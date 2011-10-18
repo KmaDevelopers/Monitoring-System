@@ -36,7 +36,6 @@
                 ) ,
             ) ,
         ) ,
-    
         // application components
         'components' => array(
             'user' => array(
@@ -49,6 +48,7 @@
             'urlManager' => array(
                 'urlFormat' => 'path',
                 'showScriptName' => false,
+                'caseSensitive' => false,
                 'rules' => array(
                     
                     array('sensor/get', 'pattern'=>'sensor', 'verb'=>'GET'),
@@ -63,6 +63,9 @@
                     array('server/delete', 'pattern'=>'server/<id:\d+>', 'verb'=>'DELETE'),
                     array('server/create', 'pattern'=>'server', 'verb'=>'POST'),
                     
+                    array('statistics/list', 'pattern'=>'statistics/<id:\d+>', 'verb'=>'GET'),
+                    
+
                     '<controller:\w+>/<id:\d+>' => '<controller>/list',
                     '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
                     '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
