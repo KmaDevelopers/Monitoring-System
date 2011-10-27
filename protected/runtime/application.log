@@ -2767,3 +2767,15 @@ Stack trace:
 #1 /root/www/pdev/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
 #2 /root/www/pdev/index.php(13): CApplication->run()
 #3 {main} REQUEST_URI=/js/lib/extjs/src/app/Window.js?_dc=1317992263523
+2011/10/27 20:20:38 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/lib/extjs/src/QuaeryComponent.js".' in /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php:332
+Stack trace:
+#0 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('js/lib/extjs/sr...')
+#1 /root/www/KmaMS/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/KmaMS/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/js/lib/extjs/src/QuaeryComponent.js?_dc=1319736038220
+2011/10/27 20:20:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/lib/extjs/src/QuaerySelector.js".' in /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php:332
+Stack trace:
+#0 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('js/lib/extjs/sr...')
+#1 /root/www/KmaMS/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/KmaMS/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/js/lib/extjs/src/QuaerySelector.js?_dc=1319736042430

@@ -21,10 +21,10 @@ Ext.define('KMA.view.Sensor', {
     },
     applyStyles: function(coords) {
         this.style = {
-            backgroundImage: "url('" + KMA.constants.IMAGEHOST + "/images/sensor.png')",
+            backgroundImage: "url('" + KMA.constants.SENSOR_IMAGE_SRC + "')",
             backgroundColor:  'transparent',
             backgroundRepeat: 'no-repeat',
-            backgroundSize: 40,
+            backgroundSize: 45,
             cursor: "pointer",
             position: "absolute",
             top: coords[1] + 'px',
@@ -43,7 +43,7 @@ Ext.define('KMA.view.Sensor', {
         var marginLeft = this.width || this.el.getWidth();
         Ext.core.DomHelper.append(
         this.el.dom.id, {
-            style: "font-weight:bold;margin-left: " + marginLeft,
+            style: "font-size:20px;color:white;font-weight:bold;margin-left:-10px" ,
             id: "bla",
             tag: "div",
             html: '1'
