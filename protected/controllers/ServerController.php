@@ -29,8 +29,12 @@ class ServerController extends KmaController
 	
 	public function actionGet() {
 		
-		$serverId = $_REQUEST['id'];
+		$serverId = Yii::app()->request->getParam('id',false);
 		
+		if(!$serverId) {
+			return $this->error('Can\'t load server by Id!');
+		}
+				
 		$serv = Server::model()->findByPk($serverId);
 		
 		if($serv){
@@ -56,7 +60,6 @@ class ServerController extends KmaController
 		} else {
 			$this->error("Can't validate server!");
 		}
-		
 	}
 	
 }

@@ -1,9 +1,9 @@
 Ext.define('KMA.controller.MapController', {
     extend: "Ext.app.Controller",
     views: [
-    	'Sensor', 
-    	'MapContainer', 
-    	'SensorInfoWindow',
+        'Sensor', 
+        'MapContainer', 
+        'SensorInfoWindow',
         'LogWindow',
         'SensorStatisticsChart',
         'LogsList',
