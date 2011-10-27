@@ -26,22 +26,24 @@ Ext.define('KMA.view.SensorStatisticsChart', {
     		}],
     		series: [{
         		type: 'line',
+			fill: true,
         		highlight: {
-            		size: 7,
-            		radius: 15
+				size: 7,
+				radius: 15
         		},
 		        axis: 'left',
 		        xField: 'date',
 		        yField: 'temperature',
-                tips: {
-                    trackMouse: true,
-                    width: 200,
-                    height: 45,
-                    renderer: function(storeItem, item) {
-                    	this.html = '<span style="font-size:15px;">Temperature: ' + storeItem.get('temperature') + '<br />' + 'Date: ' + storeItem.get('date') + "</span>";
-                    }
-                },
-    		}]
+			tips: {
+			    trackMouse: true,
+			    width: 200,
+			    height: 45,
+			    style: 'background-color:white',
+			    renderer: function(storeItem, item) {
+				this.html = '<span style="background-color:white;font-size:15px;">Temperature: ' + storeItem.get('temperature') + '<br />' + 'Date: ' + storeItem.get('date') + "</span>";
+			    }
+			}
+		}]
     	});
 
     	this.callParent([config]);
