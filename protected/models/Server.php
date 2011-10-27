@@ -3,7 +3,7 @@
 /**
  * This is the model class for table "Server".
  *
- * The followings are the available columns in table 'Server':
+ * The followings are the available colhgfcdfghjkumns in table 'Server':
  * @property integer $serverId
  * @property string $ip
  * @property string $name
@@ -36,6 +36,7 @@ class Server extends KmaActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+			
 			array('ip', 'length', 'max'=>15),
 			array('name', 'length', 'max'=>100),
 			array('path', 'length', 'max'=>250),
@@ -44,7 +45,6 @@ class Server extends KmaActiveRecord
 			array('serverId, ip, name, path', 'safe', 'on'=>'search'),
 		);
 	}
-
 	/**
 	 * @return array relational rules.
 	 */
@@ -53,8 +53,9 @@ class Server extends KmaActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'sensors' => array(self::HAS_MANY,'Sensor', 'serverId'),
 		);
-	}
+	} 
 
 	/**
 	 * @return array customized attribute labels (name=>label)

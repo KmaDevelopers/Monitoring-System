@@ -91,26 +91,25 @@ class Statistics extends KmaActiveRecord
 	/*
 	 * @return array of Statatistics by sensor id
 	 */
-	public static function getStatisticsBySensorId($sensorId, $criteria){
-		$criteriaConfig = array_merge($criteria, array(
+	public static function getStatisticsBySensorId($sensorId, $cr){
+		$criteriaConfig = array(
 				'condition' => 'sensorId = :sensorId',
 				'params' => array(':sensorId' => $sensorId)
-		));
+		);
 		
 		$criteria = new CDbCriteria($criteriaConfig);
+		$criteria->mergeWith($cr);	
+		
 		$stats = Statistics::model()->findAll($criteria);
+
 		$result = array();
 		
 		foreach($stats as $stat){
 			array_push($result, Statistics::prepareItem($stat));
 		}
 
-		$countCriteria = new CDbCriteria(array(
-			'condition' => 'sensorId = :sensorId',
-			'params' => array(':sensorId' => $sensorId),
-		));
-
-		$count = Statistics::model()->count($countCriteria);
+		$count = count($stats);
+		
 		return array($result, $count);
 	}
 	

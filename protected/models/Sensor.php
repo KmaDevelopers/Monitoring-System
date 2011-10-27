@@ -123,4 +123,17 @@ class Sensor extends KmaActiveRecord
 			     'temp' => $temp,
 			     );
 	}
+
+	protected static $sensorSerialArray = array();
+
+	public static function getSensorIdBySerial($serial) {
+			if(empty($sensorSerialArray)){
+				$res = Yii::app()->db->CreateCommand('Select serial,sensorId from Sensor')->queryAll(false);
+				foreach($res as $v){
+					$sensorSerialArray[$v[0]] = $v[1];
+				}
+			}
+
+			return $sensorSerialArray[$serial];
+	}
 }
