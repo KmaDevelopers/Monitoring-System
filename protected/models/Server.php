@@ -91,7 +91,15 @@ class Server extends KmaActiveRecord
 		));
 	}
 	
-	public function getItemArray(){
-		return $this->attributes;
+	public function getItemArray($relation = NULL){
+		if(is_null($relation)){
+			return $this->attributes;
+		} else {
+			$res = $this->attributes;
+			$res[$relation] = array_map(function($it){
+				return $it->getItemArray();
+			},$this->$relation);
+			return $res;
+		}
 	}
 }

@@ -21,6 +21,7 @@
         'import' => array(
             'application.models.*',
             'application.components.*',
+            'application.components.actions.*',
         ) ,
         'modules' => array(
     

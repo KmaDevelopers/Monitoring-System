@@ -13,9 +13,10 @@ class ServerController extends KmaController
 				'actions' => array(
 						   'get',
 						   'index',
+						   'delete',
 						   'create',
 						   ),
-				'users' => array('*'),
+				'users' => array('*'), 
 			),
 			array('deny', // deny all users
 				'users' => array('*'),
@@ -23,42 +24,35 @@ class ServerController extends KmaController
 		);
 	}
 	
-	public function actionIndex(){
-		$this->result(array());
-	}
-	
-	public function actionGet() {
-		
-		$serverId = Yii::app()->request->getParam('id',false);
-		
-		if(!$serverId) {
-			return $this->error('Can\'t load server by Id!');
-		}
-				
-		$serv = Server::model()->findByPk($serverId);
-		
-		if($serv){
-			$this->result(array(
-				$serv->getItemArray()
-			));
-		} else {
-			$this->error('Can\'t load server by Id!');
-		}
-	}
-	
 	public function actionCreate(){
 		
 		$serv = new Server();
 		$serv->attributes = $_REQUEST['Server'];
 		
-		if($serv->validate()){
-			if($serv->save()){
+		if($serv->validate()) {
+			if($serv->save()) {
 				$this->result($serv);
 			} else {
 				$this->error("Can't save server!");
 			}
 		} else {
 			$this->error("Can't validate server!");
+		}
+	}
+	
+	public function actionList(){
+		
+		// add pagination
+		$models = KmaActiveRecord::model('Server')->findAll();
+		
+		if(isset($models)) {
+			$res = array_map(function($it){
+					return $it->getItemArray('sensors');
+				}, $models);
+			
+				$this->getController()->result($res);
+		} else {
+			$this->getController()->error("Can't load servers!");
 		}
 	}
 	

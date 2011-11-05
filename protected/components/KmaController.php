@@ -32,6 +32,14 @@ class KmaController extends CController {
      * for more details on how to specify this property.
      */
     public $breadcrumbs = array();
+    
+    public function actions(){
+        return array(
+			'get' => 'application.components.actions.GetAction',
+			'delete' => 'application.components.actions.DeleteAction'
+			);
+    }
+
     public function beforeAction($action) {
 	//if(Yii::app()->request->isAjaxRequest) {
 	//
@@ -46,13 +54,15 @@ class KmaController extends CController {
 	//}
 	return parent::beforeAction($action);
     }
-    protected function result($items,$count=null) {
-	if (!is_array($items)) {
-	    $items = array($items);
-	}
-	echo CJSON::encode(array('success' => true, 'items' => $items,'total'=>$count));
+
+    public function result($items,$count=null) {
+    	if (!is_array($items)) {
+    	    $items = array($items);
+    	}
+    	echo CJSON::encode(array('success' => true, 'items' => $items,'total'=>$count));
     }
-    protected function error($msg) {
-	echo CJSON::encode(array('success' => false, 'msg' => $msg,));
+
+    public function error($msg) {
+	   echo CJSON::encode(array('success' => false, 'msg' => $msg,));
     }
 }
