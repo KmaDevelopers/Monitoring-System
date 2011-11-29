@@ -193,8 +193,9 @@ class CUrlManager extends CApplicationComponent
 				return;
 			}
 		}
-		foreach($this->rules as $pattern=>$route)
+		foreach($this->rules as $pattern=>$route){
 			$this->_rules[]=$this->createUrlRule($route,$pattern);
+		}
 		if(isset($cache))
 			$cache->set(self::CACHE_KEY,array($this->_rules,$hash));
 	}

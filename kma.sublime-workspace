@@ -1,0 +1,962 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"LEGEN",
+				"LEGEND_HOR"
+			],
+			[
+				"the",
+				"theme_class"
+			],
+			[
+				"date",
+				"dates  (variable)"
+			],
+			[
+				"select",
+				"registerAutoloader  (function)"
+			],
+			[
+				"pat",
+				"pattern  (variable)"
+			],
+			[
+				"func",
+				"function"
+			],
+			[
+				"fun",
+				"fun: function …"
+			],
+			[
+				"para",
+				"params  (variable)"
+			],
+			[
+				"raw",
+				"rawPathInfo  (variable)"
+			],
+			[
+				"var_du",
+				"var_dump  (function)"
+			],
+			[
+				"man",
+				"manager"
+			],
+			[
+				"na",
+				"name"
+			],
+			[
+				"class",
+				"class: class …"
+			],
+			[
+				"Yii",
+				"Yii  (class)"
+			],
+			[
+				"impo",
+				"import_request_variables"
+			],
+			[
+				"funct",
+				"function"
+			],
+			[
+				"addsl",
+				"addcslashes  (function)"
+			],
+			[
+				"te",
+				"this  (variable)"
+			],
+			[
+				"getCon",
+				"getController  (function)"
+			],
+			[
+				"get",
+				"getController  (function)"
+			],
+			[
+				"resul",
+				"cubrid_result"
+			],
+			[
+				"controller",
+				"getController  (function)"
+			],
+			[
+				"this",
+				"this  (variable)"
+			],
+			[
+				"req",
+				"http_request"
+			],
+			[
+				"fin",
+				"findByPk  (function)"
+			],
+			[
+				"id",
+				"registerAutoloader  (function)"
+			],
+			[
+				"CA",
+				"CAction  (class)"
+			],
+			[
+				"exten",
+				"extends  (keyword)"
+			],
+			[
+				"isse",
+				"isset"
+			],
+			[
+				"sen",
+				"sensors"
+			],
+			[
+				"ser",
+				"servers"
+			],
+			[
+				"retu",
+				"return"
+			],
+			[
+				"arra",
+				"array_merge"
+			],
+			[
+				"else",
+				"else: else …"
+			],
+			[
+				"erro",
+				"error  (function)"
+			],
+			[
+				"er",
+				"error"
+			],
+			[
+				"Sen",
+				"SensorCordinates"
+			],
+			[
+				"getSt",
+				"getStore"
+			],
+			[
+				"re",
+				"res"
+			],
+			[
+				"app",
+				"append"
+			],
+			[
+				"sys",
+				"sys  (module)"
+			],
+			[
+				"My",
+				"MySQLdb  (module)"
+			],
+			[
+				"et",
+				"extends"
+			],
+			[
+				"action",
+				"actions"
+			],
+			[
+				"CI",
+				"Circle  (class)"
+			],
+			[
+				"as",
+				"asa  (function)"
+			],
+			[
+				"err",
+				"error"
+			],
+			[
+				"acess",
+				"accessRules  (function)"
+			],
+			[
+				"e",
+				"error  (function)"
+			],
+			[
+				"getParams",
+				"session_get_cookie_params"
+			],
+			[
+				"request",
+				"enchant_broker_request_dict"
+			],
+			[
+				"requ",
+				"http_request"
+			],
+			[
+				"thi",
+				"this"
+			],
+			[
+				"ra",
+				"random"
+			],
+			[
+				"num",
+				"numpy"
+			],
+			[
+				"res",
+				"resArray"
+			],
+			[
+				"sri",
+				"serial"
+			],
+			[
+				"seri",
+				"serial"
+			],
+			[
+				"proce",
+				"proccedServer"
+			],
+			[
+				"prin",
+				"print_r"
+			],
+			[
+				"sensor",
+				"sensorSerialArray"
+			],
+			[
+				"Sensor",
+				"sensors"
+			],
+			[
+				"da",
+				"date"
+			],
+			[
+				"continu",
+				"apd_continue"
+			],
+			[
+				"resu",
+				"results"
+			],
+			[
+				"fre",
+				"fread"
+			],
+			[
+				"file_get",
+				"file_get_contents"
+			],
+			[
+				"fope",
+				"fopen"
+			],
+			[
+				"fop",
+				"fopen"
+			],
+			[
+				"va",
+				"var_dump"
+			],
+			[
+				"self",
+				"printer_select_font"
+			],
+			[
+				"se",
+				"sensors"
+			],
+			[
+				"fore",
+				"foreach: foreach …"
+			],
+			[
+				"publi",
+				"openssl_public_decrypt"
+			],
+			[
+				"extends",
+				"ncurses_use_extended_names"
+			],
+			[
+				"li",
+				"limit"
+			],
+			[
+				"cr",
+				"criteria"
+			],
+			[
+				"cou",
+				"count"
+			],
+			[
+				"st",
+				"stats"
+			],
+			[
+				"strto",
+				"strtotime"
+			],
+			[
+				"ti",
+				"time"
+			],
+			[
+				"var_",
+				"var_dump"
+			],
+			[
+				"rando",
+				"gmp_random"
+			],
+			[
+				"ran",
+				"rand"
+			],
+			[
+				"execu",
+				"execute"
+			],
+			[
+				"array_mer",
+				"array_merge"
+			],
+			[
+				"star",
+				"startDate"
+			],
+			[
+				"sta",
+				"startDate"
+			],
+			[
+				"getPar",
+				"getParam"
+			],
+			[
+				"reque",
+				"request"
+			],
+			[
+				"all",
+				"allModels"
+			],
+			[
+				"publ",
+				"public"
+			],
+			[
+				"mo",
+				"model"
+			],
+			[
+				"Statistics",
+				"Statistics"
+			],
+			[
+				"Sta",
+				"StatisticsController"
+			],
+			[
+				"CHtml",
+				"newt_checkbox_tree_multi"
+			],
+			[
+				"link",
+				"ssh2_sftp_symlink"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "protected/controllers/ServerController.php",
+			"settings":
+			{
+				"buffer_size": 1199,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "protected/controllers/SensorController.php",
+			"settings":
+			{
+				"buffer_size": 875,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "protected/components/KmaController.php",
+			"settings":
+			{
+				"buffer_size": 2105,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "protected/models/Sensor.php",
+			"settings":
+			{
+				"buffer_size": 3451,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "protected/controllers/StatisticsController.php",
+			"settings":
+			{
+				"buffer_size": 1501,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "protected/controllers/AdminController.php",
+			"settings":
+			{
+				"buffer_size": 503,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "protected/components/actions/GetAction.php",
+			"settings":
+			{
+				"buffer_size": 707,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "protected/config/main.php",
+			"settings":
+			{
+				"buffer_size": 4663,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+			[
+				"",
+				"HTML: Encode Special Characters"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 297.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/artiom/htdocs/kma_monitoring_system/protected/controllers/GraphicController.php",
+		"/home/artiom/htdocs/kma_monitoring_system/protected/vendors/jpgraph/jpgraph.php",
+		"/home/artiom/htdocs/kma_monitoring_system/protected/vendors/jpgraph/themes/UniversalTheme.class.php",
+		"/home/artiom/htdocs/kma_monitoring_system/protected/vendors/jpgraph/jpgraph_theme.inc.php",
+		"/home/artiom/htdocs/kma_monitoring_system/protected/vendors/jpgraph/docs/classref/DateScale.html",
+		"/home/artiom/htdocs/kma_monitoring_system/protected/components/KmaUrlRule.php",
+		"/home/artiom/htdocs/kma_monitoring_system/protected/components/GraphicsUrlRule.php",
+		"/home/artiom/htdocs/kma_monitoring_system/protected/components/GraphUrlRule.php",
+		"/home/artiom/htdocs/kma_monitoring_system/protected/components/CBaseUrlRule.php",
+		"/home/artiom/.config/sublime-text-2/Packages/User/PHP.sublime-settings",
+		"/home/artiom/htdocs/yii-1.1.7.r3135/framework/collections/CList.php",
+		"/home/artiom/htdocs/yii-1.1.7.r3135/framework/collections/CListIterator.php",
+		"/home/artiom/htdocs/yii-1.1.7.r3135/framework/web/CHttpSessionIterator.php",
+		"/home/artiom/htdocs/yii-1.1.7.r3135/framework/base/CComponent.php",
+		"/home/artiom/htdocs/yii-1.1.7.r3135/framework/YiiBase.php",
+		"/home/artiom/htdocs/yii-1.1.7.r3135/framework/web/helpers/CGoogleApi.php",
+		"/home/artiom/htdocs/kma_monitoring_system/js/app/constants.js",
+		"/home/artiom/Загрузки/crm.up.sql",
+		"/home/artiom/htdocs/kma_monitoring_system/protected/components/DeleteAction.php",
+		"/home/artiom/htdocs/kma_monitoring_system/nodeJsSevers/test.serv.js",
+		"/home/artiom/htdocs/kma_monitoring_system/protected/config/main.php",
+		"/home/artiom/htdocs/kma_monitoring_system/protected/controllers/SensorController.php",
+		"/home/artiom/htdocs/kma_monitoring_system/js/app/controller/MapController.js",
+		"/home/artiom/test.py",
+		"/home/artiom/htdocs/kma_monitoring_system/protected/controllers/ServerController.php",
+		"/home/artiom/test1.py",
+		"/home/artiom/htdocs/yii-1.1.7.r3135/framework/yiilite.php",
+		"/home/artiom/.config/sublime-text-2/Packages/User/Base File.sublime-settings",
+		"/home/artiom/.config/sublime-text-2/Packages/User/Global.sublime-settings",
+		"/home/artiom/Projects/Java/App/CopyFile.java",
+		"/home/artiom/Projects/Java/App/CommonVariable.java",
+		"/home/artiom/Projects/Java/App/Monitor.java",
+		"/home/artiom/Projects/Java/App/index.html",
+		"/home/artiom/Projects/Java/App/mmThreadApplet.java",
+		"/home/artiom/.config/sublime-text-2/Packages/Default/Default (Linux).sublime-keymap",
+		"/home/artiom/.config/sublime-text-2/Packages/Default/Base File.sublime-settings",
+		"/home/artiom/htdocs/kma_monitoring_system/developer_docs/Фото0356.jpg",
+		"/home/artiom/Projects/Java/App/fileCopy.java",
+		"/home/artiom/htdocs/kma_monitoring_system/protected/commands/LoadSensorDataCommand.php",
+		"/home/artiom/htdocs/kma_monitoring_system/protected/controllers/StatisticsController.php",
+		"/home/artiom/htdocs/kma_monitoring_system/protected/controllers/SensorController.php~",
+		"/home/artiom/htdocs/kma.sensors/protected/controllers/StatisticsController.php",
+		"/home/artiom/htdocs/kma.sensors/protected/config/main.php",
+		"/home/artiom/htdocs/kma.sensors/protected/controllers/SensorController.php",
+		"/home/artiom/htdocs/kma.sensors/protected/models/Statistics.php",
+		"/home/artiom/htdocs/kma.sensors/protected/models/Sensor.php",
+		"/home/artiom/htdocs/kma.sensors/protected/migrations/m111004_162422_fixtures.php",
+		"/home/artiom/htdocs/kma.sensors/protected/commands/LoadSensorDataCommand.php",
+		"/home/artiom/htdocs/kma.sensors/protected/models/Server.php",
+		"/home/artiom/htdocs/kma.sensors/protected/config/console.php",
+		"/home/artiom/htdocs/kma.sensors/nodeJsSevers/test.serv.js",
+		"/home/artiom/Projects/NodeJs/test.serv.js",
+		"/home/artiom/htdocs/kma.sensors/js/app/constants.js",
+		"/home/artiom/htdocs/kma.sensors/js/app/controller/MapController.js",
+		"/home/artiom/htdocs/kma.sensors/js/app/model/Sensor.js",
+		"/home/artiom/htdocs/kma.sensors/protected/controllers/ServerController.php~",
+		"/home/artiom/htdocs/kma.sensors/protected/models/Sensor.php~",
+		"/home/artiom/htdocs/comp/js/inventory.js",
+		"/home/artiom/htdocs/comp/protected/modules/inventory/controllers/InventoryController.php",
+		"/home/artiom/Sublime Plugins/developing module",
+		"/home/artiom/htdocs/comp/docs/default/InventoryController.html",
+		"/home/artiom/htdocs/kma.sensors/sensor.sublime-workspace",
+		"/home/artiom/.config/sublime-text-2/Packages/Default/Global.sublime-settings",
+		"/home/artiom/htdocs/kma.sensors/protected/controllers/ServerController.php",
+		"/home/artiom/htdocs/kma.sensors/protected/components/KmaController.php",
+		"/home/artiom/htdocs/kma.sensors/protected/components/KmaActiveRecord.php",
+		"/home/artiom/htdocs/kma.sensors/protected/yiic.bat",
+		"/home/artiom/htdocs/kma.sensors/protected/yiic",
+		"/home/artiom/htdocs/kma.sensors/Фото0358.jpg"
+	],
+	"find":
+	{
+		"height": 33.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"^.* get",
+			"class",
+			"KmaController",
+			"		",
+			"hist",
+			"actionGenerateS",
+			"\"font_face\": \"Consolas\",\n   \"font_size\": 10,"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "protected/controllers/ServerController.php",
+					"settings":
+					{
+						"buffer_size": 1199,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1191,
+								1191
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 320.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "protected/controllers/SensorController.php",
+					"settings":
+					{
+						"buffer_size": 875,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								398,
+								398
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "protected/components/KmaController.php",
+					"settings":
+					{
+						"buffer_size": 2105,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 17.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "protected/models/Sensor.php",
+					"settings":
+					{
+						"buffer_size": 3451,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								675,
+								675
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 17.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "protected/controllers/StatisticsController.php",
+					"settings":
+					{
+						"buffer_size": 1501,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								61,
+								518
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "protected/controllers/AdminController.php",
+					"settings":
+					{
+						"buffer_size": 503,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								135,
+								135
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 17.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "protected/components/actions/GetAction.php",
+					"settings":
+					{
+						"buffer_size": 707,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								350,
+								350
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 21.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "protected/config/main.php",
+					"settings":
+					{
+						"buffer_size": 4663,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2964,
+								2964
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 60.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 29.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"server",
+				"kma_monitoring_system/protected/controllers/ServerController.php"
+			],
+			[
+				"jpgraph_theme",
+				"kma_monitoring_system/protected/vendors/jpgraph/jpgraph_theme.inc.php"
+			],
+			[
+				"jpgraph",
+				"kma_monitoring_system/protected/vendors/jpgraph/jpgraph.php"
+			],
+			[
+				"mai",
+				"kma_monitoring_system/protected/config/main.php"
+			],
+			[
+				"gra",
+				"kma_monitoring_system/protected/controllers/GraphicController.php"
+			],
+			[
+				"google",
+				"yii-1.1.7.r3135/framework/web/helpers/CGoogleApi.php"
+			],
+			[
+				"yiiba",
+				"yii-1.1.7.r3135/framework/YiiBase.php"
+			],
+			[
+				"ccomponent",
+				"yii-1.1.7.r3135/framework/base/CComponent.php"
+			],
+			[
+				"iterator",
+				"yii-1.1.7.r3135/framework/web/CHttpSessionIterator.php"
+			],
+			[
+				"clistiterator",
+				"yii-1.1.7.r3135/framework/collections/CListIterator.php"
+			],
+			[
+				"clist",
+				"yii-1.1.7.r3135/framework/collections/CList.php"
+			],
+			[
+				"main",
+				"kma_monitoring_system/protected/config/main.php"
+			],
+			[
+				"getac",
+				"kma_monitoring_system/protected/components/actions/GetAction.php"
+			],
+			[
+				"admi",
+				"kma_monitoring_system/protected/controllers/AdminController.php"
+			],
+			[
+				"sta",
+				"kma.sensors/protected/models/Statistics.php"
+			],
+			[
+				"fixtures",
+				"kma.sensors/protected/migrations/m111004_162422_fixtures.php"
+			],
+			[
+				"inventory",
+				"comp/js/inventory.js"
+			],
+			[
+				"invento",
+				"comp/protected/modules/inventory/controllers/InventoryController.php"
+			],
+			[
+				"inventorycon",
+				"comp/docs/default/InventoryController.html"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"",
+				"/home/artiom/Projects/Python/BlackBord/BB.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 195.0,
+	"status_bar_visible": true
+}

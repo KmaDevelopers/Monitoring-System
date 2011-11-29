@@ -15,6 +15,7 @@ class SensorController extends KmaController
 						   'index',
 						   'create',
 						   'delete',
+						   'update',
 						   ),
 				'users' => array('*'),
 			),
@@ -24,15 +25,16 @@ class SensorController extends KmaController
 		);
 	}
 	
-
-	public function actionCreate(){
+	public function actionCreate() {
 		
-		$serv = new Sensor();
-		$serv->attributes = isset($_POST['Sensor']) ? $_POST['Sensor'] : array();
+		$sens = new Sensor();
+		$sens->attributes = $_POST['Sensor'];
 		
-		if($serv->validate()){
-			if($serv->save()){
-				$this->result($serv);
+		$sens->attributes = isset($_POST['Sensor']) ? $_POST['Sensor'] : array();
+		
+		if($sens->validate()){
+			if($sens->save()){
+				$this->result($sens->getItemArray(),1);
 			} else {
 				$this->error("Can't save sensor!");
 			}

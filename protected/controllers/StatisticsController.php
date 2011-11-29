@@ -11,14 +11,13 @@ class StatisticsController extends KmaController {
 			'users' => array('*'),),
 		);
     }
-	
-	
+		
 	public function actions(){
 		return array();
 	}
 	
     public function actionList() {
-		$sensorId = Yii::app()->request->getParam('id', 1);
+		$sensorId = Yii::app()->request->getParam('id', -1);
 		$sort = Yii::app()->request->getParam('sort', 'statId');
 		$order = Yii::app()->request->getParam('dir', 'ASC');
 		$page = Yii::app()->request->getParam('page', 0);

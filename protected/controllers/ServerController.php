@@ -1,7 +1,7 @@
 <?php
 
-class ServerController extends KmaController
-{
+class ServerController extends KmaController {
+
 	/**
 	 * Specifies the access control rules.
 	 * This method is used by the 'accessControl' filter.
@@ -11,27 +11,29 @@ class ServerController extends KmaController
 		return array(
 			array('allow', // allow all users to perform 'index' and 'view' actions
 				'actions' => array(
-						   'get',
-						   'index',
-						   'delete',
-						   'create',
-						   ),
-				'users' => array('*'), 
+					'get',
+					'index',
+					'list',
+					'delete',
+					'update',
+					'create',
+				),
+				'users' => array('*'),
 			),
 			array('deny', // deny all users
 				'users' => array('*'),
 			),
 		);
 	}
-	
-	public function actionCreate(){
-		
+
+	public function actionCreate() {
+
 		$serv = new Server();
-		$serv->attributes = $_REQUEST['Server'];
-		
-		if($serv->validate()) {
-			if($serv->save()) {
-				$this->result($serv);
+		$serv->attributes = $_POST['Server'];
+
+		if ($serv->validate()) {
+			if ($serv->save()) {
+				$this->result($serv->getItemArray(NULL),1);
 			} else {
 				$this->error("Can't save server!");
 			}
@@ -39,21 +41,21 @@ class ServerController extends KmaController
 			$this->error("Can't validate server!");
 		}
 	}
-	
-	public function actionList(){
-		
+
+	public function actionList() {
+
 		// add pagination
 		$models = KmaActiveRecord::model('Server')->findAll();
-		
-		if(isset($models)) {
-			$res = array_map(function($it){
-					return $it->getItemArray('sensors');
-				}, $models);
-			
-				$this->getController()->result($res);
+
+		if (isset($models)) {
+			$res = array_map(function($it) {
+						return $it->getItemArray('sensors');
+					}, $models);
+
+			$this->result($res);
 		} else {
-			$this->getController()->error("Can't load servers!");
+			$this->error("Can't load servers!");
 		}
 	}
-	
+
 }

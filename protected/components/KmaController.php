@@ -4,9 +4,10 @@
  * All controller classes for this application should extend from this base class.
  */
 class KmaController extends CController {
-    public function filters() {
-	return array('accessControl', // perform access control for CRUD operations
-	);
+   
+	public function filters() {
+		return array('accessControl', // perform access control for CRUD operations
+		);
     }
     /**
      * Specifies the access control rules.
@@ -36,7 +37,8 @@ class KmaController extends CController {
     public function actions(){
         return array(
 			'get' => 'application.components.actions.GetAction',
-			'delete' => 'application.components.actions.DeleteAction'
+			'delete' => 'application.components.actions.DeleteAction',
+			'update' => 'application.components.actions.UpdateAction',
 			);
     }
 
