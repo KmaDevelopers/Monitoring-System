@@ -14,6 +14,7 @@ class SensorController extends KmaController
 						   'get',
 						   'index',
 						   'create',
+						   'delete',
 						   ),
 				'users' => array('*'),
 			),
@@ -23,42 +24,16 @@ class SensorController extends KmaController
 		);
 	}
 	
-	public function actionIndex() {
-		$this->result(array());
-	}
-	
-	public function actionGet() {
-		$sensorId = isset($_REQUEST['id']) ? : false;
+	public function actionCreate() {
 		
-		if(!$sensorId){
-			/**
-			 *get all sensors
-			 */
-			$sensors = Sensor::model()->findAll();
-		} else {
-			$sensor = Sensor::model()->findByPk($sensorId);
-		}
 		
-		if(isset($sensor)) {
-			$this->result(array(
-				$sensor->getItemArray()
-			));
-		} elseif(isset($sensors)) {
-			$res = array();
-			foreach($sensors as $sen){
-				array_push($res,$sen->getItemArray()); 
-			}
-			
-			$this->result($res);
-			
-		} else {
-			$this->error('Can\'t load sensor by Id!');
-		}
-	}
-	
-	public function actionCreate(){
+		
+		$json = file_get_contents('php://input');
+
 		
 		$serv = new Sensor();
+		$serv->attributes = CJSON::decode($json);
+		
 		$serv->attributes = isset($_POST['Sensor']) ? $_POST['Sensor'] : array();
 		
 		if($serv->validate()){

@@ -3,9 +3,9 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="language" content="en" />
-    <link rel="stylesheet" href="./js/lib/extjs/resources/css/ext-all-gray.css" />
-    <script type="text/javascript" src="./adminJs/js/lib/extjs/ext-all-dev.js"></script>
-    <script type="text/javascript" src="./adminJs/js/app.js?<?php echo time();?>"></script>
+    <link rel="stylesheet" href="/adminJs/lib/extjs/resources/css/ext-all-gray.css" />
+    <script type="text/javascript" src="/adminJs/lib/extjs/ext-all-dev.js"></script>
+    <script type="text/javascript" src="/adminJs/app.js?<?php echo time();?>"></script>
     <title><?php echo CHtml::encode($this->pageTitle); ?></title>
     <style type='text/css'>
 	.sensor {
@@ -21,14 +21,10 @@
 	    background-size: 160px;
 	}
 
-	.list-td {
-		vertical-align: middle;
-		height: 40px;
-	}
-
-	.list-td img {
+	.edit-link img {
 		cursor: pointer;
 	}
+
     </style>
 </head>
 

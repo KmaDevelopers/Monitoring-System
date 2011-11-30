@@ -1,7 +1,7 @@
 <?php
 
-class ServerController extends KmaController
-{
+class ServerController extends KmaController {
+
 	/**
 	 * Specifies the access control rules.
 	 * This method is used by the 'accessControl' filter.
@@ -11,10 +11,12 @@ class ServerController extends KmaController
 		return array(
 			array('allow', // allow all users to perform 'index' and 'view' actions
 				'actions' => array(
-						   'get',
-						   'index',
-						   'create',
-						   ),
+					'get',
+					'index',
+					'list',
+					'delete',
+					'create',
+				),
 				'users' => array('*'),
 			),
 			array('deny', // deny all users
@@ -22,33 +24,16 @@ class ServerController extends KmaController
 			),
 		);
 	}
-	
-	public function actionIndex(){
-		$this->result(array());
-	}
-	
-	public function actionGet() {
-		
-		$serverId = $_REQUEST['id'];
-		
-		$serv = Server::model()->findByPk($serverId);
-		
-		if($serv){
-			$this->result(array(
-				$serv->getItemArray()
-			));
-		} else {
-			$this->error('Can\'t load server by Id!');
-		}
-	}
-	
-	public function actionCreate(){
-		
+
+	public function actionCreate() {
+
+		$json = file_get_contents('php://input');
+
 		$serv = new Server();
-		$serv->attributes = $_REQUEST['Server'];
-		
-		if($serv->validate()){
-			if($serv->save()){
+		$serv->attributes = CJSON::decode($json);
+
+		if ($serv->validate()) {
+			if ($serv->save()) {
 				$this->result($serv);
 			} else {
 				$this->error("Can't save server!");
@@ -56,7 +41,22 @@ class ServerController extends KmaController
 		} else {
 			$this->error("Can't validate server!");
 		}
-		
 	}
-	
+
+	public function actionList() {
+
+		// add pagination
+		$models = KmaActiveRecord::model('Server')->findAll();
+
+		if (isset($models)) {
+			$res = array_map(function($it) {
+						return $it->getItemArray('sensors');
+					}, $models);
+
+			$this->result($res);
+		} else {
+			$this->error("Can't load servers!");
+		}
+	}
+
 }

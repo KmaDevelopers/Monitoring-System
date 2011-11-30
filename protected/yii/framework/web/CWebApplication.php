@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CWebApplication class file.
  *
@@ -41,17 +42,19 @@
  * @package system.web
  * @since 1.0
  */
-class CWebApplication extends CApplication
-{
+class CWebApplication extends CApplication {
+
 	/**
 	 * @return string the route of the default controller, action or module. Defaults to 'site'.
 	 */
-	public $defaultController='site';
+	public $defaultController = 'site';
+
 	/**
 	 * @var mixed the application-wide layout. Defaults to 'main' (relative to {@link getLayoutPath layoutPath}).
 	 * If this is false, then no layout will be used.
 	 */
-	public $layout='main';
+	public $layout = 'main';
+
 	/**
 	 * @var array mapping from controller ID to controller configurations.
 	 * Each name-value pair specifies the configuration for a single controller.
@@ -76,7 +79,8 @@ class CWebApplication extends CApplication
 	 * checked to see if the request can be handled by one of the controllers in the map.
 	 * If not, a controller will be searched for under the {@link getControllerPath default controller path}.
 	 */
-	public $controllerMap=array();
+	public $controllerMap = array();
+
 	/**
 	 * @var array the configuration specifying a controller which should handle
 	 * all user requests. This is mainly used when the application is in maintenance mode
@@ -93,7 +97,6 @@ class CWebApplication extends CApplication
 	 * Defaults to null, meaning catch-all is not effective.
 	 */
 	public $catchAllRequest;
-
 	private $_controllerPath;
 	private $_viewPath;
 	private $_systemViewPath;
@@ -102,22 +105,19 @@ class CWebApplication extends CApplication
 	private $_homeUrl;
 	private $_theme;
 
-
 	/**
 	 * Processes the current request.
 	 * It first resolves the request into controller and action,
 	 * and then creates the controller to perform the action.
 	 */
-	public function processRequest()
-	{
-		if(is_array($this->catchAllRequest) && isset($this->catchAllRequest[0]))
-		{
-			$route=$this->catchAllRequest[0];
-			foreach(array_splice($this->catchAllRequest,1) as $name=>$value)
-				$_GET[$name]=$value;
+	public function processRequest() {
+		if (is_array($this->catchAllRequest) && isset($this->catchAllRequest[0])) {
+			$route = $this->catchAllRequest[0];
+			foreach (array_splice($this->catchAllRequest, 1) as $name => $value)
+				$_GET[$name] = $value;
+		} else {
+			$route = $this->getUrlManager()->parseUrl($this->getRequest());
 		}
-		else
-			$route=$this->getUrlManager()->parseUrl($this->getRequest());
 		$this->runController($route);
 	}
 
@@ -126,31 +126,30 @@ class CWebApplication extends CApplication
 	 * This method overrides the parent implementation by registering additional core components.
 	 * @see setComponents
 	 */
-	protected function registerCoreComponents()
-	{
+	protected function registerCoreComponents() {
 		parent::registerCoreComponents();
 
-		$components=array(
-			'session'=>array(
-				'class'=>'CHttpSession',
+		$components = array(
+			'session' => array(
+				'class' => 'CHttpSession',
 			),
-			'assetManager'=>array(
-				'class'=>'CAssetManager',
+			'assetManager' => array(
+				'class' => 'CAssetManager',
 			),
-			'user'=>array(
-				'class'=>'CWebUser',
+			'user' => array(
+				'class' => 'CWebUser',
 			),
-			'themeManager'=>array(
-				'class'=>'CThemeManager',
+			'themeManager' => array(
+				'class' => 'CThemeManager',
 			),
-			'authManager'=>array(
-				'class'=>'CPhpAuthManager',
+			'authManager' => array(
+				'class' => 'CPhpAuthManager',
 			),
-			'clientScript'=>array(
-				'class'=>'CClientScript',
+			'clientScript' => array(
+				'class' => 'CClientScript',
 			),
-			'widgetFactory'=>array(
-				'class'=>'CWidgetFactory',
+			'widgetFactory' => array(
+				'class' => 'CWidgetFactory',
 			),
 		);
 
@@ -160,32 +159,28 @@ class CWebApplication extends CApplication
 	/**
 	 * @return IAuthManager the authorization manager component
 	 */
-	public function getAuthManager()
-	{
+	public function getAuthManager() {
 		return $this->getComponent('authManager');
 	}
 
 	/**
 	 * @return CAssetManager the asset manager component
 	 */
-	public function getAssetManager()
-	{
+	public function getAssetManager() {
 		return $this->getComponent('assetManager');
 	}
 
 	/**
 	 * @return CHttpSession the session component
 	 */
-	public function getSession()
-	{
+	public function getSession() {
 		return $this->getComponent('session');
 	}
 
 	/**
 	 * @return CWebUser the user session information
 	 */
-	public function getUser()
-	{
+	public function getUser() {
 		return $this->getComponent('user');
 	}
 
@@ -196,8 +191,7 @@ class CWebApplication extends CApplication
 	 * be replaced by this renderer.
 	 * @return IViewRenderer the view renderer.
 	 */
-	public function getViewRenderer()
-	{
+	public function getViewRenderer() {
 		return $this->getComponent('viewRenderer');
 	}
 
@@ -205,8 +199,7 @@ class CWebApplication extends CApplication
 	 * Returns the client script manager.
 	 * @return CClientScript the client script manager
 	 */
-	public function getClientScript()
-	{
+	public function getClientScript() {
 		return $this->getComponent('clientScript');
 	}
 
@@ -215,35 +208,31 @@ class CWebApplication extends CApplication
 	 * @return IWidgetFactory the widget factory
 	 * @since 1.1
 	 */
-	public function getWidgetFactory()
-	{
+	public function getWidgetFactory() {
 		return $this->getComponent('widgetFactory');
 	}
 
 	/**
 	 * @return CThemeManager the theme manager.
 	 */
-	public function getThemeManager()
-	{
+	public function getThemeManager() {
 		return $this->getComponent('themeManager');
 	}
 
 	/**
 	 * @return CTheme the theme used currently. Null if no theme is being used.
 	 */
-	public function getTheme()
-	{
-		if(is_string($this->_theme))
-			$this->_theme=$this->getThemeManager()->getTheme($this->_theme);
+	public function getTheme() {
+		if (is_string($this->_theme))
+			$this->_theme = $this->getThemeManager()->getTheme($this->_theme);
 		return $this->_theme;
 	}
 
 	/**
 	 * @param string $value the theme name
 	 */
-	public function setTheme($value)
-	{
-		$this->_theme=$value;
+	public function setTheme($value) {
+		$this->_theme = $value;
 	}
 
 	/**
@@ -253,9 +242,8 @@ class CWebApplication extends CApplication
 	 * @param string $ampersand the token separating name-value pairs in the URL.
 	 * @return string the constructed URL
 	 */
-	public function createUrl($route,$params=array(),$ampersand='&')
-	{
-		return $this->getUrlManager()->createUrl($route,$params,$ampersand);
+	public function createUrl($route, $params=array(), $ampersand='&') {
+		return $this->getUrlManager()->createUrl($route, $params, $ampersand);
 	}
 
 	/**
@@ -266,13 +254,12 @@ class CWebApplication extends CApplication
 	 * @param string $ampersand the token separating name-value pairs in the URL.
 	 * @return string the constructed URL
 	 */
-	public function createAbsoluteUrl($route,$params=array(),$schema='',$ampersand='&')
-	{
-		$url=$this->createUrl($route,$params,$ampersand);
-		if(strpos($url,'http')===0)
+	public function createAbsoluteUrl($route, $params=array(), $schema='', $ampersand='&') {
+		$url = $this->createUrl($route, $params, $ampersand);
+		if (strpos($url, 'http') === 0)
 			return $url;
 		else
-			return $this->getRequest()->getHostInfo($schema).$url;
+			return $this->getRequest()->getHostInfo($schema) . $url;
 	}
 
 	/**
@@ -283,22 +270,19 @@ class CWebApplication extends CApplication
 	 * @return string the relative URL for the application
 	 * @see CHttpRequest::getBaseUrl()
 	 */
-	public function getBaseUrl($absolute=false)
-	{
+	public function getBaseUrl($absolute=false) {
 		return $this->getRequest()->getBaseUrl($absolute);
 	}
 
 	/**
 	 * @return string the homepage URL
 	 */
-	public function getHomeUrl()
-	{
-		if($this->_homeUrl===null)
-		{
-			if($this->getUrlManager()->showScriptName)
+	public function getHomeUrl() {
+		if ($this->_homeUrl === null) {
+			if ($this->getUrlManager()->showScriptName)
 				return $this->getRequest()->getScriptUrl();
 			else
-				return $this->getRequest()->getBaseUrl().'/';
+				return $this->getRequest()->getBaseUrl() . '/';
 		}
 		else
 			return $this->_homeUrl;
@@ -307,9 +291,8 @@ class CWebApplication extends CApplication
 	/**
 	 * @param string $value the homepage URL
 	 */
-	public function setHomeUrl($value)
-	{
-		$this->_homeUrl=$value;
+	public function setHomeUrl($value) {
+		$this->_homeUrl = $value;
 	}
 
 	/**
@@ -317,20 +300,17 @@ class CWebApplication extends CApplication
 	 * @param string $route the route of the current request. See {@link createController} for more details.
 	 * @throws CHttpException if the controller could not be created.
 	 */
-	public function runController($route)
-	{
-		if(($ca=$this->createController($route))!==null)
-		{
-			list($controller,$actionID)=$ca;
-			$oldController=$this->_controller;
-			$this->_controller=$controller;
+	public function runController($route) {
+		if (($ca = $this->createController($route)) !== null) {
+			list($controller, $actionID) = $ca;
+			$oldController = $this->_controller;
+			$this->_controller = $controller;
 			$controller->init();
 			$controller->run($actionID);
-			$this->_controller=$oldController;
+			$this->_controller = $oldController;
 		}
 		else
-			throw new CHttpException(404,Yii::t('yii','Unable to resolve the request "{route}".',
-				array('{route}'=>$route===''?$this->defaultController:$route)));
+			throw new CHttpException(404, Yii::t('yii', 'Unable to resolve the request "{route}".', array('{route}' => $route === '' ? $this->defaultController : $route)));
 	}
 
 	/**
@@ -353,59 +333,53 @@ class CWebApplication extends CApplication
 	 * instance is the owner.
 	 * @return array the controller instance and the action ID. Null if the controller class does not exist or the route is invalid.
 	 */
-	public function createController($route,$owner=null)
-	{
-		if($owner===null)
-			$owner=$this;
-		if(($route=trim($route,'/'))==='')
-			$route=$owner->defaultController;
-		$caseSensitive=$this->getUrlManager()->caseSensitive;
+	public function createController($route, $owner=null) {
+		if ($owner === null)
+			$owner = $this;
+		if (($route = trim($route, '/')) === '')
+			$route = $owner->defaultController;
+		$caseSensitive = $this->getUrlManager()->caseSensitive;
 
 		$route.='/';
-		while(($pos=strpos($route,'/'))!==false)
-		{
-			$id=substr($route,0,$pos);
-			if(!preg_match('/^\w+$/',$id))
+		while (($pos = strpos($route, '/')) !== false) {
+			$id = substr($route, 0, $pos);
+			if (!preg_match('/^\w+$/', $id))
 				return null;
-			if(!$caseSensitive)
-				$id=strtolower($id);
-			$route=(string)substr($route,$pos+1);
-			if(!isset($basePath))  // first segment
-			{
-				if(isset($owner->controllerMap[$id]))
-				{
+			if (!$caseSensitive)
+				$id = strtolower($id);
+			$route = (string) substr($route, $pos + 1);
+			if (!isset($basePath)) {  // first segment
+				if (isset($owner->controllerMap[$id])) {
 					return array(
-						Yii::createComponent($owner->controllerMap[$id],$id,$owner===$this?null:$owner),
+						Yii::createComponent($owner->controllerMap[$id], $id, $owner === $this ? null : $owner),
 						$this->parseActionParams($route),
 					);
 				}
 
-				if(($module=$owner->getModule($id))!==null)
-					return $this->createController($route,$module);
+				if (($module = $owner->getModule($id)) !== null)
+					return $this->createController($route, $module);
 
-				$basePath=$owner->getControllerPath();
-				$controllerID='';
+				$basePath = $owner->getControllerPath();
+				$controllerID = '';
 			}
 			else
 				$controllerID.='/';
-			$className=ucfirst($id).'Controller';
-			$classFile=$basePath.DIRECTORY_SEPARATOR.$className.'.php';
-			if(is_file($classFile))
-			{
-				if(!class_exists($className,false))
+			$className = ucfirst($id) . 'Controller';
+			$classFile = $basePath . DIRECTORY_SEPARATOR . $className . '.php';
+			if (is_file($classFile)) {
+				if (!class_exists($className, false))
 					require($classFile);
-				if(class_exists($className,false) && is_subclass_of($className,'CController'))
-				{
-					$id[0]=strtolower($id[0]);
+				if (class_exists($className, false) && is_subclass_of($className, 'CController')) {
+					$id[0] = strtolower($id[0]);
 					return array(
-						new $className($controllerID.$id,$owner===$this?null:$owner),
+						new $className($controllerID . $id, $owner === $this ? null : $owner),
 						$this->parseActionParams($route),
 					);
 				}
 				return null;
 			}
 			$controllerID.=$id;
-			$basePath.=DIRECTORY_SEPARATOR.$id;
+			$basePath.=DIRECTORY_SEPARATOR . $id;
 		}
 	}
 
@@ -415,13 +389,11 @@ class CWebApplication extends CApplication
 	 * @return string action ID
 	 * @since 1.0.3
 	 */
-	protected function parseActionParams($pathInfo)
-	{
-		if(($pos=strpos($pathInfo,'/'))!==false)
-		{
-			$manager=$this->getUrlManager();
-			$manager->parsePathInfo((string)substr($pathInfo,$pos+1));
-			$actionID=substr($pathInfo,0,$pos);
+	protected function parseActionParams($pathInfo) {
+		if (($pos = strpos($pathInfo, '/')) !== false) {
+			$manager = $this->getUrlManager();
+			$manager->parsePathInfo((string) substr($pathInfo, $pos + 1));
+			$actionID = substr($pathInfo, 0, $pos);
 			return $manager->caseSensitive ? $actionID : strtolower($actionID);
 		}
 		else
@@ -431,8 +403,7 @@ class CWebApplication extends CApplication
 	/**
 	 * @return CController the currently active controller
 	 */
-	public function getController()
-	{
+	public function getController() {
 		return $this->_controller;
 	}
 
@@ -440,97 +411,84 @@ class CWebApplication extends CApplication
 	 * @param CController $value the currently active controller
 	 * @since 1.0.6
 	 */
-	public function setController($value)
-	{
-		$this->_controller=$value;
+	public function setController($value) {
+		$this->_controller = $value;
 	}
 
 	/**
 	 * @return string the directory that contains the controller classes. Defaults to 'protected/controllers'.
 	 */
-	public function getControllerPath()
-	{
-		if($this->_controllerPath!==null)
+	public function getControllerPath() {
+		if ($this->_controllerPath !== null)
 			return $this->_controllerPath;
 		else
-			return $this->_controllerPath=$this->getBasePath().DIRECTORY_SEPARATOR.'controllers';
+			return $this->_controllerPath = $this->getBasePath() . DIRECTORY_SEPARATOR . 'controllers';
 	}
 
 	/**
 	 * @param string $value the directory that contains the controller classes.
 	 * @throws CException if the directory is invalid
 	 */
-	public function setControllerPath($value)
-	{
-		if(($this->_controllerPath=realpath($value))===false || !is_dir($this->_controllerPath))
-			throw new CException(Yii::t('yii','The controller path "{path}" is not a valid directory.',
-				array('{path}'=>$value)));
+	public function setControllerPath($value) {
+		if (($this->_controllerPath = realpath($value)) === false || !is_dir($this->_controllerPath))
+			throw new CException(Yii::t('yii', 'The controller path "{path}" is not a valid directory.', array('{path}' => $value)));
 	}
 
 	/**
 	 * @return string the root directory of view files. Defaults to 'protected/views'.
 	 */
-	public function getViewPath()
-	{
-		if($this->_viewPath!==null)
+	public function getViewPath() {
+		if ($this->_viewPath !== null)
 			return $this->_viewPath;
 		else
-			return $this->_viewPath=$this->getBasePath().DIRECTORY_SEPARATOR.'views';
+			return $this->_viewPath = $this->getBasePath() . DIRECTORY_SEPARATOR . 'views';
 	}
 
 	/**
 	 * @param string $path the root directory of view files.
 	 * @throws CException if the directory does not exist.
 	 */
-	public function setViewPath($path)
-	{
-		if(($this->_viewPath=realpath($path))===false || !is_dir($this->_viewPath))
-			throw new CException(Yii::t('yii','The view path "{path}" is not a valid directory.',
-				array('{path}'=>$path)));
+	public function setViewPath($path) {
+		if (($this->_viewPath = realpath($path)) === false || !is_dir($this->_viewPath))
+			throw new CException(Yii::t('yii', 'The view path "{path}" is not a valid directory.', array('{path}' => $path)));
 	}
 
 	/**
 	 * @return string the root directory of system view files. Defaults to 'protected/views/system'.
 	 */
-	public function getSystemViewPath()
-	{
-		if($this->_systemViewPath!==null)
+	public function getSystemViewPath() {
+		if ($this->_systemViewPath !== null)
 			return $this->_systemViewPath;
 		else
-			return $this->_systemViewPath=$this->getViewPath().DIRECTORY_SEPARATOR.'system';
+			return $this->_systemViewPath = $this->getViewPath() . DIRECTORY_SEPARATOR . 'system';
 	}
 
 	/**
 	 * @param string $path the root directory of system view files.
 	 * @throws CException if the directory does not exist.
 	 */
-	public function setSystemViewPath($path)
-	{
-		if(($this->_systemViewPath=realpath($path))===false || !is_dir($this->_systemViewPath))
-			throw new CException(Yii::t('yii','The system view path "{path}" is not a valid directory.',
-				array('{path}'=>$path)));
+	public function setSystemViewPath($path) {
+		if (($this->_systemViewPath = realpath($path)) === false || !is_dir($this->_systemViewPath))
+			throw new CException(Yii::t('yii', 'The system view path "{path}" is not a valid directory.', array('{path}' => $path)));
 	}
 
 	/**
 	 * @return string the root directory of layout files. Defaults to 'protected/views/layouts'.
 	 */
-	public function getLayoutPath()
-	{
-		if($this->_layoutPath!==null)
+	public function getLayoutPath() {
+		if ($this->_layoutPath !== null)
 			return $this->_layoutPath;
 		else
-			return $this->_layoutPath=$this->getViewPath().DIRECTORY_SEPARATOR.'layouts';
+			return $this->_layoutPath = $this->getViewPath() . DIRECTORY_SEPARATOR . 'layouts';
 	}
 
 	/**
 	 * @param string $path the root directory of layout files.
 	 * @throws CException if the directory does not exist.
 	 */
-	public function setLayoutPath($path)
-	{
-		if(($this->_layoutPath=realpath($path))===false || !is_dir($this->_layoutPath))
-			throw new CException(Yii::t('yii','The layout path "{path}" is not a valid directory.',
-				array('{path}'=>$path)));
+	public function setLayoutPath($path) {
+		if (($this->_layoutPath = realpath($path)) === false || !is_dir($this->_layoutPath))
+			throw new CException(Yii::t('yii', 'The layout path "{path}" is not a valid directory.', array('{path}' => $path)));
 	}
 
 	/**
@@ -543,8 +501,7 @@ class CWebApplication extends CApplication
 	 * @return boolean whether the action should be executed.
 	 * @since 1.0.4
 	 */
-	public function beforeControllerAction($controller,$action)
-	{
+	public function beforeControllerAction($controller, $action) {
 		return true;
 	}
 
@@ -557,8 +514,8 @@ class CWebApplication extends CApplication
 	 * @param CAction $action the action
 	 * @since 1.0.4
 	 */
-	public function afterControllerAction($controller,$action)
-	{
+	public function afterControllerAction($controller, $action) {
+		
 	}
 
 	/**
@@ -568,17 +525,14 @@ class CWebApplication extends CApplication
 	 * @return CWebModule the module that has the specified ID. Null if no module is found.
 	 * @since 1.0.3
 	 */
-	public function findModule($id)
-	{
-		if(($controller=$this->getController())!==null && ($module=$controller->getModule())!==null)
-		{
-			do
-			{
-				if(($m=$module->getModule($id))!==null)
+	public function findModule($id) {
+		if (($controller = $this->getController()) !== null && ($module = $controller->getModule()) !== null) {
+			do {
+				if (($m = $module->getModule($id)) !== null)
 					return $m;
-			} while(($module=$module->getParentModule())!==null);
+			} while (($module = $module->getParentModule()) !== null);
 		}
-		if(($m=$this->getModule($id))!==null)
+		if (($m = $this->getModule($id)) !== null)
 			return $m;
 	}
 
@@ -586,10 +540,10 @@ class CWebApplication extends CApplication
 	 * Initializes the application.
 	 * This method overrides the parent implementation by preloading the 'request' component.
 	 */
-	protected function init()
-	{
+	protected function init() {
 		parent::init();
 		// preload 'request' so that it has chance to respond to onBeginRequest event.
 		$this->getRequest();
 	}
+
 }

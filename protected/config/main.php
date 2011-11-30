@@ -9,7 +9,7 @@
         'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
         'name' => 'KMA Web Application',
     
-        //	'defaultController' => 'kma/index',
+        //  'defaultController' => 'kma/index',
         
         // preloading 'log' component
     
@@ -21,6 +21,7 @@
         'import' => array(
             'application.models.*',
             'application.components.*',
+            'application.components.actions.*',
         ) ,
         'modules' => array(
     
@@ -50,14 +51,15 @@
                 'showScriptName' => false,
                 'caseSensitive' => false,
                 'rules' => array(
-                    
+                    'graphic/<name>' => 'graphic/index/name/<name>',
+                                      
                     array('sensor/get', 'pattern'=>'sensor', 'verb'=>'GET'),
                     array('sensor/get', 'pattern'=>'sensor/<id:\d+>', 'verb'=>'GET'),
                     array('sensor/update', 'pattern'=>'sensor/<id:\d+>', 'verb'=>'PUT'),
                     array('sensor/delete', 'pattern'=>'sensor/<id:\d+>', 'verb'=>'DELETE'),
                     array('sensor/create', 'pattern'=>'sensor', 'verb'=>'POST'),
                     
-                    array('server/get', 'pattern'=>'server', 'verb'=>'GET'),
+                    array('server/list', 'pattern'=>'server', 'verb'=>'GET'),
                     array('server/get', 'pattern'=>'server/<id:\d+>', 'verb'=>'GET'),
                     array('server/update', 'pattern'=>'server/<id:\d+>', 'verb'=>'PUT'),
                     array('server/delete', 'pattern'=>'server/<id:\d+>', 'verb'=>'DELETE'),
@@ -65,20 +67,19 @@
                     
                     array('statistics/list', 'pattern'=>'statistics/<id:\d+>', 'verb'=>'GET'),
                     
-
                     '<controller:\w+>/<id:\d+>' => '<controller>/list',
                     '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
                     '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
-                    //'<controller:\w+>/<id:\d+>' => '<controller>/view',
+                    '<controller:\w+>/<id:\d+>' => '<controller>/view',
                 ) ,
             ) ,
     
-            //		'db'=>array(
+            //      'db'=>array(
             
-            //			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
+            //          'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
     
             
-            //		),
+            //      ),
     
             
             // uncomment the following to use a MySQL database
@@ -91,7 +92,6 @@
                 'charset' => 'utf8',
             ) ,
             'errorHandler' => array(
-    
                 // use 'site/error' action to display errors
                 'errorAction' => 'site/error',
             ) ,

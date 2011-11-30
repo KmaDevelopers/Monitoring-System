@@ -5321,3 +5321,388 @@ Stack trace:
 #21 /home/artiom/htdocs/kma.sensors/index.php(13): CApplication->run()
 #22 {main} REQUEST_URI=/Sensor?_dc=1318781976610&page=1&start=0&limit=25
 >>>>>>> 8a45619c76f1a4e40932a554312db84024f1f2ea
+2011/11/29 16:44:34 [error] [exception.CException] exception 'CException' with message 'AdminController does not have a method named "end".' in /root/www/KmaMS/protected/yii/framework/base/CComponent.php:266
+Stack trace:
+#0 /root/www/KmaMS/protected/controllers/AdminController.php(9): CComponent->__call('end', Array)
+#1 /root/www/KmaMS/protected/controllers/AdminController.php(9): AdminController->end()
+#2 /root/www/KmaMS/protected/yii/framework/web/actions/CInlineAction.php(50): AdminController->actionIndex()
+#3 /root/www/KmaMS/protected/yii/framework/web/CController.php(300): CInlineAction->runWithParams(Array)
+#4 /root/www/KmaMS/protected/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#5 /root/www/KmaMS/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#6 /root/www/KmaMS/protected/yii/framework/web/CController.php(1122): CFilter->filter(Object(CFilterChain))
+#7 /root/www/KmaMS/protected/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#8 /root/www/KmaMS/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 /root/www/KmaMS/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#10 /root/www/KmaMS/protected/yii/framework/web/CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(309): CController->run('')
+#12 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin')
+#13 /root/www/KmaMS/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#14 /root/www/KmaMS/index.php(13): CApplication->run()
+#15 {main} REQUEST_URI=/admin
+2011/11/29 16:45:20 [error] [php] Missing argument 1 for CController::render(), called in /root/www/KmaMS/protected/controllers/AdminController.php on line 9 and defined (/root/www/KmaMS/protected/yii/framework/web/CController.php:775)
+Stack trace:
+#0 /root/www/KmaMS/protected/yii/framework/web/CController.php(300): CInlineAction->runWithParams()
+#1 /root/www/KmaMS/protected/yii/framework/web/filters/CFilterChain.php(133): AdminController->runAction()
+#2 /root/www/KmaMS/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#3 /root/www/KmaMS/protected/yii/framework/web/CController.php(1122): CAccessControlFilter->filter()
+#4 /root/www/KmaMS/protected/yii/framework/web/filters/CInlineFilter.php(59): AdminController->filterAccessControl()
+#5 /root/www/KmaMS/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#6 /root/www/KmaMS/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#7 /root/www/KmaMS/protected/yii/framework/web/CController.php(257): AdminController->runActionWithFilters()
+#8 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(309): AdminController->run()
+#9 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController()
+#10 /root/www/KmaMS/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#11 /root/www/KmaMS/index.php(13): CWebApplication->run()
+REQUEST_URI=/admin
+in /root/www/KmaMS/protected/controllers/AdminController.php (9)
+in /root/www/KmaMS/index.php (13)
+2011/11/29 16:45:36 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "adminJs/js/app.js".' in /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('adminJs/js/app....')
+#1 /root/www/KmaMS/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/KmaMS/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/adminJs/js/app.js?1322577936
+2011/11/29 16:45:36 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "adminJs/js/lib/extjs/ext-dev.js".' in /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('adminJs/js/lib/...')
+#1 /root/www/KmaMS/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/KmaMS/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/adminJs/js/lib/extjs/ext-dev.js
+2011/11/29 16:45:38 [error] [exception.CException] exception 'CException' with message 'AdminController cannot find the requested view "".' in /root/www/KmaMS/protected/yii/framework/web/CController.php:875
+Stack trace:
+#0 /root/www/KmaMS/protected/yii/framework/web/CController.php(779): CController->renderPartial('', NULL, true)
+#1 /root/www/KmaMS/protected/controllers/AdminController.php(9): CController->render('')
+#2 /root/www/KmaMS/protected/yii/framework/web/actions/CInlineAction.php(50): AdminController->actionIndex()
+#3 /root/www/KmaMS/protected/yii/framework/web/CController.php(300): CInlineAction->runWithParams(Array)
+#4 /root/www/KmaMS/protected/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#5 /root/www/KmaMS/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#6 /root/www/KmaMS/protected/yii/framework/web/CController.php(1122): CFilter->filter(Object(CFilterChain))
+#7 /root/www/KmaMS/protected/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#8 /root/www/KmaMS/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 /root/www/KmaMS/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#10 /root/www/KmaMS/protected/yii/framework/web/CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(309): CController->run('')
+#12 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin')
+#13 /root/www/KmaMS/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#14 /root/www/KmaMS/index.php(13): CApplication->run()
+#15 {main} REQUEST_URI=/admin
+2011/11/29 16:45:42 [error] [exception.CException] exception 'CException' with message 'AdminController cannot find the requested view "".' in /root/www/KmaMS/protected/yii/framework/web/CController.php:875
+Stack trace:
+#0 /root/www/KmaMS/protected/yii/framework/web/CController.php(779): CController->renderPartial(false, NULL, true)
+#1 /root/www/KmaMS/protected/controllers/AdminController.php(9): CController->render(false)
+#2 /root/www/KmaMS/protected/yii/framework/web/actions/CInlineAction.php(50): AdminController->actionIndex()
+#3 /root/www/KmaMS/protected/yii/framework/web/CController.php(300): CInlineAction->runWithParams(Array)
+#4 /root/www/KmaMS/protected/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#5 /root/www/KmaMS/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#6 /root/www/KmaMS/protected/yii/framework/web/CController.php(1122): CFilter->filter(Object(CFilterChain))
+#7 /root/www/KmaMS/protected/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#8 /root/www/KmaMS/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 /root/www/KmaMS/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#10 /root/www/KmaMS/protected/yii/framework/web/CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(309): CController->run('')
+#12 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin')
+#13 /root/www/KmaMS/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#14 /root/www/KmaMS/index.php(13): CApplication->run()
+#15 {main} REQUEST_URI=/admin
+2011/11/29 16:45:42 [error] [exception.CException] exception 'CException' with message 'AdminController cannot find the requested view "".' in /root/www/KmaMS/protected/yii/framework/web/CController.php:875
+Stack trace:
+#0 /root/www/KmaMS/protected/yii/framework/web/CController.php(779): CController->renderPartial(false, NULL, true)
+#1 /root/www/KmaMS/protected/controllers/AdminController.php(9): CController->render(false)
+#2 /root/www/KmaMS/protected/yii/framework/web/actions/CInlineAction.php(50): AdminController->actionIndex()
+#3 /root/www/KmaMS/protected/yii/framework/web/CController.php(300): CInlineAction->runWithParams(Array)
+#4 /root/www/KmaMS/protected/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#5 /root/www/KmaMS/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#6 /root/www/KmaMS/protected/yii/framework/web/CController.php(1122): CFilter->filter(Object(CFilterChain))
+#7 /root/www/KmaMS/protected/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#8 /root/www/KmaMS/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 /root/www/KmaMS/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#10 /root/www/KmaMS/protected/yii/framework/web/CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(309): CController->run('')
+#12 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin')
+#13 /root/www/KmaMS/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#14 /root/www/KmaMS/index.php(13): CApplication->run()
+#15 {main} REQUEST_URI=/admin
+2011/11/29 16:48:54 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "adminJs/js/app.js".' in /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('adminJs/js/app....')
+#1 /root/www/KmaMS/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/KmaMS/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/adminJs/js/app.js?1322578134
+2011/11/29 16:48:54 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "adminJs/js/lib/extjs/ext-dev.js".' in /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('adminJs/js/lib/...')
+#1 /root/www/KmaMS/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/KmaMS/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/adminJs/js/lib/extjs/ext-dev.js
+2011/11/29 16:48:55 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "adminJs/js/lib/extjs/ext-dev.js".' in /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('adminJs/js/lib/...')
+#1 /root/www/KmaMS/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/KmaMS/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/adminJs/js/lib/extjs/ext-dev.js
+2011/11/29 16:48:55 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "adminJs/js/app.js".' in /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('adminJs/js/app....')
+#1 /root/www/KmaMS/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/KmaMS/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/adminJs/js/app.js?1322578135
+2011/11/29 16:48:56 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "adminJs/js/app.js".' in /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('adminJs/js/app....')
+#1 /root/www/KmaMS/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/KmaMS/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/adminJs/js/app.js?1322578135
+2011/11/29 16:48:56 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "adminJs/js/lib/extjs/ext-dev.js".' in /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('adminJs/js/lib/...')
+#1 /root/www/KmaMS/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/KmaMS/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/adminJs/js/lib/extjs/ext-dev.js
+2011/11/29 16:48:56 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "adminJs/js/lib/extjs/ext-dev.js".' in /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('adminJs/js/lib/...')
+#1 /root/www/KmaMS/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/KmaMS/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/adminJs/js/lib/extjs/ext-dev.js
+2011/11/29 16:48:56 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "adminJs/js/app.js".' in /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('adminJs/js/app....')
+#1 /root/www/KmaMS/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/KmaMS/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/adminJs/js/app.js?1322578136
+2011/11/29 16:48:56 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "adminJs/js/lib/extjs/ext-dev.js".' in /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('adminJs/js/lib/...')
+#1 /root/www/KmaMS/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/KmaMS/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/adminJs/js/lib/extjs/ext-dev.js
+2011/11/29 16:48:56 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "adminJs/js/app.js".' in /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('adminJs/js/app....')
+#1 /root/www/KmaMS/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/KmaMS/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/adminJs/js/app.js?1322578136
+2011/11/29 16:48:56 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "adminJs/js/app.js".' in /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('adminJs/js/app....')
+#1 /root/www/KmaMS/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/KmaMS/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/adminJs/js/app.js?1322578136
+2011/11/29 16:48:56 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "adminJs/js/lib/extjs/ext-dev.js".' in /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('adminJs/js/lib/...')
+#1 /root/www/KmaMS/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/KmaMS/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/adminJs/js/lib/extjs/ext-dev.js
+2011/11/29 16:49:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "adminJs/js/lib/extjs/ext-dev.js".' in /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('adminJs/js/lib/...')
+#1 /root/www/KmaMS/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/KmaMS/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/adminJs/js/lib/extjs/ext-dev.js
+2011/11/29 16:49:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "adminJs/js/app.js".' in /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('adminJs/js/app....')
+#1 /root/www/KmaMS/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/KmaMS/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/adminJs/js/app.js?1322578177
+2011/11/29 16:50:05 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "adminJs/js/lib/extjs/resources/css/ext-all-gray.css".' in /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('adminJs/js/lib/...')
+#1 /root/www/KmaMS/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/KmaMS/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/adminJs/js/lib/extjs/resources/css/ext-all-gray.css
+2011/11/29 16:50:05 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "adminJs/js/lib/extjs/ext-dev.js".' in /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('adminJs/js/lib/...')
+#1 /root/www/KmaMS/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/KmaMS/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/adminJs/js/lib/extjs/ext-dev.js
+2011/11/29 16:50:05 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "adminJs/js/app.js".' in /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('adminJs/js/app....')
+#1 /root/www/KmaMS/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/KmaMS/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/adminJs/js/app.js?1322578205
+2011/11/29 16:50:24 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "adminjs".' in /root/www/KmaMS/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /root/www/KmaMS/protected/yii/framework/web/CController.php(262): CController->missingAction('adminjs')
+#1 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(309): CController->run('adminjs')
+#2 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/adminJs/j...')
+#3 /root/www/KmaMS/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /root/www/KmaMS/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/adminJs/js/lib/extjs/resources/css/ext-all-gray.css
+2011/11/29 16:50:25 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "adminjs".' in /root/www/KmaMS/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /root/www/KmaMS/protected/yii/framework/web/CController.php(262): CController->missingAction('adminjs')
+#1 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(309): CController->run('adminjs')
+#2 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/adminJs/j...')
+#3 /root/www/KmaMS/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /root/www/KmaMS/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/adminJs/js/app.js?1322578224
+2011/11/29 16:50:25 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "adminjs".' in /root/www/KmaMS/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /root/www/KmaMS/protected/yii/framework/web/CController.php(262): CController->missingAction('adminjs')
+#1 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(309): CController->run('adminjs')
+#2 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/adminJs/j...')
+#3 /root/www/KmaMS/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /root/www/KmaMS/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/adminJs/js/lib/extjs/ext-dev.js
+2011/11/29 16:50:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "adminjs".' in /root/www/KmaMS/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /root/www/KmaMS/protected/yii/framework/web/CController.php(262): CController->missingAction('adminjs')
+#1 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(309): CController->run('adminjs')
+#2 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/adminJs/j...')
+#3 /root/www/KmaMS/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /root/www/KmaMS/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/adminJs/js/app.js?1322578243
+2011/11/29 16:50:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "adminjs".' in /root/www/KmaMS/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /root/www/KmaMS/protected/yii/framework/web/CController.php(262): CController->missingAction('adminjs')
+#1 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(309): CController->run('adminjs')
+#2 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/adminJs/j...')
+#3 /root/www/KmaMS/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /root/www/KmaMS/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/adminJs/js/lib/extjs/resources/css/ext-all-gray.css
+2011/11/29 16:50:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "adminjs".' in /root/www/KmaMS/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /root/www/KmaMS/protected/yii/framework/web/CController.php(262): CController->missingAction('adminjs')
+#1 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(309): CController->run('adminjs')
+#2 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/adminJs/j...')
+#3 /root/www/KmaMS/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /root/www/KmaMS/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/adminJs/js/lib/extjs/ext-dev.js
+2011/11/29 16:51:24 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "adminjs".' in /root/www/KmaMS/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /root/www/KmaMS/protected/yii/framework/web/CController.php(262): CController->missingAction('adminjs')
+#1 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(309): CController->run('adminjs')
+#2 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/adminJs/l...')
+#3 /root/www/KmaMS/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /root/www/KmaMS/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/adminJs/lib/extjs/ext-dev.js
+2011/11/29 16:51:24 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "adminjs".' in /root/www/KmaMS/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /root/www/KmaMS/protected/yii/framework/web/CController.php(262): CController->missingAction('adminjs')
+#1 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(309): CController->run('adminjs')
+#2 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/adminJs/l...')
+#3 /root/www/KmaMS/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /root/www/KmaMS/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/adminJs/lib/extjs/resources/css/ext-all-gray.css
+2011/11/29 16:51:24 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "adminjs".' in /root/www/KmaMS/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /root/www/KmaMS/protected/yii/framework/web/CController.php(262): CController->missingAction('adminjs')
+#1 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(309): CController->run('adminjs')
+#2 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/adminJs/a...')
+#3 /root/www/KmaMS/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /root/www/KmaMS/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/adminJs/app.js?1322578284
+2011/11/29 16:51:35 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "adminJs/lib/extjs/ext-dev.js".' in /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('adminJs/lib/ext...')
+#1 /root/www/KmaMS/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/KmaMS/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/adminJs/lib/extjs/ext-dev.js
+2011/11/29 16:52:03 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "adminjs".' in /root/www/KmaMS/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /root/www/KmaMS/protected/yii/framework/web/CController.php(262): CController->missingAction('adminjs')
+#1 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(309): CController->run('adminjs')
+#2 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/adminJs/a...')
+#3 /root/www/KmaMS/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /root/www/KmaMS/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/adminJs/app/core/EventBus.js?_dc=1322578323867
+2011/11/29 16:52:03 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "adminjs".' in /root/www/KmaMS/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /root/www/KmaMS/protected/yii/framework/web/CController.php(262): CController->missingAction('adminjs')
+#1 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(309): CController->run('adminjs')
+#2 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/adminJs/a...')
+#3 /root/www/KmaMS/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /root/www/KmaMS/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/adminJs/app/components/ux/Notification.js?_dc=1322578323870
+2011/11/29 16:52:04 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "adminjs".' in /root/www/KmaMS/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /root/www/KmaMS/protected/yii/framework/web/CController.php(262): CController->missingAction('adminjs')
+#1 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(309): CController->run('adminjs')
+#2 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/adminJs/a...')
+#3 /root/www/KmaMS/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /root/www/KmaMS/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/adminJs/app/components/basic/NoticeHandler.js?_dc=1322578323869
+2011/11/29 16:52:04 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "adminjs".' in /root/www/KmaMS/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /root/www/KmaMS/protected/yii/framework/web/CController.php(262): CController->missingAction('adminjs')
+#1 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(309): CController->run('adminjs')
+#2 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/adminJs/a...')
+#3 /root/www/KmaMS/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /root/www/KmaMS/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/adminJs/app/components/basic/Utils.js?_dc=1322578323869
+2011/11/29 16:52:04 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "adminjs".' in /root/www/KmaMS/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /root/www/KmaMS/protected/yii/framework/web/CController.php(262): CController->missingAction('adminjs')
+#1 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(309): CController->run('adminjs')
+#2 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/adminJs/a...')
+#3 /root/www/KmaMS/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /root/www/KmaMS/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/adminJs/app/links.js?_dc=1322578323868
+2011/11/29 16:52:04 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "adminjs".' in /root/www/KmaMS/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /root/www/KmaMS/protected/yii/framework/web/CController.php(262): CController->missingAction('adminjs')
+#1 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(309): CController->run('adminjs')
+#2 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/adminJs/a...')
+#3 /root/www/KmaMS/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /root/www/KmaMS/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/adminJs/app/constants.js?_dc=1322578323868
+2011/11/29 16:52:04 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "adminjs".' in /root/www/KmaMS/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /root/www/KmaMS/protected/yii/framework/web/CController.php(262): CController->missingAction('adminjs')
+#1 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(309): CController->run('adminjs')
+#2 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/adminJs/a...')
+#3 /root/www/KmaMS/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /root/www/KmaMS/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/adminJs/app/view/Viewport.js?_dc=1322578323870
+2011/11/29 16:52:04 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "adminjs".' in /root/www/KmaMS/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /root/www/KmaMS/protected/yii/framework/web/CController.php(262): CController->missingAction('adminjs')
+#1 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(309): CController->run('adminjs')
+#2 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/adminJs/a...')
+#3 /root/www/KmaMS/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /root/www/KmaMS/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/adminJs/app/controller/SensorController.js?_dc=1322578323870
+2011/11/29 16:52:04 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "adminjs".' in /root/www/KmaMS/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /root/www/KmaMS/protected/yii/framework/web/CController.php(262): CController->missingAction('adminjs')
+#1 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(309): CController->run('adminjs')
+#2 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/adminJs/a...')
+#3 /root/www/KmaMS/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /root/www/KmaMS/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/adminJs/app/controller/ServerController.js?_dc=1322578323871
+2011/11/29 16:55:45 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "server".' in /root/www/KmaMS/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /root/www/KmaMS/protected/yii/framework/web/CController.php(262): CController->missingAction('server')
+#1 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(309): CController->run('server')
+#2 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/server')
+#3 /root/www/KmaMS/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /root/www/KmaMS/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/server
+2011/11/29 17:12:28 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "index".' in /root/www/KmaMS/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /root/www/KmaMS/protected/yii/framework/web/CController.php(262): CController->missingAction('')
+#1 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(309): CController->run('')
+#2 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('server')
+#3 /root/www/KmaMS/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /root/www/KmaMS/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/server?_dc=1322579548343
+2011/11/29 17:13:07 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "index".' in /root/www/KmaMS/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /root/www/KmaMS/protected/yii/framework/web/CController.php(262): CController->missingAction('')
+#1 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(309): CController->run('')
+#2 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('server')
+#3 /root/www/KmaMS/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /root/www/KmaMS/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/server?_dc=1322579587417
+2011/11/29 17:19:19 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "index".' in /root/www/KmaMS/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /root/www/KmaMS/protected/yii/framework/web/CController.php(262): CController->missingAction('')
+#1 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(309): CController->run('')
+#2 /root/www/KmaMS/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('server')
+#3 /root/www/KmaMS/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /root/www/KmaMS/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/server?_dc=1322579959241
