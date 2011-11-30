@@ -3,6 +3,12 @@
   <component name="DependencyValidationManager">
     <option name="SKIP_IMPORT_STATEMENTS" value="false" />
   </component>
+<<<<<<< HEAD
+=======
+  <component name="ProjectResources">
+    <default-html-doctype>http://www.w3.org/1999/xhtml</default-html-doctype>
+  </component>
+>>>>>>> b9db33af46f6a0caf34c55bf7752e9fef29533e7
   <component name="ProjectRootManager" version="2" />
 </project>
 

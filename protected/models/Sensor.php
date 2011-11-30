@@ -8,7 +8,9 @@
  * @property integer $serverId
  * @property string $serial
  * @property string $name
- * @property string $path
+ * @property @deprecated string $path
+ * @property int $x
+ * @property int $y
  */
 class Sensor extends KmaActiveRecord
 {
@@ -37,10 +39,10 @@ class Sensor extends KmaActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('serverId', 'numerical', 'integerOnly'=>true),
+			array('serverId, x, y', 'numerical', 'integerOnly'=>true),
 			array('serial', 'length', 'max'=>50),
 			array('name', 'length', 'max'=>100),
-			array('path', 'length', 'max'=>250),
+//			array('path', 'length', 'max'=>250),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('sensorId, serverId, serial, name, path', 'safe', 'on'=>'search'),
@@ -106,19 +108,14 @@ class Sensor extends KmaActiveRecord
 		 *temp		: 20.4
 		 */
 		
-		$pos = CJSON::decode($this->path);
-		
-		$x = $pos['x'];
-		$y = $pos['y'];
-		
 		$temp = is_array($this->lastStat) ? $this->lastStat->temperature : 0;
 		
 		return array(
 			     'sensorId' => $this->primaryKey,
 				 'serial' => $this->serial,
 			     'name' => $this->name,
-			     'x' => $x,
-			     'y' => $y,
+			     'x' => $this->x,
+			     'y' => $this->y,
 			     'ip' => $this->server->ip,
 			     'temp' => $temp,
 			     );

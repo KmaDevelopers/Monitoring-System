@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/.idea/KmaMS.iml" filepath="$PROJECT_DIR$/.idea/KmaMS.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/.idea/kma_monitoring_system.iml" filepath="$PROJECT_DIR$/.idea/kma_monitoring_system.iml" />
+>>>>>>> b9db33af46f6a0caf34c55bf7752e9fef29533e7
     </modules>
   </component>
 </project>

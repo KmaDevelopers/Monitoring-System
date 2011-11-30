@@ -15,6 +15,10 @@ class SensorController extends KmaController
 						   'index',
 						   'create',
 						   'delete',
+<<<<<<< HEAD
+=======
+						   'update',
+>>>>>>> b9db33af46f6a0caf34c55bf7752e9fef29533e7
 						   ),
 				'users' => array('*'),
 			),
@@ -25,6 +29,7 @@ class SensorController extends KmaController
 	}
 	
 	public function actionCreate() {
+<<<<<<< HEAD
 		
 		
 		
@@ -35,10 +40,17 @@ class SensorController extends KmaController
 		$serv->attributes = CJSON::decode($json);
 		
 		$serv->attributes = isset($_POST['Sensor']) ? $_POST['Sensor'] : array();
+=======
 		
-		if($serv->validate()){
-			if($serv->save()){
-				$this->result($serv);
+		$sens = new Sensor();
+		$sens->attributes = $_POST['Sensor'];
+		
+		$sens->attributes = isset($_POST['Sensor']) ? $_POST['Sensor'] : array();
+>>>>>>> b9db33af46f6a0caf34c55bf7752e9fef29533e7
+		
+		if($sens->validate()){
+			if($sens->save()){
+				$this->result($sens->getItemArray(),1);
 			} else {
 				$this->error("Can't save sensor!");
 			}

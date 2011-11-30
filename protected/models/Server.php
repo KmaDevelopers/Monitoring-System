@@ -91,7 +91,11 @@ class Server extends KmaActiveRecord
 		));
 	}
 	
+<<<<<<< HEAD
 	public function getItemArray($relation = NULL){
+=======
+	public function getItemArray($relation = 'sensors'){
+>>>>>>> b9db33af46f6a0caf34c55bf7752e9fef29533e7
 		if(is_null($relation)){
 			return $this->attributes;
 		} else {
