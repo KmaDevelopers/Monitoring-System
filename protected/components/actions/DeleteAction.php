@@ -6,7 +6,7 @@ class DeleteAction extends CAction {
 		$name = $this->getController()->id;
 
 		$id = CJSON::decode(file_get_contents('php://input'));
-		$id = $id['id'];
+		$id = $id[$name.'Id'];
 
 		if ($id) {
 			$model = KmaActiveRecord::model(ucfirst($name))->findByPk($id);

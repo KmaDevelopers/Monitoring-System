@@ -5321,3 +5321,43 @@ Stack trace:
 #21 /home/artiom/htdocs/kma.sensors/index.php(13): CApplication->run()
 #22 {main} REQUEST_URI=/Sensor?_dc=1318781976610&page=1&start=0&limit=25
 >>>>>>> 8a45619c76f1a4e40932a554312db84024f1f2ea
+2011/12/03 11:29:15 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "login".' in /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/web/CController.php(262): CController->missingAction('login')
+#1 /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/web/CWebApplication.php(309): CController->run('login')
+#2 /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('site/login')
+#3 /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /home/artiom/htdocs/kma_monitoring_system/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/site/login
+2011/12/03 11:31:24 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "login".' in /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/web/CController.php(262): CController->missingAction('login')
+#1 /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/web/CWebApplication.php(309): CController->run('login')
+#2 /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('site/login')
+#3 /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /home/artiom/htdocs/kma_monitoring_system/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/site/login
+2011/12/03 11:35:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "js".' in /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/web/CController.php(262): CController->missingAction('js')
+#1 /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/web/CWebApplication.php(309): CController->run('js')
+#2 /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/js/lib/ex...')
+#3 /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /home/artiom/htdocs/kma_monitoring_system/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/js/lib/extjs/resources/css/ext-all-gray.css
+2011/12/03 11:35:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "adminjs".' in /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/web/CController.php(262): CController->missingAction('adminjs')
+#1 /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/web/CWebApplication.php(309): CController->run('adminjs')
+#2 /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/adminJs/j...')
+#3 /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /home/artiom/htdocs/kma_monitoring_system/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/adminJs/js/app.js?1322904949
+2011/12/03 11:35:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "adminjs".' in /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/web/CController.php(262): CController->missingAction('adminjs')
+#1 /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/web/CWebApplication.php(309): CController->run('adminjs')
+#2 /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/adminJs/j...')
+#3 /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /home/artiom/htdocs/kma_monitoring_system/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/adminJs/js/lib/extjs/ext-dev.js

@@ -28,9 +28,13 @@ class SensorController extends KmaController
 	public function actionCreate() {
 		
 		$sens = new Sensor();
-		$sens->attributes = $_POST['Sensor'];
-		
-		$sens->attributes = isset($_POST['Sensor']) ? $_POST['Sensor'] : array();
+
+		if(isset($_POST['Sensor'])) {
+			$sens->attributes = $_POST['Sensor'];
+		}else{
+			$data = CJSON::decode(file_get_contents('php://input'));
+			$sens->attributes = $data;
+		}
 		
 		if($sens->validate()){
 			if($sens->save()){

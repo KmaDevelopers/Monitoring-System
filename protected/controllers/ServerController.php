@@ -29,7 +29,12 @@ class ServerController extends KmaController {
 	public function actionCreate() {
 
 		$serv = new Server();
-		$serv->attributes = $_POST['Server'];
+		if($_POST['Server']){
+			$serv->attributes = $_POST['Server'];
+		}else{
+			$data = CJSON::decode(file_get_contents('php://input'));
+			$serv->attributes = CJSON::decode($data);
+		}
 
 		if ($serv->validate()) {
 			if ($serv->save()) {
@@ -40,6 +45,62 @@ class ServerController extends KmaController {
 		} else {
 			$this->error("Can't validate server!");
 		}
+
+		Yii::app()->end();
+		
+		if ($serv->validate()) {
+			if ($serv->save()) {
+
+				/////
+
+				/**
+				* @TODO НУЖНО СРАЗУ ЖЕ СОЗДАВАТЬ СЕНСОРЫ ДЛЯ СЕРВЕРА ПРИ СОЗДАНИИ И ПОМЕЧАТЬ ИХ КАК ДЕАКТИВИРОВАНЫЕ
+				*/
+				try{
+					$results = @file_get_contents('http://'.$serv['ip'], 'r');
+				}catch(Exception $e) {
+					$this->result($serv->getItemArray(),1);
+					Yii::app()->end();
+				}
+
+				if(empty($results)) {
+					$this->result($serv->getItemArray(),1);
+					Yii::app()->end();
+				}
+
+				$resArray = explode(";",$results);
+				
+				/**
+				* create sensors
+				*/
+
+				$insertDataArray = array();
+				$date = date('Y-m-d H:i:s');
+
+				for($i = 0 ; $i < count($resArray)/2 ; $i +=2 ){
+
+					$serial = $resArray[$i];
+					if(!empty($sensorBySerial[$serial])) {
+						$insertDataArray[] = $serial.",{$serv['serverId']},0";
+					}
+				}
+
+				if(empty($insertDataArray)) {
+					$this->result($serv->getItemArray(),1);
+					Yii::app()->end();
+				}
+
+				$sql = "insert into `Sensor` (serial, serverId, active) VALUES (".implode('),(',$insertDataArray).")";
+				Yii::app()->db->createCommand($sql)->execute();	
+					
+				$this->result($serv->getItemArray('sensors'),1);
+			} else {
+				$this->error("Can't save server!");
+			}
+		} else {
+			$this->error("Can't validate server!");
+		}
+
 	}
 
 	public function actionList() {
@@ -49,6 +110,7 @@ class ServerController extends KmaController {
 
 		if (isset($models)) {
 			$res = array_map(function($it) {
+
 						return $it->getItemArray('sensors');
 					}, $models);
 
