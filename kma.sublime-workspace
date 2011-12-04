@@ -5,7 +5,7 @@
 		[
 			[
 				"sen",
-				"sensors"
+				"sens"
 			],
 			[
 				"seve",
@@ -451,7 +451,7 @@
 			"file": "protected/controllers/ServerController.php",
 			"settings":
 			{
-				"buffer_size": 2608,
+				"buffer_size": 2939,
 				"line_ending": "Unix"
 			}
 		},
@@ -459,7 +459,7 @@
 			"file": "protected/controllers/SensorController.php",
 			"settings":
 			{
-				"buffer_size": 1013,
+				"buffer_size": 1091,
 				"line_ending": "Unix"
 			}
 		},
@@ -467,7 +467,7 @@
 			"file": "protected/models/Server.php",
 			"settings":
 			{
-				"buffer_size": 2626,
+				"buffer_size": 2627,
 				"line_ending": "Unix"
 			}
 		},
@@ -634,15 +634,15 @@
 					"file": "protected/controllers/ServerController.php",
 					"settings":
 					{
-						"buffer_size": 2608,
+						"buffer_size": 2939,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								790,
-								790
+								0,
+								0
 							]
 						],
 						"settings":
@@ -661,15 +661,15 @@
 					"file": "protected/controllers/SensorController.php",
 					"settings":
 					{
-						"buffer_size": 1013,
+						"buffer_size": 1091,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								621,
-								621
+								620,
+								620
 							]
 						],
 						"settings":
@@ -678,7 +678,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 192.0,
+						"translation.y": 336.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -688,15 +688,15 @@
 					"file": "protected/models/Server.php",
 					"settings":
 					{
-						"buffer_size": 2626,
+						"buffer_size": 2627,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2307,
-								2307
+								2405,
+								2405
 							]
 						],
 						"settings":
@@ -705,7 +705,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 960.0,
+						"translation.y": 912.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -732,7 +732,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1200.0,
+						"translation.y": 1776.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

@@ -92,6 +92,7 @@ class Server extends KmaActiveRecord
 		));
 	}
 	
+
 	public function getItemArray($relation = 'sensors'){
 		/**
 		* OPTIMIZE IF HAVE BIG LOAD
