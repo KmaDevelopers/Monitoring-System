@@ -1,5 +1,20 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
  * @class Ext.grid.header.DropZone
+ * @extends Ext.dd.DropZone
  * @private
  */
 Ext.define('Ext.grid.header.DropZone', {
@@ -23,7 +38,7 @@ Ext.define('Ext.grid.header.DropZone', {
 
     getTopIndicator: function() {
         if (!this.topIndicator) {
-            this.topIndicator = Ext.DomHelper.append(Ext.getBody(), {
+            this.topIndicator = Ext.core.DomHelper.append(Ext.getBody(), {
                 cls: "col-move-top",
                 html: "&#160;"
             }, true);
@@ -33,7 +48,7 @@ Ext.define('Ext.grid.header.DropZone', {
 
     getBottomIndicator: function() {
         if (!this.bottomIndicator) {
-            this.bottomIndicator = Ext.DomHelper.append(Ext.getBody(), {
+            this.bottomIndicator = Ext.core.DomHelper.append(Ext.getBody(), {
                 cls: "col-move-bottom",
                 html: "&#160;"
             }, true);
@@ -68,7 +83,7 @@ Ext.define('Ext.grid.header.DropZone', {
             topXY, bottomXY, headerCtEl, minX, maxX;
 
         // Cannot drag beyond non-draggable start column
-        if (!header.draggable && header.getIndex() === 0) {
+        if (!header.draggable && header.getIndex() == 0) {
             return false;
         }
 
@@ -139,25 +154,10 @@ Ext.define('Ext.grid.header.DropZone', {
     },
 
     onNodeOver: function(node, dragZone, e, data) {
-        var me = this,
-            header = me.headerCt,
-            doPosition = true,
-            from = data.header,
-            to;
-            
-        if (data.header.el.dom === node) {
-            doPosition = false;
-        } else if (header.restrictReorder) {
-            to = me.getLocation(e, node).header;
-            doPosition = from.ownerCt == to.ownerCt;
+        if (data.header.el.dom !== node) {
+            this.positionIndicator(data.header, node, e);
         }
-        
-        if (doPosition) {
-            me.positionIndicator(data.header, node, e);
-        } else {
-            me.valid = false;
-        }
-        return me.valid ? me.dropAllowed : me.dropNotAllowed;
+        return this.valid ? this.dropAllowed : this.dropNotAllowed;
     },
 
     hideIndicators: function() {
@@ -172,21 +172,17 @@ Ext.define('Ext.grid.header.DropZone', {
     onNodeDrop: function(node, dragZone, e, data) {
         if (this.valid) {
             this.invalidateDrop();
-            var dragHeader   = data.header,
+            var hd = data.header,
                 lastLocation = this.lastLocation,
-                targetHeader = lastLocation.header,
-                fromCt       = dragHeader.ownerCt,
-                localFromIdx = fromCt.items.indexOf(dragHeader), // Container.items is a MixedCollection
-                toCt         = targetHeader.ownerCt,
-                localToIdx   = toCt.items.indexOf(targetHeader),
-                headerCt     = this.headerCt,
-                fromIdx      = headerCt.getHeaderIndex(dragHeader),
-                toIdx        = headerCt.getHeaderIndex(targetHeader),
+                fromCt  = hd.ownerCt,
+                fromIdx = fromCt.items.indexOf(hd), // Container.items is a MixedCollection
+                toCt    = lastLocation.header.ownerCt,
+                toIdx   = toCt.items.indexOf(lastLocation.header),
+                headerCt = this.headerCt,
                 groupCt,
                 scrollerOwner;
 
             if (lastLocation.pos === 'after') {
-                localToIdx++;
                 toIdx++;
             }
 
@@ -195,71 +191,70 @@ Ext.define('Ext.grid.header.DropZone', {
             // does NOT currently support grouped headers.
             if (fromCt !== toCt && fromCt.lockableInjected && toCt.lockableInjected && toCt.lockedCt) {
                 scrollerOwner = fromCt.up('[scrollerOwner]');
-                scrollerOwner.lock(dragHeader, localToIdx);
+                scrollerOwner.lock(hd, toIdx);
             } else if (fromCt !== toCt && fromCt.lockableInjected && toCt.lockableInjected && fromCt.lockedCt) {
                 scrollerOwner = fromCt.up('[scrollerOwner]');
-                scrollerOwner.unlock(dragHeader, localToIdx);
+                scrollerOwner.unlock(hd, toIdx);
             } else {
                 // If dragging rightwards, then after removal, the insertion index will be one less when moving
                 // in between the same container.
-                if ((fromCt === toCt) && (localToIdx > localFromIdx)) {
-                    localToIdx--;
+                if ((fromCt === toCt) && (toIdx > fromCt.items.indexOf(hd))) {
                     toIdx--;
                 }
 
                 // Remove dragged header from where it was without destroying it or relaying its Container
                 if (fromCt !== toCt) {
-                    fromCt.suspendLayouts();
-                    fromCt.remove(dragHeader, false);
-                    fromCt.resumeLayouts();
+                    fromCt.suspendLayout = true;
+                    fromCt.remove(hd, false);
+                    fromCt.suspendLayout = false;
                 }
 
                 // Dragged the last header out of the fromCt group... The fromCt group must die
                 if (fromCt.isGroupHeader) {
                     if (!fromCt.items.getCount()) {
                         groupCt = fromCt.ownerCt;
-                        groupCt.suspendLayouts();
+                        groupCt.suspendLayout = true;
                         groupCt.remove(fromCt, false);
                         fromCt.el.dom.parentNode.removeChild(fromCt.el.dom);
-                        groupCt.resumeLayouts();
+                        groupCt.suspendLayout = false;
                     } else {
-                        fromCt.minWidth = fromCt.getWidth() - dragHeader.getWidth();
+                        fromCt.minWidth = fromCt.getWidth() - hd.getWidth();
                         fromCt.setWidth(fromCt.minWidth);
                     }
                 }
 
                 // Move dragged header into its drop position
-                toCt.suspendLayouts();
+                toCt.suspendLayout = true;
                 if (fromCt === toCt) {
-                    toCt.move(localFromIdx, localToIdx);
+                    toCt.move(fromIdx, toIdx);
                 } else {
-                    toCt.insert(localToIdx, dragHeader);
+                    toCt.insert(toIdx, hd);
                 }
-                toCt.resumeLayouts();
+                toCt.suspendLayout = false;
 
                 // Group headers acquire the aggregate width of their child headers
                 // Therefore a child header may not flex; it must contribute a fixed width.
                 // But we restore the flex value when moving back into the main header container
                 if (toCt.isGroupHeader) {
-                    dragHeader.savedFlex = dragHeader.flex;
-                    delete dragHeader.flex;
-                    dragHeader.width = dragHeader.getWidth();
+                    hd.savedFlex = hd.flex;
+                    delete hd.flex;
+                    hd.width = hd.getWidth();
                     // When there was previously a flex, we need to ensure we don't count for the
                     // border twice.
-                    toCt.minWidth = toCt.getWidth() + dragHeader.getWidth() - (dragHeader.savedFlex ? 1 : 0);
+                    toCt.minWidth = toCt.getWidth() + hd.getWidth() - (hd.savedFlex ? 1 : 0);
                     toCt.setWidth(toCt.minWidth);
                 } else {
-                    if (dragHeader.savedFlex) {
-                        dragHeader.flex = dragHeader.savedFlex;
-                        delete dragHeader.width;
+                    if (hd.savedFlex) {
+                        hd.flex = hd.savedFlex;
+                        delete hd.width;
                     }
                 }
+
 
                 // Refresh columns cache in case we remove an emptied group column
                 headerCt.purgeCache();
                 headerCt.doLayout();
-                headerCt.onHeaderMoved(dragHeader, fromIdx, toIdx);
-
+                headerCt.onHeaderMoved(hd, fromIdx, toIdx);
                 // Emptied group header can only be destroyed after the header and grid have been refreshed
                 if (!fromCt.items.getCount()) {
                     fromCt.destroy();
@@ -268,3 +263,4 @@ Ext.define('Ext.grid.header.DropZone', {
         }
     }
 });
+

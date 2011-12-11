@@ -3,8 +3,8 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>The source code</title>
-  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
-  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <link href="../prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../prettify/prettify.js"></script>
   <style type="text/css">
     .highlight { display: block; background-color: #ddd; }
   </style>
@@ -17,6 +17,7 @@
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js"><span id='Ext-grid-plugin-HeaderReorderer'>/**
 </span> * @class Ext.grid.plugin.HeaderReorderer
+ * @extends Ext.util.Observable
  * @private
  */
 Ext.define('Ext.grid.plugin.HeaderReorderer', {
@@ -26,11 +27,7 @@ Ext.define('Ext.grid.plugin.HeaderReorderer', {
 
     init: function(headerCt) {
         this.headerCt = headerCt;
-        headerCt.on({
-            render: this.onHeaderCtRender,
-            single: true,
-            scope: this
-        });
+        headerCt.on('render', this.onHeaderCtRender, this);
     },
 
 <span id='Ext-grid-plugin-HeaderReorderer-method-destroy'>    /**
@@ -42,12 +39,10 @@ Ext.define('Ext.grid.plugin.HeaderReorderer', {
     },
 
     onHeaderCtRender: function() {
-        var me = this;
-        
-        me.dragZone = new Ext.grid.header.DragZone(me.headerCt);
-        me.dropZone = new Ext.grid.header.DropZone(me.headerCt);
-        if (me.disabled) {
-            me.dragZone.disable();
+        this.dragZone = Ext.create('Ext.grid.header.DragZone', this.headerCt);
+        this.dropZone = Ext.create('Ext.grid.header.DropZone', this.headerCt);
+        if (this.disabled) {
+            this.dragZone.disable();
         }
     },
     
@@ -64,7 +59,6 @@ Ext.define('Ext.grid.plugin.HeaderReorderer', {
             this.dragZone.disable();
         }
     }
-});
-</pre>
+});</pre>
 </body>
 </html>

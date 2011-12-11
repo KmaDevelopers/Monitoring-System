@@ -1,8 +1,28 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
+ * @class Ext.menu.Item
+ * @extends Ext.Component
+ *
  * A base class for all menu items that require menu-related functionality such as click handling,
  * sub-menus, icons, etc.
  *
- *     @example
+ * {@img Ext.menu.Menu/Ext.menu.Menu.png Ext.menu.Menu component}
+ *
+ * __Example Usage:__
+ *
  *     Ext.create('Ext.menu.Menu', {
  *         width: 100,
  *         height: 100,
@@ -12,12 +32,13 @@
  *             text: 'icon item',
  *             iconCls: 'add16'
  *         },{
- *             text: 'text item'
+ *             text: 'text item',
  *         },{
  *             text: 'plain item',
  *             plain: true
  *         }]
  *     });
+ *
  */
 Ext.define('Ext.menu.Item', {
     extend: 'Ext.Component',
@@ -30,26 +51,22 @@ Ext.define('Ext.menu.Item', {
      */
 
     /**
-     * @property {Ext.menu.Menu} parentMenu
-     * The parent Menu of this item.
-     */
-
-    /**
      * @cfg {String} activeCls
      * The CSS class added to the menu item when the item is activated (focused/mouseover).
      * Defaults to `Ext.baseCSSPrefix + 'menu-item-active'`.
+     * @markdown
      */
     activeCls: Ext.baseCSSPrefix + 'menu-item-active',
 
     /**
-     * @cfg {String} ariaRole
-     * @private
+     * @cfg {String} ariaRole @hide
      */
     ariaRole: 'menuitem',
 
     /**
      * @cfg {Boolean} canActivate
      * Whether or not this menu item can be activated when focused/mouseovered. Defaults to `true`.
+     * @markdown
      */
     canActivate: true,
 
@@ -57,6 +74,7 @@ Ext.define('Ext.menu.Item', {
      * @cfg {Number} clickHideDelay
      * The delay in milliseconds to wait before hiding the menu after clicking the menu item.
      * This only has an effect when `hideOnClick: true`. Defaults to `1`.
+     * @markdown
      */
     clickHideDelay: 1,
 
@@ -70,6 +88,7 @@ Ext.define('Ext.menu.Item', {
      * @cfg {String} disabledCls
      * The CSS class added to the menu item when the item is disabled.
      * Defaults to `Ext.baseCSSPrefix + 'menu-item-disabled'`.
+     * @markdown
      */
     disabledCls: Ext.baseCSSPrefix + 'menu-item-disabled',
 
@@ -116,7 +135,7 @@ Ext.define('Ext.menu.Item', {
 
     /**
      * @cfg {String} menuAlign
-     * The default {@link Ext.Element#getAlignToXY Ext.Element.getAlignToXY} anchor position value for this
+     * The default {@link Ext.core.Element#getAlignToXY Ext.Element.getAlignToXY} anchor position value for this
      * item's sub-menu relative to this item's position. Defaults to `'tl-tr?'`.
      * @markdown
      */
@@ -142,20 +161,17 @@ Ext.define('Ext.menu.Item', {
      * @markdown
      */
 
-    arrowCls: Ext.baseCSSPrefix + 'menu-item-arrow',
-
-    childEls: [
-        'itemEl', 'iconEl', 'textEl', 'arrowEl'
-    ],
-
     renderTpl: [
         '<tpl if="plain">',
             '{text}',
-        '<tpl else>',
-            '<a id="{id}-itemEl" class="' + Ext.baseCSSPrefix + 'menu-item-link" href="{href}" <tpl if="hrefTarget">target="{hrefTarget}"</tpl> hidefocus="true" unselectable="on">',
-                '<img id="{id}-iconEl" src="{icon}" class="' + Ext.baseCSSPrefix + 'menu-item-icon {iconCls}" />',
-                '<span id="{id}-textEl" class="' + Ext.baseCSSPrefix + 'menu-item-text" <tpl if="menu">style="margin-right: 17px;"</tpl> >{text}</span>',
-                '<img id="{id}-arrowEl" src="{blank}" class="{arrowCls}" />',
+        '</tpl>',
+        '<tpl if="!plain">',
+            '<a class="' + Ext.baseCSSPrefix + 'menu-item-link" href="{href}" <tpl if="hrefTarget">target="{hrefTarget}"</tpl> hidefocus="true" unselectable="on">',
+                '<img src="{icon}" class="' + Ext.baseCSSPrefix + 'menu-item-icon {iconCls}" />',
+                '<span class="' + Ext.baseCSSPrefix + 'menu-item-text" <tpl if="menu">style="margin-right: 17px;"</tpl> >{text}</span>',
+                '<tpl if="menu">',
+                    '<img src="' + Ext.BLANK_IMAGE_URL + '" class="' + Ext.baseCSSPrefix + 'menu-item-arrow" />',
+                '</tpl>',
             '</a>',
         '</tpl>'
     ],
@@ -166,13 +182,6 @@ Ext.define('Ext.menu.Item', {
      * @cfg {String} text
      * The text/html to display in this item. Defaults to `undefined`.
      * @markdown
-     */
-
-    /**
-     * @cfg {Function} handler
-     * A function called when the menu item is clicked (can be used instead of {@link #click} event).
-     * @cfg {Ext.menu.Item} handler.item The item that was clicked
-     * @cfg {Ext.EventObject} handler.e The underyling {@link Ext.EventObject}.
      */
 
     activate: function() {
@@ -219,10 +228,6 @@ Ext.define('Ext.menu.Item', {
             this.menu.hide();
         }
     },
-    
-    cancelDeferHide: function(){
-        clearTimeout(this.hideMenuTimer);
-    },
 
     deferHideParentMenus: function() {
         Ext.menu.Manager.hideAll();
@@ -232,7 +237,7 @@ Ext.define('Ext.menu.Item', {
         var me = this;
 
         if (me.menu) {
-            me.cancelDeferHide();
+            clearTimeout(me.hideMenuTimer);
             if (delay === 0) {
                 me.deferExpandMenu();
             } else {
@@ -339,60 +344,42 @@ Ext.define('Ext.menu.Item', {
         var me = this;
 
         clearTimeout(me.expandMenuTimer);
-        me.cancelDeferHide();
+        clearTimeout(me.hideMenuTimer);
         clearTimeout(me.deferHideParentMenusTimer);
 
-        me.setMenu(null);
+        if (me.menu) {
+            delete me.menu.parentItem;
+            delete me.menu.parentMenu;
+            delete me.menu.ownerCt;
+            if (me.destroyMenu !== false) {
+                me.menu.destroy();
+            }
+        }
         me.callParent(arguments);
     },
 
-    beforeRender: function() {
+    onRender: function(ct, pos) {
         var me = this,
-            blank = Ext.BLANK_IMAGE_URL;
-
-        me.callParent();
+            prefix = '.' + Ext.baseCSSPrefix;
 
         Ext.applyIf(me.renderData, {
             href: me.href || '#',
             hrefTarget: me.hrefTarget,
-            icon: me.icon || blank,
+            icon: me.icon || Ext.BLANK_IMAGE_URL,
             iconCls: me.iconCls + (me.checkChangeDisabled ? ' ' + me.disabledCls : ''),
+            menu: Ext.isDefined(me.menu),
             plain: me.plain,
-            text: me.text,
-            arrowCls: me.menu ? me.arrowCls : '',
-            blank: blank
+            text: me.text
         });
-    },
-    
-    /**
-     * Set a child menu for this item. See the {@link #menu} configuration.
-     * @param {Ext.menu.Menu/Object} menu A menu, or menu configuration. null may be
-     * passed to remove the menu.
-     * @param {Boolean} [destroyMenu] True to destroy any existing menu. False to
-     * prevent destruction. If not specified, the {@link #destroyMenu} configuration
-     * will be used.
-     */
-    setMenu: function(menu, destroyMenu) {
-        var me = this,
-            oldMenu = me.menu;
-            
-        if (oldMenu) {
-            delete oldMenu.parentItem;
-            delete oldMenu.parentMenu;
-            delete oldMenu.ownerCt;
-            if (destroyMenu === true || (destroyMenu !== false && me.destroyMenu)) {
-                Ext.destroy(oldMenu);
-            }
-        }
-        if (menu) {
-            me.menu = Ext.menu.Manager.get(menu);
-        } else {
-            me.menu = null;
-        }
-        
-        if (me.rendered && !me.destroying) {
-            me.arrowEl[me.menu ? 'addCls' : 'removeCls'](me.arrowCls);
-        }
+
+        Ext.applyIf(me.renderSelectors, {
+            itemEl: prefix + 'menu-item-link',
+            iconEl: prefix + 'menu-item-icon',
+            textEl: prefix + 'menu-item-text',
+            arrowEl: prefix + 'menu-item-arrow'
+        });
+
+        me.callParent(arguments);
     },
 
     /**
@@ -410,16 +397,15 @@ Ext.define('Ext.menu.Item', {
      * @param {String} iconCls The CSS class to set to {@link #iconCls}
      */
     setIconCls: function(iconCls) {
-        var me = this,
-            iconEl;
+        var me = this;
 
-        if (iconEl) {
+        if (me.iconEl) {
             if (me.iconCls) {
-                iconEl.removeCls(me.iconCls);
+                me.iconEl.removeCls(me.iconCls);
             }
 
             if (iconCls) {
-                iconEl.addCls(iconCls);
+                me.iconEl.addCls(iconCls);
             }
         }
 
@@ -438,8 +424,9 @@ Ext.define('Ext.menu.Item', {
 
         if (me.rendered) {
             el.update(text || '');
-            // cannot just call layout on the component due to stretchmax
-            me.ownerCt.updateLayout();
+            // cannot just call doComponentLayout due to stretchmax
+            me.ownerCt.redoComponentLayout();
         }
     }
 });
+

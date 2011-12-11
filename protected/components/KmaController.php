@@ -37,12 +37,8 @@ class KmaController extends CController {
     public function actions(){
         return array(
 			'get' => 'application.components.actions.GetAction',
-<<<<<<< HEAD
-			'delete' => 'application.components.actions.DeleteAction'
-=======
 			'delete' => 'application.components.actions.DeleteAction',
 			'update' => 'application.components.actions.UpdateAction',
->>>>>>> b9db33af46f6a0caf34c55bf7752e9fef29533e7
 			);
     }
 

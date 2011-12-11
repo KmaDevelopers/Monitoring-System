@@ -3,8 +3,8 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>The source code</title>
-  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
-  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <link href="../prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../prettify/prettify.js"></script>
   <style type="text/css">
     .highlight { display: block; background-color: #ddd; }
   </style>
@@ -17,6 +17,7 @@
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js"><span id='Ext-selection-TreeModel'>/**
 </span> * @class Ext.selection.TreeModel
+ * @extends Ext.selection.RowModel
  *
  * Adds custom behavior for left/right keyboard navigation for use with a tree.
  * Depends on the view having an expand and collapse method which accepts a
@@ -80,15 +81,16 @@ Ext.define('Ext.selection.TreeModel', {
     },
     
     onKeyPress: function(e, t) {
-        var key = e.getKey(),
-            selected, 
-            checked;
+        var selected, checked;
         
-        if (key === e.SPACE || key === e.ENTER) {
+        if (e.getKey() === e.SPACE || e.getKey() === e.ENTER) {
             e.stopEvent();
             selected = this.getLastSelected();
-            if (selected) {
-                this.view.onCheckChange(selected);
+            if (selected &amp;&amp; selected.isLeaf()) {
+                checked = selected.get('checked');
+                if (Ext.isBoolean(checked)) {
+                    selected.set('checked', !checked);
+                }
             }
         } else {
             this.callParent(arguments);

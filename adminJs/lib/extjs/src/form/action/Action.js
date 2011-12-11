@@ -1,5 +1,20 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
  * @class Ext.form.action.Action
+ * @extends Ext.Base
  * <p>The subclasses of this class provide actions to perform upon {@link Ext.form.Basic Form}s.</p>
  * <p>Instances of this class are only created by a {@link Ext.form.Basic Form} when
  * the Form needs to perform an action such as submit or load. The Configuration options
@@ -45,7 +60,7 @@ Ext.define('Ext.form.action.Action', {
 
     /**
      * @cfg {Object} headers <p>Extra headers to be sent in the AJAX request for submit and load actions. See
-     * {@link Ext.data.proxy.Ajax#headers}.</p>
+     * {@link Ext.data.Connection#headers}.</p>
      */
 
     /**
@@ -94,7 +109,7 @@ Ext.define('Ext.form.action.Action', {
      * @cfg {Boolean} submitEmptyText If set to <tt>true</tt>, the emptyText value will be sent with the form
      * when it is submitted. Defaults to <tt>true</tt>.
      */
-    submitEmptyText : true,
+
     /**
      * @property type
      * The type of action this Action instance performs.
@@ -311,3 +326,4 @@ buttons: [{
 
     }
 });
+

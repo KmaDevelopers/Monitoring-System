@@ -1,3 +1,17 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 Ext.Loader.setConfig({enabled: true});
 
 Ext.Loader.setPath('Ext.ux', '../ux/');
@@ -7,15 +21,6 @@ Ext.require([
     'Ext.util.*',
     'Ext.grid.PagingScroller'
 ]);
-
-Ext.define('Employee', {
-    extend: 'Ext.data.Model',
-    fields: [
-       {name: 'rating', type: 'int'},
-       {name: 'salary', type: 'float'},
-       {name: 'name'}
-    ]
-});
 
 Ext.onReady(function(){
     /**
@@ -48,6 +53,17 @@ Ext.onReady(function(){
         }
         return data;
     }
+
+    Ext.define('Employee', {
+        extend: 'Ext.data.Model',
+        fields: [
+           {name: 'rating', type: 'int'},
+           {name: 'salary', type: 'float'},
+           {name: 'name'}
+        ]
+    });
+
+
     // create the Data Store
     var store = Ext.create('Ext.data.Store', {
         id: 'store',
@@ -56,7 +72,7 @@ Ext.onReady(function(){
         buffered: true,
         // never purge any data, we prefetch all up front
         purgePageCount: 0,
-        model: 'Employee',
+        model: 'ForumThread',
         proxy: {
             type: 'memory'
         }
@@ -110,11 +126,12 @@ Ext.onReady(function(){
         records = [],
         i = 0;
     for (; i < ln; i++) {
-        records.push(Ext.create('Employee', data[i]));
+        records.push(Ext.ModelManager.create(data[i], 'Employee'));
     }
     store.cacheRecords(records);
 
     store.guaranteeRange(0, 49);
 });
+
 
 

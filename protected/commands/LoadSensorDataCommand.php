@@ -83,9 +83,9 @@ class LoadSensorDataCommand extends CConsoleCommand{
 			return;
 		}
 
-		// echo "insert data server {$server['serverId']}\n";
-		// print_r($insertDataArray);
-		// echo "\n";
+		//echo "insert data server {$server['serverId']}\n";
+		//print_r($insertDataArray);
+		//echo "\n";
 
 		$sql = "insert into `Statistics` (sensorId, date, temperature) VALUES (".implode('),(',$insertDataArray).")";
 		Yii::app()->db->createCommand($sql)->execute();

@@ -1,5 +1,20 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
  * @class Ext.direct.RemotingProvider
+ * @extends Ext.direct.JsonProvider
  * 
  * <p>The {@link Ext.direct.RemotingProvider RemotingProvider} exposes access to
  * server side methods on the client (a remote procedure call (RPC) type of
@@ -101,7 +116,7 @@ TestAction.multiply(
      * @cfg {Number/Boolean} enableBuffer
      * <p><tt>true</tt> or <tt>false</tt> to enable or disable combining of method
      * calls. If a number is specified this is the amount of time in milliseconds
-     * to wait before sending a batched request.</p>
+     * to wait before sending a batched request (defaults to <tt>10</tt>).</p>
      * <br><p>Calls which are received within the specified timeframe will be
      * concatenated together and sent in a single request, optimizing the
      * application by reducing the amount of round trips that have to be made
@@ -111,13 +126,13 @@ TestAction.multiply(
     
     /**
      * @cfg {Number} maxRetries
-     * Number of times to re-attempt delivery on failure of a call.
+     * Number of times to re-attempt delivery on failure of a call. Defaults to <tt>1</tt>.
      */
     maxRetries: 1,
     
     /**
      * @cfg {Number} timeout
-     * The timeout to use for each request.
+     * The timeout to use for each request. Defaults to <tt>undefined</tt>.
      */
     timeout: undefined,
     
@@ -146,7 +161,7 @@ TestAction.multiply(
             'call'
         );
         me.namespace = (Ext.isString(me.namespace)) ? Ext.ns(me.namespace) : me.namespace || window;
-        me.transactions = new Ext.util.MixedCollection();
+        me.transactions = Ext.create('Ext.util.MixedCollection');
         me.callBuffer = [];
     },
     
@@ -172,7 +187,7 @@ TestAction.multiply(
             methods = actions[action];
             
             for (i = 0, len = methods.length; i < len; ++i) {
-                method = new Ext.direct.RemotingMethod(methods[i]);
+                method = Ext.create('Ext.direct.RemotingMethod', methods[i]);
                 cls[method.name] = this.createHandler(action, method);
             }
         }
@@ -290,7 +305,7 @@ TestAction.multiply(
                 if (transaction && transaction.retryCount < me.maxRetries) {
                     transaction.retry();
                 } else {
-                    event = new Ext.direct.ExceptionEvent({
+                    event = Ext.create('Ext.direct.ExceptionEvent', {
                         data: null,
                         transaction: transaction,
                         code: Ext.direct.Manager.self.exceptions.TRANSPORT,
@@ -331,7 +346,7 @@ TestAction.multiply(
             scope = callData.scope,
             transaction;
 
-        transaction = new Ext.direct.Transaction({
+        transaction = Ext.create('Ext.direct.Transaction', {
             provider: me,
             args: args,
             action: action,
@@ -419,7 +434,7 @@ TestAction.multiply(
         me.callBuffer.push(transaction);
         if (enableBuffer) {
             if (!me.callTask) {
-                me.callTask = new Ext.util.DelayedTask(me.combineAndSend, me);
+                me.callTask = Ext.create('Ext.util.DelayedTask', me.combineAndSend, me);
             }
             me.callTask.delay(Ext.isNumber(enableBuffer) ? enableBuffer : 10);
         } else {
@@ -448,11 +463,11 @@ TestAction.multiply(
      * @param {Object} method The method being executed
      * @param {HTMLElement} form The form being submitted
      * @param {Function} callback (optional) A callback to run after the form submits
-     * @param {Object} scope (optional) A scope to execute the callback in
+     * @param {Object} scope A scope to execute the callback in
      */
     configureFormRequest : function(action, method, form, callback, scope){
         var me = this,
-            transaction = new Ext.direct.Transaction({
+            transaction = Ext.create('Ext.direct.Transaction', {
                 provider: me,
                 action: action,
                 method: method.name,
@@ -505,3 +520,4 @@ TestAction.multiply(
     }
     
 });
+

@@ -1,10 +1,28 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
+ * @class Ext.util.Point
+ * @extends Ext.util.Region
+ *
  * Represents a 2D point with x and y properties, useful for comparison and instantiation
  * from an event:
- *
- *     var point = Ext.util.Point.fromEvent(e);
- *
+ * <pre><code>
+ * var point = Ext.util.Point.fromEvent(e);
+ * </code></pre>
  */
+
 Ext.define('Ext.util.Point', {
 
     /* Begin Definitions */
@@ -16,7 +34,7 @@ Ext.define('Ext.util.Point', {
          * Returns a new instance of Ext.util.Point base on the pageX / pageY values of the given event
          * @static
          * @param {Event} e The event
-         * @return {Ext.util.Point}
+         * @returns Ext.util.Point
          */
         fromEvent: function(e) {
             e = (e.changedTouches && e.changedTouches.length > 0) ? e.changedTouches[0] : e;
@@ -26,11 +44,6 @@ Ext.define('Ext.util.Point', {
 
     /* End Definitions */
 
-    /**
-     * Creates a point from two coordinates.
-     * @param {Number} x X coordinate.
-     * @param {Number} y Y coordinate.
-     */
     constructor: function(x, y) {
         this.callParent([y, x, y, x]);
     },
@@ -56,7 +69,8 @@ Ext.define('Ext.util.Point', {
 
     /**
      * Whether the given point is not away from this point within the given threshold amount.
-     * @param {Ext.util.Point/Object} p The point to check with, either an instance
+     * TODO: Rename this isNear.
+     * @param {Ext.util.Point/Object} The point to check with, either an instance
      * of Ext.util.Point or an object with left and top properties
      * @param {Object/Number} threshold Can be either an object with x and y properties or a number
      * @return {Boolean}
@@ -76,7 +90,7 @@ Ext.define('Ext.util.Point', {
     /**
      * Compare this point with another point when the x and y values of both points are rounded. E.g:
      * [100.3,199.8] will equals to [100, 200]
-     * @param {Ext.util.Point/Object} p The point to compare with, either an instance
+     * @param {Ext.util.Point/Object} The point to compare with, either an instance
      * of Ext.util.Point or an object with x and y properties
      * @return {Boolean}
      */
@@ -85,9 +99,13 @@ Ext.define('Ext.util.Point', {
     }
 }, function() {
     /**
+     * Translate this region by the given offset amount. TODO: Either use translate or translateBy!
+     * @param {Ext.util.Offset/Object} offset Object containing the <code>x</code> and <code>y</code> properties.
+     * Or the x value is using the two argument form.
+     * @param {Number} The y value unless using an Offset object.
+     * @return {Ext.util.Region} this This Region
      * @method
-     * Alias for {@link #translateBy}
-     * @alias Ext.util.Region#translateBy
      */
     this.prototype.translate = Ext.util.Region.prototype.translateBy;
 });
+

@@ -3,8 +3,8 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>The source code</title>
-  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
-  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <link href="../prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../prettify/prettify.js"></script>
   <style type="text/css">
     .highlight { display: block; background-color: #ddd; }
   </style>
@@ -17,20 +17,20 @@
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js"><span id='Ext-env-OS'>/**
 </span> * @class Ext.env.OS
- * Provides useful information about the current operating system environment.
- * Access the global instance stored in {@link Ext#os}. Example:
+ * Provide useful information about the current operating system environment. Access the global instance stored in Ext.os. Example:
+ * &lt;pre&gt;&lt;code&gt;
+ * if (Ext.os.is.Windows) {
+ *      // Windows specific code here
+ * }
  *
- *     if (Ext.os.is.Windows) {
- *          // Windows specific code here
- *     }
+ * if (Ext.os.is.iOS) {
+ *      // iPad, iPod, iPhone, etc.
+ * }
  *
- *     if (Ext.os.is.iOS) {
- *          // iPad, iPod, iPhone, etc.
- *     }
+ * console.log(&quot;Version &quot; + Ext.os.version);
+ * &lt;/code&gt;&lt;/pre&gt;
  *
- *     console.log(&quot;Version &quot; + Ext.os.version);
- *
- * For a full list of supported values, refer to: {@link Ext.env.OS#is}
+ * For a full list of supported values, refer to: {@link Ext.env.OS#is Ext.env.OS.is}
  */
 Ext.define('Ext.env.OS', {
 
@@ -55,18 +55,21 @@ Ext.define('Ext.env.OS', {
 
 <span id='Ext-env-OS-method-is'>    /**
 </span>     * A &quot;hybrid&quot; property, can be either accessed as a method call, i.e:
-     *
-     *     if (Ext.os.is('Android')) { ... }
+     * &lt;pre&gt;&lt;code&gt;
+     * if (Ext.os.is('Android')) { ... }
+     * &lt;/code&gt;&lt;/pre&gt;
      *
      * or as an object with boolean properties, i.e:
-     *
-     *     if (Ext.os.is.Android) { ... }
+     * &lt;pre&gt;&lt;code&gt;
+     * if (Ext.os.is.Android) { ... }
+     * &lt;/code&gt;&lt;/pre&gt;
      *
      * Versions can be conveniently checked as well. For example:
+     * &lt;pre&gt;&lt;code&gt;
+     * if (Ext.os.is.Android2) { ... } // Equivalent to (Ext.os.is.Android &amp;&amp; Ext.os.version.equals(2))
      *
-     *     if (Ext.os.is.Android2) { ... } // Equivalent to (Ext.os.is.Android &amp;&amp; Ext.os.version.equals(2))
-     * 
-     *     if (Ext.os.is.iOS32) { ... } // Equivalent to (Ext.os.is.iOS &amp;&amp; Ext.os.version.equals(3.2))
+     * if (Ext.os.is.iOS32) { ... } // Equivalent to (Ext.os.is.iOS &amp;&amp; Ext.os.version.equals(3.2))
+     * &lt;/code&gt;&lt;/pre&gt;
      *
      * Note that only {@link Ext.Version#getMajor major component}  and {@link Ext.Version#getShortVersion shortVersion}
      * value of the version are available via direct property checking.
@@ -80,15 +83,15 @@ Ext.define('Ext.env.OS', {
     is: Ext.emptyFn,
 
 <span id='Ext-env-OS-property-name'>    /**
-</span>     * @property {String} name
-     * Read-only - the full name of the current operating system
+</span>     * Read-only - the full name of the current operating system
      * Possible values are: iOS, Android, WebOS, BlackBerry, MacOSX, Windows, Linux and Other
+     * @type String
      */
     name: null,
 
 <span id='Ext-env-OS-property-version'>    /**
-</span>     * @property {Ext.Version} version
-     * Read-only, refer to {@link Ext.Version}
+</span>     * Read-only, refer to {@link Ext.Version}
+     * @type Ext.Version
      */
     version: null,
 
@@ -142,12 +145,7 @@ Ext.define('Ext.env.OS', {
     }
 }, function() {
 
-<span id='Ext-property-os'>    /**
-</span>     * @property {Ext.env.OS} os
-     * @member Ext
-     * Global convenient instance of {@link Ext.env.OS}.
-     */
-    Ext.os = new Ext.env.OS();
+Ext.os = new Ext.env.OS();
 
 });
 </pre>

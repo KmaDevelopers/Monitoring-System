@@ -75,11 +75,13 @@
             height: 100%;
         }
     }
-    
-    .#{$prefix}panel-header-text-container {
-        overflow: hidden;
-        -o-text-overflow: ellipsis;
-        text-overflow: ellipsis;
+
+    // Vertical headers must be inline blocks so that they acquire width from the content
+    .#{$prefix}panel-header-vertical, .#{$prefix}panel-header-vertical .#{$prefix}panel-header-body,
+    .#{$prefix}btn-group-header-vertical, .#{$prefix}btn-group-header-vertical .#{$prefix}btn-group-header-body,
+    .#{$prefix}window-header-vertical, .#{$prefix}window-header-vertical .#{$prefix}window-header-body {
+        display: -moz-inline-stack;
+        display: inline-block;
     }
 
     .#{$prefix}panel-header-text {
@@ -182,8 +184,8 @@
         );
     }
 
-    .#{$prefix}panel-header-plain,
-    .#{$prefix}panel-body-plain {
+    .x-panel-header-plain,
+    .x-panel-body-plain {
         border: 0;
         padding: 0;
     }
@@ -261,19 +263,19 @@
     @if $ui-header-background-color != null and $ui-header-background-gradient != null {
         @if not $supports-gradients or $compile-all {
             .#{$prefix}nlg .#{$prefix}panel-header-#{$ui-label}-top {
-                background-image: theme-background-image($theme-name, 'panel-header/panel-header-#{$ui-label}-top-bg.gif');
+                background-image: theme-image($theme-name, 'panel-header/panel-header-#{$ui-label}-top-bg.gif');
             }
             
             .#{$prefix}nlg .#{$prefix}panel-header-#{$ui-label}-bottom {
-                background-image: theme-background-image($theme-name, 'panel-header/panel-header-#{$ui-label}-bottom-bg.gif');
+                background-image: theme-image($theme-name, 'panel-header/panel-header-#{$ui-label}-bottom-bg.gif');
             }
 
             .#{$prefix}nlg .#{$prefix}panel-header-#{$ui-label}-left {
-                background-image: theme-background-image($theme-name, 'panel-header/panel-header-#{$ui-label}-left-bg.gif');
+                background-image: theme-image($theme-name, 'panel-header/panel-header-#{$ui-label}-left-bg.gif');
             }
 
             .#{$prefix}nlg .#{$prefix}panel-header-#{$ui-label}-right {
-                background-image: theme-background-image($theme-name, 'panel-header/panel-header-#{$ui-label}-right-bg.gif');
+                background-image: theme-image($theme-name, 'panel-header/panel-header-#{$ui-label}-right-bg.gif');
             }
         }
     }

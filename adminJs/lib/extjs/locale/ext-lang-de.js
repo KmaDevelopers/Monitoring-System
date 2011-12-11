@@ -1,3 +1,17 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
  * German translation
  * 2007-Apr-07 update by schmidetzki and humpdi
@@ -94,13 +108,6 @@ Ext.onReady(function() {
             yes    : "Ja",
             no     : "Nein"
         };
-        
-        // As of 4.0.4, setting the buttonText above does not take effect properly. This should be removable in 4.1.0
-        // (see issue EXTJSIV-3909)
-        Ext.MessageBox.msgButtons['ok'].text = Ext.MessageBox.buttonText.ok;
-        Ext.MessageBox.msgButtons['cancel'].text = Ext.MessageBox.buttonText.cancel;
-        Ext.MessageBox.msgButtons['yes'].text = Ext.MessageBox.buttonText.yes;
-        Ext.MessageBox.msgButtons['no'].text = Ext.MessageBox.buttonText.no;
     }
 
     if(Ext.util.Format){
@@ -189,10 +196,8 @@ Ext.onReady(function() {
 
     if(Ext.form.field.ComboBox){
         Ext.apply(Ext.form.field.ComboBox.prototype, {
+            loadingText       : "Lade Daten ...",
             valueNotFoundText : undefined
-        });
-        Ext.apply(Ext.form.field.ComboBox.prototype.defaultListConfig, {
-            loadingText       : "Lade Daten ..."
         });
     }
 

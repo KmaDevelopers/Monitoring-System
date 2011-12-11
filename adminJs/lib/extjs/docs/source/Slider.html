@@ -3,8 +3,8 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>The source code</title>
-  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
-  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <link href="../prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../prettify/prettify.js"></script>
   <style type="text/css">
     .highlight { display: block; background-color: #ddd; }
   </style>
@@ -17,6 +17,7 @@
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js"><span id='Ext-layout-component-field-Slider'>/**
 </span> * @class Ext.layout.component.field.Slider
+ * @extends Ext.layout.component.field.Field
  * @private
  */
 
@@ -32,16 +33,13 @@ Ext.define('Ext.layout.component.field.Slider', {
 
     type: 'sliderfield',
 
-    sizeBodyContents: function(width, height, ownerContext) {
-        var me = this,
-            owner = me.owner,
+    sizeBodyContents: function(width, height) {
+        var owner = this.owner,
             thumbs = owner.thumbs,
             length = thumbs.length,
-            endElContextItem = ownerContext.getEl('endEl'),
-            endElPad = endElContextItem.getPaddingInfo(),
-            inputContextItem = ownerContext.getEl('inputEl'),
-            inputPad = inputContextItem.getPaddingInfo(),
-            innerElContextItem = ownerContext.getEl('innerEl'),
+            inputEl = owner.inputEl,
+            innerEl = owner.innerEl,
+            endEl = owner.endEl,
             i = 0;
 
         /*
@@ -51,13 +49,15 @@ Ext.define('Ext.layout.component.field.Slider', {
         for(; i &lt; length; ++i) {
             thumbs[i].el.stopAnimation();
         }
-
+        
         if (owner.vertical) {
-            innerElContextItem.setHeight(height - inputPad.top - endElPad.bottom);
-        } else {
-            innerElContextItem.setWidth(width - inputPad.left - endElPad.right);
+            inputEl.setHeight(height);
+            innerEl.setHeight(Ext.isNumber(height) ? height - inputEl.getPadding('t') - endEl.getPadding('b') : height);
         }
-
+        else {
+            inputEl.setWidth(width);
+            innerEl.setWidth(Ext.isNumber(width) ? width - inputEl.getPadding('l') - endEl.getPadding('r') : width);
+        }
         owner.syncThumbs();
     }
 });

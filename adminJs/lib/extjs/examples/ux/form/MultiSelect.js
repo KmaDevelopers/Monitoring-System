@@ -1,3 +1,17 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
  * @class Ext.ux.form.MultiSelect
  * @extends Ext.form.field.Base
@@ -19,7 +33,7 @@ Ext.define('Ext.ux.form.MultiSelect', {
     uses: [
         'Ext.view.BoundList',
         'Ext.form.FieldSet',
-        //'Ext.ux.layout.component.form.MultiSelect',
+        'Ext.ux.layout.component.form.MultiSelect',
         'Ext.view.DragZone',
         'Ext.view.DropZone'
     ],
@@ -119,7 +133,7 @@ Ext.define('Ext.ux.form.MultiSelect', {
      * </div></li></ul></div></li></ul></div>
      */
 
-    //componentLayout: 'multiselectfield',
+    componentLayout: 'multiselectfield',
 
     fieldBodyCls: Ext.baseCSSPrefix + 'form-multiselect-body',
 
@@ -149,7 +163,7 @@ Ext.define('Ext.ux.form.MultiSelect', {
             boundList = me.boundList;
 
         if (oldStore && !initial && oldStore !== store && oldStore.autoDestroy) {
-            oldStore.destroyStore();
+            oldStore.destroy();
         }
 
         me.store = store ? Ext.data.StoreManager.lookup(store) : null;
@@ -167,12 +181,10 @@ Ext.define('Ext.ux.form.MultiSelect', {
         me.callParent(arguments);
 
         boundList = me.boundList = Ext.create('Ext.view.BoundList', {
-            deferInitialRefresh: false,
             multiSelect: true,
             store: me.store,
             displayField: me.displayField,
-            border: false,
-            disabled: me.disabled
+            border: false
         });
 
         selModel = boundList.getSelectionModel();
@@ -302,10 +314,6 @@ Ext.define('Ext.ux.form.MultiSelect', {
 
     // no conversion
     valueToRaw: function(value) {
-        var delimiter = this.delimiter;
-        if (Ext.isString(value) && delimiter) {
-            value = value.split(delimiter);
-        }
         return value;
     },
 
@@ -354,23 +362,15 @@ Ext.define('Ext.ux.form.MultiSelect', {
     },
 
     onDisable: function() {
-        var me = this;
-        
-        me.callParent();
-        me.updateReadOnly();
-        if (me.boundList) {
-            me.boundList.disable();
-        }
+        this.callParent();
+        this.disabled = true;
+        this.updateReadOnly();
     },
 
     onEnable: function() {
-        var me = this;
-        
-        me.callParent();
-        me.updateReadOnly();
-        if (me.boundList) {
-            me.boundList.enable();
-        }
+        this.callParent();
+        this.disabled = false;
+        this.updateReadOnly();
     },
 
     setReadOnly: function(readOnly) {
@@ -395,3 +395,6 @@ Ext.define('Ext.ux.form.MultiSelect', {
         this.callParent();
     }
 });
+
+
+

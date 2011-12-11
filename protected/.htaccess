@@ -1,2 +1,1 @@
-deny for all
-
+deny from all

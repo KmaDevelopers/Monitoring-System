@@ -1,3 +1,17 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
  * @class Ext.Date
  * A set of useful static methods to deal with date
@@ -130,7 +144,7 @@ function xf(format) {
 Ext.Date = {
     /**
      * Returns the current timestamp
-     * @return {Number} The current timestamp
+     * @return {Date} The current timestamp
      * @method
      */
     now: Date.now || function() {
@@ -168,6 +182,7 @@ Ext.Date = {
      * default behaviour of javascript Date objects.
      * (see {@link #parse} for more information)
      * Defaults to <tt>false</tt>.
+     * @static
      * @type Boolean
     */
     useStrict: false,
@@ -210,6 +225,7 @@ Ext.Date.parseFunctions['x-date-format'] = myDateParser;
      * <p>To enable Dates to also be <i>formatted</i> according to that format, a corresponding
      * formatting function must be placed into the {@link #formatFunctions} property.
      * @property parseFunctions
+     * @static
      * @type Object
      */
     parseFunctions: {
@@ -238,6 +254,7 @@ Ext.Date.formatFunctions['x-date-format'] = myDateFormatter;
      * <p>To enable date strings to also be <i>parsed</i> according to that format, a corresponding
      * parsing function must be placed into the {@link #parseFunctions} property.
      * @property formatFunctions
+     * @static
      * @type Object
      */
     formatFunctions: {
@@ -251,41 +268,48 @@ Ext.Date.formatFunctions['x-date-format'] = myDateFormatter;
 
     /**
      * Date interval constant
+     * @static
      * @type String
      */
     MILLI : "ms",
 
     /**
      * Date interval constant
+     * @static
      * @type String
      */
     SECOND : "s",
 
     /**
      * Date interval constant
+     * @static
      * @type String
      */
     MINUTE : "mi",
 
     /** Date interval constant
+     * @static
      * @type String
      */
     HOUR : "h",
 
     /**
      * Date interval constant
+     * @static
      * @type String
      */
     DAY : "d",
 
     /**
      * Date interval constant
+     * @static
      * @type String
      */
     MONTH : "mo",
 
     /**
      * Date interval constant
+     * @static
      * @type String
      */
     YEAR : "y",
@@ -316,12 +340,12 @@ Ext.Date.defaults.d = 1;
 Ext.Date.parse('2009-02', 'Y-m'); // returns a Date object representing February 1st 2009
 </code></pre>
      * @property defaults
+     * @static
      * @type Object
      */
     defaults: {},
 
     /**
-     * @property {String[]} dayNames
      * An array of textual day names.
      * Override these values for international dates.
      * Example:
@@ -332,6 +356,8 @@ Ext.Date.dayNames = [
     ...
 ];
 </code></pre>
+     * @type Array
+     * @static
      */
     dayNames : [
         "Sunday",
@@ -344,7 +370,6 @@ Ext.Date.dayNames = [
     ],
 
     /**
-     * @property {String[]} monthNames
      * An array of textual month names.
      * Override these values for international dates.
      * Example:
@@ -355,6 +380,8 @@ Ext.Date.monthNames = [
     ...
 ];
 </code></pre>
+     * @type Array
+     * @static
      */
     monthNames : [
         "January",
@@ -372,7 +399,6 @@ Ext.Date.monthNames = [
     ],
 
     /**
-     * @property {Object} monthNumbers
      * An object hash of zero-based javascript month numbers (with short month names as keys. note: keys are case-sensitive).
      * Override these values for international dates.
      * Example:
@@ -383,6 +409,8 @@ Ext.Date.monthNumbers = {
     ...
 };
 </code></pre>
+     * @type Object
+     * @static
      */
     monthNumbers : {
         Jan:0,
@@ -399,10 +427,12 @@ Ext.Date.monthNumbers = {
         Dec:11
     },
     /**
-     * @property {String} defaultFormat
      * <p>The date format string that the {@link Ext.util.Format#dateRenderer}
      * and {@link Ext.util.Format#date} functions use.  See {@link Ext.Date} for details.</p>
-     * <p>This may be overridden in a locale file.</p>
+     * <p>This defaults to <code>m/d/Y</code>, but may be overridden in a locale file.</p>
+     * @property defaultFormat
+     * @static
+     * @type String
      */
     defaultFormat : "m/d/Y",
     /**
@@ -410,6 +440,7 @@ Ext.Date.monthNumbers = {
      * Override this function for international dates.
      * @param {Number} month A zero-based javascript month number.
      * @return {String} The short month name.
+     * @static
      */
     getShortMonthName : function(month) {
         return utilDate.monthNames[month].substring(0, 3);
@@ -420,6 +451,7 @@ Ext.Date.monthNumbers = {
      * Override this function for international dates.
      * @param {Number} day A zero-based javascript day number.
      * @return {String} The short day name.
+     * @static
      */
     getShortDayName : function(day) {
         return utilDate.dayNames[day].substring(0, 3);
@@ -430,6 +462,7 @@ Ext.Date.monthNumbers = {
      * Override this function for international dates.
      * @param {String} name The short/full month name.
      * @return {Number} The zero-based javascript month number.
+     * @static
      */
     getMonthNumber : function(name) {
         // handle camel casing for english month names (since the keys for the Ext.Date.monthNumbers hash are case sensitive)
@@ -440,6 +473,7 @@ Ext.Date.monthNumbers = {
      * Checks if the specified format contains hour information
      * @param {String} format The format to check
      * @return {Boolean} True if the format contains hour information
+     * @static
      * @method
      */
     formatContainsHourInfo : (function(){
@@ -456,6 +490,7 @@ Ext.Date.monthNumbers = {
      * @param {String} format The format to check
      * @return {Boolean} True if the format contains information about
      * date/day information.
+     * @static
      * @method
      */
     formatContainsDateInfo : (function(){
@@ -480,6 +515,7 @@ Ext.Date.formatCodes.x = "Ext.util.Format.leftPad(this.getDate(), 2, '0')";
 console.log(Ext.Date.format(new Date(), 'X'); // returns the current day of the month
 </code></pre>
      * @type Object
+     * @static
      */
     formatCodes : {
         d: "Ext.String.leftPad(this.getDate(), 2, '0')",
@@ -549,6 +585,7 @@ console.log(Ext.Date.format(new Date(), 'X'); // returns the current day of the 
      * @param {Number} second (optional) Second
      * @param {Number} millisecond (optional) Millisecond
      * @return {Boolean} true if the passed parameters do not cause a Date "rollover", false otherwise.
+     * @static
      */
     isValid : function(y, m, d, h, i, s, ms) {
         // setup defaults
@@ -598,6 +635,7 @@ dt = Ext.Date.parse("2006-02-29 03:20:01", "Y-m-d H:i:s", true); // returns null
      * @param {Boolean} strict (optional) True to validate date strings while parsing (i.e. prevents javascript Date "rollover")
                         (defaults to false). Invalid date strings will return null when parsed.
      * @return {Date} The parsed Date.
+     * @static
      */
     parse : function(input, format, strict) {
         var p = utilDate.parseFunctions;
@@ -985,21 +1023,6 @@ dt = Ext.Date.parse("2006-02-29 03:20:01", "Y-m-d H:i:s", true); // returns null
     dateFormat: function(date, format) {
         return utilDate.format(date, format);
     },
-    
-    /**
-     * Compares if two dates are equal by comparing their values.
-     * @param {Date} date1
-     * @param {Date} date2
-     * @return {Boolean} True if the date values are equal
-     */
-    isEqual: function(date1, date2) {
-        // check we have 2 date objects
-        if (date1 && date2) {
-            return (date1.getTime() === date2.getTime());
-        }
-        // one or both isn't a date, only equal if both are falsey
-        return !(date1 || date2);
-    },
 
     /**
      * Formats a date given the supplied format string.
@@ -1367,3 +1390,4 @@ console.log(dt2); //returns 'Tue Sep 26 2006 00:00:00'
 var utilDate = Ext.Date;
 
 })();
+

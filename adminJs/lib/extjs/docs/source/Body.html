@@ -3,8 +3,8 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>The source code</title>
-  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
-  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <link href="../prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../prettify/prettify.js"></script>
   <style type="text/css">
     .highlight { display: block; background-color: #ddd; }
   </style>
@@ -19,6 +19,7 @@
 </span> * Component layout for components which maintain an inner body element which must be resized to synchronize with the
  * Component size.
  * @class Ext.layout.component.Body
+ * @extends Ext.layout.component.Component
  * @private
  */
 
@@ -28,83 +29,56 @@ Ext.define('Ext.layout.component.Body', {
 
     alias: ['layout.body'],
 
-    extend: 'Ext.layout.component.Auto',
+    extend: 'Ext.layout.component.Component',
+
+    uses: ['Ext.layout.container.Container'],
 
     /* End Definitions */
 
     type: 'body',
-
-    beginLayout: function (ownerContext) {
-        this.callParent(arguments);
-
-        ownerContext.bodyContext = ownerContext.getEl('body');
-    },
-
-    calculate: function(ownerContext) {
-        // Subtle But Important:
-        // 
-        // We don't want to call getProp/hasProp et.al. unless we in fact need that value
-        // for our results! If we call it and don't need it, the layout manager will think
-        // we depend on it and will schedule us again should it change.
-
+    
+    onLayout: function(width, height) {
         var me = this,
-            fixedHeight = ownerContext.heightAuthority &gt; 0,
-            fixedWidth  = ownerContext.widthAuthority &gt; 0,
-            height, width, bodyContext, frameInfo;
+            owner = me.owner;
 
+        // Size the Component's encapsulating element according to the dimensions
+        me.setTargetSize(width, height);
+
+        // Size the Component's body element according to the content box of the encapsulating element
+        me.setBodySize.apply(me, arguments);
+
+        // We need to bind to the owner whenever we do not have a user set height or width.
+        if (owner &amp;&amp; owner.layout &amp;&amp; owner.layout.isLayout) {
+            if (!Ext.isNumber(owner.height) || !Ext.isNumber(owner.width)) {
+                owner.layout.bindToOwnerCtComponent = true;
+            }
+            else {
+                owner.layout.bindToOwnerCtComponent = false;
+            }
+        }
+        
         me.callParent(arguments);
+    },
 
-        bodyContext = ownerContext.bodyContext;
-        frameInfo = ownerContext.getFrameInfo();
+<span id='Ext-layout-component-Body-method-setBodySize'>    /**
+</span>     * @private
+     * &lt;p&gt;Sizes the Component's body element to fit exactly within the content box of the Component's encapsulating element.&lt;p&gt;
+     */
+    setBodySize: function(width, height) {
+        var me = this,
+            owner = me.owner,
+            frameSize = owner.frameSize,
+            isNumber = Ext.isNumber;
 
-        // Either fix the body size based upon this Component's frame info (padding)
-        // Or adjust this Componentts auto size, accounting for extra size added by the body's padding 
-        if (fixedWidth) {
-            width = ownerContext.getProp('width');
-            if (width === undefined) {
-                me.done = false;
-            } else {
-                bodyContext.setWidth(width - frameInfo.width);
-            }
+        if (isNumber(width)) {
+            width -= owner.el.getFrameWidth('lr') - frameSize.left - frameSize.right;
         }
-        if (fixedHeight) {
-            height = ownerContext.getProp('height');
-            if (height === undefined) {
-                me.done = false;
-            } else {
-               bodyContext.setHeight(height - frameInfo.height);
-            }
+        if (isNumber(height)) {
+            height -= owner.el.getFrameWidth('tb') - frameSize.top - frameSize.bottom;
         }
-    },
 
-    calculateOwnerHeightFromContentHeight: function (ownerContext, contentHeight) {
-        return contentHeight + ownerContext.getFrameInfo().height;
-    },
-
-    calculateOwnerWidthFromContentWidth: function (ownerContext, contentWidth) {
-        return contentWidth + ownerContext.getFrameInfo().width;
-    },
-
-    getContentWidth: function (ownerContext) {
-        return ownerContext.bodyContext.el.dom.offsetWidth;
-    },
-
-    getContentHeight: function (ownerContext) {
-        return ownerContext.bodyContext.el.dom.offsetHeight;
-    },
-
-    publishOwnerHeight: function (ownerContext, contentHeight) {
-        this.callParent(arguments);
-
-        ownerContext.bodyContext.setProp('height', contentHeight, false);
-    },
-
-    publishOwnerWidth: function (ownerContext, contentWidth) {
-        this.callParent(arguments);
-
-        ownerContext.bodyContext.setProp('width', contentWidth, false);
+        me.setElementSize(owner.body, width, height);
     }
-});
-</pre>
+});</pre>
 </body>
 </html>

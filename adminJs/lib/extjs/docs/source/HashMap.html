@@ -3,8 +3,8 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>The source code</title>
-  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
-  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <link href="../prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../prettify/prettify.js"></script>
   <style type="text/css">
     .highlight { display: block; background-color: #ddd; }
   </style>
@@ -39,9 +39,6 @@ map.each(function(key, value, length){
  * &lt;/p&gt;
  */
 Ext.define('Ext.util.HashMap', {
-    mixins: {
-        observable: 'Ext.util.Observable'
-    },
 
 <span id='Ext-util-HashMap-cfg-keyFn'>    /**
 </span>     * @cfg {Function} keyFn A function that is used to retrieve a default key for a passed object.
@@ -49,13 +46,17 @@ Ext.define('Ext.util.HashMap', {
      * if the add method is called with a single argument.
      */
 
+    mixins: {
+        observable: 'Ext.util.Observable'
+    },
+
 <span id='Ext-util-HashMap-method-constructor'>    /**
 </span>     * Creates new HashMap.
      * @param {Object} config (optional) Config object.
      */
     constructor: function(config) {
         config = config || {};
-
+        
         var me = this,
             keyFn = config.keyFn;
 
@@ -95,7 +96,7 @@ Ext.define('Ext.util.HashMap', {
 
         me.mixins.observable.constructor.call(me, config);
         me.clear(true);
-
+        
         if (keyFn) {
             me.getKey = keyFn;
         }
@@ -156,7 +157,7 @@ Ext.define('Ext.util.HashMap', {
         }
 
         if (me.containsKey(key)) {
-            return me.replace(key, value);
+            me.replace(key, value);
         }
 
         data = me.getData(key, value);

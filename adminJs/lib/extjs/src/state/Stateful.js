@@ -1,3 +1,17 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
  * @class Ext.state.Stateful
  * A mixin for being able to save the state of an object to an underlying
@@ -7,7 +21,7 @@ Ext.define('Ext.state.Stateful', {
 
     /* Begin Definitions */
 
-    mixins: {
+   mixins: {
         observable: 'Ext.util.Observable'
     },
 
@@ -41,7 +55,7 @@ Ext.state.Manager.setProvider(new Ext.state.CookieProvider({
      * object hash which represents the restorable state of the object.</p>
      * <p>The value yielded by getState is passed to {@link Ext.state.Manager#set}
      * which uses the configured {@link Ext.state.Provider} to save the object
-     * keyed by the <code>{@link #stateId}</code>.</p>
+     * keyed by the <code>{@link #stateId}</code></p>.
      * <p>During construction, a stateful object attempts to <i>restore</i>
      * its state by calling {@link Ext.state.Manager#get} passing the
      * <code>{@link #stateId}</code></p>
@@ -62,9 +76,9 @@ Ext.state.Manager.setProvider(new Ext.state.CookieProvider({
      */
 
     /**
-     * @cfg {String[]} stateEvents
+     * @cfg {Array} stateEvents
      * <p>An array of events that, when fired, should trigger this object to
-     * save its state. Defaults to none. <code>stateEvents</code> may be any type
+     * save its state (defaults to none). <code>stateEvents</code> may be any type
      * of event supported by this object, including browser or custom events
      * (e.g., <tt>['click', 'customerchange']</tt>).</p>
      * <p>See <code>{@link #stateful}</code> for an explanation of saving and
@@ -72,8 +86,8 @@ Ext.state.Manager.setProvider(new Ext.state.CookieProvider({
      */
 
     /**
-     * @cfg {Number} saveDelay
-     * A buffer to be applied if many state events are fired within a short period.
+     * @cfg {Number} saveBuffer A buffer to be applied if many state events are fired within
+     * a short period. Defaults to 100.
      */
     saveDelay: 100,
 
@@ -157,14 +171,12 @@ Ext.state.Manager.setProvider(new Ext.state.CookieProvider({
     },
 
     /**
-     * Add events that will trigger the state to be saved. If the first argument is an
-     * array, each element of that array is the name of a state event. Otherwise, each
-     * argument passed to this method is the name of a state event.
-     * @param {String/String[]} events The event name or an array of event names.
+     * Add events that will trigger the state to be saved.
+     * @param {String/Array} events The event name or an array of event names.
      */
     addStateEvents: function(events){
         if (!Ext.isArray(events)) {
-            events = Array.prototype.slice.call(arguments, 0);
+            events = [events];
         }
 
         var me = this,
@@ -186,7 +198,7 @@ Ext.state.Manager.setProvider(new Ext.state.CookieProvider({
 
         if (delay > 0) {
             if (!me.stateTask) {
-                me.stateTask = new Ext.util.DelayedTask(me.saveState, me);
+                me.stateTask = Ext.create('Ext.util.DelayedTask', me.saveState, me);
             }
             me.stateTask.delay(me.saveDelay);
         } else {
@@ -274,41 +286,6 @@ Ext.state.Manager.setProvider(new Ext.state.CookieProvider({
     },
 
     /**
-     * Conditionally saves a single property from this object to the given state object.
-     * The idea is to only save state which has changed from the initial state so that
-     * current software settings do not override future software settings. Only those
-     * values that are user-changed state should be saved.
-     *
-     * @param {String} propName The name of the property to save.
-     * @param {Object} state The state object in to which to save the property.
-     * @param {String} stateName (optional) The name to use for the property in state.
-     * @return {Boolean} True if the property was saved, false if not.
-     */
-    savePropToState: function (propName, state, stateName) {
-        var me = this,
-            value = me[propName],
-            config = me.initialConfig;
-
-        if (me.hasOwnProperty(propName)) {
-            if (!config || config[propName] !== value) {
-                if (state) {
-                    state[stateName || propName] = value;
-                }
-                return true;
-            }
-        }
-        return false;
-    },
-
-    savePropsToState: function (propNames, state) {
-        var me = this;
-        Ext.each(propNames, function (propName) {
-            me.savePropToState(propName, state);
-        });
-        return state;
-    },
-
-    /**
      * Destroys this stateful object.
      */
     destroy: function(){
@@ -321,3 +298,4 @@ Ext.state.Manager.setProvider(new Ext.state.CookieProvider({
     }
 
 });
+

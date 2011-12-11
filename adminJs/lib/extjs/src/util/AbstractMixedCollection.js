@@ -1,10 +1,23 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
  * @class Ext.util.AbstractMixedCollection
- * @private
  */
 Ext.define('Ext.util.AbstractMixedCollection', {
     requires: ['Ext.util.Filter'],
-
+    
     mixins: {
         observable: 'Ext.util.Observable'
     },
@@ -17,10 +30,12 @@ Ext.define('Ext.util.AbstractMixedCollection', {
         me.keys = [];
         me.length = 0;
 
+        me.addEvents(
             /**
              * @event clear
              * Fires when the collection is cleared.
              */
+            'clear',
 
             /**
              * @event add
@@ -29,6 +44,7 @@ Ext.define('Ext.util.AbstractMixedCollection', {
              * @param {Object} o The item added.
              * @param {String} key The key associated with the added item.
              */
+            'add',
 
             /**
              * @event replace
@@ -37,12 +53,16 @@ Ext.define('Ext.util.AbstractMixedCollection', {
              * @param {Object} old The item being replaced.
              * @param {Object} new The new item.
              */
+            'replace',
+
             /**
              * @event remove
              * Fires when an item is removed from the collection.
              * @param {Object} o The item being removed.
              * @param {String} key (optional) The key associated with the removed item.
              */
+            'remove'
+        );
 
         me.allowFunctions = allowFunctions === true;
 
@@ -52,7 +72,7 @@ Ext.define('Ext.util.AbstractMixedCollection', {
 
         me.mixins.observable.constructor.call(me);
     },
-
+    
     /**
      * @cfg {Boolean} allowFunctions Specify <tt>true</tt> if the {@link #addAll}
      * function should add function references to the collection. Defaults to
@@ -234,7 +254,7 @@ mc.add(otherEl);
      * passed selection function.
      * @param {Function} fn The selection function to execute for each item.
      * @param {Object} scope (optional) The scope (<code>this</code> reference) in which the function is executed. Defaults to the browser window.
-     * @return {Object} The first item in the collection which returned true from the selection function, or null if none was found
+     * @return {Object} The first item in the collection which returned true from the selection function.
      */
     findBy : function(fn, scope) {
         var keys = this.keys,
@@ -378,7 +398,7 @@ mc.add(otherEl);
     /**
      * Returns the item associated with the passed key OR index.
      * Key has priority over index.  This is the equivalent
-     * of calling {@link #getByKey} first, then if nothing matched calling {@link #getAt}.
+     * of calling {@link #key} first, then if nothing matched calling {@link #getAt}.
      * @param {String/Number} key The key or index of the item.
      * @return {Object} If the item is found, returns the item.  If the item was not found, returns <tt>undefined</tt>.
      * If an item was found, but is a Class, returns <tt>null</tt>.
@@ -414,7 +434,7 @@ mc.add(otherEl);
      * @return {Boolean} True if the collection contains the Object as an item.
      */
     contains : function(o){
-        return typeof this.map[this.getKey(o)] != 'undefined';
+        return Ext.Array.contains(this.items, o);
     },
 
     /**
@@ -458,10 +478,10 @@ mc.add(otherEl);
     /**
      * Collects all of the values of the given property and returns their sum
      * @param {String} property The property to sum by
-     * @param {String} [root] 'root' property to extract the first argument from. This is used mainly when
+     * @param {String} root Optional 'root' property to extract the first argument from. This is used mainly when
      * summing fields in records, where the fields are all stored inside the 'data' object
-     * @param {Number} [start=0] The record index to start at
-     * @param {Number} [end=-1] The record index to end at
+     * @param {Number} start (optional) The record index to start at (defaults to <tt>0</tt>)
+     * @param {Number} end (optional) The record index to end at (defaults to <tt>-1</tt>)
      * @return {Number} The total
      */
     sum: function(property, root, start, end) {
@@ -483,7 +503,7 @@ mc.add(otherEl);
     /**
      * Collects unique values of a particular property in this MixedCollection
      * @param {String} property The property to collect on
-     * @param {String} root (optional) 'root' property to extract the first argument from. This is used mainly when
+     * @param {String} root Optional 'root' property to extract the first argument from. This is used mainly when
      * summing fields in records, where the fields are all stored inside the 'data' object
      * @param {Boolean} allowBlank (optional) Pass true to allow null, undefined or empty string values
      * @return {Array} The unique values
@@ -513,7 +533,7 @@ mc.add(otherEl);
      * Extracts all of the given property values from the items in the MC. Mainly used as a supporting method for
      * functions like sum and collect.
      * @param {String} property The property to extract
-     * @param {String} root (optional) 'root' property to extract the first argument from. This is used mainly when
+     * @param {String} root Optional 'root' property to extract the first argument from. This is used mainly when
      * extracting field data from Model instances, where the fields are stored inside the 'data' object
      * @return {Array} The extracted values
      */
@@ -577,12 +597,12 @@ var middleAged = people.filter('age', 24);
 </code></pre>
      *
      *
-     * @param {Ext.util.Filter[]/String} property A property on your objects, or an array of {@link Ext.util.Filter Filter} objects
+     * @param {Array/String} property A property on your objects, or an array of {@link Ext.util.Filter Filter} objects
      * @param {String/RegExp} value Either string that the property values
      * should start with or a RegExp to test against the property
-     * @param {Boolean} [anyMatch=false] True to match any part of the string, not just the beginning
-     * @param {Boolean} [caseSensitive=false] True for case sensitive comparison.
-     * @return {Ext.util.MixedCollection} The new filtered collection
+     * @param {Boolean} anyMatch (optional) True to match any part of the string, not just the beginning
+     * @param {Boolean} caseSensitive (optional) True for case sensitive comparison (defaults to False).
+     * @return {MixedCollection} The new filtered collection
      */
     filter : function(property, value, anyMatch, caseSensitive) {
         var filters = [],
@@ -590,7 +610,7 @@ var middleAged = people.filter('age', 24);
 
         //support for the simple case of filtering by property/value
         if (Ext.isString(property)) {
-            filters.push(new Ext.util.Filter({
+            filters.push(Ext.create('Ext.util.Filter', {
                 property     : property,
                 value        : value,
                 anyMatch     : anyMatch,
@@ -627,7 +647,7 @@ var middleAged = people.filter('age', 24);
      * If the function returns true, the value is included otherwise it is filtered.
      * @param {Function} fn The function to be called, it will receive the args o (the object), k (the key)
      * @param {Object} scope (optional) The scope (<code>this</code> reference) in which the function is executed. Defaults to this MixedCollection.
-     * @return {Ext.util.MixedCollection} The new filtered collection
+     * @return {MixedCollection} The new filtered collection
      */
     filterBy : function(fn, scope) {
         var me = this,
@@ -653,9 +673,9 @@ var middleAged = people.filter('age', 24);
      * @param {String} property The name of a property on your objects.
      * @param {String/RegExp} value A string that the property values
      * should start with or a RegExp to test against the property.
-     * @param {Number} [start=0] The index to start searching at.
-     * @param {Boolean} [anyMatch=false] True to match any part of the string, not just the beginning.
-     * @param {Boolean} [caseSensitive=false] True for case sensitive comparison.
+     * @param {Number} start (optional) The index to start searching at (defaults to 0).
+     * @param {Boolean} anyMatch (optional) True to match any part of the string, not just the beginning.
+     * @param {Boolean} caseSensitive (optional) True for case sensitive comparison.
      * @return {Number} The matched index or -1
      */
     findIndex : function(property, value, start, anyMatch, caseSensitive){
@@ -672,8 +692,8 @@ var middleAged = people.filter('age', 24);
      * Find the index of the first matching object in this collection by a function.
      * If the function returns <i>true</i> it is considered a match.
      * @param {Function} fn The function to be called, it will receive the args o (the object), k (the key).
-     * @param {Object} [scope] The scope (<code>this</code> reference) in which the function is executed. Defaults to this MixedCollection.
-     * @param {Number} [start=0] The index to start searching at.
+     * @param {Object} scope (optional) The scope (<code>this</code> reference) in which the function is executed. Defaults to this MixedCollection.
+     * @param {Number} start (optional) The index to start searching at (defaults to 0).
      * @return {Number} The matched index or -1
      */
     findIndexBy : function(fn, scope, start){
@@ -720,7 +740,7 @@ var middleAged = people.filter('age', 24);
 
     /**
      * Creates a shallow copy of this collection
-     * @return {Ext.util.MixedCollection}
+     * @return {MixedCollection}
      */
     clone : function() {
         var me = this,
@@ -737,3 +757,4 @@ var middleAged = people.filter('age', 24);
         return copy;
     }
 });
+

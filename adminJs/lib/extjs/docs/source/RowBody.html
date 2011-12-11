@@ -3,8 +3,8 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>The source code</title>
-  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
-  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <link href="../prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../prettify/prettify.js"></script>
   <style type="text/css">
     .highlight { display: block; background-color: #ddd; }
   </style>
@@ -17,6 +17,7 @@
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js"><span id='Ext-grid-feature-RowBody'>/**
 </span> * @class Ext.grid.feature.RowBody
+ * @extends Ext.grid.feature.Feature
  *
  * The rowbody feature enhances the grid's markup to have an additional
  * tr -&gt; td -&gt; div which spans the entire width of the original row.
@@ -28,6 +29,8 @@
  *
  * Will expose additional events on the gridview with the prefix of 'rowbody'.
  * For example: 'rowbodyclick', 'rowbodydblclick', 'rowbodycontextmenu'.
+ *
+ * @ftype rowbody
  */
 Ext.define('Ext.grid.feature.RowBody', {
     extend: 'Ext.grid.feature.Feature',

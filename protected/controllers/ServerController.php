@@ -15,10 +15,7 @@ class ServerController extends KmaController {
 					'index',
 					'list',
 					'delete',
-<<<<<<< HEAD
-=======
 					'update',
->>>>>>> b9db33af46f6a0caf34c55bf7752e9fef29533e7
 					'create',
 				),
 				'users' => array('*'),
@@ -31,28 +28,14 @@ class ServerController extends KmaController {
 
 	public function actionCreate() {
 
-<<<<<<< HEAD
 		$json = file_get_contents('php://input');
 
 		$serv = new Server();
 		$serv->attributes = CJSON::decode($json);
 
-		if ($serv->validate()) {
+		/*if ($serv->validate()) {
 			if ($serv->save()) {
 				$this->result($serv);
-=======
-		$serv = new Server();
-		if($_POST['Server']){
-			$serv->attributes = $_POST['Server'];
-		}else{
-			$data = CJSON::decode(file_get_contents('php://input'));
-			$serv->attributes = CJSON::decode($data);
-		}
-
-		if ($serv->validate()) {
-			if ($serv->save()) {
-				$this->result($serv->getItemArray(NULL),1);
->>>>>>> b9db33af46f6a0caf34c55bf7752e9fef29533e7
 			} else {
 				$this->error("Can't save server!");
 			}
@@ -60,7 +43,7 @@ class ServerController extends KmaController {
 			$this->error("Can't validate server!");
 		}
 
-		Yii::app()->end();
+		Yii::app()->end();*/
 		
 		if ($serv->validate()) {
 			if ($serv->save()) {
@@ -71,11 +54,12 @@ class ServerController extends KmaController {
 				* @TODO НУЖНО СРАЗУ ЖЕ СОЗДАВАТЬ СЕНСОРЫ ДЛЯ СЕРВЕРА ПРИ СОЗДАНИИ И ПОМЕЧАТЬ ИХ КАК ДЕАКТИВИРОВАНЫЕ
 				*/
 				try{
-					$results = @file_get_contents('http://'.$serv['ip'], 'r');
+					$results = file_get_contents('http://'.$serv['ip'].'/', 'r');
 				}catch(Exception $e) {
 					$this->result($serv->getItemArray(),1);
 					Yii::app()->end();
 				}
+		
 
 				if(empty($results)) {
 					$this->result($serv->getItemArray(),1);
@@ -83,28 +67,31 @@ class ServerController extends KmaController {
 				}
 
 				$resArray = explode(";",$results);
-				
+
 				/**
 				* create sensors
 				*/
 
 				$insertDataArray = array();
 				$date = date('Y-m-d H:i:s');
-
-				for($i = 0 ; $i < count($resArray)/2 ; $i +=2 ){
-
-					$serial = $resArray[$i];
-					if(!empty($sensorBySerial[$serial])) {
-						$insertDataArray[] = $serial.",{$serv['serverId']},0";
+				
+				$c = count($resArray);				
+				if($c >= 2)
+					for($i = 0 ; $i < $c/2 ; $i +=2 ){
+					
+						$serial = $resArray[$i];
+						$id = (int) Sensor::getSensorIdBySerial($serial);
+						if($id < 0) {
+							$insertDataArray[] = "'{$serial}','{$serial}',{$serv['serverId']},1";
+						}
 					}
-				}
 
 				if(empty($insertDataArray)) {
 					$this->result($serv->getItemArray(),1);
 					Yii::app()->end();
 				}
-
-				$sql = "insert into `Sensor` (serial, serverId, active) VALUES (".implode('),(',$insertDataArray).")";
+				
+				$sql = "insert into `Sensor` (serial, name ,serverId, active) VALUES (".implode('),(',$insertDataArray).")";
 				Yii::app()->db->createCommand($sql)->execute();	
 					
 				$this->result($serv->getItemArray('sensors'),1);

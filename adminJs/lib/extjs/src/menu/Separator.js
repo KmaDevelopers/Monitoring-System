@@ -1,8 +1,28 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
+ * @class Ext.menu.Separator
+ * @extends Ext.menu.Item
+ *
  * Adds a separator bar to a menu, used to divide logical groups of menu items. Generally you will
  * add one of these by using "-" in your call to add() or in your items config rather than creating one directly.
  *
- *     @example
+ * {@img Ext.menu.Separator/Ext.menu.Separator.png Ext.menu.Separator component}
+ *
+ * ## Code 
+ *
  *     Ext.create('Ext.menu.Menu', {
  *         width: 100,
  *         height: 100,
@@ -18,109 +38,102 @@
  *         },{
  *            text: 'regular item',
  *         }]
- *     });
+ *     }); 
+ *
+ * @markdown
  */
 Ext.define('Ext.menu.Separator', {
     extend: 'Ext.menu.Item',
     alias: 'widget.menuseparator',
-
+    
     /**
-     * @cfg {String} activeCls
-     * Not applicable for Separator.
+     * @cfg {String} activeCls @hide
      */
-
+    
     /**
-     * @cfg {Boolean} canActivate
-     * Not applicable for Separator.
+     * @cfg {Boolean} canActivate @hide
      */
     canActivate: false,
-
+    
     /**
-     * @cfg {Boolean} clickHideDelay
-     * Not applicable for Separator.
+     * @cfg {Boolean} clickHideDelay @hide
      */
-
+     
     /**
-     * @cfg {Boolean} destroyMenu
-     * Not applicable for Separator.
+     * @cfg {Boolean} destroyMenu @hide
      */
-
+     
     /**
-     * @cfg {Boolean} disabledCls
-     * Not applicable for Separator.
+     * @cfg {Boolean} disabledCls @hide
      */
-
+     
     focusable: false,
-
+     
     /**
-     * @cfg {String} href
-     * Not applicable for Separator.
+     * @cfg {String} href @hide
      */
-
+    
     /**
-     * @cfg {String} hrefTarget
-     * Not applicable for Separator.
+     * @cfg {String} hrefTarget @hide
      */
-
+    
     /**
-     * @cfg {Boolean} hideOnClick
-     * Not applicable for Separator.
+     * @cfg {Boolean} hideOnClick @hide
      */
     hideOnClick: false,
-
+    
     /**
-     * @cfg {String} icon
-     * Not applicable for Separator.
+     * @cfg {String} icon @hide
      */
-
+    
     /**
-     * @cfg {String} iconCls
-     * Not applicable for Separator.
+     * @cfg {String} iconCls @hide
      */
-
+    
     /**
-     * @cfg {Object} menu
-     * Not applicable for Separator.
+     * @cfg {Mixed} menu @hide
      */
-
+    
     /**
-     * @cfg {String} menuAlign
-     * Not applicable for Separator.
+     * @cfg {String} menuAlign @hide
      */
-
+    
     /**
-     * @cfg {Number} menuExpandDelay
-     * Not applicable for Separator.
+     * @cfg {Number} menuExpandDelay @hide
      */
-
+    
     /**
-     * @cfg {Number} menuHideDelay
-     * Not applicable for Separator.
+     * @cfg {Number} menuHideDelay @hide
      */
-
+    
     /**
-     * @cfg {Boolean} plain
-     * Not applicable for Separator.
+     * @cfg {Boolean} plain @hide
      */
     plain: true,
-
+    
     /**
      * @cfg {String} separatorCls
      * The CSS class used by the separator item to show the incised line.
+     * Defaults to `Ext.baseCSSPrefix + 'menu-item-separator'`.
+     * @markdown
      */
     separatorCls: Ext.baseCSSPrefix + 'menu-item-separator',
-
+    
     /**
-     * @cfg {String} text
-     * Not applicable for Separator.
+     * @cfg {String} text @hide
      */
     text: '&#160;',
-
-    beforeRender: function(ct, pos) {
-        var me = this;
-
-        me.callParent();
-
-        me.addCls(me.separatorCls);
+    
+    onRender: function(ct, pos) {
+        var me = this,
+            sepCls = me.separatorCls;
+            
+        me.cls += ' ' + sepCls;
+        
+        Ext.applyIf(me.renderSelectors, {
+            itemSepEl: '.' + sepCls
+        });
+        
+        me.callParent(arguments);
     }
 });

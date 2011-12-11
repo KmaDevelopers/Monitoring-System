@@ -1,3 +1,17 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 Ext.example = function(){
     var msgCt;
 
@@ -12,10 +26,10 @@ Ext.example = function(){
     return {
         msg : function(title, format){
             if(!msgCt){
-                msgCt = Ext.DomHelper.insertFirst(document.body, {id:'msg-div'}, true);
+                msgCt = Ext.core.DomHelper.insertFirst(document.body, {id:'msg-div'}, true);
             }
             var s = Ext.String.format.apply(String, Array.prototype.slice.call(arguments, 1));
-            var m = Ext.DomHelper.append(msgCt, createBox(title, s), true);
+            var m = Ext.core.DomHelper.append(msgCt, createBox(title, s), true);
             m.hide();
             m.slideIn('t').ghost("t", { delay: 1000, remove: true});
         },

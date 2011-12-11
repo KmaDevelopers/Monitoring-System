@@ -1,15 +1,27 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
  * @class Ext
  * @singleton
  */
-var Ext = Ext || {};
 (function() {
     var global = this,
         objectPrototype = Object.prototype,
         toString = objectPrototype.toString,
         enumerables = true,
         enumerablesTest = { toString: 1 },
-        emptyFn = function(){},
         i;
 
     if (typeof Ext === 'undefined') {
@@ -29,7 +41,7 @@ var Ext = Ext || {};
 
     /**
      * An array containing extra enumerables for old browsers
-     * @property {String[]}
+     * @type Array
      */
     Ext.enumerables = enumerables;
 
@@ -76,13 +88,7 @@ var Ext = Ext || {};
         /**
          * A reusable empty function
          */
-        emptyFn: emptyFn,
-
-        /**
-         * A zero length string which will pass a truth test. Useful for passing to methods
-         * which use a truth test to reject <i>falsy</i> values where a string value must be cleared.
-         */
-        emptyString: new String(),
+        emptyFn: function() {},
 
         baseCSSPrefix: Ext.buildSettings.baseCSSPrefix,
 
@@ -209,16 +215,36 @@ var Ext = Ext || {};
 
         /**
          * Proxy to {@link Ext.Base#override}. Please refer {@link Ext.Base#override} for further details.
+
+    Ext.define('My.cool.Class', {
+        sayHi: function() {
+            alert('Hi!');
+        }
+    }
+
+    Ext.override(My.cool.Class, {
+        sayHi: function() {
+            alert('About to say...');
+
+            this.callOverridden();
+        }
+    });
+
+    var cool = new My.cool.Class();
+    cool.sayHi(); // alerts 'About to say...'
+                  // alerts 'Hi!'
+
+         * Please note that `this.callOverridden()` only works if the class was previously
+         * created with {@link Ext#define)
          *
          * @param {Object} cls The class to override
-         * @param {Object} overrides The properties to add to origClass. This should be specified as an object literal
-         * containing one or more properties.
+         * @param {Object} overrides The list of functions to add to origClass. This should be specified as an object literal
+         * containing one or more methods.
          * @method override
          * @markdown
-         * @deprecated 4.1.0 Use {@link Ext#define Ext.define} instead
          */
         override: function(cls, overrides) {
-            if (cls.$isClass) {
+            if (cls.prototype.$className) {
                 return cls.override(overrides);
             }
             else {
@@ -234,10 +260,10 @@ var Ext = Ext || {};
          * Returns the given value itself if it's not empty, as described in {@link Ext#isEmpty}; returns the default
          * value (second argument) otherwise.
          *
-         * @param {Object} value The value to test
-         * @param {Object} defaultValue The value to return if the original value is empty
+         * @param {Mixed} value The value to test
+         * @param {Mixed} defaultValue The value to return if the original value is empty
          * @param {Boolean} allowBlank (optional) true to allow zero length strings to qualify as non-empty (defaults to false)
-         * @return {Object} value, if non-empty, else defaultValue
+         * @return {Mixed} value, if non-empty, else defaultValue
          */
         valueFrom: function(value, defaultValue, allowBlank){
             return Ext.isEmpty(value, allowBlank) ? defaultValue : value;
@@ -260,7 +286,7 @@ var Ext = Ext || {};
          * - `textnode`: If the given value is a DOM text node and contains something other than whitespace
          * - `whitespace`: If the given value is a DOM text node and contains only whitespace
          *
-         * @param {Object} value
+         * @param {Mixed} value
          * @return {String}
          * @markdown
          */
@@ -324,7 +350,7 @@ var Ext = Ext || {};
          * - a zero-length array
          * - a zero-length string (Unless the `allowEmptyString` parameter is set to `true`)
          *
-         * @param {Object} value The value to test
+         * @param {Mixed} value The value to test
          * @param {Boolean} allowEmptyString (optional) true to allow empty strings (defaults to false)
          * @return {Boolean}
          * @markdown
@@ -336,7 +362,7 @@ var Ext = Ext || {};
         /**
          * Returns true if the passed value is a JavaScript Array, false otherwise.
          *
-         * @param {Object} target The target to test
+         * @param {Mixed} target The target to test
          * @return {Boolean}
          * @method
          */
@@ -355,7 +381,7 @@ var Ext = Ext || {};
 
         /**
          * Returns true if the passed value is a JavaScript Object, false otherwise.
-         * @param {Object} value The value to test
+         * @param {Mixed} value The value to test
          * @return {Boolean}
          * @method
          */
@@ -369,14 +395,8 @@ var Ext = Ext || {};
         },
 
         /**
-         * @private
-         */
-        isSimpleObject: function(value) {
-            return value instanceof Object && value.constructor === Object;
-        },
-        /**
          * Returns true if the passed value is a JavaScript 'primitive', a string, number or boolean.
-         * @param {Object} value The value to test
+         * @param {Mixed} value The value to test
          * @return {Boolean}
          */
         isPrimitive: function(value) {
@@ -387,7 +407,7 @@ var Ext = Ext || {};
 
         /**
          * Returns true if the passed value is a JavaScript Function, false otherwise.
-         * @param {Object} value The value to test
+         * @param {Mixed} value The value to test
          * @return {Boolean}
          * @method
          */
@@ -402,7 +422,7 @@ var Ext = Ext || {};
 
         /**
          * Returns true if the passed value is a number. Returns false for non-finite numbers.
-         * @param {Object} value The value to test
+         * @param {Mixed} value The value to test
          * @return {Boolean}
          */
         isNumber: function(value) {
@@ -411,7 +431,7 @@ var Ext = Ext || {};
 
         /**
          * Validates that a value is numeric.
-         * @param {Object} value Examples: 1, '1', '2.34'
+         * @param {Mixed} value Examples: 1, '1', '2.34'
          * @return {Boolean} True if numeric, false otherwise
          */
         isNumeric: function(value) {
@@ -420,7 +440,7 @@ var Ext = Ext || {};
 
         /**
          * Returns true if the passed value is a string.
-         * @param {Object} value The value to test
+         * @param {Mixed} value The value to test
          * @return {Boolean}
          */
         isString: function(value) {
@@ -430,7 +450,7 @@ var Ext = Ext || {};
         /**
          * Returns true if the passed value is a boolean.
          *
-         * @param {Object} value The value to test
+         * @param {Mixed} value The value to test
          * @return {Boolean}
          */
         isBoolean: function(value) {
@@ -439,7 +459,7 @@ var Ext = Ext || {};
 
         /**
          * Returns true if the passed value is an HTMLElement
-         * @param {Object} value The value to test
+         * @param {Mixed} value The value to test
          * @return {Boolean}
          */
         isElement: function(value) {
@@ -448,7 +468,7 @@ var Ext = Ext || {};
 
         /**
          * Returns true if the passed value is a TextNode
-         * @param {Object} value The value to test
+         * @param {Mixed} value The value to test
          * @return {Boolean}
          */
         isTextNode: function(value) {
@@ -457,7 +477,7 @@ var Ext = Ext || {};
 
         /**
          * Returns true if the passed value is defined.
-         * @param {Object} value The value to test
+         * @param {Mixed} value The value to test
          * @return {Boolean}
          */
         isDefined: function(value) {
@@ -466,23 +486,11 @@ var Ext = Ext || {};
 
         /**
          * Returns true if the passed value is iterable, false otherwise
-         * @param {Object} value The value to test
+         * @param {Mixed} value The value to test
          * @return {Boolean}
          */
         isIterable: function(value) {
-            var type = typeof value,
-                checkLength = false;
-            if (value && type != 'string') {
-                // Functions have a length property, so we need to filter them out
-                if (type == 'function') {
-                    // In Safari, NodeList/HTMLCollection both return "function" when using typeof, so we need
-                    // to explicitly check them here.
-                    checkLength = value instanceof NodeList || value instanceof HTMLCollection;
-                } else {
-                    checkLength = true;
-                }
-            }
-            return checkLength ? value.length !== undefined : false;
+            return (value && typeof value !== 'string') ? value.length !== undefined : false;
         }
     });
 
@@ -490,8 +498,8 @@ var Ext = Ext || {};
 
         /**
          * Clone almost any type of variable including array, object, DOM nodes and Date without keeping the old reference
-         * @param {Object} item The variable to clone
-         * @return {Object} clone
+         * @param {Mixed} item The variable to clone
+         * @return {Mixed} clone
          */
         clone: function(item) {
             if (item === null || item === undefined) {
@@ -563,62 +571,19 @@ var Ext = Ext || {};
 
             return uniqueGlobalNamespace;
         },
-        
-        /**
-         * @private
-         */
-        functionFactoryCache: {},
-        
-        cacheableFunctionFactory: function() {
-            var me = this,
-                args = Array.prototype.slice.call(arguments),
-                cache = me.functionFactoryCache,
-                idx, fn, ln;
-                
-             if (Ext.enableSandbox) {
-                ln = args.length;
-                if (ln > 0) {
-                    ln--;
-                    args[ln] = 'var Ext=window.' + me.getUniqueGlobalNamespace() + ';' + args[ln];
-                }
-            }
-            idx = args.join('');
-            fn = cache[idx];
-            if (!fn) {
-                fn = Function.prototype.constructor.apply(Function.prototype, args);
-                
-                cache[idx] = fn;
-            }
-            return fn;
-        },
-        
-        functionFactory: function() {
-            var me = this,
-                args = Array.prototype.slice.call(arguments),
-                ln;
-                
-            if (Ext.enableSandbox) {
-                ln = args.length;
-                if (ln > 0) {
-                    ln--;
-                    args[ln] = 'var Ext=window.' + me.getUniqueGlobalNamespace() + ';' + args[ln];
-                }
-            }
-     
-            return Function.prototype.constructor.apply(Function.prototype, args);
-        },
 
         /**
-         * @property
          * @private
          */
-        Logger: {
-            verbose: emptyFn,
-            log: emptyFn,
-            info: emptyFn,
-            warn: emptyFn,
-            error: emptyFn,
-            deprecate: emptyFn
+        functionFactory: function() {
+            var args = Array.prototype.slice.call(arguments);
+
+            if (args.length > 0) {
+                args[args.length - 1] = 'var Ext=window.' + this.getUniqueGlobalNamespace() + ';' +
+                    args[args.length - 1];
+            }
+
+            return Function.prototype.constructor.apply(Function.prototype, args);
         }
     });
 
@@ -631,3 +596,4 @@ var Ext = Ext || {};
     Ext.type = Ext.typeOf;
 
 })();
+

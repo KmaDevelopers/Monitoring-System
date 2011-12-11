@@ -1,21 +1,36 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
  * Creates a Bar Chart. A Bar Chart is a useful visualization technique to display quantitative information for
  * different categories that can show some progression (or regression) in the dataset. As with all other series, the Bar
  * Series must be appended in the *series* Chart array configuration. See the Chart documentation for more information.
  * A typical configuration object for the bar series could be:
  *
- *     @example
+ * {@img Ext.chart.series.Bar/Ext.chart.series.Bar.png Ext.chart.series.Bar chart series}
+ *
  *     var store = Ext.create('Ext.data.JsonStore', {
- *         fields: ['name', 'data'],
+ *         fields: ['name', 'data1', 'data2', 'data3', 'data4', 'data5'],
  *         data: [
- *             { 'name': 'metric one',   'data':10 },
- *             { 'name': 'metric two',   'data': 7 },
- *             { 'name': 'metric three', 'data': 5 },
- *             { 'name': 'metric four',  'data': 2 },
- *             { 'name': 'metric five',  'data':27 }
+ *             {'name':'metric one', 'data1':10, 'data2':12, 'data3':14, 'data4':8, 'data5':13},
+ *             {'name':'metric two', 'data1':7, 'data2':8, 'data3':16, 'data4':10, 'data5':3},
+ *             {'name':'metric three', 'data1':5, 'data2':2, 'data3':14, 'data4':12, 'data5':7},
+ *             {'name':'metric four', 'data1':2, 'data2':14, 'data3':6, 'data4':1, 'data5':23},
+ *             {'name':'metric five', 'data1':27, 'data2':38, 'data3':36, 'data4':13, 'data5':33}
  *         ]
  *     });
- *
+ *     
  *     Ext.create('Ext.chart.Chart', {
  *         renderTo: Ext.getBody(),
  *         width: 500,
@@ -25,7 +40,7 @@
  *         axes: [{
  *             type: 'Numeric',
  *             position: 'bottom',
- *             fields: ['data'],
+ *             fields: ['data1'],
  *             label: {
  *                 renderer: Ext.util.Format.numberRenderer('0,0')
  *             },
@@ -47,19 +62,19 @@
  *               width: 140,
  *               height: 28,
  *               renderer: function(storeItem, item) {
- *                 this.setTitle(storeItem.get('name') + ': ' + storeItem.get('data') + ' views');
+ *                 this.setTitle(storeItem.get('name') + ': ' + storeItem.get('data1') + ' views');
  *               }
  *             },
  *             label: {
  *               display: 'insideEnd',
- *                 field: 'data',
+ *                 field: 'data1',
  *                 renderer: Ext.util.Format.numberRenderer('0'),
  *                 orientation: 'horizontal',
  *                 color: '#333',
  *                 'text-anchor': 'middle'
  *             },
  *             xField: 'name',
- *             yField: 'data'
+ *             yField: ['data1']
  *         }]
  *     });
  *
@@ -89,12 +104,12 @@ Ext.define('Ext.chart.series.Bar', {
      * @cfg {Boolean} column Whether to set the visualization as column chart or horizontal bar chart.
      */
     column: false,
-
+    
     /**
      * @cfg style Style properties that will override the theming series styles.
      */
     style: {},
-
+    
     /**
      * @cfg {Number} gutter The gutter space between single bars, as a percentage of the bar width
      */
@@ -128,7 +143,7 @@ Ext.define('Ext.chart.series.Bar', {
                 opacity: 0.8,
                 color: '#f00'
             },
-
+            
             shadowAttributes: [{
                 "stroke-width": 6,
                 "stroke-opacity": 0.05,
@@ -166,11 +181,11 @@ Ext.define('Ext.chart.series.Bar', {
     // @private sets the bar girth.
     getBarGirth: function() {
         var me = this,
-            store = me.chart.getChartStore(),
+            store = me.chart.store,
             column = me.column,
             ln = store.getCount(),
             gutter = me.gutter / 100;
-
+        
         return (me.chart.chartBBox[column ? 'width' : 'height'] - me[column ? 'xPadding' : 'yPadding'] * 2) / (ln * (gutter + 1) - gutter);
     },
 
@@ -186,7 +201,7 @@ Ext.define('Ext.chart.series.Bar', {
     getBounds: function() {
         var me = this,
             chart = me.chart,
-            store = chart.getChartStore(),
+            store = chart.substore || chart.store,
             bars = [].concat(me.yField),
             barsLen = bars.length,
             groupBarsLen = barsLen,
@@ -218,19 +233,19 @@ Ext.define('Ext.chart.series.Bar', {
             axis = chart.axes.get(me.axis);
             if (axis) {
                 out = axis.calcEnds();
-                minY = out.from;
-                maxY = out.to;
+                minY = out.from || axis.prevMin;
+                maxY = mmax(out.to || axis.prevMax, 0);
             }
         }
 
         if (me.yField && !Ext.isNumber(minY)) {
-            axis = new Ext.chart.axis.Axis({
+            axis = Ext.create('Ext.chart.axis.Axis', {
                 chart: chart,
                 fields: [].concat(me.yField)
             });
             out = axis.calcEnds();
-            minY = out.from;
-            maxY = out.to;
+            minY = out.from || axis.prevMin;
+            maxY = mmax(out.to || axis.prevMax, 0);
         }
 
         if (!Ext.isNumber(minY)) {
@@ -287,7 +302,7 @@ Ext.define('Ext.chart.series.Bar', {
     getPaths: function() {
         var me = this,
             chart = me.chart,
-            store = chart.getChartStore(),
+            store = chart.substore || chart.store,
             bounds = me.bounds = me.getBounds(),
             items = me.items = [],
             gutter = me.gutter / 100,
@@ -318,14 +333,14 @@ Ext.define('Ext.chart.series.Bar', {
             top = bounds.zero;
             totalDim = 0;
             totalNegDim = 0;
-            hasShadow = false;
+            hasShadow = false; 
             for (j = 0, counter = 0; j < barsLen; j++) {
                 // Excluded series
                 if (me.__excludes && me.__excludes[j]) {
                     continue;
                 }
                 yValue = record.get(bounds.bars[j]);
-                height = Math.round((yValue - mmax(bounds.minY, 0)) * bounds.scale);
+                height = Math.round((yValue - ((bounds.minY < 0) ? 0 : bounds.minY)) * bounds.scale);
                 barAttr = {
                     fill: colors[(barsLen > 1 ? j : 0) % colorLength]
                 };
@@ -431,7 +446,7 @@ Ext.define('Ext.chart.series.Bar', {
             shadowGroups = me.shadowGroups,
             shadowAttributes = me.shadowAttributes,
             shadowGroupsLn = shadowGroups.length,
-            store = chart.getChartStore(),
+            store = chart.substore || chart.store,
             column = me.column,
             items = me.items,
             shadows = [],
@@ -489,7 +504,7 @@ Ext.define('Ext.chart.series.Bar', {
     drawSeries: function() {
         var me = this,
             chart = me.chart,
-            store = chart.getChartStore(),
+            store = chart.substore || chart.store,
             surface = chart.surface,
             animate = chart.animate,
             stacked = me.stacked,
@@ -501,11 +516,11 @@ Ext.define('Ext.chart.series.Bar', {
             seriesStyle = me.seriesStyle,
             items, ln, i, j, baseAttrs, sprite, rendererAttributes, shadowIndex, shadowGroup,
             bounds, endSeriesStyle, barAttr, attrs, anim;
-
+        
         if (!store || !store.getCount()) {
             return;
         }
-
+        
         //fill colors are taken from the colors array.
         delete seriesStyle.fill;
         endSeriesStyle = Ext.apply(seriesStyle, this.style);
@@ -579,7 +594,7 @@ Ext.define('Ext.chart.series.Bar', {
         }
         me.renderLabels();
     },
-
+    
     // @private handled when creating a label.
     onCreateLabel: function(storeItem, item, i, display) {
         var me = this,
@@ -593,7 +608,7 @@ Ext.define('Ext.chart.series.Bar', {
             group: group
         }, endLabelStyle || {}));
     },
-
+    
     // @private callback used when placing a label.
     onPlaceLabel: function(label, storeItem, item, i, display, animate, j, index) {
         // Determine the label's final position. Starts with the configured preferred value but
@@ -749,14 +764,14 @@ Ext.define('Ext.chart.series.Bar', {
         sprite.show();
         return this.callParent(arguments);
     },
-
+    
     isItemInPoint: function(x, y, item) {
         var bbox = item.sprite.getBBox();
         return bbox.x <= x && bbox.y <= y
             && (bbox.x + bbox.width) >= x
             && (bbox.y + bbox.height) >= y;
     },
-
+    
     // @private hide all markers
     hideAll: function() {
         var axes = this.chart.axes;
@@ -786,7 +801,7 @@ Ext.define('Ext.chart.series.Bar', {
             });
         }
     },
-
+    
     /**
      * Returns a string with the color to be used for the series legend item.
      * @param index
@@ -794,7 +809,7 @@ Ext.define('Ext.chart.series.Bar', {
     getLegendColor: function(index) {
         var me = this,
             colorLength = me.colorArrayStyle.length;
-
+        
         if (me.style && me.style.fill) {
             return me.style.fill;
         } else {

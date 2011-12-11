@@ -1,3 +1,17 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
  * @class Ext.dd.ScrollManager
  * <p>Provides automatic scrolling of overflow regions in the page during drag operations.</p>
@@ -15,7 +29,7 @@ el.ddScrollConfig = {
 };
 Ext.dd.ScrollManager.register(el);
 </code></pre>
- * Note: This class is designed to be used in "Point Mode
+ * <b>Note: This class uses "Point Mode" and is untested in "Intersect Mode".</b>
  * @singleton
  */
 Ext.define('Ext.dd.ScrollManager', {
@@ -135,8 +149,7 @@ Ext.define('Ext.dd.ScrollManager', {
 
     /**
      * Registers new overflow element(s) to auto scroll
-     * @param {String/HTMLElement/Ext.Element/String[]/HTMLElement[]/Ext.Element[]} el
-     * The id of or the element to be scrolled or an array of either
+     * @param {Mixed/Array} el The id of or the element to be scrolled or an array of either
      */
     register : function(el){
         if (Ext.isArray(el)) {
@@ -151,8 +164,7 @@ Ext.define('Ext.dd.ScrollManager', {
 
     /**
      * Unregisters overflow element(s) so they are no longer scrolled
-     * @param {String/HTMLElement/Ext.Element/String[]/HTMLElement[]/Ext.Element[]} el
-     * The id of or the element to be removed or an array of either
+     * @param {Mixed/Array} el The id of or the element to be removed or an array of either
      */
     unregister : function(el){
         if(Ext.isArray(el)){
@@ -167,43 +179,44 @@ Ext.define('Ext.dd.ScrollManager', {
 
     /**
      * The number of pixels from the top or bottom edge of a container the pointer needs to be to
-     * trigger scrolling
+     * trigger scrolling (defaults to 25)
      * @type Number
      */
     vthresh : 25,
     /**
      * The number of pixels from the right or left edge of a container the pointer needs to be to
-     * trigger scrolling
+     * trigger scrolling (defaults to 25)
      * @type Number
      */
     hthresh : 25,
 
     /**
-     * The number of pixels to scroll in each scroll increment
+     * The number of pixels to scroll in each scroll increment (defaults to 100)
      * @type Number
      */
     increment : 100,
 
     /**
-     * The frequency of scrolls in milliseconds
+     * The frequency of scrolls in milliseconds (defaults to 500)
      * @type Number
      */
     frequency : 500,
 
     /**
-     * True to animate the scroll
+     * True to animate the scroll (defaults to true)
      * @type Boolean
      */
     animate: true,
 
     /**
-     * The animation duration in seconds - MUST BE less than Ext.dd.ScrollManager.frequency!
+     * The animation duration in seconds -
+     * MUST BE less than Ext.dd.ScrollManager.frequency! (defaults to .4)
      * @type Number
      */
     animDuration: 0.4,
 
     /**
-     * The named drag drop {@link Ext.dd.DragSource#ddGroup group} to which this container belongs.
+     * The named drag drop {@link Ext.dd.DragSource#ddGroup group} to which this container belongs (defaults to undefined).
      * If a ddGroup is specified, then container scrolling will only occur when a dragged object is in the same ddGroup.
      * @type String
      */
@@ -222,3 +235,4 @@ Ext.define('Ext.dd.ScrollManager', {
         }
     }
 });
+

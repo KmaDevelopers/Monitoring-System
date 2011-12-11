@@ -1,6 +1,21 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
  * Component layout for {@link Ext.view.BoundList}. Handles constraining the height to the configured maxHeight.
  * @class Ext.layout.component.BoundList
+ * @extends Ext.layout.component.Component
  * @private
  */
 Ext.define('Ext.layout.component.BoundList', {
@@ -12,28 +27,16 @@ Ext.define('Ext.layout.component.BoundList', {
     beforeLayout: function() {
         return this.callParent(arguments) || this.owner.refreshed > 0;
     },
-    
-    beginLayout: function(ownerContext) {
-        if (this.owner.pagingToolbar && !ownerContext.toolbarContext) {
-            ownerContext.toolbarContext = ownerContext.context.getCmp(this.owner.pagingToolbar);
-        }
-    },
 
-    getLayoutItems: function() {
-        return this.owner.pagingToolbar ? [ this.owner.pagingToolbar ] : [];
-    },
-
-    calculate : function(ownerContext) {
+    onLayout : function(width, height) {
         var me = this,
             owner = me.owner,
-            width = owner.width,
-            height = owner.height,
             floating = owner.floating,
             el = owner.el,
             xy = el.getXY(),
             isNumber = Ext.isNumber,
             minWidth, maxWidth, minHeight, maxHeight,
-            naturalWidth, naturalHeight, constrainedWidth, constrainedHeight;
+            naturalWidth, naturalHeight, constrainedWidth, constrainedHeight, undef;
 
         if (floating) {
             // Position offscreen so the natural width is not affected by the viewport's right edge
@@ -41,7 +44,7 @@ Ext.define('Ext.layout.component.BoundList', {
         }
 
         // Calculate initial layout
-        me.setTargetSize(ownerContext, width, height);
+        me.setTargetSize(width, height);
 
         // Handle min/maxWidth for auto-width
         if (!isNumber(width)) {
@@ -56,7 +59,7 @@ Ext.define('Ext.layout.component.BoundList', {
                     constrainedWidth = maxWidth;
                 }
                 if (constrainedWidth) {
-                    me.setTargetSize(ownerContext, constrainedWidth);
+                    me.setTargetSize(constrainedWidth);
                 }
             }
         }
@@ -73,7 +76,7 @@ Ext.define('Ext.layout.component.BoundList', {
                     constrainedHeight = maxHeight;
                 }
                 if (constrainedHeight) {
-                    me.setTargetSize(ownerContext, undefined, constrainedHeight);
+                    me.setTargetSize(undef, constrainedHeight);
                 }
             }
         }
@@ -93,7 +96,7 @@ Ext.define('Ext.layout.component.BoundList', {
         }
     },
 
-    setTargetSize : function(ownerContext, width, height) {
+    setTargetSize : function(width, height) {
         var me = this,
             owner = me.owner,
             listHeight = null,
@@ -101,16 +104,16 @@ Ext.define('Ext.layout.component.BoundList', {
 
         // Size the listEl
         if (Ext.isNumber(height)) {
-            listHeight = height - ownerContext.getFrameInfo().height;
+            listHeight = height - owner.el.getFrameWidth('tb');
             toolbar = owner.pagingToolbar;
             if (toolbar) {
-                listHeight -= ownerContext.toolbarContext.getProp('height');
+                listHeight -= toolbar.getHeight();
             }
         }
+        me.setElementSize(owner.listEl, null, listHeight);
 
-        //me.setElementSize(owner.listEl, null, listHeight);
-        ownerContext.getEl('listEl').setHeight(listHeight);
-
-        ownerContext.setSize(width, height);
+        me.callParent(arguments);
     }
+
 });
+

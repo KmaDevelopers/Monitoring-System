@@ -1,10 +1,23 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 Ext.require([
     'Ext.window.Window',
     'Ext.panel.Panel',
     'Ext.toolbar.*',
     'Ext.tree.Panel',
     'Ext.container.Viewport',
-    'Ext.container.ButtonGroup',
     'Ext.form.*',
     'Ext.tab.*',
     'Ext.slider.*',
@@ -12,58 +25,38 @@ Ext.require([
     'Ext.button.*',
     'Ext.grid.*',
     'Ext.data.*',
-    'Ext.util.*',
-
-    'Ext.perf.Monitor'
+    'EXt.util.*'
 ]);
 
-function hasOption (name) {
-    return window.location.search.indexOf(name) >= 0;
-}
+Ext.onReady(function() {
+    Ext.panel.Panel.prototype.defaultDockWeights = { top: 1, bottom: 3, left: 5, right: 7 };
 
-var useDeferRender = true,
-    rtl = hasOption('rtl');
+    var items = [];
 
-if (hasOption('diag')) {
-    Ext.require([
-        'Ext.diag.layout.ContextItem',
-        'Ext.diag.layout.Context'
-    ]);
-}
-
-if (rtl) {
-    Ext.require([
-        'Ext.rtl.Element',
-        'Ext.rtl.AbstractComponent'
-    ]);
-}
-
-function getBasicPanel () {
-    return {
+    /**
+     * Basic panel
+     */
+    items.push({
         xtype: 'panel',
 
         x: 50, y: 80,
 
         width : 150,
         height: 90,
-        rtl: rtl,
 
         title: 'Basic Panel',
         animCollapse: true,
         bodyPadding: 5,
         html       : 'Some content'
-    };
-}
+    });
 
-function getCollapsedPanel () {
-    return {
+    items.push({
         xtype: 'panel',
 
         x: 50, y: 180,
 
         width : 150,
         height: 70,
-        rtl: rtl,
 
         title: 'Collapsed Panel',
         animCollapse: true,
@@ -71,41 +64,48 @@ function getCollapsedPanel () {
         html       : 'Some content',
         collapsible: true,
         collapsed: true
-    };
-}
+    });
 
-function getMaskedPanel (rtl) {
-    return Ext.createWidget({
+    /**
+     * Masked Panel
+     */
+    items.push({
         xtype: 'panel',
 
         x: 210, y: 80,
 
         width : 130,
         height: 170,
-        rtl: rtl,
 
         title: 'Masked Panel',
 
         bodyPadding: 5,
         html       : 'Some content',
         animCollapse: true,
-        collapsible: true
-    });
-}
+        collapsible: true,
 
-function getFramedPanel () {
-    return {
+        listeners: {
+            render: function(p) {
+                p.body.mask('Loading...');
+            },
+            delay: 2000
+        }
+    });
+
+    /**
+     * Framed Panel
+     */
+    items.push({
         xtype: 'panel',
 
         x: 350, y: 80,
 
         width : 170,
         height: 100,
-        rtl: rtl,
 
         title: 'Framed Panel',
         animCollapse: true,
-
+        
         dockedItems: [{
             dock: 'top',
             xtype: 'toolbar',
@@ -116,30 +116,27 @@ function getFramedPanel () {
             dock: 'right',
             xtype: 'toolbar',
             items: [{
-                text: 'test B'
+                text: 'test'
             }]
         }, {
             dock: 'left',
             xtype: 'toolbar',
             items: [{
-                text: 'test A'
+                text: 'test'
             }]
         }],
+        
+        html       : 'Some content',
+        frame      : true
+    });
 
-        html : 'Some content',
-        frame: true
-    };
-}
-
-function getCollapsedFramedPanel () {
-    return {
+    items.push({
         xtype: 'panel',
 
         x: 350, y: 190,
 
         width : 170,
         height: 60,
-        rtl: rtl,
 
         title: 'Collapsed Framed Panel',
         animCollapse: true,
@@ -149,14 +146,49 @@ function getCollapsedFramedPanel () {
         frame      : true,
         collapsible: true,
         collapsed: true
-    };
-}
+    });
 
-function getPanelWithToolbars () {
+    /**
+     * Basic Window
+     */
+    Ext.createWidget('window', {
+        x: 530, y: 80,
+
+        width   : 150,
+        height  : 170,
+        minWidth: 150,
+        minHeight: 150,
+        maxHeight: 170,
+
+        title: 'Window',
+
+        bodyPadding: 5,
+        html       : 'Click Submit for Confirmation Msg.',
+
+        collapsible: true,
+        closable   : false,
+        draggable  : false,
+        resizable: { handles: 's' },
+        animCollapse: true,
+
+        tbar: [
+            {text: 'Toolbar'}
+        ],
+        buttons: [
+            {
+                text   : 'Submit',
+                id     : 'message_box',
+                handler: function() {
+                    Ext.MessageBox.confirm('Confirm', 'Are you sure you want to do that?');
+                }
+            }
+        ]
+    }).show();
+
     /**
      * Toolbar with a menu
      */
-    /*var xxxxxxx = Ext.createWidget('menu', {
+    var menu = Ext.createWidget('menu', {
         items: [
             {text: 'Menu item'},
             {text: 'Check 1', checked: true},
@@ -175,111 +207,61 @@ function getPanelWithToolbars () {
                 })
             }
         ]
-    });*/
-    return {
+    });
+
+    items.push({
         xtype: 'panel',
-        id: 'panelWithToolbars',
 
         x: 690, y: 80,
 
         width : 450,
         height: 170,
-        rtl: rtl,
 
         title: 'Basic Panel With Toolbars',
         collapsible: true,
 
-        tbar: {
-            id: 'panelWithToolbars_tbar',
-            items: [{
-                xtype: 'buttongroup',
-                title: 'Button Group',
-                id: 'panelWithToolbars_btngroup',
-                columns: 2,
-                defaults: {
-                    scale: 'small'
-                },
-                items: [
-                    {
-                        xtype:'splitbutton',
-                        text: 'Menu Button',
-                        iconCls: 'add16',
-                        menu: [{text: 'Menu Button 1'}]
-                    },
-                    {
-                        xtype:'splitbutton',
-                        text: 'Cut',
-                        icon: '../shared/icons/fam/cross.gif',
-                        id: 'panelWithToolbars_splitbtn',
-                        menu: [{text: 'Cut Menu Item'}]
-                    }
-                ]
-            }]
-        },
-        bbar: {
-            id: 'panelWithToolbars_bbar',
-            items: [
-                'Toolbar &amp; Menus',
-                ' ',
-                '-',
-                {text: 'Button'},
-                {
-                    text: 'Menu Button',
-                    id  : 'menu-btn',
-                    menu: [
-                        {text: 'Menu item'},
-                        {text: 'Check 1', checked: true},
-                        {text: 'Check 2', checked: false},
-                        '-',
-                        {text: 'Option 1', checked: true,  group: 'opts'},
-                        {text: 'Option 2', checked: false, group: 'opts'},
-                        '-',
-                        {
-                            text: 'Sub-items',
-                            menu: Ext.createWidget('menu', {
-                                items: [
-                                    {text: 'Item 1'},
-                                    {text: 'Item 2'}
-                                ]
-                            })
-                        }
+        tbar: [
+            'Toolbar &amp; Menus',
+            ' ',
+            '-',
+            {text: 'Button'},
+            {
+                text: 'Menu Button',
+                id  : 'menu-btn',
+                menu: menu
+            },
+            {
+                xtype: 'splitbutton',
+                text : 'Split Button',
+                menu : Ext.createWidget('menu', {
+                    items: [
+                        {text: 'Item 1'},
+                        {text: 'Item 2'}
                     ]
-                },
-                {
-                    xtype: 'splitbutton',
-                    text : 'Split Button',
-                    menu : Ext.createWidget('menu', {
-                        items: [
-                            {text: 'Item 1'},
-                            {text: 'Item 2'}
-                        ]
-                    })
-                },
-                {
-                    xtype       : 'button',
-                    enableToggle: true,
-                    pressed     : true,
-                    text        : 'Toggle Button'
-                }
-            ]
-        },
-        lbar: {
-            id: 'panelWithToolbars_lbar',
-            items: [
-                { text: 'Left' }
-            ]
-        },
-        rbar: {
-            id: 'panelWithToolbars_rbar',
-            items: [
-                { text: 'Right' }
-            ]
-        }
-    };
-}
+                })
+            },
+            {
+                xtype       : 'button',
+                enableToggle: true,
+                pressed     : true,
+                text        : 'Toggle Button'
+            }
+        ],
+        bbar: [
+            {text: 'Bottom Bar'}
+        ],
+        lbar:[
+            { text: 'Left' }
+        ],
+        rbar: [
+            { text: 'Right' }
+        ]
+    });
 
-function getFormWidgets () {
-    return {
+    /**
+     * Form and form widgets
+     */
+    items.push({
         xtype: 'form',
 
         id   : 'form-widgets',
@@ -289,11 +271,9 @@ function getFormWidgets () {
 
         width : 630,
         height: 700,
-        rtl: rtl,
-
         frame: true,
         collapsible: true,
-
+                
         tools: [
             {type:'toggle'},
             {type:'close'},
@@ -367,10 +347,7 @@ function getFormWidgets () {
                 fieldLabel: 'Checkboxes',
                 xtype: 'checkboxgroup',
                 columns: [100,100],
-                items: [
-                    {boxLabel: 'Foo', checked: true,id:'fooChk',inputId:'fooChkInput'},
-                    {boxLabel: 'Bar'}
-                ]
+                items: [{boxLabel: 'Foo', checked: true},{boxLabel: 'Bar'}]
             },
             {
                 fieldLabel: 'Radios',
@@ -389,35 +366,17 @@ function getFormWidgets () {
             },
             {
                 xtype : 'fieldset',
-                title : 'Plain Fieldset',
-                items: [
-                    {
-                        hideLabel: true,
-                        xtype: 'radiogroup',
-                        items: [
-                            {boxLabel: 'Radio A', checked: true, name: 'radiogrp2'},
-                            {boxLabel: 'Radio B', name: 'radiogrp2'}
-                        ]
-                    }
-                ]
+                title : 'Plain Fieldset'
             },
             {
                 xtype      : 'fieldset',
                 title      : 'Collapsible Fieldset',
-                collapsible: true,
-                items: [
-                    { xtype: 'checkbox', boxLabel: 'Checkbox 1' },
-                    { xtype: 'checkbox', boxLabel: 'Checkbox 2' }
-                ]
+                collapsible: true
             },
             {
                 xtype         : 'fieldset',
                 title         : 'Checkbox Fieldset',
-                checkboxToggle: true,
-                items: [
-                    { xtype: 'radio', boxLabel: 'Radio 1', name: 'radiongrp1' },
-                    { xtype: 'radio', boxLabel: 'Radio 2', name: 'radiongrp1' }
-                ]
+                checkboxToggle: true
             }
         ],
 
@@ -443,24 +402,21 @@ function getFormWidgets () {
                 }
             }
         ]
-    };
-}
+    });
 
-function getBorderLayout() {
-    return {
+    /**
+     * Border layout
+     */
+    items.push({
         xtype: 'panel',
 
         width : 450,
         height: 350,
-        rtl: rtl,
 
         x: 690, y: 260,
 
         title : 'BorderLayout Panel',
-        layout: {
-            type: 'border',
-            padding: 5
-        },
+        layout: 'border',
         collapsible: true,
 
         defaults: {
@@ -474,7 +430,7 @@ function getBorderLayout() {
                 region : 'north',
                 html   : 'North',
                 ctitle : 'North',
-                //margins: '5 5 0 5', // TRBL
+                margins: '5 5 0 5',
                 height : 70
             },
             {
@@ -482,7 +438,7 @@ function getBorderLayout() {
                 region      : 'south',
                 html        : 'South',
                 collapseMode: 'mini',
-                //margins     : '0 5 5 5', // TRBL
+                margins     : '0 5 5 5',
                 height      : 70
             },
             {
@@ -490,14 +446,14 @@ function getBorderLayout() {
                 region      : 'west',
                 html        : 'West',
                 collapseMode: 'mini',
-                //margins     : '0 0 0 5', // TRBL
+                margins     : '0 0 0 5',
                 width       : 100
             },
             {
                 title  : 'East',
                 region : 'east',
                 html   : 'East',
-                //margins: '0 5 0 0', // TRBL
+                margins: '0 5 0 0',
                 width  : 100
             },
             {
@@ -507,10 +463,11 @@ function getBorderLayout() {
                 html       : 'Center'
             }
         ]
-    };
-}
+    });
 
-function getStore () {
+    /**
+     * Grid
+     */
      var myData = [
          ['3m Co',71.72,0.02,0.03,'9/1 12:00am'],
          ['Alcoa Inc',29.01,0.42,1.47,'9/1 12:00am'],
@@ -524,7 +481,7 @@ function getStore () {
          ['E.I. du Pont de Nemours and Company',40.48,0.51,1.28,'9/1 12:00am']
      ];
 
-    return Ext.create('Ext.data.ArrayStore', {
+    var store = Ext.create('Ext.data.ArrayStore', {
         fields: [
            {name: 'company'},
            {name: 'price', type: 'float'},
@@ -539,28 +496,23 @@ function getStore () {
         data: myData,
         pageSize: 8
     });
-}
 
-function getGrid () {
-    var store = getStore(),
-        pagingBar = Ext.createWidget('pagingtoolbar', {
-            store      : store,
-            displayInfo: true,
-            displayMsg : 'Displaying topics {0} - {1} of {2}'
-        });
+    var pagingBar = Ext.createWidget('pagingtoolbar', {
+        store      : store,
+        displayInfo: true,
+        displayMsg : 'Displaying topics {0} - {1} of {2}'
+    });
 
-    return {
+    items.push({
         xtype: 'gridpanel',
 
         height: 200,
         width : 450,
-        rtl: rtl,
 
         x: 690, y: 620,
 
         title: 'GridPanel',
         collapsible: true,
-        deferRowRender: useDeferRender,
 
         store: store,
 
@@ -571,7 +523,7 @@ function getGrid () {
             {header: "% Change",     width: 75,  sortable: true, dataIndex: 'pctChange'},
             {header: "Last Updated", width: 85,  sortable: true, renderer: Ext.util.Format.dateRenderer('m/d/Y'), dataIndex: 'lastChange'}
         ],
-        loadMask: true,
+        loadMask        : true,
 
         viewConfig: {
             stripeRows: true
@@ -587,13 +539,13 @@ function getGrid () {
                 trigger2Cls: Ext.baseCSSPrefix + 'form-search-trigger'
             }
         ]
-    };
-}
+    });
 
-function getAccordion () {
+    //=============================================================
+    // Accordion / Tree
+    //=============================================================
     var tree = Ext.create('Ext.tree.Panel', {
         title: 'TreePanel',
-        deferRowRender: useDeferRender,
         root: {
             text: 'Root Node',
             expanded: true,
@@ -613,7 +565,7 @@ function getAccordion () {
         }
     });
 
-    return {
+    var accConfig = {
         title : 'Accordion and TreePanel',
         collapsible: true,
         layout: 'accordion',
@@ -622,7 +574,6 @@ function getAccordion () {
 
         width : 450,
         height: 240,
-        rtl: rtl,
 
         bodyStyle: {
             'background-color': '#eee'
@@ -638,15 +589,17 @@ function getAccordion () {
             }
         ]
     };
-}
 
-function getTabs (config) {
-    return Ext.apply({
+    items.push(accConfig);
+
+    /**
+     * Tabs
+     */
+    var tabCfg = {
         xtype: 'tabpanel',
 
         width : 310,
         height: 150,
-        rtl: rtl,
 
         activeTab: 0,
 
@@ -668,11 +621,9 @@ function getTabs (config) {
                 closable: true
             }
         ]
-    }, config);
-}
+    };
 
-function getScrollingTabs () {
-    return getTabs({
+    items.push(Ext.applyIf({
         x: 50, y: 970,
 
         enableTabScroll: true,
@@ -680,74 +631,76 @@ function getScrollingTabs () {
         items: [
             {
                 title: 'Tab 1',
-                html : 'Tab panel 1 content'
+                html : 'Tab panel for display in a border layout'
             },
             {
-                title: 'Tab 2',
-                html : 'Tab panel 2 content',
+                title   : 'Tab 2',
                 closable: true
             },
             {
-                title: 'Tab 3',
-                html : 'Tab panel 3 content',
+                title   : 'Tab 3',
                 closable: true
             },
             {
-                title: 'Tab 4',
-                html : 'Tab panel 4 content',
+                title   : 'Tab 4',
                 closable: true
             },
             {
-                title: 'Tab 5',
-                html : 'Tab panel 5 content',
+                title   : 'Tab 5',
                 closable: true
             },
             {
-                title: 'Tab 6',
-                html : 'Tab panel 6 content',
+                title   : 'Tab 6',
                 closable: true
             }
         ]
-    });
-}
+    }, tabCfg));
 
-function getPlainTabs () {
-    return getTabs({
+    items.push(Ext.apply({
         plain: true,
         x    : 370, y: 970
-    });
-}
+    }, tabCfg));
 
-function getDatePicker () {
-    return {
+    /**
+     * DatePicker
+     */
+    items.push({
         xtype: 'panel',
 
         x: 50, y: 1130,
 
         border: false,
         width : 180,
-        rtl: rtl,
 
         items: {
             xtype: 'datepicker'
         }
-    };
-}
+    });
 
-function getProgressBar () {
+    //=============================================================
+    // Resizable
+    //=============================================================
+    var rszEl = Ext.getBody().createChild({
+        style: 'background: transparent;',
+        html: '<div style="padding:20px;">Resizable handles</div>'
+    });
+
+    rszEl.position('absolute', 1, 240, 1130);
+    rszEl.setSize(180, 180);
+    Ext.create('Ext.resizer.Resizer', {
+        el: rszEl,
+        handles: 'all',
+        pinned: true
+    });
+
+    /**
+     * ProgressBar / Slider
+     */
     var progressbar = Ext.createWidget('progressbar', {
         value: 0.5
     });
 
-    if (!hasOption('nopbar')) {
-        setTimeout(function() {
-            progressbar.wait({
-                text: 'Progress text...'
-            });
-        }, 7000);
-    }
-
-    return {
+    items.push({
         xtype: 'panel',
         title: 'ProgressBar / Slider',
 
@@ -755,10 +708,9 @@ function getProgressBar () {
 
         width: 450,
         height: 200,
-        rtl: rtl,
 
         bodyPadding: 5,
-        layout: {
+        layout     : {
             type : 'vbox',
             align: 'stretch'
         },
@@ -779,222 +731,42 @@ function getProgressBar () {
                 margin  : '5 0 0 0'
             }
         ]
-    };
-}
+    });
 
-function getFramedGrid () {
-    return {
+    items.push({
         width:250,
         height:182,
         x: 430, y: 1130,
-        rtl: rtl,
-        xtype: 'grid',
+        xtype: 'gridpanel',
         title: 'Framed Grid',
         collapsible: true,
-        store: getStore(),
+        store: store,
         multiSelect: true,
         emptyText: 'No images to display',
-        deferRowRender: useDeferRender,
         frame: true,
         enableColumnMove: false,
         columns: [
-            {header: "Company", flex:  1,   sortable: true, dataIndex: 'company'},
-            {header: "Price",   width: 75,  sortable: true, dataIndex: 'price'},
-            {header: "Change",  width: 75,  sortable: true, dataIndex: 'change'}
-        ]
-    };
-}
-
-function getBasicWindow () {
-    return Ext.createWidget('window', {
-        id: 'basicWindow',
-        x: 530, y: 80,
-        hidden: false,
-        width   : 150,
-        height  : 170,
-        minWidth: 150,
-        minHeight: 150,
-        maxHeight: 170,
-        rtl: rtl,
-
-        title: 'Window',
-
-        bodyPadding: 5,
-        html       : 'Click Submit for Confirmation Msg.',
-
-        collapsible: true,
-        floating   : false,
-        closable   : false,
-        draggable  : false,
-        resizable: { handles: 's' },
-        animCollapse: true,
-
-        tbar: [
-            {text: 'Toolbar'}
-        ],
-        buttons: [
-            {
-                text   : 'Submit',
-                id     : 'message_box',
-                handler: function() {
-                    Ext.MessageBox.confirm('Confirm', 'Are you sure you want to do that?');
-                }
-            }
+            {header: "Company",      flex: 1, sortable: true, dataIndex: 'company'},
+            {header: "Price",        width: 75,  sortable: true, dataIndex: 'price'},
+            {header: "Change",       width: 75,  sortable: true, dataIndex: 'change'}
         ]
     });
-}
 
-function addResizer () {
-    var rszEl = Ext.getBody().createChild({
-        style: 'background: transparent;',
-        html: '<div style="padding:20px;">Resizable handles</div>'
-    });
-
-    rszEl.position('absolute', 1, 240, 1130);
-    rszEl.setSize(180, 180);
-    Ext.create('Ext.resizer.Resizer', {
-        id: 'resizer',
-        el: rszEl,
-        handles: 'all',
-        pinned: true
-    });
-}
-
-function addFormWindow () {
-    Ext.createWidget('window', {
-        x: 690, y: 1290,
-
-        width   : 450,
-        // height  : 360,
-        minWidth: 450,
-        rtl: rtl,
-
-        title: 'Window',
-
-        bodyPadding: '5 5 0 5',
-
-        collapsible: true,
-        closable   : false,
-        draggable  : false,
-        resizable: { handles: 's' },
-        animCollapse: true,
-
-        items: [
-            {
-                xtype : 'fieldset',
-                title : 'Plain Fieldset',
-                items: [
-                    {
-                        fieldLabel: 'TextField',
-                        xtype     : 'textfield',
-                        name      : 'someField',
-                        emptyText : 'Enter a value',
-                        anchor    : '100%'
-                    },
-                    {
-                        fieldLabel: 'ComboBox',
-                        xtype     : 'combo',
-                        store     : ['Foo', 'Bar'],
-                        anchor    : '100%'
-                    },
-                    {
-                        fieldLabel: 'DateField',
-                        xtype     : 'datefield',
-                        name      : 'date',
-                        anchor    : '100%'
-                    },
-                    {
-                        fieldLabel: 'TimeField',
-                        name      : 'time',
-                        xtype     : 'timefield',
-                        anchor    : '100%'
-                    },
-                    {
-                        fieldLabel: 'NumberField',
-                        xtype     : 'numberfield',
-                        name      : 'number',
-                        emptyText : '(This field is optional)',
-                        allowBlank: true,
-                        anchor    : '100%'
-                    },
-                    {
-                        fieldLabel: 'TextArea',
-                        xtype     : 'textareafield',
-                        name      : 'message',
-                        cls       : 'x-form-valid',
-                        value     : 'This field is hard-coded to have the "valid" style (it will require some code changes to add/remove this style dynamically)',
-                        anchor    : '100%'
-                    },
-                    {
-                        fieldLabel: 'Checkboxes',
-                        xtype: 'checkboxgroup',
-                        columns: [100,100],
-                        items: [
-                            {boxLabel: 'Foo', checked: true,id:'winFooChk',inputId:'winFooChkInput'},
-                            {boxLabel: 'Bar'}
-                        ]
-                    },
-                    {
-                        xtype: 'radiogroup',
-                        columns: [100,100],
-                        fieldLabel: 'Radio Group',
-                        items: [
-                            {boxLabel: 'Radio A', checked: true, name: 'radiogrp2'},
-                            {boxLabel: 'Radio B', name: 'radiogrp2'}
-                        ]
-                    }
-                ]
-            }
-        ],
-
-        buttons: [
-            {
-                text   : 'Submit',
-                handler: function() {
-                    Ext.MessageBox.confirm('Confirm', 'Are you sure you want to do that?');
-                }
-            }
-        ]
-    }).show();
-}
-
-function doThemes (rtl) {
-    var time = Ext.perf.getTimestamp(),
-        maskedPanel;
-
-    if (hasOption('nocss3')) {
-        Ext.supports.CSS3BorderRadius = false;
-        Ext.getBody().addCls('x-nbr x-nlg');
+    for (var i = 0; i < items.length; i++) {
+        items[i].style = {
+            position: 'absolute'
+        };
+        var item = Ext.ComponentManager.create(items[i], 'panel');
+        item.render(document.body);
     }
 
-    var items = [
-        getBasicPanel(rtl),
-        getCollapsedPanel(rtl),
-        maskedPanel = getMaskedPanel(rtl),
-        getFramedPanel(rtl),
-        getCollapsedFramedPanel(rtl),
-        getBasicWindow(rtl),
-        getPanelWithToolbars(rtl),
-        getFormWidgets(rtl),
-        getBorderLayout(rtl),
-        getGrid(rtl),
-        getAccordion(rtl),
-        getScrollingTabs(rtl),
-        getPlainTabs(rtl),
-        getDatePicker(rtl),
-        getProgressBar(rtl),
-        getFramedGrid(rtl)
-    ];
-
-    Ext.create('Ext.container.Viewport', {
-        layout: 'absolute',
-        autoScroll: true,
-        items: items
-    });
+    setTimeout(function() {
+        Ext.QuickTips.init();
+        progressbar.wait({
+            text: 'Progress text...'
+        });
+    }, 7000);
         
-    addResizer();
-    //addFormWindow();
-
     /**
      * Stylesheet Switcher
      */
@@ -1007,41 +779,5 @@ function doThemes (rtl) {
             window.location = name;
         }
     });
-
-    setTimeout(function() {
-        maskedPanel.body.mask('Loading...');
-        if (!hasOption('notips')) {
-            Ext.QuickTips.init();
-        }
-    }, 2000);
-
-    time = Ext.perf.getTimestamp() - time;
-    Ext.log('total time: ' + Math.round(time));
-}
-
-Ext.onReady(function() {
-    if (!hasOption('perf')) {
-        useDeferRender = !hasOption('nodefer');
-        if (hasOption('delay')) {
-            setTimeout(doThemes, 1000);
-        } else {
-            doThemes();
-        }
-    } else {
-        setTimeout(function () {
-            var a = document.createElement('a');
-            a.innerHTML = 'Perf Console';
-            a.style.position = "absolute";
-            a.style.left = "5px";
-            a.style.top = "5px";
-            a.href = 'javascript:void(window.open("../perf/perf-console.html","perfcon"))';
-            document.body.appendChild(a);
-
-            useDeferRender = hasOption('defer');
-
-            Ext.Perf.setup();
-            Ext.Perf.monitor('onReady', doThemes);
-            Ext.Perf.report();
-        }, 1000);
-    }
 });
+

@@ -1,1 +1,436 @@
-Ext.data.JsonP.Ext_dd_ScrollManager({"mixedInto":[],"xtypes":{},"tagname":"class","html":"<div><pre class=\"hierarchy\"><h4>Hierarchy</h4><div class='subclass first-child'><a href='#!/api/Ext.Base' rel='Ext.Base' class='docClass'>Ext.Base</a><div class='subclass '><strong>Ext.dd.ScrollManager</strong></div></div><h4>Requires</h4><div class='dependency'><a href='#!/api/Ext.dd.DragDropManager' rel='Ext.dd.DragDropManager' class='docClass'>Ext.dd.DragDropManager</a></div><h4>Files</h4><div class='dependency'><a href='source/ScrollManager.html#Ext-dd-ScrollManager' target='_blank'>ScrollManager.js</a></div></pre><div class='doc-contents'><p>Provides automatic scrolling of overflow regions in the page during drag operations.</p>\n\n\n<p>The ScrollManager configs will be used as the defaults for any scroll container registered with it,\nbut you can also override most of the configs per scroll container by adding a\n<tt>ddScrollConfig</tt> object to the target element that contains these properties: <a href=\"#!/api/Ext.dd.ScrollManager-property-hthresh\" rel=\"Ext.dd.ScrollManager-property-hthresh\" class=\"docClass\">hthresh</a>,\n<a href=\"#!/api/Ext.dd.ScrollManager-property-vthresh\" rel=\"Ext.dd.ScrollManager-property-vthresh\" class=\"docClass\">vthresh</a>, <a href=\"#!/api/Ext.dd.ScrollManager-property-increment\" rel=\"Ext.dd.ScrollManager-property-increment\" class=\"docClass\">increment</a> and <a href=\"#!/api/Ext.dd.ScrollManager-property-frequency\" rel=\"Ext.dd.ScrollManager-property-frequency\" class=\"docClass\">frequency</a>.  Example usage:\n<pre><code>var el = Ext.get('scroll-ct');\nel.ddScrollConfig = {\n    vthresh: 50,\n    hthresh: -1,\n    frequency: 100,\n    increment: 200\n};\nExt.dd.ScrollManager.register(el);\n</code></pre>\nNote: This class is designed to be used in \"Point Mode\n\n</div><div class='members'><div id='m-property'><div class='definedBy'>Defined By</div><h3 class='members-title'>Properties</h3><div class='subsection'><div id='property-animDuration' class='member first-child not-inherited'><a href='#' class='side expandable'><span>&nbsp;</span></a><div class='title'><div class='meta'><a href='#!/api/Ext.dd.ScrollManager' rel='Ext.dd.ScrollManager' class='definedIn docClass'>Ext.dd.ScrollManager</a><br/><a href='source/ScrollManager.html#Ext-dd-ScrollManager-property-animDuration' target='_blank' class='viewSource'>view source</a></div><a href='#!/api/Ext.dd.ScrollManager-property-animDuration' class='name not-expandable'>animDuration</a><span> : <a href=\"#!/api/Number\" rel=\"Number\" class=\"docClass\">Number</a></span></div><div class='description'><div class='short'><p>The animation duration in seconds - MUST BE less than Ext.dd.ScrollManager.frequency!</p>\n</div><div class='long'><p>The animation duration in seconds - MUST BE less than Ext.dd.ScrollManager.frequency!</p>\n</div></div></div><div id='property-animate' class='member  not-inherited'><a href='#' class='side expandable'><span>&nbsp;</span></a><div class='title'><div class='meta'><a href='#!/api/Ext.dd.ScrollManager' rel='Ext.dd.ScrollManager' class='definedIn docClass'>Ext.dd.ScrollManager</a><br/><a href='source/ScrollManager.html#Ext-dd-ScrollManager-property-animate' target='_blank' class='viewSource'>view source</a></div><a href='#!/api/Ext.dd.ScrollManager-property-animate' class='name not-expandable'>animate</a><span> : <a href=\"#!/api/Boolean\" rel=\"Boolean\" class=\"docClass\">Boolean</a></span></div><div class='description'><div class='short'><p>True to animate the scroll</p>\n</div><div class='long'><p>True to animate the scroll</p>\n</div></div></div><div id='property-callOverridden' class='member  inherited'><a href='#' class='side expandable'><span>&nbsp;</span></a><div class='title'><div class='meta'><a href='#!/api/Ext.Base' rel='Ext.Base' class='definedIn docClass'>Ext.Base</a><br/><a href='source/Base3.html#Ext-Base-property-callOverridden' target='_blank' class='viewSource'>view source</a></div><a href='#!/api/Ext.Base-property-callOverridden' class='name expandable'>callOverridden</a><span> : <a href=\"#!/api/Object\" rel=\"Object\" class=\"docClass\">Object</a></span><strong class='protected-signature'>protected</strong><strong class='deprecated-signature'>deprecated</strong></div><div class='description'><div class='short'>Call the original method that was previously overridden with override\n\nExt.define('My.Cat', {\n    constructor: functi...</div><div class='long'><p>Call the original method that was previously overridden with <a href=\"#!/api/Ext.Base-static-method-override\" rel=\"Ext.Base-static-method-override\" class=\"docClass\">override</a></p>\n\n<pre><code>Ext.define('My.Cat', {\n    constructor: function() {\n        alert(\"I'm a cat!\");\n\n        return this;\n    }\n});\n\nMy.Cat.override({\n    constructor: function() {\n        alert(\"I'm going to be a cat!\");\n\n        var instance = this.callOverridden();\n\n        alert(\"Meeeeoooowwww\");\n\n        return instance;\n    }\n});\n\nvar kitty = new My.Cat(); // alerts \"I'm going to be a cat!\"\n                          // alerts \"I'm a cat!\"\n                          // alerts \"Meeeeoooowwww\"\n</code></pre>\n<div class='deprecated'><p>This property has been <strong>deprecated</strong> </p><p>as of 4.1. Use <a href=\"#!/api/Ext.Base-property-callParent\" rel=\"Ext.Base-property-callParent\" class=\"docClass\">callParent</a> instead.</p>\n</div></div></div></div><div id='property-callParent' class='member  inherited'><a href='#' class='side expandable'><span>&nbsp;</span></a><div class='title'><div class='meta'><a href='#!/api/Ext.Base' rel='Ext.Base' class='definedIn docClass'>Ext.Base</a><br/><a href='source/Base3.html#Ext-Base-property-callParent' target='_blank' class='viewSource'>view source</a></div><a href='#!/api/Ext.Base-property-callParent' class='name expandable'>callParent</a><span> : <a href=\"#!/api/Object\" rel=\"Object\" class=\"docClass\">Object</a></span><strong class='protected-signature'>protected</strong></div><div class='description'><div class='short'>Call the \"parent\" method of the current method. ...</div><div class='long'><p>Call the \"parent\" method of the current method. That is the method previously\noverridden by derivation or by an override (see <a href=\"#!/api/Ext-method-define\" rel=\"Ext-method-define\" class=\"docClass\">Ext.define</a>).</p>\n\n<pre><code> Ext.define('My.Base', {\n     constructor: function (x) {\n         this.x = x;\n     },\n\n     statics: {\n         method: function (x) {\n             return x;\n         }\n     }\n });\n\n Ext.define('My.Derived', {\n     extend: 'My.Base',\n\n     constructor: function () {\n         this.callParent([21]);\n     }\n });\n\n var obj = new My.Derived();\n\n alert(obj.x);  // alerts 21\n</code></pre>\n\n<p>This can be used with an override as follows:</p>\n\n<pre><code> Ext.define('My.DerivedOverride', {\n     override: 'My.Derived',\n\n     constructor: function (x) {\n         this.callParent([x*2]); // calls original My.Derived constructor\n     }\n });\n\n var obj = new My.Derived();\n\n alert(obj.x);  // now alerts 42\n</code></pre>\n\n<p>This also works with static methods.</p>\n\n<pre><code> Ext.define('My.Derived2', {\n     extend: 'My.Base',\n\n     statics: {\n         method: function (x) {\n             return this.callParent([x*2]); // calls My.Base.method\n         }\n     }\n });\n\n alert(My.Base.method(10);     // alerts 10\n alert(My.Derived2.method(10); // alerts 20\n</code></pre>\n\n<p>Lastly, it also works with overridden static methods.</p>\n\n<pre><code> Ext.define('My.Derived2Override', {\n     override: 'My.Derived2',\n\n     statics: {\n         method: function (x) {\n             return this.callParent([x*2]); // calls My.Derived2.method\n         }\n     }\n });\n\n alert(My.Derived2.method(10); // now alerts 40\n</code></pre>\n</div></div></div><div id='property-ddGroup' class='member  not-inherited'><a href='#' class='side expandable'><span>&nbsp;</span></a><div class='title'><div class='meta'><a href='#!/api/Ext.dd.ScrollManager' rel='Ext.dd.ScrollManager' class='definedIn docClass'>Ext.dd.ScrollManager</a><br/><a href='source/ScrollManager.html#Ext-dd-ScrollManager-property-ddGroup' target='_blank' class='viewSource'>view source</a></div><a href='#!/api/Ext.dd.ScrollManager-property-ddGroup' class='name expandable'>ddGroup</a><span> : <a href=\"#!/api/String\" rel=\"String\" class=\"docClass\">String</a></span></div><div class='description'><div class='short'>The named drag drop group to which this container belongs. ...</div><div class='long'><p>The named drag drop <a href=\"#!/api/Ext.dd.DragSource-cfg-ddGroup\" rel=\"Ext.dd.DragSource-cfg-ddGroup\" class=\"docClass\">group</a> to which this container belongs.\nIf a ddGroup is specified, then container scrolling will only occur when a dragged object is in the same ddGroup.</p>\n</div></div></div><div id='property-frequency' class='member  not-inherited'><a href='#' class='side expandable'><span>&nbsp;</span></a><div class='title'><div class='meta'><a href='#!/api/Ext.dd.ScrollManager' rel='Ext.dd.ScrollManager' class='definedIn docClass'>Ext.dd.ScrollManager</a><br/><a href='source/ScrollManager.html#Ext-dd-ScrollManager-property-frequency' target='_blank' class='viewSource'>view source</a></div><a href='#!/api/Ext.dd.ScrollManager-property-frequency' class='name not-expandable'>frequency</a><span> : <a href=\"#!/api/Number\" rel=\"Number\" class=\"docClass\">Number</a></span></div><div class='description'><div class='short'><p>The frequency of scrolls in milliseconds</p>\n</div><div class='long'><p>The frequency of scrolls in milliseconds</p>\n</div></div></div><div id='property-hthresh' class='member  not-inherited'><a href='#' class='side expandable'><span>&nbsp;</span></a><div class='title'><div class='meta'><a href='#!/api/Ext.dd.ScrollManager' rel='Ext.dd.ScrollManager' class='definedIn docClass'>Ext.dd.ScrollManager</a><br/><a href='source/ScrollManager.html#Ext-dd-ScrollManager-property-hthresh' target='_blank' class='viewSource'>view source</a></div><a href='#!/api/Ext.dd.ScrollManager-property-hthresh' class='name not-expandable'>hthresh</a><span> : <a href=\"#!/api/Number\" rel=\"Number\" class=\"docClass\">Number</a></span></div><div class='description'><div class='short'><p>The number of pixels from the right or left edge of a container the pointer needs to be to\ntrigger scrolling</p>\n</div><div class='long'><p>The number of pixels from the right or left edge of a container the pointer needs to be to\ntrigger scrolling</p>\n</div></div></div><div id='property-increment' class='member  not-inherited'><a href='#' class='side expandable'><span>&nbsp;</span></a><div class='title'><div class='meta'><a href='#!/api/Ext.dd.ScrollManager' rel='Ext.dd.ScrollManager' class='definedIn docClass'>Ext.dd.ScrollManager</a><br/><a href='source/ScrollManager.html#Ext-dd-ScrollManager-property-increment' target='_blank' class='viewSource'>view source</a></div><a href='#!/api/Ext.dd.ScrollManager-property-increment' class='name not-expandable'>increment</a><span> : <a href=\"#!/api/Number\" rel=\"Number\" class=\"docClass\">Number</a></span></div><div class='description'><div class='short'><p>The number of pixels to scroll in each scroll increment</p>\n</div><div class='long'><p>The number of pixels to scroll in each scroll increment</p>\n</div></div></div><div id='property-self' class='member  inherited'><a href='#' class='side expandable'><span>&nbsp;</span></a><div class='title'><div class='meta'><a href='#!/api/Ext.Base' rel='Ext.Base' class='definedIn docClass'>Ext.Base</a><br/><a href='source/Base3.html#Ext-Base-property-self' target='_blank' class='viewSource'>view source</a></div><a href='#!/api/Ext.Base-property-self' class='name expandable'>self</a><span> : <a href=\"#!/api/Ext.Class\" rel=\"Ext.Class\" class=\"docClass\">Ext.Class</a></span><strong class='protected-signature'>protected</strong></div><div class='description'><div class='short'>Get the reference to the current class from which this object was instantiated. ...</div><div class='long'><p>Get the reference to the current class from which this object was instantiated. Unlike <a href=\"#!/api/Ext.Base-method-statics\" rel=\"Ext.Base-method-statics\" class=\"docClass\">statics</a>,\n<code>this.self</code> is scope-dependent and it's meant to be used for dynamic inheritance. See <a href=\"#!/api/Ext.Base-method-statics\" rel=\"Ext.Base-method-statics\" class=\"docClass\">statics</a>\nfor a detailed comparison</p>\n\n<pre><code>Ext.define('My.Cat', {\n    statics: {\n        speciesName: 'Cat' // My.Cat.speciesName = 'Cat'\n    },\n\n    constructor: function() {\n        alert(this.self.speciesName); / dependentOL on 'this'\n\n        return this;\n    },\n\n    clone: function() {\n        return new this.self();\n    }\n});\n\n\nExt.define('My.SnowLeopard', {\n    extend: 'My.Cat',\n    statics: {\n        speciesName: 'Snow Leopard'         // My.SnowLeopard.speciesName = 'Snow Leopard'\n    }\n});\n\nvar cat = new My.Cat();                     // alerts 'Cat'\nvar snowLeopard = new My.SnowLeopard();     // alerts 'Snow Leopard'\n\nvar clone = snowLeopard.clone();\nalert(Ext.getClassName(clone));             // alerts 'My.SnowLeopard'\n</code></pre>\n</div></div></div><div id='property-vthresh' class='member  not-inherited'><a href='#' class='side expandable'><span>&nbsp;</span></a><div class='title'><div class='meta'><a href='#!/api/Ext.dd.ScrollManager' rel='Ext.dd.ScrollManager' class='definedIn docClass'>Ext.dd.ScrollManager</a><br/><a href='source/ScrollManager.html#Ext-dd-ScrollManager-property-vthresh' target='_blank' class='viewSource'>view source</a></div><a href='#!/api/Ext.dd.ScrollManager-property-vthresh' class='name not-expandable'>vthresh</a><span> : <a href=\"#!/api/Number\" rel=\"Number\" class=\"docClass\">Number</a></span></div><div class='description'><div class='short'><p>The number of pixels from the top or bottom edge of a container the pointer needs to be to\ntrigger scrolling</p>\n</div><div class='long'><p>The number of pixels from the top or bottom edge of a container the pointer needs to be to\ntrigger scrolling</p>\n</div></div></div></div></div><div id='m-method'><div class='definedBy'>Defined By</div><h3 class='members-title'>Methods</h3><div class='subsection'><div id='method-getInitialConfig' class='member first-child inherited'><a href='#' class='side expandable'><span>&nbsp;</span></a><div class='title'><div class='meta'><a href='#!/api/Ext.Base' rel='Ext.Base' class='definedIn docClass'>Ext.Base</a><br/><a href='source/Base3.html#Ext-Base-method-getInitialConfig' target='_blank' class='viewSource'>view source</a></div><a href='#!/api/Ext.Base-method-getInitialConfig' class='name expandable'>getInitialConfig</a>( <span class='pre'><a href=\"#!/api/Object\" rel=\"Object\" class=\"docClass\">Object</a> name</span> )</div><div class='description'><div class='short'> ...</div><div class='long'>\n<h3 class=\"pa\">Parameters</h3><ul><li><span class='pre'>name</span> : <a href=\"#!/api/Object\" rel=\"Object\" class=\"docClass\">Object</a><div class='sub-desc'>\n</div></li></ul></div></div></div><div id='method-initConfig' class='member  inherited'><a href='#' class='side expandable'><span>&nbsp;</span></a><div class='title'><div class='meta'><a href='#!/api/Ext.Base' rel='Ext.Base' class='definedIn docClass'>Ext.Base</a><br/><a href='source/Base3.html#Ext-Base-method-initConfig' target='_blank' class='viewSource'>view source</a></div><a href='#!/api/Ext.Base-method-initConfig' class='name expandable'>initConfig</a>( <span class='pre'><a href=\"#!/api/Object\" rel=\"Object\" class=\"docClass\">Object</a> config</span> ) : <a href=\"#!/api/Object\" rel=\"Object\" class=\"docClass\">Object</a><strong class='protected-signature'>protected</strong></div><div class='description'><div class='short'>Initialize configuration for this class. ...</div><div class='long'><p>Initialize configuration for this class. a typical example:</p>\n\n<pre><code>Ext.define('My.awesome.Class', {\n    // The default config\n    config: {\n        name: 'Awesome',\n        isAwesome: true\n    },\n\n    constructor: function(config) {\n        this.initConfig(config);\n\n        return this;\n    }\n});\n\nvar awesome = new My.awesome.Class({\n    name: 'Super Awesome'\n});\n\nalert(awesome.getName()); // 'Super Awesome'\n</code></pre>\n<h3 class=\"pa\">Parameters</h3><ul><li><span class='pre'>config</span> : <a href=\"#!/api/Object\" rel=\"Object\" class=\"docClass\">Object</a><div class='sub-desc'>\n</div></li></ul><h3 class='pa'>Returns</h3><ul><li><span class='pre'><a href=\"#!/api/Object\" rel=\"Object\" class=\"docClass\">Object</a></span><div class='sub-desc'><p>mixins The mixin prototypes as key - value pairs</p>\n</div></li></ul></div></div></div><div id='method-refreshCache' class='member  not-inherited'><a href='#' class='side expandable'><span>&nbsp;</span></a><div class='title'><div class='meta'><a href='#!/api/Ext.dd.ScrollManager' rel='Ext.dd.ScrollManager' class='definedIn docClass'>Ext.dd.ScrollManager</a><br/><a href='source/ScrollManager.html#Ext-dd-ScrollManager-method-refreshCache' target='_blank' class='viewSource'>view source</a></div><a href='#!/api/Ext.dd.ScrollManager-method-refreshCache' class='name expandable'>refreshCache</a>( <span class='pre'></span> )</div><div class='description'><div class='short'>Manually trigger a cache refresh. ...</div><div class='long'><p>Manually trigger a cache refresh.</p>\n</div></div></div><div id='method-register' class='member  not-inherited'><a href='#' class='side expandable'><span>&nbsp;</span></a><div class='title'><div class='meta'><a href='#!/api/Ext.dd.ScrollManager' rel='Ext.dd.ScrollManager' class='definedIn docClass'>Ext.dd.ScrollManager</a><br/><a href='source/ScrollManager.html#Ext-dd-ScrollManager-method-register' target='_blank' class='viewSource'>view source</a></div><a href='#!/api/Ext.dd.ScrollManager-method-register' class='name expandable'>register</a>( <span class='pre'><a href=\"#!/api/String\" rel=\"String\" class=\"docClass\">String</a>/HTMLElement/<a href=\"#!/api/Ext.dom.Element\" rel=\"Ext.dom.Element\" class=\"docClass\">Ext.Element</a>/<a href=\"#!/api/String\" rel=\"String\" class=\"docClass\">String</a>[]/HTMLElement[]/<a href=\"#!/api/Ext.dom.Element\" rel=\"Ext.dom.Element\" class=\"docClass\">Ext.Element</a>[] el</span> )</div><div class='description'><div class='short'>Registers new overflow element(s) to auto scroll ...</div><div class='long'><p>Registers new overflow element(s) to auto scroll</p>\n<h3 class=\"pa\">Parameters</h3><ul><li><span class='pre'>el</span> : <a href=\"#!/api/String\" rel=\"String\" class=\"docClass\">String</a>/HTMLElement/<a href=\"#!/api/Ext.dom.Element\" rel=\"Ext.dom.Element\" class=\"docClass\">Ext.Element</a>/<a href=\"#!/api/String\" rel=\"String\" class=\"docClass\">String</a>[]/HTMLElement[]/<a href=\"#!/api/Ext.dom.Element\" rel=\"Ext.dom.Element\" class=\"docClass\">Ext.Element</a>[]<div class='sub-desc'><p>The id of or the element to be scrolled or an array of either</p>\n</div></li></ul></div></div></div><div id='method-statics' class='member  inherited'><a href='#' class='side expandable'><span>&nbsp;</span></a><div class='title'><div class='meta'><a href='#!/api/Ext.Base' rel='Ext.Base' class='definedIn docClass'>Ext.Base</a><br/><a href='source/Base3.html#Ext-Base-method-statics' target='_blank' class='viewSource'>view source</a></div><a href='#!/api/Ext.Base-method-statics' class='name expandable'>statics</a>( <span class='pre'></span> ) : <a href=\"#!/api/Ext.Class\" rel=\"Ext.Class\" class=\"docClass\">Ext.Class</a><strong class='protected-signature'>protected</strong></div><div class='description'><div class='short'>Get the reference to the class from which this object was instantiated. ...</div><div class='long'><p>Get the reference to the class from which this object was instantiated. Note that unlike <a href=\"#!/api/Ext.Base-property-self\" rel=\"Ext.Base-property-self\" class=\"docClass\">self</a>,\n<code>this.statics()</code> is scope-independent and it always returns the class from which it was called, regardless of what\n<code>this</code> points to during run-time</p>\n\n<pre><code>Ext.define('My.Cat', {\n    statics: {\n        totalCreated: 0,\n        speciesName: 'Cat' // My.Cat.speciesName = 'Cat'\n    },\n\n    constructor: function() {\n        var statics = this.statics();\n\n        alert(statics.speciesName);     // always equals to 'Cat' no matter what 'this' refers to\n                                        // equivalent to: My.Cat.speciesName\n\n        alert(this.self.speciesName);   // dependent on 'this'\n\n        statics.totalCreated++;\n\n        return this;\n    },\n\n    clone: function() {\n        var cloned = new this.self;                      // dependent on 'this'\n\n        cloned.groupName = this.statics().speciesName;   // equivalent to: My.Cat.speciesName\n\n        return cloned;\n    }\n});\n\n\nExt.define('My.SnowLeopard', {\n    extend: 'My.Cat',\n\n    statics: {\n        speciesName: 'Snow Leopard'     // My.SnowLeopard.speciesName = 'Snow Leopard'\n    },\n\n    constructor: function() {\n        this.callParent();\n    }\n});\n\nvar cat = new My.Cat();                 // alerts 'Cat', then alerts 'Cat'\n\nvar snowLeopard = new My.SnowLeopard(); // alerts 'Cat', then alerts 'Snow Leopard'\n\nvar clone = snowLeopard.clone();\nalert(Ext.getClassName(clone));         // alerts 'My.SnowLeopard'\nalert(clone.groupName);                 // alerts 'Cat'\n\nalert(My.Cat.totalCreated);             // alerts 3\n</code></pre>\n<h3 class='pa'>Returns</h3><ul><li><span class='pre'><a href=\"#!/api/Ext.Class\" rel=\"Ext.Class\" class=\"docClass\">Ext.Class</a></span><div class='sub-desc'>\n</div></li></ul></div></div></div><div id='method-unregister' class='member  not-inherited'><a href='#' class='side expandable'><span>&nbsp;</span></a><div class='title'><div class='meta'><a href='#!/api/Ext.dd.ScrollManager' rel='Ext.dd.ScrollManager' class='definedIn docClass'>Ext.dd.ScrollManager</a><br/><a href='source/ScrollManager.html#Ext-dd-ScrollManager-method-unregister' target='_blank' class='viewSource'>view source</a></div><a href='#!/api/Ext.dd.ScrollManager-method-unregister' class='name expandable'>unregister</a>( <span class='pre'><a href=\"#!/api/String\" rel=\"String\" class=\"docClass\">String</a>/HTMLElement/<a href=\"#!/api/Ext.dom.Element\" rel=\"Ext.dom.Element\" class=\"docClass\">Ext.Element</a>/<a href=\"#!/api/String\" rel=\"String\" class=\"docClass\">String</a>[]/HTMLElement[]/<a href=\"#!/api/Ext.dom.Element\" rel=\"Ext.dom.Element\" class=\"docClass\">Ext.Element</a>[] el</span> )</div><div class='description'><div class='short'>Unregisters overflow element(s) so they are no longer scrolled ...</div><div class='long'><p>Unregisters overflow element(s) so they are no longer scrolled</p>\n<h3 class=\"pa\">Parameters</h3><ul><li><span class='pre'>el</span> : <a href=\"#!/api/String\" rel=\"String\" class=\"docClass\">String</a>/HTMLElement/<a href=\"#!/api/Ext.dom.Element\" rel=\"Ext.dom.Element\" class=\"docClass\">Ext.Element</a>/<a href=\"#!/api/String\" rel=\"String\" class=\"docClass\">String</a>[]/HTMLElement[]/<a href=\"#!/api/Ext.dom.Element\" rel=\"Ext.dom.Element\" class=\"docClass\">Ext.Element</a>[]<div class='sub-desc'><p>The id of or the element to be removed or an array of either</p>\n</div></li></ul></div></div></div></div></div></div></div>","allMixins":[],"meta":{},"requires":["Ext.dd.DragDropManager"],"deprecated":null,"extends":"Ext.Base","inheritable":false,"static":false,"superclasses":["Ext.Base","Ext.dd.ScrollManager"],"protected":false,"singleton":true,"code_type":"ext_define","alias":null,"members":{"property":[{"owner":"Ext.dd.ScrollManager","tagname":"property","deprecated":null,"static":false,"protected":false,"template":null,"required":null,"name":"animDuration","id":"property-animDuration"},{"owner":"Ext.dd.ScrollManager","tagname":"property","deprecated":null,"static":false,"protected":false,"template":null,"required":null,"name":"animate","id":"property-animate"},{"owner":"Ext.Base","tagname":"property","deprecated":{"doc":null,"tagname":"deprecated","text":"<p>as of 4.1. Use <a href=\"#!/api/Ext.Base-property-callParent\" rel=\"Ext.Base-property-callParent\" class=\"docClass\">callParent</a> instead.</p>\n","version":null},"static":false,"protected":true,"template":null,"required":null,"name":"callOverridden","id":"property-callOverridden"},{"owner":"Ext.Base","tagname":"property","deprecated":null,"static":false,"protected":true,"template":null,"required":null,"name":"callParent","id":"property-callParent"},{"owner":"Ext.dd.ScrollManager","tagname":"property","deprecated":null,"static":false,"protected":false,"template":null,"required":null,"name":"ddGroup","id":"property-ddGroup"},{"owner":"Ext.dd.ScrollManager","tagname":"property","deprecated":null,"static":false,"protected":false,"template":null,"required":null,"name":"frequency","id":"property-frequency"},{"owner":"Ext.dd.ScrollManager","tagname":"property","deprecated":null,"static":false,"protected":false,"template":null,"required":null,"name":"hthresh","id":"property-hthresh"},{"owner":"Ext.dd.ScrollManager","tagname":"property","deprecated":null,"static":false,"protected":false,"template":null,"required":null,"name":"increment","id":"property-increment"},{"owner":"Ext.Base","tagname":"property","deprecated":null,"static":false,"protected":true,"template":null,"required":null,"name":"self","id":"property-self"},{"owner":"Ext.dd.ScrollManager","tagname":"property","deprecated":null,"static":false,"protected":false,"template":null,"required":null,"name":"vthresh","id":"property-vthresh"}],"css_var":[],"css_mixin":[],"method":[{"owner":"Ext.Base","tagname":"method","deprecated":null,"static":false,"protected":false,"template":false,"required":null,"name":"getInitialConfig","id":"method-getInitialConfig"},{"owner":"Ext.Base","tagname":"method","deprecated":null,"static":false,"protected":true,"template":false,"required":null,"name":"initConfig","id":"method-initConfig"},{"owner":"Ext.dd.ScrollManager","tagname":"method","deprecated":null,"static":false,"protected":false,"template":false,"required":null,"name":"refreshCache","id":"method-refreshCache"},{"owner":"Ext.dd.ScrollManager","tagname":"method","deprecated":null,"static":false,"protected":false,"template":false,"required":null,"name":"register","id":"method-register"},{"owner":"Ext.Base","tagname":"method","deprecated":null,"static":false,"protected":true,"template":false,"required":null,"name":"statics","id":"method-statics"},{"owner":"Ext.dd.ScrollManager","tagname":"method","deprecated":null,"static":false,"protected":false,"template":false,"required":null,"name":"unregister","id":"method-unregister"}],"cfg":[],"event":[]},"statics":{"property":[],"css_var":[],"method":[],"css_mixin":[],"cfg":[],"event":[]},"subclasses":[],"uses":[],"private":false,"name":"Ext.dd.ScrollManager","mixins":[],"id":"class-Ext.dd.ScrollManager","component":false,"alternateClassNames":[],"files":[{"href":"ScrollManager.html#Ext-dd-ScrollManager","filename":"ScrollManager.js"}]});
+Ext.data.JsonP.Ext_dd_ScrollManager({
+  "mixedInto": [
+
+  ],
+  "superclasses": [
+    "Ext.Base"
+  ],
+  "inheritable": false,
+  "subclasses": [
+
+  ],
+  "deprecated": null,
+  "allMixins": [
+
+  ],
+  "href": "ScrollManager.html#Ext-dd-ScrollManager",
+  "members": {
+    "cfg": [
+
+    ],
+    "method": [
+      {
+        "inheritable": false,
+        "deprecated": null,
+        "params": [
+          {
+            "type": "Array/Arguments",
+            "optional": false,
+            "doc": "<p>The arguments, either an array or the <code>arguments</code> object</p>\n",
+            "name": "args"
+          }
+        ],
+        "href": "Base3.html#Ext-Base-method-callOverridden",
+        "return": {
+          "type": "Mixed",
+          "doc": "<p>Returns the result after calling the overridden method</p>\n"
+        },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
+        "private": false,
+        "shortDoc": "Call the original method that was previously overridden with Ext.Base.override\n\nExt.define('My.Cat', {\n    constructo...",
+        "static": false,
+        "name": "callOverridden",
+        "owner": "Ext.Base",
+        "doc": "<p>Call the original method that was previously overridden with Ext.Base.override</p>\n\n<pre><code>Ext.define('My.Cat', {\n    constructor: function() {\n        alert(\"I'm a cat!\");\n\n        return this;\n    }\n});\n\nMy.Cat.override({\n    constructor: function() {\n        alert(\"I'm going to be a cat!\");\n\n        var instance = this.callOverridden();\n\n        alert(\"Meeeeoooowwww\");\n\n        return instance;\n    }\n});\n\nvar kitty = new My.Cat(); // alerts \"I'm going to be a cat!\"\n                          // alerts \"I'm a cat!\"\n                          // alerts \"Meeeeoooowwww\"\n</code></pre>\n",
+        "linenr": 269,
+        "html_filename": "Base3.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
+        "params": [
+          {
+            "type": "Array/Arguments",
+            "optional": false,
+            "doc": "<p>The arguments, either an array or the <code>arguments</code> object\nfrom the current method, for example: <code>this.callParent(arguments)</code></p>\n",
+            "name": "args"
+          }
+        ],
+        "href": "Base3.html#Ext-Base-method-callParent",
+        "return": {
+          "type": "Mixed",
+          "doc": "<p>Returns the result from the superclass' method</p>\n"
+        },
+        "protected": true,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
+        "private": false,
+        "shortDoc": "Call the parent's overridden method. ...",
+        "static": false,
+        "name": "callParent",
+        "owner": "Ext.Base",
+        "doc": "<p>Call the parent's overridden method. For example:</p>\n\n<pre><code>Ext.define('My.own.A', {\n    constructor: function(test) {\n        alert(test);\n    }\n});\n\nExt.define('My.own.B', {\n    extend: 'My.own.A',\n\n    constructor: function(test) {\n        alert(test);\n\n        this.callParent([test + 1]);\n    }\n});\n\nExt.define('My.own.C', {\n    extend: 'My.own.B',\n\n    constructor: function() {\n        alert(\"Going to call parent's overriden constructor...\");\n\n        this.callParent(arguments);\n    }\n});\n\nvar a = new My.own.A(1); // alerts '1'\nvar b = new My.own.B(1); // alerts '1', then alerts '2'\nvar c = new My.own.C(2); // alerts \"Going to call parent's overriden constructor...\"\n                         // alerts '2', then alerts '3'\n</code></pre>\n",
+        "linenr": 124,
+        "html_filename": "Base3.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
+        "params": [
+
+        ],
+        "href": "Base3.html#Ext-Base-method-getName",
+        "return": {
+          "type": "String",
+          "doc": "<p>className</p>\n"
+        },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
+        "private": false,
+        "shortDoc": "Get the current class' name in string format. ...",
+        "static": false,
+        "name": "getName",
+        "owner": "Ext.Base",
+        "doc": "<p>Get the current class' name in string format.</p>\n\n<pre><code>Ext.define('My.cool.Class', {\n    constructor: function() {\n        alert(this.self.getName()); // alerts 'My.cool.Class'\n    }\n});\n\nMy.cool.Class.getName(); // 'My.cool.Class'\n</code></pre>\n",
+        "linenr": 631,
+        "html_filename": "Base3.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
+        "params": [
+          {
+            "type": "Object",
+            "optional": false,
+            "doc": "\n",
+            "name": "config"
+          }
+        ],
+        "href": "Base3.html#Ext-Base-method-initConfig",
+        "return": {
+          "type": "Object",
+          "doc": "<p>mixins The mixin prototypes as key - value pairs</p>\n"
+        },
+        "protected": true,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
+        "private": false,
+        "shortDoc": "Initialize configuration for this class. ...",
+        "static": false,
+        "name": "initConfig",
+        "owner": "Ext.Base",
+        "doc": "<p>Initialize configuration for this class. a typical example:</p>\n\n<pre><code>Ext.define('My.awesome.Class', {\n    // The default config\n    config: {\n        name: 'Awesome',\n        isAwesome: true\n    },\n\n    constructor: function(config) {\n        this.initConfig(config);\n\n        return this;\n    }\n});\n\nvar awesome = new My.awesome.Class({\n    name: 'Super Awesome'\n});\n\nalert(awesome.getName()); // 'Super Awesome'\n</code></pre>\n",
+        "linenr": 63,
+        "html_filename": "Base3.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
+        "params": [
+
+        ],
+        "href": "ScrollManager.html#Ext-dd-ScrollManager-method-refreshCache",
+        "return": {
+          "type": "void",
+          "doc": "\n"
+        },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/ScrollManager.js",
+        "private": false,
+        "shortDoc": "Manually trigger a cache refresh. ...",
+        "static": false,
+        "name": "refreshCache",
+        "owner": "Ext.dd.ScrollManager",
+        "doc": "<p>Manually trigger a cache refresh.</p>\n",
+        "linenr": 211,
+        "html_filename": "ScrollManager.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
+        "params": [
+          {
+            "type": "Mixed/Array",
+            "optional": false,
+            "doc": "<p>The id of or the element to be scrolled or an array of either</p>\n",
+            "name": "el"
+          }
+        ],
+        "href": "ScrollManager.html#Ext-dd-ScrollManager-method-register",
+        "return": {
+          "type": "void",
+          "doc": "\n"
+        },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/ScrollManager.js",
+        "private": false,
+        "shortDoc": "Registers new overflow element(s) to auto scroll ...",
+        "static": false,
+        "name": "register",
+        "owner": "Ext.dd.ScrollManager",
+        "doc": "<p>Registers new overflow element(s) to auto scroll</p>\n",
+        "linenr": 136,
+        "html_filename": "ScrollManager.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
+        "params": [
+
+        ],
+        "href": "Base3.html#Ext-Base-method-statics",
+        "return": {
+          "type": "Class",
+          "doc": "\n"
+        },
+        "protected": true,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
+        "private": false,
+        "shortDoc": "Get the reference to the class from which this object was instantiated. ...",
+        "static": false,
+        "name": "statics",
+        "owner": "Ext.Base",
+        "doc": "<p>Get the reference to the class from which this object was instantiated. Note that unlike <a href=\"#/api/Ext.Base-property-self\" rel=\"Ext.Base-property-self\" class=\"docClass\">Ext.Base.self</a>,\n<code>this.statics()</code> is scope-independent and it always returns the class from which it was called, regardless of what\n<code>this</code> points to during run-time</p>\n\n<pre><code>Ext.define('My.Cat', {\n    statics: {\n        totalCreated: 0,\n        speciesName: 'Cat' // My.Cat.speciesName = 'Cat'\n    },\n\n    constructor: function() {\n        var statics = this.statics();\n\n        alert(statics.speciesName);     // always equals to 'Cat' no matter what 'this' refers to\n                                        // equivalent to: My.Cat.speciesName\n\n        alert(this.self.speciesName);   // dependent on 'this'\n\n        statics.totalCreated++;\n\n        return this;\n    },\n\n    clone: function() {\n        var cloned = new this.self;                      // dependent on 'this'\n\n        cloned.groupName = this.statics().speciesName;   // equivalent to: My.Cat.speciesName\n\n        return cloned;\n    }\n});\n\n\nExt.define('My.SnowLeopard', {\n    extend: 'My.Cat',\n\n    statics: {\n        speciesName: 'Snow Leopard'     // My.SnowLeopard.speciesName = 'Snow Leopard'\n    },\n\n    constructor: function() {\n        this.callParent();\n    }\n});\n\nvar cat = new My.Cat();                 // alerts 'Cat', then alerts 'Cat'\n\nvar snowLeopard = new My.SnowLeopard(); // alerts 'Cat', then alerts 'Snow Leopard'\n\nvar clone = snowLeopard.clone();\nalert(Ext.getClassName(clone));         // alerts 'My.SnowLeopard'\nalert(clone.groupName);                 // alerts 'Cat'\n\nalert(My.Cat.totalCreated);             // alerts 3\n</code></pre>\n",
+        "linenr": 199,
+        "html_filename": "Base3.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
+        "params": [
+          {
+            "type": "Mixed/Array",
+            "optional": false,
+            "doc": "<p>The id of or the element to be removed or an array of either</p>\n",
+            "name": "el"
+          }
+        ],
+        "href": "ScrollManager.html#Ext-dd-ScrollManager-method-unregister",
+        "return": {
+          "type": "void",
+          "doc": "\n"
+        },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/ScrollManager.js",
+        "private": false,
+        "shortDoc": "Unregisters overflow element(s) so they are no longer scrolled ...",
+        "static": false,
+        "name": "unregister",
+        "owner": "Ext.dd.ScrollManager",
+        "doc": "<p>Unregisters overflow element(s) so they are no longer scrolled</p>\n",
+        "linenr": 151,
+        "html_filename": "ScrollManager.html"
+      }
+    ],
+    "event": [
+
+    ],
+    "css_var": [
+
+    ],
+    "css_mixin": [
+
+    ],
+    "property": [
+      {
+        "inheritable": false,
+        "type": "Number",
+        "deprecated": null,
+        "href": "ScrollManager.html#Ext-dd-ScrollManager-property-animDuration",
+        "protected": false,
+        "tagname": "property",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/ScrollManager.js",
+        "private": false,
+        "static": false,
+        "name": "animDuration",
+        "owner": "Ext.dd.ScrollManager",
+        "doc": "<p>The animation duration in seconds -\nMUST BE less than Ext.dd.ScrollManager.frequency! (defaults to .4)</p>\n",
+        "linenr": 197,
+        "html_filename": "ScrollManager.html"
+      },
+      {
+        "inheritable": false,
+        "type": "Boolean",
+        "deprecated": null,
+        "href": "ScrollManager.html#Ext-dd-ScrollManager-property-animate",
+        "protected": false,
+        "tagname": "property",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/ScrollManager.js",
+        "private": false,
+        "static": false,
+        "name": "animate",
+        "owner": "Ext.dd.ScrollManager",
+        "doc": "<p>True to animate the scroll (defaults to true)</p>\n",
+        "linenr": 191,
+        "html_filename": "ScrollManager.html"
+      },
+      {
+        "inheritable": false,
+        "type": "String",
+        "deprecated": null,
+        "href": "ScrollManager.html#Ext-dd-ScrollManager-property-ddGroup",
+        "protected": false,
+        "tagname": "property",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/ScrollManager.js",
+        "private": false,
+        "shortDoc": "The named drag drop group to which this container belongs (defaults to undefined). ...",
+        "static": false,
+        "name": "ddGroup",
+        "owner": "Ext.dd.ScrollManager",
+        "doc": "<p>The named drag drop <a href=\"#/api/Ext.dd.DragSource-cfg-ddGroup\" rel=\"Ext.dd.DragSource-cfg-ddGroup\" class=\"docClass\">group</a> to which this container belongs (defaults to undefined).\nIf a ddGroup is specified, then container scrolling will only occur when a dragged object is in the same ddGroup.</p>\n",
+        "linenr": 204,
+        "html_filename": "ScrollManager.html"
+      },
+      {
+        "inheritable": false,
+        "type": "Number",
+        "deprecated": null,
+        "href": "ScrollManager.html#Ext-dd-ScrollManager-property-frequency",
+        "protected": false,
+        "tagname": "property",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/ScrollManager.js",
+        "private": false,
+        "static": false,
+        "name": "frequency",
+        "owner": "Ext.dd.ScrollManager",
+        "doc": "<p>The frequency of scrolls in milliseconds (defaults to 500)</p>\n",
+        "linenr": 185,
+        "html_filename": "ScrollManager.html"
+      },
+      {
+        "inheritable": false,
+        "type": "Number",
+        "deprecated": null,
+        "href": "ScrollManager.html#Ext-dd-ScrollManager-property-hthresh",
+        "protected": false,
+        "tagname": "property",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/ScrollManager.js",
+        "private": false,
+        "shortDoc": "The number of pixels from the right or left edge of a container the pointer needs to be to\ntrigger scrolling (default...",
+        "static": false,
+        "name": "hthresh",
+        "owner": "Ext.dd.ScrollManager",
+        "doc": "<p>The number of pixels from the right or left edge of a container the pointer needs to be to\ntrigger scrolling (defaults to 25)</p>\n",
+        "linenr": 172,
+        "html_filename": "ScrollManager.html"
+      },
+      {
+        "inheritable": false,
+        "type": "Number",
+        "deprecated": null,
+        "href": "ScrollManager.html#Ext-dd-ScrollManager-property-increment",
+        "protected": false,
+        "tagname": "property",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/ScrollManager.js",
+        "private": false,
+        "static": false,
+        "name": "increment",
+        "owner": "Ext.dd.ScrollManager",
+        "doc": "<p>The number of pixels to scroll in each scroll increment (defaults to 100)</p>\n",
+        "linenr": 179,
+        "html_filename": "ScrollManager.html"
+      },
+      {
+        "inheritable": false,
+        "type": "Class",
+        "deprecated": null,
+        "href": "Base3.html#Ext-Base-property-self",
+        "protected": true,
+        "tagname": "property",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
+        "private": false,
+        "shortDoc": "Get the reference to the current class from which this object was instantiated. ...",
+        "static": false,
+        "name": "self",
+        "owner": "Ext.Base",
+        "doc": "<p>Get the reference to the current class from which this object was instantiated. Unlike <a href=\"#/api/Ext.Base-method-statics\" rel=\"Ext.Base-method-statics\" class=\"docClass\">Ext.Base.statics</a>,\n<code>this.self</code> is scope-dependent and it's meant to be used for dynamic inheritance. See <a href=\"#/api/Ext.Base-method-statics\" rel=\"Ext.Base-method-statics\" class=\"docClass\">Ext.Base.statics</a>\nfor a detailed comparison</p>\n\n<pre><code>Ext.define('My.Cat', {\n    statics: {\n        speciesName: 'Cat' // My.Cat.speciesName = 'Cat'\n    },\n\n    constructor: function() {\n        alert(this.self.speciesName); / dependent on 'this'\n\n        return this;\n    },\n\n    clone: function() {\n        return new this.self();\n    }\n});\n\n\nExt.define('My.SnowLeopard', {\n    extend: 'My.Cat',\n    statics: {\n        speciesName: 'Snow Leopard'         // My.SnowLeopard.speciesName = 'Snow Leopard'\n    }\n});\n\nvar cat = new My.Cat();                     // alerts 'Cat'\nvar snowLeopard = new My.SnowLeopard();     // alerts 'Snow Leopard'\n\nvar clone = snowLeopard.clone();\nalert(Ext.getClassName(clone));             // alerts 'My.SnowLeopard'\n</code></pre>\n",
+        "linenr": 18,
+        "html_filename": "Base3.html"
+      },
+      {
+        "inheritable": false,
+        "type": "Number",
+        "deprecated": null,
+        "href": "ScrollManager.html#Ext-dd-ScrollManager-property-vthresh",
+        "protected": false,
+        "tagname": "property",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/ScrollManager.js",
+        "private": false,
+        "shortDoc": "The number of pixels from the top or bottom edge of a container the pointer needs to be to\ntrigger scrolling (default...",
+        "static": false,
+        "name": "vthresh",
+        "owner": "Ext.dd.ScrollManager",
+        "doc": "<p>The number of pixels from the top or bottom edge of a container the pointer needs to be to\ntrigger scrolling (defaults to 25)</p>\n",
+        "linenr": 166,
+        "html_filename": "ScrollManager.html"
+      }
+    ]
+  },
+  "singleton": true,
+  "protected": false,
+  "tagname": "class",
+  "mixins": [
+
+  ],
+  "alias": null,
+  "author": null,
+  "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/ScrollManager.js",
+  "private": false,
+  "alternateClassNames": [
+
+  ],
+  "static": false,
+  "name": "Ext.dd.ScrollManager",
+  "doc": "<p>Provides automatic scrolling of overflow regions in the page during drag operations.</p>\n\n\n<p>The ScrollManager configs will be used as the defaults for any scroll container registered with it,\nbut you can also override most of the configs per scroll container by adding a\n<tt>ddScrollConfig</tt> object to the target element that contains these properties: <a href=\"#/api/Ext.dd.ScrollManager-property-hthresh\" rel=\"Ext.dd.ScrollManager-property-hthresh\" class=\"docClass\">hthresh</a>,\n<a href=\"#/api/Ext.dd.ScrollManager-property-vthresh\" rel=\"Ext.dd.ScrollManager-property-vthresh\" class=\"docClass\">vthresh</a>, <a href=\"#/api/Ext.dd.ScrollManager-property-increment\" rel=\"Ext.dd.ScrollManager-property-increment\" class=\"docClass\">increment</a> and <a href=\"#/api/Ext.dd.ScrollManager-property-frequency\" rel=\"Ext.dd.ScrollManager-property-frequency\" class=\"docClass\">frequency</a>.  Example usage:\n<pre><code>var el = Ext.get('scroll-ct');\nel.ddScrollConfig = {\n    vthresh: 50,\n    hthresh: -1,\n    frequency: 100,\n    increment: 200\n};\nExt.dd.ScrollManager.register(el);\n</code></pre>\n<b>Note: This class uses \"Point Mode\" and is untested in \"Intersect Mode\".</b>\n\n",
+  "docauthor": null,
+  "component": false,
+  "linenr": 1,
+  "xtypes": [
+
+  ],
+  "html_filename": "ScrollManager.html",
+  "statics": {
+    "cfg": [
+
+    ],
+    "method": [
+
+    ],
+    "event": [
+
+    ],
+    "css_var": [
+
+    ],
+    "css_mixin": [
+
+    ],
+    "property": [
+
+    ]
+  },
+  "extends": "Ext.Base"
+});

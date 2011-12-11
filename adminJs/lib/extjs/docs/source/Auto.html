@@ -3,8 +3,8 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>The source code</title>
-  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
-  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <link href="../prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../prettify/prettify.js"></script>
   <style type="text/css">
     .highlight { display: block; background-color: #ddd; }
   </style>
@@ -15,119 +15,83 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js"><span id='Ext-layout-component-Auto'>/**
-</span> * @class Ext.layout.component.Auto
- * @private
+  <pre class="prettyprint lang-js"><span id='Ext-layout-container-Auto'>/**
+</span> * @class Ext.layout.container.Auto
+ * @extends Ext.layout.container.Container
  *
- * &lt;p&gt;The AutoLayout is the default layout manager delegated by {@link Ext.Component} to
- * render any child Elements when no &lt;tt&gt;{@link Ext.container.Container#layout layout}&lt;/tt&gt; is configured.&lt;/p&gt;
+ * &lt;p&gt;The AutoLayout is the default layout manager delegated by {@link Ext.container.Container} to
+ * render any child Components when no &lt;tt&gt;{@link Ext.container.Container#layout layout}&lt;/tt&gt; is configured into
+ * a &lt;tt&gt;{@link Ext.container.Container Container}.&lt;/tt&gt;.  AutoLayout provides only a passthrough of any layout calls
+ * to any child containers.&lt;/p&gt;
+ * {@img Ext.layout.container.Auto/Ext.layout.container.Auto.png Ext.layout.container.Auto container layout}
+ * Example usage:
+ 	Ext.create('Ext.Panel', {
+		width: 500,
+		height: 280,
+		title: &quot;AutoLayout Panel&quot;,
+		layout: 'auto',
+		renderTo: document.body,
+		items: [{
+			xtype: 'panel',
+			title: 'Top Inner Panel',
+			width: '75%',
+			height: 90
+		},{
+			xtype: 'panel',
+			title: 'Bottom Inner Panel',
+			width: '75%',
+			height: 90
+		}]
+	});
  */
 
-Ext.define('Ext.layout.component.Auto', {
+Ext.define('Ext.layout.container.Auto', {
 
     /* Begin Definitions */
 
-    alias: 'layout.autocomponent',
+    alias: ['layout.auto', 'layout.autocontainer'],
 
-    extend: 'Ext.layout.component.Component',
+    extend: 'Ext.layout.container.Container',
 
     /* End Definitions */
 
-    type: 'autocomponent',
+    type: 'autocontainer',
 
-<span id='Ext-layout-component-Auto-property-setHeightInDom'>    /**
-</span>     * @private
-     * When publishing height of an auto Component, it is usually not written to the DOM.
-     * Setting this to &lt;code&gt;true&lt;/code&gt; overrides this behaviour.
-     */
-    setHeightInDom: false,
+    bindToOwnerCtComponent: true,
 
-    
-<span id='Ext-layout-component-Auto-property-setWidthInDom'>    /**
-</span>     * @private
-     * When publishing width of an auto Component, it is usually not written to the DOM.
-     * Setting this to &lt;code&gt;true&lt;/code&gt; overrides this behaviour.
-     */
-    setWidthInDom: false,
-
-    calculate: function(ownerContext) {
+    // @private
+    onLayout : function(owner, target) {
         var me = this,
-            measurement = me.measureAutoDimensions(ownerContext);
+            items = me.getLayoutItems(),
+            ln = items.length,
+            i;
 
-        if (measurement.gotWidth) {
-            me.publishOwnerWidth(ownerContext, measurement.contentWidth);
-        }
-        if (measurement.gotHeight) {
-            me.publishOwnerHeight(ownerContext, measurement.contentHeight);
-        }
-
-        if (!measurement.gotAll) {
-            me.done = false;
-        }
-    },
-
-    calculateOwnerHeightFromContentHeight: function (ownerContext, contentHeight) {
-        // OwnerContext padding is always added into contentHeight by all container layouts
-        // so we must subtract it when adding the frameInfo to calculate the Component height
-        // because frameInfo includes padding+framing+border
-        return contentHeight - ownerContext.getPaddingInfo().height + ownerContext.getFrameInfo().height;
-    },
-
-    calculateOwnerWidthFromContentWidth: function (ownerContext, contentWidth) {
-        // OwnerContext padding is always added into contentWidth by all container layouts
-        // so we must subtract it when adding the frameInfo to calculate the Component width
-        // because frameInfo includes padding+framing+border
-        return contentWidth - ownerContext.getPaddingInfo().width + ownerContext.getFrameInfo().width;
-    },
-
-    publishOwnerHeight: function (ownerContext, contentHeight) {
-        var me = this,
-            owner = me.owner,
-            height = me.calculateOwnerHeightFromContentHeight(ownerContext, contentHeight),
-            constrainedHeight, dirty;
-
-        if (isNaN(height)) {
-            me.done = false;
-        } else {
-            constrainedHeight = Ext.Number.constrain(height, owner.minHeight, owner.maxHeight);
-
-            if (constrainedHeight == height) {
-                dirty = me.setHeightInDom;
-            } else {
-                ownerContext.autoHeight = false;
-                ownerContext.heightAuthority = 1;
-                height = constrainedHeight;
-                // TODO: we might need to invalidate here...
+        // Ensure the Container is only primed with the clear element if there are child items.
+        if (ln) {
+            // Auto layout uses natural HTML flow to arrange the child items.
+            // To ensure that all browsers (I'm looking at you IE!) add the bottom margin of the last child to the
+            // containing element height, we create a zero-sized element with style clear:both to force a &quot;new line&quot;
+            if (!me.clearEl) {
+                me.clearEl = me.getRenderTarget().createChild({
+                    cls: Ext.baseCSSPrefix + 'clear',
+                    role: 'presentation'
+                });
             }
 
-            ownerContext.setHeight(height, dirty);
+            // Auto layout allows CSS to size its child items.
+            for (i = 0; i &lt; ln; i++) {
+                me.setItemSize(items[i]);
+            }
         }
     },
 
-    publishOwnerWidth: function (ownerContext, contentWidth) {
-        var me = this,
-            owner = me.owner,
-            width = me.calculateOwnerWidthFromContentWidth(ownerContext, contentWidth),
-            constrainedWidth, dirty;
+    configureItem: function(item) {
+        this.callParent(arguments);
 
-        if (isNaN(width)) {
-            me.done = false;
-        } else {
-            constrainedWidth = Ext.Number.constrain(width, owner.minWidth, owner.maxWidth);
-
-            if (constrainedWidth == width) {
-                dirty = me.setWidthInDom;
-            } else {
-                ownerContext.autoWidth = false;
-                ownerContext.widthAuthority = 1;
-                width = constrainedWidth;
-                // TODO: we might need to invalidate here...
-            }
-
-            ownerContext.setWidth(width, dirty);
-        }
+        // Auto layout does not manage any dimensions.
+        item.layoutManagedHeight = 2;
+        item.layoutManagedWidth = 2;
     }
-});
-</pre>
+});</pre>
 </body>
 </html>

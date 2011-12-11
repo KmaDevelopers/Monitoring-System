@@ -1,5 +1,20 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
  * @class Ext.view.BoundListKeyNav
+ * @extends Ext.util.KeyNav
  * A specialized {@link Ext.util.KeyNav} implementation for navigating a {@link Ext.view.BoundList} using
  * the keyboard. The up, down, pageup, pagedown, home, and end keys move the active highlight
  * through the list. The enter key invokes the selection model's select action using the highlighted item.
@@ -9,8 +24,9 @@ Ext.define('Ext.view.BoundListKeyNav', {
     requires: 'Ext.view.BoundList',
 
     /**
-     * @cfg {Ext.view.BoundList} boundList (required)
-     * The {@link Ext.view.BoundList} instance for which key navigation will be managed.
+     * @cfg {Ext.view.BoundList} boundList
+     * @required
+     * The {@link Ext.view.BoundList} instance for which key navigation will be managed. This is required.
      */
 
     constructor: function(el, config) {

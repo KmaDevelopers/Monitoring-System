@@ -1,47 +1,60 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
  * @class Ext.layout.container.Anchor
+ * @extends Ext.layout.container.Container
  * 
  * This is a layout that enables anchoring of contained elements relative to the container's dimensions.
  * If the container is resized, all anchored items are automatically rerendered according to their
- * `{@link #anchor}` rules.
+ * <b><tt>{@link #anchor}</tt></b> rules.
  *
- * This class is intended to be extended or created via the {@link Ext.container.AbstractContainer#layout layout}: 'anchor' 
- * config, and should generally not need to be created directly via the new keyword.
+ * This class is intended to be extended or created via the layout: 'anchor' {@link Ext.layout.container.AbstractContainer#layout}
+ * config, and should generally not need to be created directly via the new keyword.</p>
  * 
  * AnchorLayout does not have any direct config options (other than inherited ones). By default,
  * AnchorLayout will calculate anchor measurements based on the size of the container itself. However, the
- * container using the AnchorLayout can supply an anchoring-specific config property of `anchorSize`.
- *
+ * container using the AnchorLayout can supply an anchoring-specific config property of <b>anchorSize</b>.
  * If anchorSize is specifed, the layout will use it as a virtual container for the purposes of calculating
  * anchor measurements based on it instead, allowing the container to be sized independently of the anchoring
- * logic if necessary.
+ * logic if necessary.  
  *
- *     @example
+ * {@img Ext.layout.container.Anchor/Ext.layout.container.Anchor.png Ext.layout.container.Anchor container layout}
+ *
+ * For example:
  *     Ext.create('Ext.Panel', {
  *         width: 500,
  *         height: 400,
  *         title: "AnchorLayout Panel",
  *         layout: 'anchor',
  *         renderTo: Ext.getBody(),
- *         items: [
- *             {
- *                 xtype: 'panel',
- *                 title: '75% Width and 20% Height',
- *                 anchor: '75% 20%'
- *             },
- *             {
- *                 xtype: 'panel',
- *                 title: 'Offset -300 Width & -200 Height',
- *                 anchor: '-300 -200'		
- *             },
- *             {
- *                 xtype: 'panel',
- *                 title: 'Mixed Offset and Percent',
- *                 anchor: '-250 20%'
- *             }
- *         ]
+ *         items: [{
+ *             xtype: 'panel',
+ *             title: '75% Width and 20% Height',
+ *             anchor: '75% 20%'
+ *         },{
+ *             xtype: 'panel',
+ *             title: 'Offset -300 Width & -200 Height',
+ *             anchor: '-300 -200'		
+ *         },{
+ *             xtype: 'panel',
+ *             title: 'Mixed Offset and Percent',
+ *             anchor: '-250 20%'
+ *         }]
  *     });
  */
+
 Ext.define('Ext.layout.container.Anchor', {
 
     /* Begin Definitions */
@@ -52,74 +65,55 @@ Ext.define('Ext.layout.container.Anchor', {
 
     /* End Definitions */
 
-    type: 'anchor',
-
-    manageOverflow: 2,
-
-    renderTpl: [
-        '{%this.renderBody(out,values)%}',
-
-        // This layout uses natural HTML flow to arrange the child items. To ensure that
-        // all browsers (I'm looking at you IE!) add the bottom margin of the last child
-        // to the containing element height, we create a zero-sized element to force a
-        // "new line". If we add "clear:both" this causes IE6 to get extra margins and
-        // IE9 to eat the bottom margin.
-        // 
-        // Since we aren't floating our child elements, we don't really need (or want)
-        // the "clear:both" style. This causes strange results in IE at least now that
-        // we have the padder as well.
-        '<div role="presentation" style="clear:none;" class="',Ext.baseCSSPrefix,'clear"></div>',
-
-        '{%this.renderPadder(out,values)%}'
-    ],
-
     /**
      * @cfg {String} anchor
+     * <p>This configuation option is to be applied to <b>child <tt>items</tt></b> of a container managed by
+     * this layout (ie. configured with <tt>layout:'anchor'</tt>).</p><br/>
      *
-     * This configuation option is to be applied to **child `items`** of a container managed by
-     * this layout (ie. configured with `layout:'anchor'`).
-     *
-     * This value is what tells the layout how an item should be anchored to the container. `items`
-     * added to an AnchorLayout accept an anchoring-specific config property of **anchor** which is a string
+     * <p>This value is what tells the layout how an item should be anchored to the container. <tt>items</tt>
+     * added to an AnchorLayout accept an anchoring-specific config property of <b>anchor</b> which is a string
      * containing two values: the horizontal anchor value and the vertical anchor value (for example, '100% 50%').
-     * The following types of anchor values are supported:
+     * The following types of anchor values are supported:<div class="mdetail-params"><ul>
      *
-     * - **Percentage** : Any value between 1 and 100, expressed as a percentage.
+     * <li><b>Percentage</b> : Any value between 1 and 100, expressed as a percentage.<div class="sub-desc">
+     * The first anchor is the percentage width that the item should take up within the container, and the
+     * second is the percentage height.  For example:<pre><code>
+// two values specified
+anchor: '100% 50%' // render item complete width of the container and
+                   // 1/2 height of the container
+// one value specified
+anchor: '100%'     // the width value; the height will default to auto
+     * </code></pre></div></li>
      *
-     *   The first anchor is the percentage width that the item should take up within the container, and the
-     *   second is the percentage height.  For example:
+     * <li><b>Offsets</b> : Any positive or negative integer value.<div class="sub-desc">
+     * This is a raw adjustment where the first anchor is the offset from the right edge of the container,
+     * and the second is the offset from the bottom edge. For example:<pre><code>
+// two values specified
+anchor: '-50 -100' // render item the complete width of the container
+                   // minus 50 pixels and
+                   // the complete height minus 100 pixels.
+// one value specified
+anchor: '-50'      // anchor value is assumed to be the right offset value
+                   // bottom offset will default to 0
+     * </code></pre></div></li>
      *
-     *       // two values specified
-     *       anchor: '100% 50%' // render item complete width of the container and
-     *                          // 1/2 height of the container
-     *       // one value specified
-     *       anchor: '100%'     // the width value; the height will default to auto
+     * <li><b>Sides</b> : Valid values are <tt>'right'</tt> (or <tt>'r'</tt>) and <tt>'bottom'</tt>
+     * (or <tt>'b'</tt>).<div class="sub-desc">
+     * Either the container must have a fixed size or an anchorSize config value defined at render time in
+     * order for these to have any effect.</div></li>
      *
-     * - **Offsets** : Any positive or negative integer value.
+     * <li><b>Mixed</b> : <div class="sub-desc">
+     * Anchor values can also be mixed as needed.  For example, to render the width offset from the container
+     * right edge by 50 pixels and 75% of the container's height use:
+     * <pre><code>
+anchor: '-50 75%'
+     * </code></pre></div></li>
      *
-     *   This is a raw adjustment where the first anchor is the offset from the right edge of the container,
-     *   and the second is the offset from the bottom edge. For example:
      *
-     *       // two values specified
-     *       anchor: '-50 -100' // render item the complete width of the container
-     *                          // minus 50 pixels and
-     *                          // the complete height minus 100 pixels.
-     *       // one value specified
-     *       anchor: '-50'      // anchor value is assumed to be the right offset value
-     *                          // bottom offset will default to 0
-     *
-     * - **Sides** : Valid values are `right` (or `r`) and `bottom` (or `b`).
-     *
-     *   Either the container must have a fixed size or an anchorSize config value defined at render time in
-     *   order for these to have any effect.
-     *   
-     * - **Mixed** :
-     *
-     *   Anchor values can also be mixed as needed.  For example, to render the width offset from the container
-     *   right edge by 50 pixels and 75% of the container's height use:
-     *   
-     *       anchor:   '-50 75%'
+     * </ul></div>
      */
+
+    type: 'anchor',
 
     /**
      * @cfg {String} defaultAnchor
@@ -129,206 +123,134 @@ Ext.define('Ext.layout.container.Anchor', {
 
     parseAnchorRE: /^(r|right|b|bottom)$/i,
 
-    beginLayout: function (ownerContext) {
+    // private
+    onLayout: function() {
+        this.callParent(arguments);
+
         var me = this,
-            dimensions = 0,
-            anchorSpec, childContext, childItems, i, length, target;
+            size = me.getLayoutTargetSize(),
+            owner = me.owner,
+            target = me.getTarget(),
+            ownerWidth = size.width,
+            ownerHeight = size.height,
+            overflow = target.getStyle('overflow'),
+            components = me.getVisibleItems(owner),
+            len = components.length,
+            boxes = [],
+            box, newTargetSize, component, anchorSpec, calcWidth, calcHeight,
+            i, el, cleaner;
 
-        me.callParent(arguments);
-
-        childItems = ownerContext.childItems; // populated by callParent
-        length = childItems.length;
-
-        for (i = 0; i < length; ++i) {
-            childContext = childItems[i];
-            anchorSpec = childContext.target.anchorSpec;
-
-            if (anchorSpec) {
-                if (childContext.widthAuthority == 2 && anchorSpec.right) {
-                    dimensions |= 1;
-                }
-                if (childContext.heightAuthority == 2 && anchorSpec.bottom) {
-                    dimensions |= 2;
-                }
-
-                if (dimensions == 3) { // if (both dimensions in play)
-                    break;
-                }
-            }
+        if (ownerWidth < 20 && ownerHeight < 20) {
+            return;
         }
 
-        ownerContext.anchorDimensions = dimensions;
+        // Anchor layout uses natural HTML flow to arrange the child items.
+        // To ensure that all browsers (I'm looking at you IE!) add the bottom margin of the last child to the
+        // containing element height, we create a zero-sized element with style clear:both to force a "new line"
+        if (!me.clearEl) {
+            me.clearEl = target.createChild({
+                cls: Ext.baseCSSPrefix + 'clear',
+                role: 'presentation'
+            });
+        }
 
-        // Work around WebKit RightMargin bug. We're going to inline-block all the children
-        // only ONCE and remove it when we're done
-        if (!Ext.supports.RightMargin && !me.rightMarginCleanerFn) {
-            target = ownerContext.targetContext.el; // targetContext is added by superclass
-
-            me.rightMarginCleanerFn = Ext.Element.getRightMarginFixCleaner(target);
+        // Work around WebKit RightMargin bug. We're going to inline-block all the children only ONCE and remove it when we're done
+        if (!Ext.supports.RightMargin) {
+            cleaner = Ext.core.Element.getRightMarginFixCleaner(target);
             target.addCls(Ext.baseCSSPrefix + 'inline-children');
         }
 
-        //<debug>
-        me.sanityCheck(ownerContext);
-        //</debug>
-    },
+        for (i = 0; i < len; i++) {
+            component = components[i];
+            el = component.el;
 
-    calculate: function (ownerContext) {
-        var me = this,
-            containerSize = me.getContainerSize(ownerContext);
-
-        if (ownerContext.anchorDimensions !== ownerContext.state.calculatedAnchors) {
-            me.calculateAnchors(ownerContext, containerSize);
-        }
-
-        if (ownerContext.hasDomProp('containerChildrenDone')) {
-            // Once the child layouts are done we can determine the content sizes...
-
-            if (!containerSize.gotAll) {
-                me.done = false;
-            }
-
-            me.calculateContentSize(ownerContext, ownerContext.anchorDimensions);
-
-            if (me.done) {
-                me.calculateOverflow(ownerContext, containerSize, ownerContext.anchorDimensions);
-                return;
-            }
-        }
-
-        me.done = false;
-    },
-
-    calculateAnchors: function (ownerContext, containerSize) {
-        var me = this,
-            childItems = ownerContext.childItems,
-            length = childItems.length,
-            gotHeight = containerSize.gotHeight,
-            gotWidth = containerSize.gotWidth,
-            ownerHeight = containerSize.height,
-            ownerWidth = containerSize.width,
-            state = ownerContext.state,
-            calculatedAnchors = (gotWidth ? 1 : 0) | (gotHeight ? 2 : 0),
-            anchorSpec, childContext, childMargins, height, i, width;
-
-        state.calculatedAnchors = (state.calculatedAnchors || 0) | calculatedAnchors;
-
-        for (i = 0; i < length; i++) {
-            childContext = childItems[i];
-            childMargins = childContext.getMarginInfo();
-            anchorSpec = childContext.target.anchorSpec;
-
-            // Check widthAuthority in case "defaults" has applied an anchor to a component
-            // that also has width (which must win). If we did not make this check in this
-            // way, we would attempt to calculate a width where it had been configured.
-            //
-            if (gotWidth && childContext.widthAuthority == 2) {
-                width = anchorSpec.right(ownerWidth) - childMargins.width;
-                width = me.adjustWidthAnchor(width, childContext);
-
-                childContext.setWidth(width);
-            }
-
-            // Repeat for height
-            if (gotHeight && childContext.heightAuthority == 2) {
-                height = anchorSpec.bottom(ownerHeight) - childMargins.height;
-                height = me.adjustHeightAnchor(height, childContext);
-
-                childContext.setHeight(height);
-            }
-        }
-    },
-
-    finishedLayout: function (ownerContext) {
-        var cleanerFn = this.rightMarginCleanerFn;
-
-        if (cleanerFn) {
-            delete this.rightMarginCleanerFn;
-            ownerContext.targetContext.el.removeCls(Ext.baseCSSPrefix + 'inline-children');
-            cleanerFn();
-        }
-    },
-
-    //<debug>
-    sanityCheck: function (ownerContext) {
-        var autoWidth = ownerContext.autoWidth,
-            autoHeight = ownerContext.autoHeight,
-            children = ownerContext.childItems,
-            anchorSpec, comp, childContext;
-
-        for (var i = 0, length = children.length; i < length; ++i) {
-            childContext = children[i];
-            comp = childContext.target;
-            anchorSpec = comp.anchorSpec;
-
+            anchorSpec = component.anchorSpec;
             if (anchorSpec) {
-                if (childContext.widthAuthority == 2 && anchorSpec.right) {
-                    if (autoWidth) {
-                        Ext.log({
-                            level: 'warn',
-                            msg: 'Right anchor on '+comp.id+' in autoWidth container'
-                        });
-                    }
+                if (anchorSpec.right) {
+                    calcWidth = me.adjustWidthAnchor(anchorSpec.right(ownerWidth) - el.getMargin('lr'), component);
+                } else {
+                    calcWidth = undefined;
+                }
+                if (anchorSpec.bottom) {
+                    calcHeight = me.adjustHeightAnchor(anchorSpec.bottom(ownerHeight) - el.getMargin('tb'), component);
+                } else {
+                    calcHeight = undefined;
                 }
 
-                if (childContext.heightAuthority == 2 && anchorSpec.bottom) {
-                    if (autoHeight) {
-                        Ext.log({
-                            level: 'warn',
-                            msg: 'Bottom anchor on '+comp.id+' in autoHeight container'
-                        });
-                    }
-                }
+                boxes.push({
+                    component: component,
+                    anchor: true,
+                    width: calcWidth || undefined,
+                    height: calcHeight || undefined
+                });
+            } else {
+                boxes.push({
+                    component: component,
+                    anchor: false
+                });
             }
         }
+
+        // Work around WebKit RightMargin bug. We're going to inline-block all the children only ONCE and remove it when we're done
+        if (!Ext.supports.RightMargin) {
+            target.removeCls(Ext.baseCSSPrefix + 'inline-children');
+            cleaner();
+        }
+
+        for (i = 0; i < len; i++) {
+            box = boxes[i];
+            me.setItemSize(box.component, box.width, box.height);
+        }
+
+        if (overflow && overflow != 'hidden' && !me.adjustmentPass) {
+            newTargetSize = me.getLayoutTargetSize();
+            if (newTargetSize.width != size.width || newTargetSize.height != size.height) {
+                me.adjustmentPass = true;
+                me.onLayout();
+            }
+        }
+
+        delete me.adjustmentPass;
     },
-    //</debug>
 
     // private
-    anchorFactory: {
-        offset: function (delta) {
-            return function(v) {
-                return v + delta;
-            };
-        },
-        ratio: function (ratio) {
-            return function(v) {
-                return Math.floor(v * ratio);
-            };
-        },
-        standard: function (diff) {
-            return function(v) {
-                return v - diff;
-            };
-        }
-    },
-
     parseAnchor: function(a, start, cstart) {
         if (a && a != 'none') {
-            var factory = this.anchorFactory,
-                delta;
-
+            var ratio;
+            // standard anchor
             if (this.parseAnchorRE.test(a)) {
-                return factory.standard(cstart - start);
+                var diff = cstart - start;
+                return function(v) {
+                    return v - diff;
+                };
             }    
-            if (a.indexOf('%') != -1) {
-                return factory.ratio(parseFloat(a.replace('%', '')) * 0.01);
+            // percentage
+            else if (a.indexOf('%') != -1) {
+                ratio = parseFloat(a.replace('%', '')) * 0.01;
+                return function(v) {
+                    return Math.floor(v * ratio);
+                };
             }    
-            delta = parseInt(a, 10);
-            if (!isNaN(delta)) {
-                return factory.offset(delta);
+            // simple offset adjustment
+            else {
+                a = parseInt(a, 10);
+                if (!isNaN(a)) {
+                    return function(v) {
+                        return v + a;
+                    };
+                }
             }
         }
         return null;
     },
 
     // private
-    adjustWidthAnchor: function(value, childContext) {
+    adjustWidthAnchor: function(value, comp) {
         return value;
     },
 
     // private
-    adjustHeightAnchor: function(value, childContext) {
+    adjustHeightAnchor: function(value, comp) {
         return value;
     },
 
@@ -337,10 +259,9 @@ Ext.define('Ext.layout.container.Anchor', {
             owner = me.owner,
             anchor= item.anchor,
             anchorsArray,
+            anchorSpec,
             anchorWidth,
             anchorHeight;
-
-        me.callParent(arguments);
 
         if (!item.anchor && item.items && !Ext.isNumber(item.width) && !(Ext.isIE6 && Ext.isStrict)) {
             item.anchor = anchor = me.defaultAnchor;
@@ -350,11 +271,13 @@ Ext.define('Ext.layout.container.Anchor', {
         if (owner.anchorSize) {
             if (typeof owner.anchorSize == 'number') {
                 anchorWidth = owner.anchorSize;
-            } else {
+            }
+            else {
                 anchorWidth = owner.anchorSize.width;
                 anchorHeight = owner.anchorSize.height;
             }
-        } else {
+        }
+        else {
             anchorWidth = owner.initialConfig.width;
             anchorHeight = owner.initialConfig.height;
         }
@@ -362,49 +285,27 @@ Ext.define('Ext.layout.container.Anchor', {
         if (anchor) {
             // cache all anchor values
             anchorsArray = anchor.split(' ');
-            item.anchorSpec = {
+            item.anchorSpec = anchorSpec = {
                 right: me.parseAnchor(anchorsArray[0], item.initialConfig.width, anchorWidth),
                 bottom: me.parseAnchor(anchorsArray[1], item.initialConfig.height, anchorHeight)
             };
-        }
-    },
 
-    sizePolicy: {
-        '': {
-            setsWidth: 0,
-            setsHeight: 0
-        },
-        b: {
-            setsWidth: 0,
-            setsHeight: 1
-        },
-        r: {
-            '': {
-                setsWidth: 1,
-                setsHeight: 0
-            },
-            b: {
-                setsWidth: 1,
-                setsHeight: 1
-
-            }
-        }
-    },
-
-    getItemSizePolicy: function (item) {
-        var anchorSpec = item.anchorSpec,
-            key = '',
-            policy = this.sizePolicy;
-
-        if (anchorSpec) {
             if (anchorSpec.right) {
-                policy = policy.r;
+                item.layoutManagedWidth = 1;
+            } else {
+                item.layoutManagedWidth = 2;
             }
-            if (anchorSpec.bottom) {
-                key = 'b';
-            }
-        }
 
-        return policy[key];
+            if (anchorSpec.bottom) {
+                item.layoutManagedHeight = 1;
+            } else {
+                item.layoutManagedHeight = 2;
+            }
+        } else {
+            item.layoutManagedWidth = 2;
+            item.layoutManagedHeight = 2;
+        }
+        this.callParent(arguments);
     }
+
 });

@@ -6,7 +6,6 @@
         margin-bottom: $fieldset-padding;
         
         display: block; /* preserve margins in IE */
-        position: relative;
     }
     
     .#{$prefix}ie .#{$prefix}fieldset {
@@ -45,6 +44,10 @@
         .#{$prefix}ie7 .#{$prefix}fieldset-header,
         .#{$prefix}ie8 .#{$prefix}fieldset-header {
             padding: 0;
+        }
+
+        .#{$prefix}ie .#{$prefix}fieldset-header {
+            margin-bottom: 10px;
         }
 
         .#{$prefix}ie9 .#{$prefix}fieldset-header {

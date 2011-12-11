@@ -3,8 +3,8 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>The source code</title>
-  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
-  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <link href="../prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../prettify/prettify.js"></script>
   <style type="text/css">
     .highlight { display: block; background-color: #ddd; }
   </style>
@@ -29,7 +29,7 @@ Ext.define('Ext.chart.Highlight', {
 
 <span id='Ext-chart-Highlight-property-highlight'>    /**
 </span>     * Highlight the given series item.
-     * @param {Boolean/Object} Default's false. Can also be an object width style properties (i.e fill, stroke, radius) 
+     * @param {Boolean|Object} Default's false. Can also be an object width style properties (i.e fill, stroke, radius) 
      * or just use default styles per series by setting highlight = true.
      */
     highlight: false,
@@ -109,7 +109,7 @@ Ext.define('Ext.chart.Highlight', {
             sprite._endStyle = to;
         }
         if (animate) {
-            sprite._anim = new Ext.fx.Anim({
+            sprite._anim = Ext.create('Ext.fx.Anim', {
                 target: sprite,
                 from: sprite._from,
                 to: sprite._to,
@@ -158,7 +158,7 @@ Ext.define('Ext.chart.Highlight', {
                 if (animate) {
                     //sprite._to = obj;
                     sprite._endStyle = obj;
-                    sprite._anim = new Ext.fx.Anim({
+                    sprite._anim = Ext.create('Ext.fx.Anim', {
                         target: sprite,
                         to: obj,
                         duration: 150

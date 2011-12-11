@@ -1,9 +1,21 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 Ext.require('Ext.chart.*');
 Ext.require(['Ext.Window', 'Ext.fx.target.Sprite', 'Ext.layout.container.Fit']);
 
 Ext.onReady(function () {
-    var textArea;
-    
     Ext.chart.theme.White = Ext.extend(Ext.chart.theme.Base, {
         constructor: function() {
            Ext.chart.theme.White.superclass.constructor.call(this, {
@@ -25,7 +37,22 @@ Ext.onReady(function () {
            });
         }
     });
-    var chart = Ext.create('Ext.chart.Chart', {
+
+    var win = Ext.create('Ext.Window', {
+        width: 800,
+        height: 600,
+        hidden: false,
+        maximizable: true,
+        title: 'Bar Chart',
+        renderTo: Ext.getBody(),
+        layout: 'fit',
+        tbar: [{
+            text: 'Reload Data',
+            handler: function() {
+                store1.loadData(generateData());
+            }
+        }],
+        items: {
             id: 'chartCmp',
             xtype: 'chart',
             animate: true,
@@ -85,42 +112,7 @@ Ext.onReady(function () {
                 xField: 'name',
                 yField: ['data1']
             }]
-        });
-        
-    var win = Ext.create('Ext.Window', {
-        width: 800,
-        height: 600,
-        minHeight: 400,
-        minWidth: 550,
-        hidden: false,
-        maximizable: true,
-        title: 'Bar Chart',
-        renderTo: Ext.getBody(),
-        layout: 'fit',
-        tbar: [{
-            text: 'Save Chart',
-            handler: function() {
-                if (!textArea) {
-                    Ext.getBody().createChild({
-                        tag: 'h3',
-                        html: 'Chart SVG'
-                    });
-                    textArea = Ext.getBody().createChild({
-                        tag: 'textarea',
-                        rows: 20,
-                        cols: 60
-                    });
-                }
-                textArea.dom.value = chart.save({
-                    type: 'svg'
-                });
-            }
-        }, {
-            text: 'Reload Data',
-            handler: function() {
-                store1.loadData(generateData());
-            }
-        }],
-        items: chart
+        }
     });
 });
+

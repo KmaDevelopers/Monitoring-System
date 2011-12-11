@@ -64,6 +64,11 @@
             color: $tab-color;
             outline: 0 none;
 
+            overflow: hidden;
+            overflow-x: visible;
+            -o-text-overflow: ellipsis;
+            text-overflow: ellipsis;
+
             &::-moz-focus-inner {
                 border: 0;
                 padding: 0;
@@ -76,19 +81,12 @@
                 display: block;
                 text-align: center;
                 white-space: nowrap;
-                text-overflow: ellipsis;
-                -o-text-overflow: ellipsis;
-                overflow: hidden;
             }
         }
 
         img {
             display: none;
         }
-    }
-
-    .#{$prefix}tab-disabled {
-        @include opacity(1);
     }
 
     .#{$prefix}border-box {
@@ -216,11 +214,10 @@
             .#{$prefix}tab-icon {
                 position: absolute;
                 background-repeat: no-repeat;
-                background-position: 0 -1px;
                 top: 0;
-                left: 0;
-                right: auto;
-                bottom: 0;
+                left:0;
+                right:auto;
+                bottom:0;
                 width: 18px;
                 height: 18px;
             }
@@ -321,25 +318,17 @@
 
     @if not $supports-gradients or $compile-all {
         .#{$prefix}nlg {
-            @if $tab-background-gradient != null {
-                .#{$prefix}tab-top { background-image: theme-background-image($theme-name, 'tab/tab-default-top-bg.gif'); }
-                .#{$prefix}tab-bottom { background-image: theme-background-image($theme-name, 'tab/tab-default-bottom-bg.gif'); }
-            }
+            .#{$prefix}tab-top { background-image: theme-image($theme-name, 'tab/tab-default-top-bg.gif'); }
+            .#{$prefix}tab-bottom { background-image: theme-image($theme-name, 'tab/tab-default-bottom-bg.gif'); }
 
-            @if $tab-background-gradient-over != null {
-                .#{$prefix}tab-top-over { background-image: theme-background-image($theme-name, 'tab/tab-default-top-over-bg.gif'); }
-                .#{$prefix}tab-bottom-over { background-image: theme-background-image($theme-name, 'tab/tab-default-bottom-over-bg.gif'); }
-            }
+            .#{$prefix}tab-top-over { background-image: theme-image($theme-name, 'tab/tab-default-top-over-bg.gif'); }
+            .#{$prefix}tab-bottom-over { background-image: theme-image($theme-name, 'tab/tab-default-bottom-over-bg.gif'); }
 
-            @if $tab-background-gradient-active != null {
-                .#{$prefix}tab-top-active { background-image: theme-background-image($theme-name, 'tab/tab-default-top-active-bg.gif'); }
-                .#{$prefix}tab-bottom-active { background-image: theme-background-image($theme-name, 'tab/tab-default-bottom-active-bg.gif'); }
-            }
+            .#{$prefix}tab-top-active { background-image: theme-image($theme-name, 'tab/tab-default-top-active-bg.gif'); }
+            .#{$prefix}tab-bottom-active { background-image: theme-image($theme-name, 'tab/tab-default-bottom-active-bg.gif'); }
 
-            @if $tab-background-gradient-disabled != null {
-                .#{$prefix}tab-top-disabled { background-image: theme-background-image($theme-name, 'tab/tab-default-top-disabled-bg.gif') !important; }
-                .#{$prefix}tab-bottom-disabled { background-image: theme-background-image($theme-name, 'tab/tab-default-bottom-disabled-bg.gif') !important; }
-            }
+            .#{$prefix}tab-top-disabled { background-image: theme-image($theme-name, 'tab/tab-default-top-disabled-bg.gif') !important; }
+            .#{$prefix}tab-bottom-disabled { background-image: theme-image($theme-name, 'tab/tab-default-bottom-disabled-bg.gif') !important; }
         }
     }
 
@@ -356,13 +345,8 @@
         font-size: 0;
         line-height: 0;
         text-indent: -999px;
-        background: no-repeat;
-        background-image: theme-background-image($theme-name, $tab-closable-icon);
+        background: theme-image($theme-name, $tab-closable-icon) no-repeat;
         @include opacity(.6);
-    }
-    .#{$prefix}nbr .#{$prefix}tab-close-btn {
-        top: $nbr-tab-closable-icon-top;
-        right: $nbr-tab-closable-icon-right;
     }
     .#{$prefix}tab-close-btn:hover {
         @include opacity(1);
@@ -377,18 +361,16 @@
                 .#{$prefix}frame-br,
                 .#{$prefix}frame-tc,
                 .#{$prefix}frame-bc {
-                    background-image: theme-background-image($theme-name, 'tab/tab-default-top-over-corners.gif');
+                    background-image: theme-image($theme-name, 'tab/tab-default-top-over-corners.gif');
                 }
                 .#{$prefix}frame-ml,
                 .#{$prefix}frame-mr {
-                    background-image: theme-background-image($theme-name, 'tab/tab-default-top-over-sides.gif');
+                    background-image: theme-image($theme-name, 'tab/tab-default-top-over-sides.gif');
                 }
-                @if $tab-background-gradient-over != null {
-                    .#{$prefix}frame-mc {
-                        background-color: $tab-base-color-over;
-                        background-repeat: repeat-x;
-                        background-image: theme-background-image($theme-name, 'tab/tab-default-top-over-bg.gif');
-                    }
+                .#{$prefix}frame-mc {
+                    background-color: $tab-base-color-over;
+                    background-repeat: repeat-x;
+                    background-image: theme-image($theme-name, 'tab/tab-default-top-over-bg.gif');
                 }
             }
 
@@ -399,18 +381,16 @@
                 .#{$prefix}frame-br,
                 .#{$prefix}frame-tc,
                 .#{$prefix}frame-bc {
-                    background-image: theme-background-image($theme-name, 'tab/tab-default-bottom-over-corners.gif');
+                    background-image: theme-image($theme-name, 'tab/tab-default-bottom-over-corners.gif');
                 }
                 .#{$prefix}frame-ml,
                 .#{$prefix}frame-mr {
-                    background-image: theme-background-image($theme-name, 'tab/tab-default-bottom-over-sides.gif');
+                    background-image: theme-image($theme-name, 'tab/tab-default-bottom-over-sides.gif');
                 }
-                @if $tab-background-gradient-over != null {
-                    .#{$prefix}frame-mc {
-                        background-color: $tab-base-color-over;
-                        background-repeat: repeat-x;
-                        background-image: theme-background-image($theme-name, 'tab/tab-default-bottom-over-bg.gif');
-                    }
+                .#{$prefix}frame-mc {
+                    background-color: $tab-base-color-over;
+                    background-repeat: repeat-x;
+                    background-image: theme-image($theme-name, 'tab/tab-default-bottom-over-bg.gif');
                 }
             }
 
@@ -421,18 +401,16 @@
                 .#{$prefix}frame-br,
                 .#{$prefix}frame-tc,
                 .#{$prefix}frame-bc {
-                    background-image: theme-background-image($theme-name, 'tab/tab-default-top-active-corners.gif');
+                    background-image: theme-image($theme-name, 'tab/tab-default-top-active-corners.gif');
                 }
                 .#{$prefix}frame-ml,
                 .#{$prefix}frame-mr {
-                    background-image: theme-background-image($theme-name, 'tab/tab-default-top-active-sides.gif');
+                    background-image: theme-image($theme-name, 'tab/tab-default-top-active-sides.gif');
                 }
-                @if $tab-background-gradient-active != null {
-                    .#{$prefix}frame-mc {
-                        background-color: $tab-base-color-active;
-                        background-repeat: repeat-x;
-                        background-image: theme-background-image($theme-name, 'tab/tab-default-top-active-bg.gif');
-                    }
+                .#{$prefix}frame-mc {
+                    background-color: $tab-base-color-active;
+                    background-repeat: repeat-x;
+                    background-image: theme-image($theme-name, 'tab/tab-default-top-active-bg.gif');
                 }
             }
 
@@ -443,18 +421,16 @@
                 .#{$prefix}frame-br,
                 .#{$prefix}frame-tc,
                 .#{$prefix}frame-bc {
-                    background-image: theme-background-image($theme-name, 'tab/tab-default-bottom-active-corners.gif');
+                    background-image: theme-image($theme-name, 'tab/tab-default-bottom-active-corners.gif');
                 }
                 .#{$prefix}frame-ml,
                 .#{$prefix}frame-mr {
-                    background-image: theme-background-image($theme-name, 'tab/tab-default-bottom-active-sides.gif');
+                    background-image: theme-image($theme-name, 'tab/tab-default-bottom-active-sides.gif');
                 }
-                @if $tab-background-gradient-active != null {
-                    .#{$prefix}frame-mc {
-                        background-color: $tab-base-color-active;
-                        background-repeat: repeat-x;
-                        background-image: theme-background-image($theme-name, 'tab/tab-default-bottom-active-bg.gif');
-                    }
+                .#{$prefix}frame-mc {
+                    background-color: $tab-base-color-active;
+                    background-repeat: repeat-x;
+                    background-image: theme-image($theme-name, 'tab/tab-default-bottom-active-bg.gif');
                 }
             }
 
@@ -465,17 +441,15 @@
                 .#{$prefix}frame-br,
                 .#{$prefix}frame-tc,
                 .#{$prefix}frame-bc {
-                    background-image: theme-background-image($theme-name, 'tab/tab-default-top-disabled-corners.gif');
+                    background-image: theme-image($theme-name, 'tab/tab-default-top-disabled-corners.gif');
                 }
                 .#{$prefix}frame-ml,
                 .#{$prefix}frame-mr {
-                    background-image: theme-background-image($theme-name, 'tab/tab-default-top-disabled-sides.gif');
+                    background-image: theme-image($theme-name, 'tab/tab-default-top-disabled-sides.gif');
                 }
-                @if $tab-background-gradient-disabled != null {
-                    .#{$prefix}frame-mc {
-                        background-repeat: repeat-x;
-                        background-image: theme-background-image($theme-name, 'tab/tab-default-top-disabled-bg.gif');
-                    }
+                .#{$prefix}frame-mc {
+                    background-repeat: repeat-x;
+                    background-image: theme-image($theme-name, 'tab/tab-default-top-disabled-bg.gif');
                 }
             }
 
@@ -486,17 +460,15 @@
                 .#{$prefix}frame-br,
                 .#{$prefix}frame-tc,
                 .#{$prefix}frame-bc {
-                    background-image: theme-background-image($theme-name, 'tab/tab-default-bottom-disabled-corners.gif');
+                    background-image: theme-image($theme-name, 'tab/tab-default-bottom-disabled-corners.gif');
                 }
                 .#{$prefix}frame-ml,
                 .#{$prefix}frame-mr {
-                    background-image: theme-background-image($theme-name, 'tab/tab-default-bottom-disabled-sides.gif');
+                    background-image: theme-image($theme-name, 'tab/tab-default-bottom-disabled-sides.gif');
                 }
-                @if $tab-background-gradient-disabled != null {
-                    .#{$prefix}frame-mc {
-                        background-repeat: repeat-x;
-                        background-image: theme-background-image($theme-name, 'tab/tab-default-bottom-disabled-bg.gif');
-                    }
+                .#{$prefix}frame-mc {
+                    background-repeat: repeat-x;
+                    background-image: theme-image($theme-name, 'tab/tab-default-bottom-disabled-bg.gif');
                 }
             }
         }

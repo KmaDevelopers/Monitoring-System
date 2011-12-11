@@ -3,8 +3,8 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>The source code</title>
-  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
-  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <link href="../prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../prettify/prettify.js"></script>
   <style type="text/css">
     .highlight { display: block; background-color: #ddd; }
   </style>
@@ -15,323 +15,262 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js"><span id='Ext-layout-component-Component'>/**
-</span> * This class is intended to be extended or created via the {@link Ext.Component#componentLayout layout}
- * configuration property.  See {@link Ext.Component#componentLayout} for additional details.
- * @private
+  <pre class="prettyprint lang-js"><span id='Ext-draw-Component'>/**
+</span> * @class Ext.draw.Component
+ * @extends Ext.Component
+ *
+ * The Draw Component is a surface in which sprites can be rendered. The Draw Component
+ * manages and holds a `Surface` instance: an interface that has
+ * an SVG or VML implementation depending on the browser capabilities and where
+ * Sprites can be appended.
+ * {@img Ext.draw.Component/Ext.draw.Component.png Ext.draw.Component component}
+ * One way to create a draw component is:
+ * 
+ *     var drawComponent = Ext.create('Ext.draw.Component', {
+ *         viewBox: false,
+ *         items: [{
+ *             type: 'circle',
+ *             fill: '#79BB3F',
+ *             radius: 100,
+ *             x: 100,
+ *             y: 100
+ *         }]
+ *     });
+ *   
+ *     Ext.create('Ext.Window', {
+ *         width: 215,
+ *         height: 235,
+ *         layout: 'fit',
+ *         items: [drawComponent]
+ *     }).show();
+ * 
+ * In this case we created a draw component and added a sprite to it.
+ * The *type* of the sprite is *circle* so if you run this code you'll see a yellow-ish
+ * circle in a Window. When setting `viewBox` to `false` we are responsible for setting the object's position and
+ * dimensions accordingly. 
+ * 
+ * You can also add sprites by using the surface's add method:
+ *    
+ *     drawComponent.surface.add({
+ *         type: 'circle',
+ *         fill: '#79BB3F',
+ *         radius: 100,
+ *         x: 100,
+ *         y: 100
+ *     });
+ *  
+ * For more information on Sprites, the core elements added to a draw component's surface,
+ * refer to the Ext.draw.Sprite documentation.
  */
-Ext.define('Ext.layout.component.Component', {
+Ext.define('Ext.draw.Component', {
 
     /* Begin Definitions */
 
-    extend: 'Ext.layout.Layout',
+    alias: 'widget.draw',
+
+    extend: 'Ext.Component',
+
+    requires: [
+        'Ext.draw.Surface',
+        'Ext.layout.component.Draw'
+    ],
 
     /* End Definitions */
 
-    type: 'component',
+<span id='Ext-draw-Component-cfg-enginePriority'>    /**
+</span>     * @cfg {Array} enginePriority
+     * Defines the priority order for which Surface implementation to use. The first
+     * one supported by the current environment will be used.
+     */
+    enginePriority: ['Svg', 'Vml'],
 
-    isComponentLayout: true,
+    baseCls: Ext.baseCSSPrefix + 'surface',
 
-    monitorChildren: true,
+    componentLayout: 'draw',
 
-    nullBox: {},
+<span id='Ext-draw-Component-cfg-viewBox'>    /**
+</span>     * @cfg {Boolean} viewBox
+     * Turn on view box support which will scale and position items in the draw component to fit to the component while
+     * maintaining aspect ratio. Note that this scaling can override other sizing settings on yor items. Defaults to true.
+     */
+    viewBox: true,
+
+<span id='Ext-draw-Component-cfg-autoSize'>    /**
+</span>     * @cfg {Boolean} autoSize
+     * Turn on autoSize support which will set the bounding div's size to the natural size of the contents. Defaults to false.
+     */
+    autoSize: false,
     
-    beginLayoutCycle: function (ownerContext, firstCycle) {
-        var me = this,
-            owner = me.owner,
-            heightAuthority = ownerContext.heightAuthority,
-            widthAuthority = ownerContext.widthAuthority,
-            body = owner.el.dom === document.body,
-            lastBox = ownerContext.lastBox || me.nullBox,
-            dirty;
+<span id='Ext-draw-Component-cfg-gradients'>    /**
+</span>     * @cfg {Array} gradients (optional) Define a set of gradients that can be used as `fill` property in sprites.
+     * The gradients array is an array of objects with the following properties:
+     *
+     * &lt;ul&gt;
+     * &lt;li&gt;&lt;strong&gt;id&lt;/strong&gt; - string - The unique name of the gradient.&lt;/li&gt;
+     * &lt;li&gt;&lt;strong&gt;angle&lt;/strong&gt; - number, optional - The angle of the gradient in degrees.&lt;/li&gt;
+     * &lt;li&gt;&lt;strong&gt;stops&lt;/strong&gt; - object - An object with numbers as keys (from 0 to 100) and style objects
+     * as values&lt;/li&gt;
+     * &lt;/ul&gt;
+     * 
+     
+     For example:
+     
+     &lt;pre&gt;&lt;code&gt;
+        gradients: [{
+            id: 'gradientId',
+            angle: 45,
+            stops: {
+                0: {
+                    color: '#555'
+                },
+                100: {
+                    color: '#ddd'
+                }
+            }
+        },  {
+            id: 'gradientId2',
+            angle: 0,
+            stops: {
+                0: {
+                    color: '#590'
+                },
+                20: {
+                    color: '#599'
+                },
+                100: {
+                    color: '#ddd'
+                }
+            }
+        }]
+     &lt;/code&gt;&lt;/pre&gt;
+     
+     Then the sprites can use `gradientId` and `gradientId2` by setting the fill attributes to those ids, for example:
+     
+     &lt;pre&gt;&lt;code&gt;
+        sprite.setAttributes({
+            fill: 'url(#gradientId)'
+        }, true);
+     &lt;/code&gt;&lt;/pre&gt;
+     
+     */
 
+    initComponent: function() {
+        this.callParent(arguments);
+
+        this.addEvents(
+            'mousedown',
+            'mouseup',
+            'mousemove',
+            'mouseenter',
+            'mouseleave',
+            'click'
+        );
+    },
+
+<span id='Ext-draw-Component-method-onRender'>    /**
+</span>     * @private
+     *
+     * Create the Surface on initial render
+     */
+    onRender: function() {
+        var me = this,
+            viewBox = me.viewBox,
+            autoSize = me.autoSize,
+            bbox, items, width, height, x, y;
         me.callParent(arguments);
 
-        // we want to publish configured dimensions as early as possible and since this is
-        // a write phase...
+        me.createSurface();
 
-        if (widthAuthority == 1) {
-            // If the owner.el is the body, owner.width is not dirty (we don't want to write
-            // it to the body el). For other el's, the width may already be correct in the
-            // DOM (e.g., it is rendered in the markup initially). If the width is not
-            // correct in the DOM, this is only going to be the case on the first cycle.
+        items = me.surface.items;
 
-            dirty = !body &amp;&amp; firstCycle &amp;&amp; owner.width !== lastBox.width;
-            
-            ownerContext.setWidth(owner.width, dirty);
-        } else if (ownerContext.isTopLevel &amp;&amp; widthAuthority) {
-            ownerContext.setWidth(me.lastComponentSize.width, /*dirty=*/false, /*force=*/true);
-        }
-
-        if (heightAuthority == 1) {
-            dirty = !body &amp;&amp; firstCycle &amp;&amp; owner.height !== lastBox.height;
-            ownerContext.setHeight(owner.height, dirty);
-        } else if (ownerContext.isTopLevel &amp;&amp; heightAuthority) {
-            ownerContext.setHeight(me.lastComponentSize.height, false, true);
-        }
-    },
-
-    finishedLayout: function(ownerContext) {
-        var me = this,
-            props = ownerContext.props,
-            elementChildren = ownerContext.children,
-            len, i, elContext, elProps;
-
-        // NOTE: In the code below we cannot use getProp because that will generate a layout dependency
-
-        // Set lastBox on managed child Elements.
-        // So that ContextItem.constructor can snag the lastBox for use by its undo method.
-        if (elementChildren) {
-            len = elementChildren.length;
-            for (i = 0; i &lt; len; i++) {
-                elContext = elementChildren[i];
-                elProps = elContext.props;
-                elContext.el.lastBox = {
-                    width  : elProps.width,
-                    height : elProps.height,
-                    x      : elProps.x,
-                    y      : elProps.y
-                };
+        if (viewBox || autoSize) {
+            bbox = items.getBBox();
+            width = bbox.width;
+            height = bbox.height;
+            x = bbox.x;
+            y = bbox.y;
+            if (me.viewBox) {
+                me.surface.setViewBox(x, y, width, height);
+            }
+            else {
+                // AutoSized
+                me.autoSizeSurface();
             }
         }
-
-        // Cache the size from which we are changing so that notifyOwner can notify the owningComponent with all essential information
-        ownerContext.previousSize = me.lastComponentSize;
-
-        // Cache the currently layed out size
-        me.owner.lastBox = me.lastComponentSize = {
-            width: props.width,
-            height: props.height,
-            x: props.x,
-            y: props.y
-        };
     },
-    
-    notifyOwner: function(ownerContext) {
-        var me = this,
-            currentSize = me.lastComponentSize,
-            prevSize = ownerContext.previousSize,
-            args = [currentSize.width, currentSize.height];
 
-        if (prevSize) {
-            args.push(prevSize.width, prevSize.height);
+    //@private
+    autoSizeSurface: function() {
+        var me = this,
+            items = me.surface.items,
+            bbox = items.getBBox(),
+            width = bbox.width,
+            height = bbox.height;
+        items.setAttributes({
+            translate: {
+                x: -bbox.x,
+                //Opera has a slight offset in the y axis.
+                y: -bbox.y + (+Ext.isOpera)
+            }
+        }, true);
+        if (me.rendered) {
+            me.setSize(width, height);
+            me.surface.setSize(width, height);
         }
-        
-        // Call afterComponentLayout passing new size, and only passing old size if there *was* an old size.
-        me.owner.afterComponentLayout.apply(me.owner, args);
+        else {
+            me.surface.setSize(width, height);
+        }
+        me.el.setSize(width, height);
     },
 
-<span id='Ext-layout-component-Component-method-needsLayout'>    /**
-</span>     * Check if the new size is different from the current size and only
-     * trigger a layout if it is necessary.
-     * @param {Number} width The new width to set.
-     * @param {Number} height The new height to set.
-     */
-    needsLayout : function(width, height) {
-        var me = this,
-            widthBeingChanged,
-            heightBeingChanged;
-            me.lastComponentSize = me.lastComponentSize || {
-                width: -Infinity,
-                height: -Infinity
-            };
-        
-        // If autoWidthing, or an explicitly different width is passed, then the width is being changed.
-        widthBeingChanged  = !Ext.isDefined(width)  || me.lastComponentSize.width  !== width;
-
-        // If autoHeighting, or an explicitly different height is passed, then the height is being changed.
-        heightBeingChanged = !Ext.isDefined(height) || me.lastComponentSize.height !== height;
-
-
-        // Return true if the managed Component needs to be layed out.
-        return (me.childrenChanged || widthBeingChanged || heightBeingChanged);
-    },
-
-<span id='Ext-layout-component-Component-method-getTarget'>    /**
-</span>     * Returns the owner component's resize element.
-     * @return {Ext.Element}
-     */
-    getTarget : function() {
-        return this.owner.el;
-    },
-
-<span id='Ext-layout-component-Component-method-getRenderTarget'>    /**
-</span>     * Returns the element into which rendering must take place. Defaults to the owner Component's encapsulating element.
+<span id='Ext-draw-Component-method-createSurface'>    /**
+</span>     * Create the Surface instance. Resolves the correct Surface implementation to
+     * instantiate based on the 'enginePriority' config. Once the Surface instance is
+     * created you can use the handle to that instance to add sprites. For example:
      *
-     * May be overridden in Component layout managers which implement an inner element.
-     * @return {Ext.Element}
+     &lt;pre&gt;&lt;code&gt;
+        drawComponent.surface.add(sprite);
+     &lt;/code&gt;&lt;/pre&gt;
      */
-    getRenderTarget : function() {
-        return this.owner.el;
-    },
+    createSurface: function() {
+        var surface = Ext.draw.Surface.create(Ext.apply({}, {
+                width: this.width,
+                height: this.height,
+                renderTo: this.el
+            }, this.initialConfig));
+        this.surface = surface;
 
-    cacheTargetInfo: function(ownerContext) {
-        var me = this,
-            targetInfo = me.targetInfo,
-            target, body;
-
-        if (!targetInfo) {
-            target = ownerContext.getEl('getTarget', me);
-            body = ownerContext.getEl('getTargetEl');
-
-            me.targetInfo = targetInfo = {
-                padding: target.getPaddingInfo(),
-                border: target.getBorderInfo()
+        function refire(eventName) {
+            return function(e) {
+                this.fireEvent(eventName, e);
             };
         }
 
-        return targetInfo;
+        surface.on({
+            scope: this,
+            mouseup: refire('mouseup'),
+            mousedown: refire('mousedown'),
+            mousemove: refire('mousemove'),
+            mouseenter: refire('mouseenter'),
+            mouseleave: refire('mouseleave'),
+            click: refire('click')
+        });
     },
 
-    measureAutoDimensions: function (ownerContext, dimensions) {
-        // Subtle But Important:
-        // 
-        // We don't want to call getProp/hasProp et.al. unless we in fact need that value
-        // for our results! If we call it and don't need it, the layout manager will think
-        // we depend on it and will schedule us again should it change.
 
-        var me = this,
-            owner = me.owner,
-            autoHeight = ownerContext.autoHeight,
-            autoWidth  = ownerContext.autoWidth,
-            boxParent = ownerContext.boxParent,
-            isBoxParent = ownerContext.isBoxParent,
-            state = ownerContext.state,
-            ret = {
-                gotWidth: false,
-                gotHeight: false,
-                isContainer: !ownerContext.hasRawContent
-            },
-            hv = dimensions || 3,
-            zeroWidth = !(hv &amp; 1),
-            zeroHeight = !(hv &amp; 2),
-            needed = 0,
-            got = 0,
-            ready, size;
-
-        if (ret.isContainer) {
-            if (autoHeight) {
-                ++needed;
-
-                // don't ask unless we need to know...
-                if (zeroHeight) {
-                    ret.contentHeight = 0;
-                    ret.gotHeight = true;
-                    ++got;
-                } else if ((ret.contentHeight = ownerContext.getProp('contentHeight')) !== undefined) {
-                    ret.gotHeight = true;
-                    ++got;
-                }
-            }
-
-            if (autoWidth) {
-                ++needed;
-
-                // don't ask unless we need to know...
-                if (zeroWidth) {
-                    ret.contentWidth = 0;
-                    ret.gotWidth = true;
-                    ++got;
-                } else if ((ret.contentWidth = ownerContext.getProp('contentWidth')) !== undefined) {
-                    ret.gotWidth = true;
-                    ++got;
-                }
-            }
-        } else {
-            // This is the 98% use case of auto-sizing
-            if (autoHeight) {
-                ++needed;
-
-                size = ownerContext.props.contentHeight;
-                if (typeof size == 'number') { // if (already determined)
-                    ret.contentHeight = size;
-                    ret.gotHeight = true;
-                    ++got;
-                } else {
-                    if (zeroHeight || ownerContext.target.noWrap) {
-                        ready = true;
-                    } else if (!autoWidth || owner.minWidth !== undefined || owner.maxWidth !== undefined) {
-                        // fixed width, so we need the width to determine the height...
-                        ready = ownerContext.hasDomProp('width');
-                    } else if (isBoxParent || !boxParent || boxParent.autoWidth) {
-                        // if we have no boxParent, we are ready, but an autoWidth boxParent
-                        // artificially provides width early in the measurement process so
-                        // we are ready to go in that case as well...
-                        ready = true;
-                    } else {
-                        // lastly, we have a boxParent that will be given a width, so we
-                        // can wait for that width to be set in order to properly measure
-                        // whatever is inside...
-                        ready = boxParent.hasDomProp('width');
-                    }
-
-                    if (ready) {
-                        ret.contentHeight = zeroHeight ? 0 : me.getContentHeight(ownerContext);
-                        ownerContext.setContentHeight(ret.contentHeight, true);
-                        ret.gotHeight = true;
-                        ++got;
-                    }
-                }
-            }
-
-            // A minority use case, but often occurs with autoHeight... also useful for
-            // things like images
-            if (autoWidth) {
-                ++needed;
-
-                size = ownerContext.props.contentWidth;
-                if (typeof size == 'number') { // if (already determined)
-                    ret.contentWidth = size;
-                    ret.gotWidth = true;
-                    ++got;
-                } else {
-                    if (zeroWidth) {
-                        ready = true;
-                    } else if (isBoxParent || !boxParent || boxParent.autoWidth) {
-                        // if we have no boxParent, we are ready, but an autoWidth boxParent
-                        // artificially provides width early in the measurement process so
-                        // we are ready to go in that case as well...
-                        ready = true;
-                    } else {
-                        // lastly, we have a boxParent that will be given a width, so we
-                        // can wait for that width to be set in order to properly measure
-                        // whatever is inside...
-                        ready = boxParent.hasDomProp('width');
-                    }
-
-                    if (ready) {
-                        ret.contentWidth = zeroWidth ? 0 : me.getContentWidth(ownerContext);
-                        ownerContext.setContentWidth(ret.contentWidth, true);
-                        ret.gotWidth = true;
-                        ++got;
-                    }
-                }
-            }
-
-            if (boxParent &amp;&amp; boxParent.autoWidth &amp;&amp; !state.boxMeasured &amp;&amp; ownerContext.measuresBox) {
-                // since an autoWidth boxParent is holding a width on itself to allow each
-                // child to measure
-                state.boxMeasured = 1; // best to only call once per child
-                boxParent.boxChildMeasured();
-            }
+<span id='Ext-draw-Component-method-onDestroy'>    /**
+</span>     * @private
+     * 
+     * Clean up the Surface instance on component destruction
+     */
+    onDestroy: function() {
+        var surface = this.surface;
+        if (surface) {
+            surface.destroy();
         }
-
-        // TODO - enforce min/maxHeight and min/maxWidth?
-
-        ret.gotAll = got == needed;
-        // see if we can avoid calling this method by storing something on ownerContext.
-        return ret;
-    },
-
-    getContentWidth: function (ownerContext) {
-        // contentWidth includes padding, but not border, framing or margins
-        return ownerContext.el.getWidth() + ownerContext.getPaddingInfo().width - ownerContext.getFrameInfo().width;
-    },
-
-    getContentHeight: function (ownerContext) {
-        // contentHeight includes padding, but not border, framing or margins
-        return ownerContext.el.getHeight() + ownerContext.getPaddingInfo().height - ownerContext.getFrameInfo().height;
+        this.callParent(arguments);
     }
+
 });
 </pre>
 </body>

@@ -1,13 +1,14 @@
 Ext.define("MsAdmin.model.Sensor", {
 	extend: "Ext.data.Model",
-    idProperty: "id",
+    idProperty: "sensorId",
 	fields: [
-        'id',
+        'sensorId',
         'serial',
     	'serverId',
         'location', 
         'name',
-        'position'
+        'x',
+        'y'
     ],
     proxy: {
     	type: 'ajax',
@@ -23,11 +24,6 @@ Ext.define("MsAdmin.model.Sensor", {
         }
     },
     validations: [{
-        type: 'format',
-        field: "serial",
-        matcher: /^[0-9]{1,20}$/,
-        message: MsAdmin.t("Serial must be a number")
-    }, {
         type: "presence",
         field: "name",
         message: MsAdmin.t("You should provide sensor name")

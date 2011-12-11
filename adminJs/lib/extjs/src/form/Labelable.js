@@ -1,72 +1,62 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
- * A mixin which allows a component to be configured and decorated with a label and/or error message as is
- * common for form fields. This is used by e.g. Ext.form.field.Base and Ext.form.FieldContainer
- * to let them be managed by the Field layout.
- *
- * NOTE: This mixin is mainly for internal library use and most users should not need to use it directly. It
- * is more likely you will want to use one of the component classes that import this mixin, such as
- * Ext.form.field.Base or Ext.form.FieldContainer.
- *
- * Use of this mixin does not make a component a field in the logical sense, meaning it does not provide any
- * logic or state related to values or validation; that is handled by the related Ext.form.field.Field
- * mixin. These two mixins may be used separately (for example Ext.form.FieldContainer is Labelable but not a
- * Field), or in combination (for example Ext.form.field.Base implements both and has logic for connecting the
- * two.)
- *
- * Component classes which use this mixin should use the Field layout
- * or a derivation thereof to properly size and position the label and message according to the component config.
- * They must also call the {@link #initLabelable} method during component initialization to ensure the mixin gets
- * set up correctly.
- *
+ * @class Ext.form.Labelable
+
+A mixin which allows a component to be configured and decorated with a label and/or error message as is
+common for form fields. This is used by e.g. {@link Ext.form.field.Base} and {@link Ext.form.FieldContainer}
+to let them be managed by the Field layout.
+
+**NOTE**: This mixin is mainly for internal library use and most users should not need to use it directly. It
+is more likely you will want to use one of the component classes that import this mixin, such as
+{@link Ext.form.field.Base} or {@link Ext.form.FieldContainer}.
+
+Use of this mixin does not make a component a field in the logical sense, meaning it does not provide any
+logic or state related to values or validation; that is handled by the related {@link Ext.form.field.Field}
+mixin. These two mixins may be used separately (for example {@link Ext.form.FieldContainer} is Labelable but not a
+Field), or in combination (for example {@link Ext.form.field.Base} implements both and has logic for connecting the
+two.)
+
+Component classes which use this mixin should use the Field layout
+or a derivation thereof to properly size and position the label and message according to the component config.
+They must also call the {@link #initLabelable} method during component initialization to ensure the mixin gets
+set up correctly.
+
+ * @markdown
  * @docauthor Jason Johnston <jason@sencha.com>
  */
 Ext.define("Ext.form.Labelable", {
     requires: ['Ext.XTemplate'],
 
-    childEls: [
-        /**
-         * @property labelEl
-         * @type Ext.Element
-         * The label Element for this component. Only available after the component has been rendered.
-         */
-        'labelEl',
-
-        /**
-         * @property bodyEl
-         * @type Ext.Element
-         * The div Element wrapping the component's contents. Only available after the component has been rendered.
-         */
-        'bodyEl',
-
-        /**
-         * @property errorEl
-         * @type Ext.Element
-         * The div Element that will contain the component's error message(s). Note that depending on the
-         * configured {@link #msgTarget}, this element may be hidden in favor of some other form of
-         * presentation, but will always be present in the DOM for use by assistive technologies.
-         */
-        'errorEl'
-    ],
-
     /**
-     * @cfg {String/String[]/Ext.XTemplate} labelableRenderTpl
+     * @cfg {Array/String/Ext.XTemplate} labelableRenderTpl
      * The rendering template for the field decorations. Component classes using this mixin should include
      * logic to use this as their {@link Ext.AbstractComponent#renderTpl renderTpl}, and implement the
      * {@link #getSubTplMarkup} method to generate the field body content.
      */
     labelableRenderTpl: [
         '<tpl if="!hideLabel && !(!fieldLabel && hideEmptyLabel)">',
-            '<label id="{id}-labelEl"<tpl if="inputId"> for="{inputId}"</tpl> class="{labelCls}"',
-                '<tpl if="labelStyle"> style="{labelStyle}"</tpl>>',
+            '<label<tpl if="inputId"> for="{inputId}"</tpl> class="{labelCls}"<tpl if="labelStyle"> style="{labelStyle}"</tpl>>',
                 '<tpl if="fieldLabel">{fieldLabel}{labelSeparator}</tpl>',
             '</label>',
         '</tpl>',
-        '<div class="{baseBodyCls} {fieldBodyCls}" id="{id}-bodyEl" role="presentation">',
-            '{[values.$comp.getSubTplMarkup()]}',
-        '</div>',
-        '<div id="{id}-errorEl" class="{errorMsgCls}" style="display:none"></div>',
+        '<div class="{baseBodyCls} {fieldBodyCls}"<tpl if="inputId"> id="{baseBodyCls}-{inputId}"</tpl> role="presentation">{subTplMarkup}</div>',
+        '<div class="{errorMsgCls}" style="display:none"></div>',
         '<div class="{clearCls}" role="presentation"><!-- --></div>',
         {
+            compiled: true,
             disableFormats: true
         }
     ],
@@ -90,55 +80,47 @@ Ext.define("Ext.form.Labelable", {
     isFieldLabelable: true,
 
     /**
-     * @cfg {String} [formItemCls='x-form-item']
+     * @cfg {String} formItemCls
      * A CSS class to be applied to the outermost element to denote that it is participating in the form
-     * field layout.
+     * field layout. Defaults to 'x-form-item'.
      */
     formItemCls: Ext.baseCSSPrefix + 'form-item',
 
     /**
-     * @cfg {String} [labelCls='x-form-item-label']
-     * The CSS class to be applied to the label element.
-     * This (single) CSS class is used to formulate the renderSelector and drives the field
-     * layout where it is concatenated with a hyphen ('-') and {@link #labelAlign}. To add
-     * additional classes, use {@link #labelClsExtra}.
+     * @cfg {String} labelCls
+     * The CSS class to be applied to the label element. Defaults to 'x-form-item-label'.
      */
     labelCls: Ext.baseCSSPrefix + 'form-item-label',
 
     /**
-     * @cfg {String} labelClsExtra
-     * An optional string of one or more additional CSS classes to add to the label element.
-     * Defaults to empty.
-     */
-
-    /**
-     * @cfg {String} [errorMsgCls='x-form-error-msg']
-     * The CSS class to be applied to the error message element.
+     * @cfg {String} errorMsgCls
+     * The CSS class to be applied to the error message element. Defaults to 'x-form-error-msg'.
      */
     errorMsgCls: Ext.baseCSSPrefix + 'form-error-msg',
 
     /**
-     * @cfg {String} [baseBodyCls='x-form-item-body']
-     * The CSS class to be applied to the body content element.
+     * @cfg {String} baseBodyCls
+     * The CSS class to be applied to the body content element. Defaults to 'x-form-item-body'.
      */
     baseBodyCls: Ext.baseCSSPrefix + 'form-item-body',
 
     /**
      * @cfg {String} fieldBodyCls
      * An extra CSS class to be applied to the body content element in addition to {@link #fieldBodyCls}.
+     * Defaults to empty.
      */
     fieldBodyCls: '',
 
     /**
-     * @cfg {String} [clearCls='x-clear']
+     * @cfg {String} clearCls
      * The CSS class to be applied to the special clearing div rendered directly after the field
-     * contents wrapper to provide field clearing.
+     * contents wrapper to provide field clearing (defaults to <tt>'x-clear'</tt>).
      */
     clearCls: Ext.baseCSSPrefix + 'clear',
 
     /**
-     * @cfg {String} [invalidCls='x-form-invalid']
-     * The CSS class to use when marking the component invalid.
+     * @cfg {String} invalidCls
+     * The CSS class to use when marking the component invalid (defaults to 'x-form-invalid')
      */
     invalidCls : Ext.baseCSSPrefix + 'form-invalid',
 
@@ -146,7 +128,7 @@ Ext.define("Ext.form.Labelable", {
      * @cfg {String} fieldLabel
      * The label for the field. It gets appended with the {@link #labelSeparator}, and its position
      * and sizing is determined by the {@link #labelAlign}, {@link #labelWidth}, and {@link #labelPad}
-     * configs.
+     * configs. Defaults to undefined.
      */
     fieldLabel: undefined,
 
@@ -166,13 +148,13 @@ Ext.define("Ext.form.Labelable", {
     /**
      * @cfg {Number} labelWidth
      * The width of the {@link #fieldLabel} in pixels. Only applicable if the {@link #labelAlign} is set
-     * to "left" or "right".
+     * to "left" or "right". Defaults to <tt>100</tt>.
      */
     labelWidth: 100,
 
     /**
      * @cfg {Number} labelPad
-     * The amount of space in pixels between the {@link #fieldLabel} and the input field.
+     * The amount of space in pixels between the {@link #fieldLabel} and the input field. Defaults to <tt>5</tt>.
      */
     labelPad : 5,
 
@@ -184,13 +166,14 @@ Ext.define("Ext.form.Labelable", {
 
     /**
      * @cfg {String} labelStyle
-     * A CSS style specification string to apply directly to this field's label.
+     * <p>A CSS style specification string to apply directly to this field's label. Defaults to undefined.</p>
      */
 
     /**
      * @cfg {Boolean} hideLabel
-     * Set to true to completely hide the label element ({@link #fieldLabel} and {@link #labelSeparator}).
-     * Also see {@link #hideEmptyLabel}, which controls whether space will be reserved for an empty fieldLabel.
+     * <p>Set to <tt>true</tt> to completely hide the label element ({@link #fieldLabel} and {@link #labelSeparator}).
+     * Defaults to <tt>false</tt>.</p>
+     * <p>Also see {@link #hideEmptyLabel}, which controls whether space will be reserved for an empty fieldLabel.</p>
      */
     hideLabel: false,
 
@@ -199,7 +182,7 @@ Ext.define("Ext.form.Labelable", {
      * <p>When set to <tt>true</tt>, the label element ({@link #fieldLabel} and {@link #labelSeparator}) will be
      * automatically hidden if the {@link #fieldLabel} is empty. Setting this to <tt>false</tt> will cause the empty
      * label element to be rendered and space to be reserved for it; this is useful if you want a field without a label
-     * to line up with other labeled fields in the same form.</p>
+     * to line up with other labeled fields in the same form. Defaults to <tt>true</tt>.</p>
      * <p>If you wish to unconditionall hide the label even if a non-empty fieldLabel is configured, then set
      * the {@link #hideLabel} config to <tt>true</tt>.</p>
      */
@@ -208,13 +191,14 @@ Ext.define("Ext.form.Labelable", {
     /**
      * @cfg {Boolean} preventMark
      * <tt>true</tt> to disable displaying any {@link #setActiveError error message} set on this object.
+     * Defaults to <tt>false</tt>.
      */
     preventMark: false,
 
     /**
      * @cfg {Boolean} autoFitErrors
      * Whether to adjust the component's body area to make room for 'side' or 'under'
-     * {@link #msgTarget error messages}.
+     * {@link #msgTarget error messages}. Defaults to <tt>true</tt>.
      */
     autoFitErrors: true,
 
@@ -236,7 +220,7 @@ Ext.define("Ext.form.Labelable", {
     /**
      * @cfg {String} activeError
      * If specified, then the component will be displayed with this value as its active error when
-     * first rendered. Use {@link #setActiveError} or {@link #unsetActiveError} to
+     * first rendered. Defaults to undefined. Use {@link #setActiveError} or {@link #unsetActiveError} to
      * change it after component creation.
      */
 
@@ -247,9 +231,6 @@ Ext.define("Ext.form.Labelable", {
      */
     initLabelable: function() {
         this.addCls(this.formItemCls);
-        
-        // Prevent first render of active error, at Field render time from signalling a change from undefined to "
-        this.lastActiveError = '';
 
         this.addEvents(
             /**
@@ -270,56 +251,6 @@ Ext.define("Ext.form.Labelable", {
     getFieldLabel: function() {
         return this.fieldLabel || '';
     },
-    
-    /**
-     * Set the label of this field.
-     * @param {String} label The new label. The {@link #labelSeparator} will be automatically appended
-     * to the label string.
-     */
-    setFieldLabel: function(label){
-        label = label || '';
-        
-        var me = this,
-            separator = me.labelSeparator,
-            labelEl = me.labelEl,
-            last;
-        
-        me.fieldLabel = label;
-        if (me.rendered) {
-            if (Ext.isEmpty(label) && me.hideEmptyLabel) {
-                Ext.destroy(me.labelEl);
-                me.labelEl = null;
-            } else {
-                labelEl = me.createLabelEl();
-                last = label.substr(label.length - 1);
-                // append separator if necessary
-                if (last != separator) {
-                    label += separator;
-                }
-                labelEl.update(label);
-            }
-            me.doComponentLayout();
-        }
-    },
-    
-    /**
-     * Create the labelEl if it doesn't exist.
-     * @private
-     * @return {Ext.dom.Element} The labelEl
-     */
-    createLabelEl: function(){
-        var me = this;
-        
-        if (!me.labelEl) {
-            me.labelEl = me.el.insertFirst({
-                tag: 'label',
-                htmlFor: me.getInputId(),
-                cls: me.getLabelCls(),
-                style: me.getLabelStyle()
-            });
-        }
-        return me.labelEl;
-    },
 
     /**
      * @protected
@@ -327,34 +258,6 @@ Ext.define("Ext.form.Labelable", {
      * @return {Object} The template arguments
      */
     getLabelableRenderData: function() {
-        var me = this;
-
-        return Ext.copyTo(
-            {
-                inputId: me.getInputId(),
-                fieldLabel: me.getFieldLabel(),
-                labelCls: me.getLabelCls(),
-                labelStyle: me.getLabelStyle()
-            },
-            me,
-            'hideLabel,hideEmptyLabel,fieldBodyCls,baseBodyCls,errorMsgCls,clearCls,labelSeparator',
-            true
-        );
-    },
-    
-    getLabelCls: function(){
-        var labelCls = this.labelCls,
-            labelClsExtra = this.labelClsExtra;
-            
-        return labelClsExtra ? labelCls + ' ' + labelClsExtra : labelCls;
-    },
-    
-    /**
-     * Gets any label styling for the labelEl
-     * @private
-     * @return {String} The label styling
-     */
-    getLabelStyle: function(){
         var me = this,
             labelAlign = me.labelAlign,
             labelPad = me.labelPad,
@@ -371,7 +274,52 @@ Ext.define("Ext.form.Labelable", {
                 labelStyle += 'width:' + me.labelWidth + 'px;';
             }
         }
-        return labelStyle + (me.labelStyle || '');
+
+        return Ext.copyTo(
+            {
+                inputId: me.getInputId(),
+                fieldLabel: me.getFieldLabel(),
+                labelStyle: labelStyle + (me.labelStyle || ''),
+                subTplMarkup: me.getSubTplMarkup()
+            },
+            me,
+            'hideLabel,hideEmptyLabel,labelCls,fieldBodyCls,baseBodyCls,errorMsgCls,clearCls,labelSeparator',
+            true
+        );
+    },
+
+    /**
+     * @protected
+     * Returns the additional {@link Ext.AbstractComponent#renderSelectors} for selecting the field
+     * decoration elements from the rendered {@link #labelableRenderTpl}. Component classes using this mixin should
+     * be sure and merge this method's result into the component's {@link Ext.AbstractComponent#renderSelectors}
+     * before rendering.
+     */
+    getLabelableSelectors: function() {
+        return {
+            /**
+             * @property labelEl
+             * @type Ext.core.Element
+             * The label Element for this component. Only available after the component has been rendered.
+             */
+            labelEl: 'label.' + this.labelCls,
+
+            /**
+             * @property bodyEl
+             * @type Ext.core.Element
+             * The div Element wrapping the component's contents. Only available after the component has been rendered.
+             */
+            bodyEl: '.' + this.baseBodyCls,
+
+            /**
+             * @property errorEl
+             * @type Ext.core.Element
+             * The div Element that will contain the component's error message(s). Note that depending on the
+             * configured {@link #msgTarget}, this element may be hidden in favor of some other form of
+             * presentation, but will always be present in the DOM for use by assistive technologies.
+             */
+            errorEl: '.' + this.errorMsgCls
+        };
     },
 
     /**
@@ -431,7 +379,7 @@ Ext.define("Ext.form.Labelable", {
     /**
      * Gets an Array of any active error messages currently applied to the field. This does not trigger
      * validation on its own, it merely returns any messages that the component may already hold.
-     * @return {String[]} The active error messages on the component; if there are no errors, an empty Array is returned.
+     * @return {Array} The active error messages on the component; if there are no errors, an empty Array is returned.
      */
     getActiveErrors: function() {
         return this.activeErrors || [];
@@ -446,7 +394,7 @@ Ext.define("Ext.form.Labelable", {
      * to call doComponentLayout to actually update the field's layout to match. If the field extends
      * {@link Ext.form.field.Base} you should call {@link Ext.form.field.Base#markInvalid markInvalid} instead.
      *
-     * @param {String[]} errors The error messages
+     * @param {Array} errors The error messages
      */
     setActiveErrors: function(errors) {
         this.activeErrors = errors;
@@ -519,3 +467,4 @@ Ext.define("Ext.form.Labelable", {
     }
 
 });
+

@@ -3,8 +3,8 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>The source code</title>
-  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
-  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <link href="../prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../prettify/prettify.js"></script>
   <style type="text/css">
     .highlight { display: block; background-color: #ddd; }
   </style>
@@ -17,6 +17,7 @@
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js"><span id='Ext-grid-feature-RowWrap'>/**
 </span> * @class Ext.grid.feature.RowWrap
+ * @extends Ext.grid.feature.Feature
  * @private
  */
 Ext.define('Ext.grid.feature.RowWrap', {
@@ -26,16 +27,15 @@ Ext.define('Ext.grid.feature.RowWrap', {
     // turn off feature events.
     hasFeatureEvent: false,
     
-    mutateMetaRowTpl: function(metaRowTpl) {  
-        var prefix = Ext.baseCSSPrefix;      
+    mutateMetaRowTpl: function(metaRowTpl) {        
         // Remove &quot;x-grid-row&quot; from the first row, note this could be wrong
         // if some other feature unshifted things in front.
-        metaRowTpl[0] = metaRowTpl[0].replace(prefix + 'grid-row', '');
+        metaRowTpl[0] = metaRowTpl[0].replace(Ext.baseCSSPrefix + 'grid-row', '');
         metaRowTpl[0] = metaRowTpl[0].replace(&quot;{[this.embedRowCls()]}&quot;, &quot;&quot;);
         // 2
-        metaRowTpl.unshift('&lt;table class=&quot;' + prefix + 'grid-table ' + prefix + 'grid-table-resizer&quot; style=&quot;width: {[this.embedFullWidth()]}px;&quot;&gt;');
+        metaRowTpl.unshift('&lt;table class=&quot;' + Ext.baseCSSPrefix + 'grid-table ' + Ext.baseCSSPrefix + 'grid-table-resizer&quot; style=&quot;width: {[this.embedFullWidth()]}px;&quot;&gt;');
         // 1
-        metaRowTpl.unshift('&lt;tr class=&quot;' + prefix + 'grid-row {[this.embedRowCls()]}&quot;&gt;&lt;td colspan=&quot;{[this.embedColSpan()]}&quot;&gt;&lt;div class=&quot;' + prefix + 'grid-rowwrap-div&quot;&gt;');
+        metaRowTpl.unshift('&lt;tr class=&quot;' + Ext.baseCSSPrefix + 'grid-row {[this.embedRowCls()]}&quot;&gt;&lt;td colspan=&quot;{[this.embedColSpan()]}&quot;&gt;&lt;div class=&quot;' + Ext.baseCSSPrefix + 'grid-rowwrap-div&quot;&gt;');
         
         // 3
         metaRowTpl.push('&lt;/table&gt;');

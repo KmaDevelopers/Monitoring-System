@@ -13,398 +13,10 @@
         <div id="releases">
             <div class="release">
                 <h1>
-                    Release Notes for Ext JS 4.0.6
-                </h1>
-                <p class="notes">
-                    Release Date: August 30, 2011<br>
-                    Version Number: 4.0.6
-                </p>
-                <h2>
-                    Bugs Fixed
-                </h2>
-
-                <ul>
-                    <li>Grid
-                        <ul>
-                            <li>[EXTJSIV-2231] - Fixed a styling bug with grids with rowbody that would cause columns to lay out incorrectly with custom CSS</li>
-                            <li>[EXTJSIV-3246] - Fixed a bug where specifying a single grid Feature would fail as it expects an array</li>
-                            <li>[EXTJSIV-3415] - Fixed a bug where right clicking would incorrectly deselect all selected nodes (affects Windows machines only)</li>
-                            <li>[EXTJSIV-3466] - Fixed a bug where selection does not work with grid row editor and Firefox 5 / IE 9</li>
-                            <li>[EXTJSIV-3586] - Grid header drag resizes wrong header</li>
-                            <li>[EXTJSIV-3591] - Checkbox column not re-added after grid reconfigure</li>
-                            <li>[EXTJSIV-3605] - Fixed a JavaScript error when user mouse hover on the first column in the grid. (Grid plugins example)</li>
-                            <li>[EXTJSIV-3642] - Scrollbars don't appear when a custom renderer increases the height of the rows in a tree</li>
-                            <li>[EXTJSIV-3644] - Column lines are not displaying properly in the grid.</li>
-                            <li>[EXTJSIV-3645] - Summary Grid example -Vertical scroll bar is disappearing when Toggle Summary button is clicked.</li>
-                            <li>[EXTJSIV-3658] - Paging scroller doesn't function with up/page up</li>
-                            <li>[EXTJSIV-3660] - hideGroupedHeader does not work</li>
-                            <li>[EXTJSIV-3661] - Grouping doesn't remember selections</li>
-                            <li>[EXTJSIV-3668] - Loading data doesn't invoke grid's vertical scrollbar</li>
-                            <li>[EXTJSIV-3715] - Horizontal scrollbar doesn't show on empty grid</li>
-                            <li>[EXTJSIV-3717] - Fixed a bad scrollbar in dd/dnd_grid_to_grid.html</li>
-                            <li>[EXTJSIV-3725] - Grid with locked columns not syncing header heights</li>
-                            <li>[EXTJSIV-3732] - Property Grid - Page is not loaded properly. Empty space is created in between column header and rows in the grid.</li>
-                            <li>[EXTJSIV-3733] - Drag and Drop : Grid to From Dnd - Horizontal scroll bar is not displaying after increasing the column size in data grid.</li>
-                            <li>[EXTJSIV-3753] - Locked grid with checkbox selection model inserts header twice</li>
-                            <li>[EXTJSIV-3754] - Cannot create locked grid with all unlocked columns</li>
-                            <li>[EXTJSIV-3784] - Auto height grid.Panel first header cell is blank; Fixed with doComponentLayout</li>
-                            <li>[EXTJSIV-3785] - Fixed height grid.Panel doesn't show scrollbars when resizing the columns; Fixed with doComponentLayout</li>
-                            <li>[EXTJSIV-3786] - Fixed height grid.Panel bottom scrollbar covers last row; cannot scroll it completely into view</li>
-                            <li>[EXTJSIV-3514] - Failed test: Verify horizontal and Vertical scrolling in checkbox selection Grid plugin</li>
-                        </ul>
-                    </li>
-                    
-                    <li>Form
-                        <ul>
-                            <li>[EXTJSIV-3490] - Fixed a bug where Slider width is too narrow on Safari 3.2</li>
-                            <li>[EXTJSIV-3491] - Some form examples don't render correctly on safari 3.2</li>
-                            <li>[EXTJSIV-3648] - FileField's reset does not reset the textual input field.</li>
-                            <li>[EXTJSIV-3669] - Unable to reselect a combo value</li>
-                            <li>[EXTJSIV-3673] - Fieldset title are not rendered with firefox 3.6.17</li>
-                            <li>[EXTJSIV-3678] - Fixed a bug where Checkbox's checkChange event didn't fire using keyboard</li>
-                            <li>[EXTJSIV-3713] - Fixed a bug where BoundList doesn't allow custom itemCls</li>
-                            <li>[EXTJSIV-3759] - Slider destroy code incorrect</li>
-                            <li>[EXTJSIV-3774] - Editor bug -- unconditional use of field.inputEl</li>
-                            <li>[EXTJSIV-3597] - Can't enter spaces into fields inside menus</li>
-                        </ul>
-                    </li>
-
-                    <li>Charts and Drawing
-                        <ul>
-                            <li>[EXTJSIV-933] - Axis title "Number of Hits" lacks padding with Firefox 3.5 and 3.0</li>
-                            <li>[EXTJSIV-3647] - Mixed charts - Bar graph is crossing the maximum limit of Y -Axis (Number of Hits) when click on the reload button couple of times.</li>
-
-                        </ul>
-                    </li>
-
-                    <li>Data
-                        <ul>
-                            <li>[EXTJSIV-3325] - Fixed a bug where the 'presence' validation would incorrectly return false for numeric zero values</li>
-                            <li>[EXTJSIV-3522] - [4.0.2] beginEdit leads to 'update' event not fired on Store</li>
-                            <li>[EXTJSIV-3593] - Fixed a bug with record.validate() and length validator when value is null</li>
-                            <li>[EXTJSIV-3662] - The "isLoading()" method of Ext.data.TreeStore returns true even after loading has completed</li>
-                            <li>[EXTJSIV-3757] - Ext.data.Store modifies the original config object passed in</li>
-                        </ul>
-                    </li>
-
-                    <li>General
-                        <ul>
-                            <li>[EXTJSIV-459] - Improved docs for maskRe, stripCharsRe, regex, and regexText</li>
-                            <li>[EXTJSIV-3037] - Fixed a bug where an error would be thrown if a Tab's width is greater than the configured maxTabWidth</li>
-                            <li>[EXTJSIV-3460] - Checkboxes now correctly remove themselves from the CheckboxManager when destroyed</li>
-                            <li>[EXTJSIV-3474] - Fixed sandboxing bugs where Fieldset, TriggerField and Menu would not be correctly wrapped in CSS scoping divs</li>
-                            <li>[EXTJSIV-3537] - Ext.destroyMembers was being called incorrectly in some components</li>
-                            <li>[EXTJSIV-3598] - Unable to select text in field in menu in FF</li>
-                            <li>[EXTJSIV-3638] - Fixed a number of issues with Load Masks</li>
-                            <li>[EXTJSIV-3646] - Complex Dashboard - Company Detail caption is not displaying in FF 3.6 browser.</li>
-                            <li>[EXTJSIV-3674] - Custom Grid Filters Example was throwing a JavaScript error</li>
-                            <li>[EXTJSIV-3718] - There is no padding between fields in statusbar/statusbar-advanced.html</li>
-                            <li>[EXTJSIV-3724] - Accordion layout does not properly hide toolbar when button is clicked to expand/collapse its parent</li>
-                            <li>[EXTJSIV-3726] - Ensure owning Container is laid out after an autosized Component is laid out.</li>
-                            <li>[EXTJSIV-3740] - Portal Demo - Displaying Java script error when click on Legend items in the Stock Portlets</li>
-                            <li>[EXTJSIV-3768] - variable $toolbar-border-color was ignored</li>
-                        </ul>
-
-                    </li>
-
-                    <li>Sandbox
-                        <ul>
-                            <li>[EXTJSIV-3681] - Vertical panel header text color incorrect in sandbox mode</li>
-                            <li>[EXTJSIV-3683] - Window resize not visible in sandbox mode</li>
-                            <li>[EXTJSIV-3688] - Can't vertically resize window in sandbox mode</li>
-                            <li>[EXTJSIV-3689] - Window constrain fails in sandbox mode</li>
-                            <li>[EXTJSIV-3695] - Grid's AbstractSummary feature had been hard-coding base CSS prefix so sandboxing would not work</li>
-                            <li>[EXTJSIV-3702] - Fixed a bug where the JSONP callbacks would use the normal Ext namespace instead of the sandbox namespace in sandbox mode</li>
-                            <li>[EXTJSIV-3714] - Tooltip positioning incorrect in sandbox mode</li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            
-            <div class="release">
-                <h1>
-                    Release Notes for Ext JS 4.0.5
-                </h1>
-                <p class="notes">
-                    Release Date: July 24, 2011<br>
-                    Version Number: 4.0.5
-                </p>
-                <h2>
-                    Bugs Fixed
-                </h2>
-
-                <ul>
-                    <li>Grid
-                        <ul>
-                            <li>[EXTJSIV-2442] - Grouped Grid Header does not handle flex column show/hide well (layout issues)</li>
-                            <li>[EXTJSIV-2464] - Not possible to access the properties of the columns (locked=true)</li>
-                            <li>[EXTJSIV-2471] - "Group by this field" in Remote Summary Grid gives JS error</li>
-                            <li>[EXTJSIV-2543] - Cell Editing, intra-row change of focus.</li>
-                            <li>[EXTJSIV-2572] - Grid column header menu trigger gets stuck when there's no header menu</li>
-                            <li>[EXTJSIV-2573] - Ext.grid.plugin.DragDrop should honor disabled flag</li>
-                            <li>[EXTJSIV-3377] - Grid deferRowRender causes defer shim to be set on store listeners</li>
-                            <li>[EXTJSIV-3457] - Grid needs a viewready event which fires when the DOM rows become available.</li>
-                            <li>[EXTJSIV-3485] - Locking grid example is throwing an Hard JS error "Cannot call method 'removeCls' of undefined"</li>
-                            <li>[EXTJSIV-3489] - Grid layout is incorrect in form dashboard example</li>
-                            <li>[EXTJSIV-3492] - Form grid access examples has incorrect columns size on IE7 and IE6</li>
-                            <li>[EXTJSIV-3494] - Grid mask in custom-form example size is not equal to grid body</li>
-                            <li>[EXTJSIV-3562] - grid/form-grid.html must select the first row on page load</li>
-                        </ul>
-                    </li>
-
-                    <li>Window
-                        <ul>
-                            <li>[EXTJSIV-1732] - Progress Dialog window locked up if you reopen it after closing it</li>
-                            <li>[EXTJSIV-1994] - Strange Ext.window.Window rendering issue in WebKit browsers when placed over Java applet</li>
-                            <li>[EXTJSIV-2511] - Ghosted windows should not be stateful</li>
-                        </ul>
-                    </li>
-
-                    <li>Form
-                        <ul>
-                            <li>[EXTJSIV-2425] - HTMLEditor corrupted when changing background color of selection</li>
-                            <li>[EXTJSIV-3035] - [4.0.1]ComboBox submit the wrong content</li>
-                            <li>[EXTJSIV-3298] - [4.0.2] combobox setValue doesn't as expected</li>
-                            <li>[EXTJSIV-3330] - Setting the editable combobox to a value that is not in the list results in empty val</li>
-                            <li>[EXTJSIV-3413] - Highlight during trigger click</li>
-                            <li>[EXTJSIV-3414] - validateedit does not have new values</li>
-                            <li>[EXTJSIV-3418] - No way to get reference to field.Picker from BoundList</li>
-                            <li>[EXTJSIV-3495] - The Loading Mask in custom form example is not constraint to grid body.</li>
-                            <li>[EXTJSIV-3520] - RowExpander doesn't work on ExtJs 4.0.2 (ext-all-debug.js) but worked on (ext-all.js)</li>
-                            <li>[EXTJSIV-3561] - form/combos.html example: combobox unobtrusive select transformation doesn't work </li>
-                        </ul>
-                    </li>
-
-                    <li>Tree
-                        <ul>
-                            <li>[EXTJSIV-2197] - Failed test: Verify the tree panel when user click's on Expand All button.</li>
-                            <li>[EXTJSIV-2200] - Failed test: Verify the panel after user click's on Tree expander button</li>
-                            <li>[EXTJSIV-2204] - Dblclick expand/collapse in check-tree example causes JS error</li>
-                            <li>[EXTJSIV-2276] - Collapsing a tree panel w/collapsed nodes throws JS error</li>
-                            <li>[EXTJSIV-3362] - expandPath fails when a node is already loading</li>
-                        </ul>
-                    </li>
-
-                    <li>Layouts
-                        <ul>
-                            <li>[EXTJSIV-2431] - Accordion is missing a border when collapsed</li>
-                            <li>[EXTJSIV-2547] - Child components not rendered.sized in initially collapsed, uncontained Panel.</li>
-                            <li>[EXTJSIV-3295] - 4.0.2 only - layout fit grid scrollbar when used does not scroll content</li>
-                            <li>[EXTJSIV-3410] - Collapsing/expanding of flexed panels doesn't work</li>
-                            <li>[EXTJSIV-3541] - Cannot hide collapsed regions in a border layout</li>
-                        </ul>
-                    </li>
-
-                    <li>Charts and Drawing
-                        <ul>
-                            <li>[EXTJSIV-3045] - Add check in DrawComponent to ensure we have a valid surface before continuing execution</li>
-                            <li>[EXTJSIV-3456] - Printing legends in IE causes orange rectangles appear.</li>
-                        </ul>
-                    </li>
-
-                    <li>Data
-                        <ul>
-                            <li>[EXTJSIV-1897] - Ext.data.Store buffered issue - error thrown if records are not available on the server</li>
-                            <li>[EXTJSIV-3351] - processResponse is wrong in Ext.data.proxy.Server</li>
-                            <li>[EXTJSIV-3464] - Direct exception events don't fire on the provider.</li>
-                            <li>[EXTJSIV-3471] - Boolean field data type is not being converted properly.</li>
-                            <li>[EXTJSIV-3540] - indexOfTotal fails if the index is 0</li>
-                        </ul>
-                    </li>
-
-                    <li>General
-                        <ul>
-                            <li>[EXTJSIV-1638] - ComboBox should select the configured value upon first load of the Store. </li>
-                            <li>[EXTJSIV-2405] - Docked items added after render don't render correctly</li>
-                            <li>[EXTJSIV-2434] - Infinite scrolling is buggy on safari 3.X (the grid doesn't render the first rows)</li>
-                            <li>[EXTJSIV-2549] - Collapsed Tabpanel misses the bottom border</li>
-                            <li>[EXTJSIV-2565] - A button with a menu defined is only showing the menu when the mouse is over the arrow but in 3.x the menu showed as soon as the mouse was anywhere over the button</li>
-                            <li>[EXTJSIV-2577] - Class aliases that use a period as a separator break DOM/CQ selection</li>
-                            <li>[EXTJSIV-2628] - Ext.tab.Bar - minTabWidth has no effect</li>
-                            <li>[EXTJSIV-3284] - data-qtitle not consistently rendered.</li>
-                            <li>[EXTJSIV-3327] - [4.0.2] Plugins instantiated too early in AbstractComponent</li>
-                            <li>[EXTJSIV-3412] - Toolbar with overflow doesn't include menu in refItems</li>
-                            <li>[EXTJSIV-3453] - AbstractComponent calls constructPlugins too early</li>
-                            <li>[EXTJSIV-3470] - scrollByDeltaX() incorrectly using the vertical scroller</li>
-                            <li>[EXTJSIV-3483] - Some examples renders a blank page</li>
-                            <li>[EXTJSIV-3486] - Animated DataView throw and hard js error "Cannot call method animate of null"</li>
-                            <li>[EXTJSIV-3487] - Animated DataView example throw and hard js error "Cannot call method animate of null"</li>
-                            <li>[EXTJSIV-3488] - MultiSelect and Key-Feed-Viewer examples are throwing an hard js error 'Cannot call method addCls of null'</li>
-                            <li>[EXTJSIV-3490] - Sliders width is too narrow on Safari 3.2</li>
-                            <li>[EXTJSIV-3491] - Some form examples don't render correctly on safari 3.2</li>
-                            <li>[EXTJSIV-3496] - The theme index example is automatically scrolled on IE.</li>
-                            <li>[EXTJSIV-3539] - LoadMask beforeLoad causes a crash</li>
-                        </ul>
-                    </li>
-                </ul>
-
-                <h2>
-                    Improvements
-                </h2>
-                
-                <ul>
-                    <li>[EXTJSIV-1999] - Improved Themes Example Performance</li>
-                    <li>[EXTJSIV-3323] - [4.0] Ext.tab.Panel history feature missing</li>
-                    <li>[EXTJSIV-1907] - Refactored the renderSelectors functionality to use local element IDs instead of CSS selectors so that render selector performance is improved</li>
-                    <li>[EXTJSIV-2575] - Ext core class namespaces made consistent in the API docs</li>
-                    <li>[EXTJSIV-1887] - Tree now supports horizontal scrolling</li>
-                    <li>[EXTJSIV-2436] - dynamic_form field alignment</li>
-                </ul>
-            </div>
-            
-            <div class="release">
-                <h1>
-                    Release Notes for Ext JS 4.0.4
-                </h1>
-                <p class="notes">
-                    Release Date: June 29, 2011<br>
-                    Version Number: 4.0.4
-                </p>
-                <h2>
-                    Bugs Fixed
-                </h2>
-
-                <ul>
-                    <li>Grid
-                        <ul>
-                            <li>[EXTJSIV-1032] - Grid CheckColumn 1px to left in header</li>
-                            <li>[EXTJSIV-2122] - Cell Editing doesn't allow for custom autoSize</li>
-                            <li>[EXTJSIV-2124] - Grid: RowExpander Plugin adds additional columns</li>                
-                            <li>[EXTJSIV-2251] - Action Column doesn't allow alt text per action</li>
-                            <li>[EXTJSIV-2351] - Implement the more intuitive resizable: false on grid Columns. fixed is deprecated.</li>
-                            <li>[EXTJSIV-2381] - grid/array-grid.html Actions icons should be moved up of 1 pixel</li>
-                            <li>[EXTJSIV-2460] - Regression in Sorting buffered Grid (First row is chopped off)</li>
-                            <li>[EXTJSIV-2428] - Unable to set cell editor dynamically</li>
-                            <li>[EXTJSIV-2466] - Buffered scrolling broken in latest Chrome</li>
-                            <li>[EXTJSIV-2496] - Grid crashes when removing it from a tab panel</li>
-                            <li>[EXTJSIV-2501] - Grid applyState smashes column minWidth and has JS errors for locking grids</li>
-                            <li>[EXTJSIV-2564] - Grid missing horizontal scrollbar</li>
-                            <li>[EXTJSIV-2574] - $grid-row-cell-background variable unused</li>
-                            <li>[EXTJSIV-3029] - Reconfigure fails when no columns are passed</li>
-                            <li>[EXTJSIV-3299] - (IE7) Grid body alignement is incorrect in form-grid example</li>
-                            <li>[EXTJSIV-3309] - Grid reconfigure breaks columns layout</li>
-                            <li>[EXTJSIV-3363] - Grid header is too narrow on IE6/IE7/IE9</li>
-                        </ul>
-                    </li>
-
-                    <li>Tree
-                        <ul>
-                            <li>[EXTJSIV-1887] - Tree does not allow horizontal scrolling</li>
-                            <li>[EXTJSIV-2207] - Dblclick expand/collapse in XML Tree example causes JS error</li>
-                            <li>[EXTJSIV-2276] - Collapsing a tree panel w/collapsed nodes throws JS error</li>
-                            <li>[EXTJSIV-2517] - getNode needs a rendered check</li>
-                            <li>[EXTJSIV-2518] - NodeInterface missing getPath</li>
-                        </ul>
-                    </li>
-
-                    <li>Forms
-                        <ul>
-                            <li>[EXTJSIV-2104] - Fieldset display strange in IE</li>
-                            <li>[EXTJSIV-2130] - Specify labelCls messes up height on TextField</li>
-                            <li>[EXTJSIV-2165] - JS error when selecting item in combo box</li>
-                            <li>[EXTJSIV-2167] - JS error when selecting multiple items in combo box</li>
-                            <li>[EXTJSIV-2168] - JS error when selecting item in combo box</li>
-                            <li>[EXTJSIV-2169] - Cannot select item in combo after entering invalid text</li>                
-                            <li>[EXTJSIV-2210] - Failed test: Verify the Submit button in the xml form</li>
-                            <li>[EXTJSIV-2338] - Checkbox group/checkbox in fieldset too low</li>
-                            <li>[EXTJSIV-2349] - examples/form/form-grid-access.html loses its description text</li>
-                            <li>[EXTJSIV-2366] - ComboBox should have getStore method</li>
-                            <li>[EXTJSIV-2380] - form/checkout.html The disabled Street Address field is lighter than other fields</li>
-                            <li>[EXTJSIV-2459] - Checkbox select gives commitFn is not a function</li>
-                            <li>[EXTJSIV-2470] - Combo doesn't send queryParam on page change</li>
-                            <li>[EXTJSIV-2522] - Field crashes if destroyed when focused</li>
-                            <li>[EXTJSIV-2523] - DatePicker has undefined var</li>
-                            <li>[EXTJSIV-2527] - File field crashes when reset on unrendered field.</li>
-                            <li>[EXTJSIV-2529] - Combo does not adjust list height to fit viewport</li>
-                            <li>[EXTJSIV-2531] - Slider crashes when calling setMinValue/setMaxValue when it's not rendered</li>
-                            <li>[EXTJSIV-2546] - TextField filterKeys not applied when using alt + gr key</li>
-                            <li>[EXTJSIV-2553] - The "formBind" config does not work for buttons defined in a Form Panel's "buttons" config</li>
-                            <li>[EXTJSIV-2499] - Date picker month selector animation issues (including runtime error)</li>
-                            <li>[EXTJSIV-3028] - Combo in editor always tries to force selection</li>
-                        </ul>
-                    </li>
-
-                    <li>Tabs
-                        <ul>
-                            <li>[EXTJSIV-1034] - When there's only one tab in a TabPanel, and it's active by default, the tab selector in the tab strip is not set to the active state.</li>
-                            <li>[EXTJSIV-2542] - Ext.tab.Panel styling issues</li>
-                            <li>[EXTJSIV-3300] - TabBar background color is incorrect (no gradients) in all browsers except chrome and firefox</li>
-                        </ul>
-                    </li>
-
-                    <li>Panel
-                        <ul>
-                            <li>[EXTJSIV-2506] - Panel header should set overflow hidden for text</li>
-                            <li>[EXTJSIV-3311] - Collapsed panel layout error inside a viewport</li>
-                        </ul>
-                    </li>
-
-                    <li>Toolbars and Buttons
-                        <ul>
-                            <li>[EXTJSIV-2185] - Add textAlign cfg to Ext.button.Button</li>
-                            <li>[EXTJSIV-2387] - toolbar/toolbars example, the title of ButtonGroup is not centered anymore</li>
-                            <li>[EXTJSIV-2475] - Button icons are not well aligned on ie6 only</li>
-                            <li>[EXTJSIV-2513] - Scrolling menu in Basic Toolbar example fails</li>
-                            <li>[EXTJSIV-2544] - ButtonGroup renders blue with gray style in Ext 4.0.2</li>
-                        </ul>
-                    </li>
-
-                    <li>Window
-                        <ul>
-                            <li>[EXTJSIV-1667] - Improper Resize Handles Position / Offset in IEs</li>
-                            <li>[EXTJSIV-1732] - Progress Dialog window locking</li>
-                            <li>[EXTJSIV-2193] - Failed test: Verify Window resize using Drag and Drop</li>
-                            <li>[EXTJSIV-2505] - When you set modal:true on a window and renderTo it to a panel, it masks the whole body, not the panel</li>
-                        </ul>
-                    </li>
-
-                    <li>Charts
-                        <ul>
-                            <li>[EXTJSIV-2508] - Chart doesn't support not being passed a config object</li>
-                            <li>[EXTJSIV-2521] - Destroying unrendered chart causes error</li>
-                        </ul>
-                    </li>
-
-                    <li>Miscellaneous
-                        <ul>
-                            <li>[EXTJSIV-1066] - Calling Container.add() with a floating component does not render that component</li>
-                            <li>[EXTJSIV-1086] - Theme Example: Progress Bar's Right Pixel Border changes color while animating</li>
-                            <li>[EXTJSIV-1659] - Text hidden when column is short</li>
-                            <li>[EXTJSIV-2074] - Failed test: Verify that East panel expands when clicked on the expand button at left side of the center panel</li>
-                            <li>[EXTJSIV-2101] - Shadows not shown on certain floating items such as Menu and ComboBox list.</li>
-                            <li>[EXTJSIV-2132] - Expand sets height before anim on Panel using VBoxLayout</li>
-                            <li>[EXTJSIV-2192] - Failed test: Verify pane resize using resize bar</li>
-                            <li>[EXTJSIV-2226] - Failed test: Verify the user is able to select option from options drop down under ItemSelectorTest table</li>
-                            <li>[EXTJSIV-2252] - Need to fix DomQuery for non document rooted queries</li>
-                            <li>[EXTJSIV-2284] - Web Desktop, System Status Window is slow on IE (causes script warning)</li>
-                            <li>[EXTJSIV-2332] - Fix build warning for nested-loading MVC app</li>                                
-                            <li>[EXTJSIV-2391] - Ext.core.DomHelper should be aliased to Ext.DomHelper for backwards compat</li>
-                            <li>[EXTJSIV-2394] - Center region of border layout should have overflow:auto</li>
-                            <li>[EXTJSIV-2411] - Format.number can return -0</li>
-                            <li>[EXTJSIV-2500] - Gray theme has not styled button group</li>
-                            <li>[EXTJSIV-2507] - reader.Array doesn't work with a 0 mapping.</li>
-                            <li>[EXTJSIV-2509] - Tool ignores tooltip option</li>
-                            <li>[EXTJSIV-2510] - Button tooltipType title doesn't work</li>
-                            <li>[EXTJSIV-2520] - Menu strict typo</li>
-                            <li>[EXTJSIV-2519] - Store should give a warning if model isn't defined</li>
-                            <li>[EXTJSIV-2526] - AbstractContainer, child/down selector should be optional</li>
-                            <li>[EXTJSIV-2530] - Show event fires too early for animated component</li>
-                            <li>[EXTJSIV-2532] - Store does not consistently pass all event parameters to beforeload event</li>
-                            <li>[EXTJSIV-2537] - Box layout doesn't destroy innerCt</li>
-                            <li>[EXTJSIV-2839] - Component destroy event fires too late</li>
-                            <li>[EXTJSIV-3027] - Hidden tools get ghosted</li>
-                            <li>[EXTJSIV-3310] - Accordion layout does not handle grid properly</li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            
-            <div class="release">
-                <h1>
                     Release Notes for Ext JS 4.0.2
                 </h1>
                 <p class="notes">
-                    Release Date: June 9, 2011<br>
+                    Release Notes: June 9, 2011<br>
                     Version Number: 4.0.2
                 </p>
                 <h2>
@@ -427,7 +39,7 @@
                             <li>[EXTJSIV-1874] - Grid Performance is too slow in IE</li>
                             <li>[EXTJSIV-1968] - Ext.table.Panel: enableColumnHide</li>
                             <li>[EXTJSIV-1934] - Hiding subcolumn causes width to display incorrectly</li>
-                            <li>[EXTJSIV-1969] - IE 8 &amp; 9: Ext.grid.plugin.RowEditing and PagingToolbar</li>
+                            <li>[EXTJSIV-1969] - IE 8 & 9: Ext.grid.plugin.RowEditing and PagingToolbar</li>
                             <li>[EXTJSIV-1971] - Javascript error during cell editing</li>
                             <li>[EXTJSIV-2061] - Grid vertical scrollbar is reset when when the grid panel is collapsed and then expanded</li>
                             <li>[EXTJSIV-2062] - Call to grid.reconfigure on a rendered grid that initially has no columns configured results in the first row being hidden behind the column headers if the grid does not contain enough data to require scrollbars, different behavior with larger data set</li>
@@ -708,7 +320,7 @@
                     Release Notes for Ext JS 4.0.1
                 </h1>
                 <p class="notes">
-                    Release Date: May 17, 2011<br>
+                    Release Notes: May 17, 2011<br>
                     Version Number: 4.0.1
                 </p>
                 <h2>
@@ -948,7 +560,7 @@
                     Release Notes for Ext JS 4.0 Final
                 </h1>
                 <p class="notes">
-                    Release Date: April 26, 2011<br>
+                    Release Notes: April 26, 2011<br>
                     Version Number: 4.0.0
                 </p>
                 <h2>
@@ -1537,7 +1149,7 @@
                     Release Notes for Ext JS 4 Beta 3
                 </h1>
                 <p class="notes">
-                    Release Date: April 14, 2011<br>
+                    Release Notes: April 14, 2011<br>
                     Version Number: 4.0.0beta3
                 </p>
                 <h2>
@@ -2344,7 +1956,7 @@
                     Release Notes for Ext JS 4 Beta 2
                 </h1>
                 <p class="notes">
-                    Release Date: April 6, 2011<br>
+                    Release Notes: April 6, 2011<br>
                     Version Number: 4.0.0beta2
                 </p>
                 <h2>
@@ -2919,7 +2531,7 @@
                     Release Notes for Ext JS 4 Beta 1
                 </h1>
                 <p class="notes">
-                    Release Date: March 30, 2011<br>
+                    Release Notes: March 30, 2011<br>
                     Version Number: 4.0.0beta1
                 </p>
                 <h2>
@@ -3491,7 +3103,7 @@
                     Release Notes for Ext JS 4 PR5
                 </h1>
                 <p class="notes">
-                    Release Date: March 18, 2011<br>
+                    Release Notes: March 18, 2011<br>
                     Version Number: 4.0.0pr5
                 </p>
                 <h2>
@@ -3760,7 +3372,7 @@
                     Release Notes for Ext JS 4 Preview Release 4
                 </h1>
                 <p class="notes">
-                    Release Date: March 15, 2011<br>
+                    Release Notes: March 15, 2011<br>
                     Version Number: 4.0.0pr4
                 </p>
                 <h2>
@@ -4281,7 +3893,7 @@
                     Release Notes for Ext JS 4 PR3
                 </h1>
                 <p class="notes">
-                    Release Date: March 3, 2011<br>
+                    Release Notes: March 3, 2011<br>
                     Version Number: 4.0.0pr3
                 </p>
                 <h2>
@@ -4533,7 +4145,7 @@
                     Release Notes for Ext JS 4 PR2
                 </h1>
                 <p class="notes">
-                    Release Date: February 23, 2011<br>
+                    Release Notes: February 23, 2011<br>
                     Version Number: 4.0.0pr2
                 </p>
                 <h2>
@@ -4847,7 +4459,7 @@
                     Release Notes for Ext JS 4 PR1
                 </h1>
                 <p class="notes">
-                    Release Date: February 16, 2011<br>
+                    Release Notes: February 16, 2011<br>
                     Version Number: 4.0.0pr1
                 </p>
                 <h2>

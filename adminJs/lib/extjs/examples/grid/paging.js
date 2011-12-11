@@ -1,3 +1,17 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 Ext.Loader.setConfig({enabled: true});
 
 Ext.Loader.setPath('Ext.ux', '../ux/');
@@ -19,7 +33,7 @@ Ext.onReady(function(){
     Ext.define('ForumThread', {
         extend: 'Ext.data.Model',
         fields: [
-            'title', 'forumtitle', 'forumid', 'username',
+            'title', 'forumtitle', 'forumid', 'author',
             {name: 'replycount', type: 'int'},
             {name: 'lastpost', mapping: 'lastpost', type: 'date', dateFormat: 'timestamp'},
             'lastposter', 'excerpt', 'threadid'
@@ -62,7 +76,7 @@ Ext.onReady(function(){
     }
 
     function renderLast(value, p, r) {
-        return Ext.String.format('{0}<br/>by {1}', Ext.Date.dateFormat(value, 'M j, Y, g:i a'), r.get('lastposter'));
+        return Ext.String.format('{0}<br/>by {1}', Ext.Date.dateFormat(value, 'M j, Y, g:i a'), r.data['lastposter']);
     }
 
 
@@ -99,7 +113,7 @@ Ext.onReady(function(){
             sortable: false
         },{
             text: "Author",
-            dataIndex: 'username',
+            dataIndex: 'author',
             width: 100,
             hidden: true,
             sortable: true
@@ -140,3 +154,4 @@ Ext.onReady(function(){
     // trigger the data store load
     store.loadPage(1);
 });
+

@@ -3,8 +3,8 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>The source code</title>
-  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
-  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <link href="../prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../prettify/prettify.js"></script>
   <style type="text/css">
     .highlight { display: block; background-color: #ddd; }
   </style>
@@ -16,11 +16,14 @@
 </head>
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js"><span id='Ext-util-Region'>/**
-</span> * This class represents a rectangular region in X,Y space, and performs geometric
- * transformations or tests upon the region.
+</span> * @class Ext.util.Region
+ * @extends Object
  *
- * This class may be used to compare the document regions occupied by elements.
+ * &lt;p&gt;This class represents a rectangular region in X,Y space, and performs geometric
+ * transformations or tests upon the region.&lt;/p&gt;
+ * &lt;p&gt;This class may be used to compare the document regions occupied by elements.&lt;/p&gt;
  */
+
 Ext.define('Ext.util.Region', {
 
     /* Begin Definitions */
@@ -28,20 +31,20 @@ Ext.define('Ext.util.Region', {
     requires: ['Ext.util.Offset'],
 
     statics: {
-<span id='Ext-util-Region-static-method-getRegion'>        /**
+<span id='Ext-util-Region-method-getRegion'>        /**
 </span>         * @static
          * Retrieves an Ext.util.Region for a particular element.
-         * @param {String/HTMLElement/Ext.Element} el An element ID, htmlElement or Ext.Element representing an element in the document.
+         * @param {Mixed} el An element ID, htmlElement or Ext.core.Element representing an element in the document.
          * @returns {Ext.util.Region} region
          */
         getRegion: function(el) {
             return Ext.fly(el).getPageBox(true);
         },
 
-<span id='Ext-util-Region-static-method-from'>        /**
+<span id='Ext-util-Region-method-from'>        /**
 </span>         * @static
-         * Creates a Region from a &quot;box&quot; Object which contains four numeric properties `top`, `right`, `bottom` and `left`.
-         * @param {Object} o An object with `top`, `right`, `bottom` and `left` properties.
+         * Creates a Region from a &quot;box&quot; Object which contains four numeric properties &lt;code&gt;top&lt;/code&gt;, &lt;code&gt;right&lt;/code&gt;, &lt;code&gt;bottom&lt;/code&gt; and &lt;code&gt;left&lt;/code&gt;.
+         * @param {Object} o An object with &lt;code&gt;top&lt;/code&gt;, &lt;code&gt;right&lt;/code&gt;, &lt;code&gt;bottom&lt;/code&gt; and &lt;code&gt;left&lt;/code&gt; properties.
          * @return {Ext.util.Region} region The Region constructed based on the passed object
          */
         from: function(o) {
@@ -69,7 +72,6 @@ Ext.define('Ext.util.Region', {
 <span id='Ext-util-Region-method-contains'>    /**
 </span>     * Checks if this region completely contains the region that is passed in.
      * @param {Ext.util.Region} region
-     * @return {Boolean}
      */
     contains : function(region) {
         var me = this;
@@ -103,7 +105,6 @@ Ext.define('Ext.util.Region', {
 <span id='Ext-util-Region-method-union'>    /**
 </span>     * Returns the smallest region that contains the current AND targetRegion.
      * @param {Ext.util.Region} region
-     * @return {Ext.util.Region} a new region
      */
     union : function(region) {
         var me = this,
@@ -118,7 +119,6 @@ Ext.define('Ext.util.Region', {
 <span id='Ext-util-Region-method-constrainTo'>    /**
 </span>     * Modifies the current region to be constrained to the targetRegion.
      * @param {Ext.util.Region} targetRegion
-     * @return {Ext.util.Region} this
      */
     constrainTo : function(r) {
         var me = this,
@@ -136,7 +136,6 @@ Ext.define('Ext.util.Region', {
      * @param {Number} right right offset
      * @param {Number} bottom bottom offset
      * @param {Number} left left offset
-     * @return {Ext.util.Region} this
      */
     adjust : function(t, r, b, l) {
         var me = this;
@@ -149,8 +148,8 @@ Ext.define('Ext.util.Region', {
 
 <span id='Ext-util-Region-method-getOutOfBoundOffset'>    /**
 </span>     * Get the offset amount of a point outside the region
-     * @param {String} [axis]
-     * @param {Ext.util.Point} [p] the point
+     * @param {String} axis optional
+     * @param {Ext.util.Point} p the point
      * @return {Ext.util.Offset}
      */
     getOutOfBoundOffset: function(axis, p) {
@@ -162,7 +161,7 @@ Ext.define('Ext.util.Region', {
             }
         } else {
             p = axis;
-            var d = new Ext.util.Offset();
+            var d = Ext.create('Ext.util.Offset');
             d.x = this.getOutOfBoundOffsetX(p.x);
             d.y = this.getOutOfBoundOffsetY(p.y);
             return d;
@@ -202,8 +201,8 @@ Ext.define('Ext.util.Region', {
 
 <span id='Ext-util-Region-method-isOutOfBound'>    /**
 </span>     * Check whether the point / offset is out of bound
-     * @param {String} [axis]
-     * @param {Ext.util.Point/Number} [p] the point / offset
+     * @param {String} axis optional
+     * @param {Ext.util.Point/Number} p the point / offset
      * @return {Boolean}
      */
     isOutOfBound: function(axis, p) {
@@ -237,13 +236,12 @@ Ext.define('Ext.util.Region', {
         return (p &lt; this.y || p &gt; this.bottom);
     },
 
-<span id='Ext-util-Region-method-restrict'>    /**
-</span>     * Restrict a point within the region by a certain factor.
-     * @param {String} [axis]
-     * @param {Ext.util.Point/Ext.util.Offset/Object} [p]
-     * @param {Number} [factor]
+    /*
+     * Restrict a point within the region by a certain factor.
+     * @param {String} axis Optional
+     * @param {Ext.util.Point/Ext.util.Offset/Object} p
+     * @param {Number} factor
      * @return {Ext.util.Point/Ext.util.Offset/Object/Number}
-     * @private
      */
     restrict: function(axis, p, factor) {
         if (Ext.isObject(axis)) {
@@ -274,12 +272,11 @@ Ext.define('Ext.util.Region', {
         }
     },
 
-<span id='Ext-util-Region-method-restrictX'>    /**
-</span>     * Restrict an offset within the region by a certain factor, on the x-axis
+    /*
+     * Restrict an offset within the region by a certain factor, on the x-axis
      * @param {Number} p
-     * @param {Number} [factor=1] The factor.
-     * @return {Number}
-     * @private
+     * @param {Number} factor The factor, optional, defaults to 1
+     * @return
      */
     restrictX : function(p, factor) {
         if (!factor) {
@@ -295,12 +292,10 @@ Ext.define('Ext.util.Region', {
         return p;
     },
 
-<span id='Ext-util-Region-method-restrictY'>    /**
-</span>     * Restrict an offset within the region by a certain factor, on the y-axis
+    /*
+     * Restrict an offset within the region by a certain factor, on the y-axis
      * @param {Number} p
-     * @param {Number} [factor] The factor, defaults to 1
-     * @return {Number}
-     * @private
+     * @param {Number} factor The factor, optional, defaults to 1
      */
     restrictY : function(p, factor) {
         if (!factor) {
@@ -316,10 +311,9 @@ Ext.define('Ext.util.Region', {
         return p;
     },
 
-<span id='Ext-util-Region-method-getSize'>    /**
-</span>     * Get the width / height of this region
+    /*
+     * Get the width / height of this region
      * @return {Object} an object with width and height properties
-     * @private
      */
     getSize: function() {
         return {
@@ -338,7 +332,7 @@ Ext.define('Ext.util.Region', {
 
 <span id='Ext-util-Region-method-copyFrom'>    /**
 </span>     * Copy the values of another Region to this Region
-     * @param {Ext.util.Region} p The region to copy from.
+     * @param {Region} The region to copy from.
      * @return {Ext.util.Region} This Region
      */
     copyFrom: function(p) {
@@ -361,9 +355,9 @@ Ext.define('Ext.util.Region', {
 
 <span id='Ext-util-Region-method-translateBy'>    /**
 </span>     * Translate this region by the given offset amount
-     * @param {Ext.util.Offset/Object} x Object containing the `x` and `y` properties.
+     * @param {Ext.util.Offset/Object} offset Object containing the &lt;code&gt;x&lt;/code&gt; and &lt;code&gt;y&lt;/code&gt; properties.
      * Or the x value is using the two argument form.
-     * @param {Number} y The y value unless using an Offset object.
+     * @param {Number} The y value unless using an Offset object.
      * @return {Ext.util.Region} this This Region
      */
     translateBy: function(x, y) {

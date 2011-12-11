@@ -1,3 +1,17 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 Ext.Loader.setConfig({
     enabled: true
 });
@@ -70,14 +84,14 @@ Ext.onReady(function(){
             header: 'Common Name',
             dataIndex: 'common',
             flex: 1,
-            editor: {
+            field: {
                 allowBlank: false
             }
         }, {
             header: 'Light',
             dataIndex: 'light',
             width: 130,
-            editor: {
+            field: {
                 xtype: 'combobox',
                 typeAhead: true,
                 triggerAction: 'all',
@@ -98,7 +112,7 @@ Ext.onReady(function(){
             width: 70,
             align: 'right',
             renderer: 'usMoney',
-            editor: {
+            field: {
                 xtype: 'numberfield',
                 allowBlank: false,
                 minValue: 0,
@@ -109,7 +123,7 @@ Ext.onReady(function(){
             dataIndex: 'availDate',
             width: 95,
             renderer: formatDate,
-            editor: {
+            field: {
                 xtype: 'datefield',
                 format: 'm/d/y',
                 minValue: '01/01/06',
@@ -133,14 +147,14 @@ Ext.onReady(function(){
         tbar: [{
             text: 'Add Plant',
             handler : function(){
-                // Create a model instance
-                var r = Ext.create('Plant', {
+                // Create a record instance through the ModelManager
+                var r = Ext.ModelManager.create({
                     common: 'New Plant 1',
                     light: 'Mostly Shady',
                     price: 0,
                     availDate: Ext.Date.clearTime(new Date()),
                     indoor: false
-                });
+                }, 'Plant');
                 store.insert(0, r);
                 cellEditing.startEditByPosition({row: 0, column: 0});
             }
@@ -162,3 +176,4 @@ Ext.onReady(function(){
         }
     });
 });
+

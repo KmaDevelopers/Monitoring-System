@@ -3,8 +3,8 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>The source code</title>
-  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
-  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <link href="../prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../prettify/prettify.js"></script>
   <style type="text/css">
     .highlight { display: block; background-color: #ddd; }
   </style>
@@ -18,8 +18,8 @@
   <pre class="prettyprint lang-js">Ext.define('Ext.grid.ViewDropZone', {
     extend: 'Ext.view.DropZone',
 
-    indicatorHtml: '&lt;div class=&quot;' + Ext.baseCSSPrefix + 'grid-drop-indicator-left&quot;&gt;&lt;/div&gt;&lt;div class=&quot;' + Ext.baseCSSPrefix + 'grid-drop-indicator-right&quot;&gt;&lt;/div&gt;',
-    indicatorCls: Ext.baseCSSPrefix + 'grid-drop-indicator',
+    indicatorHtml: '&lt;div class=&quot;x-grid-drop-indicator-left&quot;&gt;&lt;/div&gt;&lt;div class=&quot;x-grid-drop-indicator-right&quot;&gt;&lt;/div&gt;',
+    indicatorCls: 'x-grid-drop-indicator',
 
     handleNodeDrop : function(data, record, position) {
         var view = this.view,

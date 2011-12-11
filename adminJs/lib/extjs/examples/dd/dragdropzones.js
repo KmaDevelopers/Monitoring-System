@@ -1,3 +1,17 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 Ext.require(['*']);
 
 Ext.onReady(function() {
@@ -109,19 +123,15 @@ Ext.onReady(function() {
         width: 920,
         height: 500,
         closeAction: 'hide',
-        layout: 'fit',
-        items: [
-            {
-                xtype: 'textarea',
-                itemId: 'srcTextArea'
-            }
+        renderTpl: [
+            '<textarea readonly class="{baseCls}-body<tpl if="bodyCls"> {bodyCls}</tpl><tpl if="frame"> {baseCls}-body-framed</tpl><tpl if="ui"> {baseCls}-body-{ui}</tpl>"<tpl if="bodyStyle"> style="{bodyStyle}"</tpl>></div>'
         ],
         listeners: {
             render: function(w) {
                 Ext.Ajax.request({
                     url: 'dragdropzones.js',
                     success: function(r) {
-                        w.down('#srcTextArea').setValue(r.responseText);
+                        w.body.dom.value = r.responseText;
                     }
                 });
             }
@@ -294,3 +304,4 @@ function initializeHospitalDropZone(v) {
         }
     });
 }
+

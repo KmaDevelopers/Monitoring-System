@@ -3,8 +3,8 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>The source code</title>
-  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
-  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <link href="../prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../prettify/prettify.js"></script>
   <style type="text/css">
     .highlight { display: block; background-color: #ddd; }
   </style>
@@ -38,16 +38,13 @@ Ext.define('Ext.chart.Tip', {
                 renderer: Ext.emptyFn,
                 constrainPosition: false
             });
-            me.tooltip = new Ext.tip.ToolTip(me.tipConfig);
-            me.chart.surface.on('mousemove', me.tooltip.onMouseMove, me.tooltip);
-            me.chart.surface.on('mouseleave', function() {
-                me.hideTip();
-            });
+            me.tooltip = Ext.create('Ext.tip.ToolTip', me.tipConfig);
+            Ext.getBody().on('mousemove', me.tooltip.onMouseMove, me.tooltip);
             if (me.tipConfig.surface) {
                 //initialize a surface
                 surface = me.tipConfig.surface;
                 sprites = surface.sprites;
-                tipSurface = new Ext.chart.TipSurface({
+                tipSurface = Ext.create('Ext.chart.TipSurface', {
                     id: 'tipSurfaceComponent',
                     sprites: sprites
                 });

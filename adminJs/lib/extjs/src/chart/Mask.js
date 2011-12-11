@@ -1,3 +1,17 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
  * @class Ext.chart.Mask
  *
@@ -33,10 +47,6 @@
  * 
  */
 Ext.define('Ext.chart.Mask', {
-    requires: [
-        'Ext.chart.MaskLayer'
-    ],
-
     /**
      * Creates new Mask.
      * @param {Object} config (optional) Config object.
@@ -49,12 +59,11 @@ Ext.define('Ext.chart.Mask', {
         if (config) {
             Ext.apply(me, config);
         }
-        if (me.enableMask) {
+        if (me.mask) {
             me.on('afterrender', function() {
                 //create a mask layer component
-                var comp = new Ext.chart.MaskLayer({
-                    renderTo: me.el,
-                    hidden: true
+                var comp = Ext.create('Ext.chart.MaskLayer', {
+                    renderTo: me.el
                 });
                 comp.el.on({
                     'mousemove': function(e) {
@@ -65,7 +74,7 @@ Ext.define('Ext.chart.Mask', {
                     }
                 });
                 //create a resize handler for the component
-                var resizeHandler = new Ext.resizer.Resizer({
+                var resizeHandler = Ext.create('Ext.resizer.Resizer', {
                     el: comp.el,
                     handles: 'all',
                     pinned: true
@@ -184,7 +193,12 @@ Ext.define('Ext.chart.Mask', {
                 width: abs(width),
                 height: abs(height)
             };
-            me.mask.updateBox(me.maskSelection);
+            me.mask.updateBox({
+                x: posX - abs(width),
+                y: posY - abs(height),
+                width: abs(width),
+                height: abs(height)
+            });
             me.mask.show();
             me.maskSprite.setAttributes({
                 hidden: true    

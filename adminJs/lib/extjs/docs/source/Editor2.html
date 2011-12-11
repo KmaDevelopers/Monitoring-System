@@ -3,8 +3,8 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>The source code</title>
-  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
-  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <link href="../prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../prettify/prettify.js"></script>
   <style type="text/css">
     .highlight { display: block; background-color: #ddd; }
   </style>
@@ -15,79 +15,51 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js"><span id='Ext-layout-container-Editor'>/**
+  <pre class="prettyprint lang-js"><span id='Ext-layout-component-Editor'>/**
 </span> * Component layout for editors
- * @class Ext.layout.container.Editor
- * @extends Ext.layout.container.Container
+ * @class Ext.layout.component.Editor
+ * @extends Ext.layout.component.Component
  * @private
  */
-Ext.define('Ext.layout.container.Editor', {
+Ext.define('Ext.layout.component.Editor', {
 
     /* Begin Definitions */
 
-    alias: 'layout.editor',
+    alias: ['layout.editor'],
 
-    extend: 'Ext.layout.container.Container',
+    extend: 'Ext.layout.component.Component',
 
     /* End Definitions */
 
-    autoSizeDefault: {
-        width: 'field',
-        height: 'field'    
-    },
-
-    getItemSizePolicy: function (item) {
-        var me = this,
-            autoSize = me.owner.autoSize;
-
-        return me.sizePolicy || (me.sizePolicy = {
-            setsWidth:  autoSize &amp;&amp; autoSize.width  === 'boundEl' ? 1 : 0,
-            setsHeight: autoSize &amp;&amp; autoSize.height === 'boundEl' ? 1 : 0
-        });
-    },
-
-    calculate: function(ownerContext) {
+    onLayout: function(width, height) {
         var me = this,
             owner = me.owner,
-            autoSize = owner.autoSize,
-            fieldWidth,
-            fieldHeight;
+            autoSize = owner.autoSize;
             
         if (autoSize === true) {
-            autoSize = me.autoSizeDefault;
+            autoSize = {
+                width: 'field',
+                height: 'field'    
+            };
         }
-
-        // Calculate size of both Editor, and its owned Field
+        
         if (autoSize) {
-            fieldWidth  = me.getDimension(owner, autoSize.width,  'getWidth',  owner.width);
-            fieldHeight = me.getDimension(owner, autoSize.height, 'getHeight', owner.height);
+            width = me.getDimension(owner, autoSize.width, 'Width', width);
+            height = me.getDimension(owner, autoSize.height, 'Height', height);
         }
-
-        // Set Field size
-        ownerContext.childItems[0].setSize(fieldWidth, fieldHeight);
-
-        // Bypass validity checking. Container layouts should not usually set their owner's size.
-        ownerContext.setWidth(fieldWidth);
-        ownerContext.setHeight(fieldHeight);
-
-        // This is a Container layout, so publish content size
-        ownerContext.setContentSize(fieldWidth || owner.field.getWidth(),
-                                    fieldHeight || owner.field.getHeight());
+        me.setTargetSize(width, height);
+        owner.field.setSize(width, height);
     },
-
-    getDimension: function(owner, type, getMethod, ownerSize){
+    
+    getDimension: function(owner, type, dimension, actual){
+        var method = 'get' + dimension;
         switch (type) {
-            // Size to boundEl's dimension
             case 'boundEl':
-                return owner.boundEl[getMethod]();
-
-            // Auto size (shrink wrap the Field's size
+                return owner.boundEl[method]();
             case 'field':
-                return undefined;
-
-            // Size to the Editor's configured size
+                return owner.field[method]();
             default:
-                return ownerSize;
+                return actual;
         }
     }
 });</pre>

@@ -6,7 +6,7 @@
 
     <!-- ExtJS -->
     <link rel="stylesheet" type="text/css" href="../../resources/css/ext-all.css" />
-    <script type="text/javascript" src="../../ext-all.js"></script>
+    <script type="text/javascript" src="../../bootstrap.js"></script>
 
     <!-- Shared -->
     <link rel="stylesheet" type="text/css" href="../shared/example.css" />
@@ -103,10 +103,8 @@ var customTplCombo = Ext.create('Ext.form.field.ComboBox', {
     labelWidth: 130,
     store: store,
     queryMode: 'local',
-    listConfig: {
-        getInnerTpl: function() {
-            return '&lt;div data-qtip="{name}. {slogan}">{name} ({abbr})&lt;/div>';
-        }
+    getInnerTpl: function() {
+        return '&lt;div data-qtip="{name}. {slogan}">{name} ({abbr})&lt;/div>';
     }
 });</pre>
 </div>

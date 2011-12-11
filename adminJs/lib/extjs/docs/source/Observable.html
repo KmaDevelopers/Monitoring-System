@@ -3,8 +3,8 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>The source code</title>
-  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
-  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <link href="../prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../prettify/prettify.js"></script>
   <style type="text/css">
     .highlight { display: block; background-color: #ddd; }
   </style>
@@ -35,7 +35,7 @@
  *             this.listeners = config.listeners;
  *
  *             // Call our superclass constructor to complete construction process.
- *             this.callParent(arguments)
+ *             Employee.superclass.constructor.call(this, config)
  *         }
  *     });
  *
@@ -58,22 +58,22 @@ Ext.define('Ext.util.Observable', {
     requires: ['Ext.util.Event'],
 
     statics: {
-<span id='Ext-util-Observable-static-method-releaseCapture'>        /**
+<span id='Ext-util-Observable-method-releaseCapture'>        /**
 </span>         * Removes **all** added captures from the Observable.
          *
-         * @param {Ext.util.Observable} o The Observable to release
+         * @param {Observable} o The Observable to release
          * @static
          */
         releaseCapture: function(o) {
             o.fireEvent = this.prototype.fireEvent;
         },
 
-<span id='Ext-util-Observable-static-method-capture'>        /**
+<span id='Ext-util-Observable-method-capture'>        /**
 </span>         * Starts capture on the specified Observable. All events will be passed to the supplied function with the event
          * name + standard signature of the event **before** the event is fired. If the supplied function returns false,
          * the event will not fire.
          *
-         * @param {Ext.util.Observable} o The Observable to capture events from.
+         * @param {Observable} o The Observable to capture events from.
          * @param {Function} fn The function to call when an event is fired.
          * @param {Object} scope (optional) The scope (`this` reference) in which the function is executed. Defaults to
          * the Observable firing the event.
@@ -83,7 +83,7 @@ Ext.define('Ext.util.Observable', {
             o.fireEvent = Ext.Function.createInterceptor(o.fireEvent, fn, scope);
         },
 
-<span id='Ext-util-Observable-static-method-observe'>        /**
+<span id='Ext-util-Observable-method-observe'>        /**
 </span>         * Sets observability on the passed class constructor.
          *
          * This makes any event fired on any instance of the passed class also fire a single event through
@@ -123,9 +123,9 @@ Ext.define('Ext.util.Observable', {
      * should be a valid listeners config object as specified in the {@link #addListener} example for attaching multiple
      * handlers at once.
      *
-     * **DOM events from Ext JS {@link Ext.Component Components}**
+     * **DOM events from ExtJS {@link Ext.Component Components}**
      *
-     * While _some_ Ext JS Component classes export selected DOM events (e.g. &quot;click&quot;, &quot;mouseover&quot; etc), this is usually
+     * While _some_ ExtJs Component classes export selected DOM events (e.g. &quot;click&quot;, &quot;mouseover&quot; etc), this is usually
      * only done when extra value can be added. For example the {@link Ext.view.View DataView}'s **`{@link
      * Ext.view.View#itemclick itemclick}`** event passing the node clicked on. To access DOM events directly from a
      * child element of a Component, we need to specify the `element` option to identify the Component property to add a
@@ -156,12 +156,11 @@ Ext.define('Ext.util.Observable', {
         var me = this;
 
         Ext.apply(me, config);
-
-        me.events = me.events || {};
         if (me.listeners) {
             me.on(me.listeners);
             delete me.listeners;
         }
+        me.events = me.events || {};
 
         if (me.bubbleEvents) {
             me.enableBubble(me.bubbleEvents);
@@ -169,13 +168,13 @@ Ext.define('Ext.util.Observable', {
     },
 
     // @private
-    eventOptionsRe : /^(?:scope|delay|buffer|single|stopEvent|preventDefault|stopPropagation|normalized|args|delegate|element|vertical|horizontal|freezeEvent)$/,
+    eventOptionsRe : /^(?:scope|delay|buffer|single|stopEvent|preventDefault|stopPropagation|normalized|args|delegate|element|vertical|horizontal)$/,
 
 <span id='Ext-util-Observable-method-addManagedListener'>    /**
-</span>     * Adds listeners to any Observable object (or Ext.Element) which are automatically removed when this Component is
+</span>     * Adds listeners to any Observable object (or Element) which are automatically removed when this Component is
      * destroyed.
      *
-     * @param {Ext.util.Observable/Ext.Element} item The item to which to add a listener/listeners.
+     * @param {Observable/Element} item The item to which to add a listener/listeners.
      * @param {Object/String} ename The event name, or an object containing event name properties.
      * @param {Function} fn (optional) If the `ename` parameter was an event name, this is the handler function.
      * @param {Object} scope (optional) If the `ename` parameter was an event name, this is the scope (`this` reference)
@@ -215,10 +214,10 @@ Ext.define('Ext.util.Observable', {
 <span id='Ext-util-Observable-method-removeManagedListener'>    /**
 </span>     * Removes listeners that were added by the {@link #mon} method.
      *
-     * @param {Ext.util.Observable/Ext.Element} item The item from which to remove a listener/listeners.
-     * @param {Object/String} ename The event name, or an object containing event name properties.
-     * @param {Function} fn (optional) If the `ename` parameter was an event name, this is the handler function.
-     * @param {Object} scope (optional) If the `ename` parameter was an event name, this is the scope (`this` reference)
+     * @param {Observable|Element} item The item from which to remove a listener/listeners.
+     * @param {Object|String} ename The event name, or an object containing event name properties.
+     * @param {Function} fn Optional. If the `ename` parameter was an event name, this is the handler function.
+     * @param {Object} scope Optional. If the `ename` parameter was an event name, this is the scope (`this` reference)
      * in which the handler function is executed.
      */
     removeManagedListener : function(item, ename, fn, scope) {
@@ -259,59 +258,38 @@ Ext.define('Ext.util.Observable', {
      * @param {Object...} args Variable number of parameters are passed to handlers.
      * @return {Boolean} returns false if any of the handlers return false otherwise it returns true.
      */
-    fireEvent: function(eventName) {
-        var name = eventName.toLowerCase(),
-            events = this.events,
-            event = events &amp;&amp; events[name],
-            bubbles = event &amp;&amp; event.bubble;
+    fireEvent: function() {
+        var me = this,
+            args = Ext.Array.toArray(arguments),
+            ename = args[0].toLowerCase(),
+            ret = true,
+            event = me.events[ename],
+            queue = me.eventQueue,
+            parent;
 
-        return this.continueFireEvent(name, Ext.Array.slice(arguments, 1), bubbles);
-    },
-
-<span id='Ext-util-Observable-method-continueFireEvent'>    /**
-</span>     * Continue to fire event.
-     * @private
-     *
-     * @param {String} eventName
-     * @param {Array} args
-     * @param {Boolean} bubbles
-     */
-    continueFireEvent: function(eventName, args, bubbles) {
-        var target = this,
-            queue, event,
-            ret = true;
-
-        do {
-            if (target.eventsSuspended === true) {
-                if ((queue = target.eventQueue)) {
-                    queue.push([eventName, args, bubbles]);
-                }
-                return ret;
-            } else {
-                event = target.events[eventName];
-                // Continue bubbling if event exists and it is `true` or the handler didn't returns false and it
-                // configure to bubble.
-                if (event &amp;&amp; event != true) {
-                    if ((ret = event.fire.apply(event, args)) === false) {
-                        break;
-                    }
-                }
+        if (me.eventsSuspended === true) {
+            if (queue) {
+                queue.push(args);
             }
-        } while (bubbles &amp;&amp; (target = target.getBubbleParent()));
-        return ret;
-    },
-
-<span id='Ext-util-Observable-method-getBubbleParent'>    /**
-</span>     * Gets the bubbling parent for an Observable
-     * @private
-     * @return {Ext.util.Observable} The bubble parent. null is returned if no bubble target exists
-     */
-    getBubbleParent: function(){
-        var me = this, parent = me.getBubbleTarget &amp;&amp; me.getBubbleTarget();
-        if (parent &amp;&amp; parent.isObservable) {
-            return parent;
+        } else if (event &amp;&amp; event !== true) {
+            if (event.bubble) {
+                if (event.fire.apply(event, args.slice(1)) === false) {
+                    return false;
+                }
+                parent = me.getBubbleTarget &amp;&amp; me.getBubbleTarget();
+                if (parent &amp;&amp; parent.isObservable) {
+                    if (!parent.events[ename] || parent.events[ename] === true || !parent.events[ename].bubble) {
+                        parent.enableBubble(ename);
+                    }
+                    return parent.fireEvent.apply(parent, args);
+                }                
+            }
+            else {
+                args.shift();
+                ret = event.fire.apply(event, args);
+            }
         }
-        return null;
+        return ret;
     },
 
 <span id='Ext-util-Observable-method-addListener'>    /**
@@ -319,12 +297,12 @@ Ext.define('Ext.util.Observable', {
      *
      * @param {String} eventName The name of the event to listen for. May also be an object who's property names are
      * event names.
-     * @param {Function} fn The method the event invokes.  Will be called with arguments given to
+     * @param {Function} handler The method the event invokes.  Will be called with arguments given to
      * {@link #fireEvent} plus the `options` parameter described below.
-     * @param {Object} [scope] The scope (`this` reference) in which the handler function is executed. **If
+     * @param {Object} scope (optional) The scope (`this` reference) in which the handler function is executed. **If
      * omitted, defaults to the object which fired the event.**
-     * @param {Object} [options] An object containing handler configuration.
-     *
+     * @param {Object} options (optional) An object containing handler configuration.
+     * 
      * **Note:** Unlike in ExtJS 3.x, the options object will also be passed as the last argument to every event handler.
      *
      * This object may contain any of the following properties:
@@ -432,10 +410,9 @@ Ext.define('Ext.util.Observable', {
 </span>     * Removes an event handler.
      *
      * @param {String} eventName The type of event the handler was associated with.
-     * @param {Function} fn The handler to remove. **This must be a reference to the function passed into the
+     * @param {Function} handler The handler to remove. **This must be a reference to the function passed into the
      * {@link #addListener} call.**
-     * @param {Object} scope (optional) The scope originally specified for the handler. It must be the same as the
-     * scope argument specified in the original call to {@link #addListener} or the listener will not be removed.
+     * @param {Object} scope (optional) The scope originally specified for the handler.
      */
     removeListener: function(ename, fn, scope) {
         var me = this,
@@ -505,7 +482,7 @@ Ext.define('Ext.util.Observable', {
 
         this.managedListeners = [];
     },
-
+    
 <span id='Ext-util-Observable-method-removeManagedListenerItem'>    /**
 </span>     * Remove a single managed listener item
      * @private
@@ -518,7 +495,7 @@ Ext.define('Ext.util.Observable', {
             managedListener.item.un(managedListener.ename, managedListener.fn, managedListener.scope);
             if (!isClear) {
                 Ext.Array.remove(this.managedListeners, managedListener);
-            }
+            }    
         }
     },
 
@@ -542,7 +519,7 @@ Ext.define('Ext.util.Observable', {
      *         storecleared: true
      *     });
      *
-     * @param {String...} more (optional) Additional event names if multiple event names are being passed as separate
+     * @param {String...} more Optional additional event names if multiple event names are being passed as separate
      * parameters. Usage:
      *
      *     this.addEvents('storeloaded', 'storecleared');
@@ -550,15 +527,17 @@ Ext.define('Ext.util.Observable', {
      */
     addEvents: function(o) {
         var me = this,
-            events = me.events || (me.events = {}),
-            arg, args, i;
-
-        if (typeof o == 'string') {
-            for (args = arguments, i = args.length; i--; ) {
-                arg = args[i];
-                if (!events[arg]) {
-                    events[arg] = true;
-                }
+            args,
+            len,
+            i;
+            
+            me.events = me.events || {};
+        if (Ext.isString(o)) {
+            args = arguments;
+            i = args.length;
+            
+            while (i--) {
+                me.events[args[i]] = me.events[args[i]] || true;
             }
         } else {
             Ext.applyIf(me.events, o);
@@ -591,30 +570,29 @@ Ext.define('Ext.util.Observable', {
 
 <span id='Ext-util-Observable-method-resumeEvents'>    /**
 </span>     * Resumes firing events (see {@link #suspendEvents}).
-     *
-     * If events were suspended using the `queueSuspended` parameter, then all events fired
+     * 
+     * If events were suspended using the `**queueSuspended**` parameter, then all events fired
      * during event suspension will be sent to any listeners now.
      */
     resumeEvents: function() {
         var me = this,
-            queued = me.eventQueue;
+            queued = me.eventQueue || [];
 
         me.eventsSuspended = false;
         delete me.eventQueue;
 
-        if (queued) {
-            Ext.each(queued, function(e) {
-                me.continueFireEvent.apply(me, e);
-            });
-        }
+        Ext.each(queued,
+        function(e) {
+            me.fireEvent.apply(me, e);
+        });
     },
 
 <span id='Ext-util-Observable-method-relayEvents'>    /**
 </span>     * Relays selected events from the specified Observable as if the events were fired by `this`.
      *
      * @param {Object} origin The Observable whose events this object is to relay.
-     * @param {String[]} events Array of event names to relay.
-     * @param {String} [prefix] A common prefix to attach to the event names
+     * @param {[String]} events Array of event names to relay.
+     * @param {Object} prefix
      */
     relayEvents : function(origin, events, prefix) {
         prefix = prefix || '';
@@ -625,7 +603,7 @@ Ext.define('Ext.util.Observable', {
             newName;
 
         for (; i &lt; len; i++) {
-            oldName = events[i];
+            oldName = events[i].substr(prefix.length);
             newName = prefix + oldName;
             me.events[newName] = me.events[newName] || true;
             origin.on(oldName, me.createRelayer(newName));
@@ -684,26 +662,22 @@ Ext.define('Ext.util.Observable', {
      *         }
      *     });
      *
-     * @param {String/String[]} eventNames The event name to bubble, or an Array of event names.
+     * @param {String/[String]} events The event name to bubble, or an Array of event names.
      */
-    enableBubble: function(eventNames) {
-        if (eventNames) {
-            var me = this,
-                names = (typeof eventNames == 'string') ? arguments : eventNames,
-                length = names.length,
-                events = me.events,
-                ename, event, i;
-
-            for (i = 0; i &lt; length; ++i) {
-                ename = names[i].toLowerCase();
-                event = events[ename];
-
-                if (!event || typeof event == 'boolean') {
-                    events[ename] = event = new Ext.util.Event(me, ename);
+    enableBubble: function(events) {
+        var me = this;
+        if (!Ext.isEmpty(events)) {
+            events = Ext.isArray(events) ? events: Ext.Array.toArray(arguments);
+            Ext.each(events,
+            function(ename) {
+                ename = ename.toLowerCase();
+                var ce = me.events[ename] || true;
+                if (Ext.isBoolean(ce)) {
+                    ce = new Ext.util.Event(me, ename);
+                    me.events[ename] = ce;
                 }
-
-                event.bubble = true;
-            }
+                ce.bubble = true;
+            });
         }
     }
 }, function() {

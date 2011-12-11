@@ -11,7 +11,8 @@ Ext.application({
     appFolder: "/adminJs/app",
     controllers: [
         'SensorController',
-        'ServerController'
+        'ServerController',
+        'MapController'
     ],
     requires: [
         'MsAdmin.core.EventBus',

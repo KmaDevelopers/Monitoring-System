@@ -97,6 +97,7 @@ class Server extends KmaActiveRecord
 		/**
 		* OPTIMIZE IF HAVE BIG LOAD
 		*/
+
 		if(is_null($relation)){
 			return $this->attributes;
 		} else {

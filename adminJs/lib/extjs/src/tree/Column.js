@@ -1,5 +1,20 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
  * @class Ext.tree.Column
+ * @extends Ext.grid.column.Column
  * 
  * Provides indentation and folder structure markup for a Tree taking into account
  * depth and position within the tree hierarchy.
@@ -9,8 +24,6 @@
 Ext.define('Ext.tree.Column', {
     extend: 'Ext.grid.column.Column',
     alias: 'widget.treecolumn',
-
-    tdCls: Ext.baseCSSPrefix + 'grid-cell-treecolumn',
 
     initComponent: function() {
         var origRenderer = this.renderer || this.defaultRenderer,
@@ -46,7 +59,7 @@ Ext.define('Ext.tree.Column', {
                                 record.get('checked') ? 'aria-checked="true"' : ''
                             ));
                             if (record.get('checked')) {
-                                metaData.tdCls += (' ' + treePrefix + 'checked');
+                                metaData.tdCls += (' ' + Ext.baseCSSPrefix + 'tree-checked');
                             }
                         }
                         if (record.isLast()) {
@@ -74,14 +87,12 @@ Ext.define('Ext.tree.Column', {
                 record = record.parentNode;
             }
             if (href) {
-                buf.push('<a href="', href, '" target="', target, '">', formattedValue, '</a>');
-            } else {
-                buf.push(formattedValue);
+                formattedValue = format('<a href="{0}" target="{1}">{2}</a>', href, target, formattedValue);
             }
             if (cls) {
                 metaData.tdCls += ' ' + cls;
             }
-            return buf.join('');
+            return buf.join("") + formattedValue;
         };
         this.callParent(arguments);
     },

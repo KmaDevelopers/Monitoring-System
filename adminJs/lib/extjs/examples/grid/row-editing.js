@@ -1,3 +1,17 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 Ext.Loader.setConfig({
     enabled: true
 });
@@ -112,7 +126,7 @@ Ext.onReady(function(){
             header: 'Start Date',
             dataIndex: 'start',
             width: 90,
-            editor: {
+            field: {
                 xtype: 'datefield',
                 allowBlank: false,
                 format: 'm/d/Y',
@@ -153,14 +167,14 @@ Ext.onReady(function(){
             handler : function() {
                 rowEditing.cancelEdit();
 
-                // Create a model instance
-                var r = Ext.create('Employee', {
+                // Create a record instance through the ModelManager
+                var r = Ext.ModelManager.create({
                     name: 'New Guy',
                     email: 'new@sencha-test.com',
                     start: new Date(),
                     salary: 50000,
                     active: true
-                });
+                }, 'Employee');
 
                 store.insert(0, r);
                 rowEditing.startEdit(0, 0);
@@ -187,3 +201,4 @@ Ext.onReady(function(){
         }
     });
 });
+

@@ -126,13 +126,15 @@ class Sensor extends KmaActiveRecord
 	protected static $sensorSerialArray = array();
 
 	public static function getSensorIdBySerial($serial) {
-			if(empty($sensorSerialArray)){
-				$res = Yii::app()->db->CreateCommand('Select serial,sensorId from Sensor')->queryAll(false);
+			if(empty(self::$sensorSerialArray)){
+				$res = Yii::app()->db->CreateCommand('Select serial,sensorId from Sensor WHERE active = 1')->queryAll(false);
 				foreach($res as $v){
-					$sensorSerialArray[$v[0]] = $v[1];
+					self::$sensorSerialArray[$v[0]] = $v[1];
 				}
 			}
-
-			return $sensorSerialArray[$serial];
+			if(array_key_exists($serial,self::$sensorSerialArray)){
+							return self::$sensorSerialArray[$serial];
+			}
+			return -1;
 	}
 }

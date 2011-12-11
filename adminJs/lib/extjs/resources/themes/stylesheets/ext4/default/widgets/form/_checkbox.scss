@@ -10,8 +10,7 @@
 
         width: $form-checkbox-size;
         height: $form-checkbox-size;
-        background: no-repeat;
-        background-image: theme-background-image($theme-name, $form-checkbox-image);
+        background: theme-image($theme-name, $form-checkbox-image) no-repeat;
 
         overflow: hidden;
         padding: 0;
@@ -49,7 +48,7 @@
 
     /* Radios */
     .#{$prefix}form-radio {
-        background-image: theme-background-image($theme-name, $form-radio-image);
+        background-image: theme-image($theme-name, $form-radio-image);
     }
 
     /* boxLabel */

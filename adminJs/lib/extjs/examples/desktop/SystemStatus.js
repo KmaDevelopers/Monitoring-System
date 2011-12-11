@@ -1,3 +1,17 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /*!
 * Ext JS Library 4.0
 * Copyright(c) 2006-2011 Sencha Inc.
@@ -13,8 +27,6 @@ Ext.define('MyDesktop.SystemStatus', {
     ],
 
     id: 'systemstatus',
-
-    refreshRate: 500,
 
     init : function() {
         // No launcher means we don't appear on the Start Menu...
@@ -43,7 +55,7 @@ Ext.define('MyDesktop.SystemStatus', {
 
         me.cpuLoadData = [];
         me.cpuLoadStore = Ext.create('store.json', {
-            fields: ['core1', 'core2', 'time']
+            fields: ['core1', 'core2']
         });
 
         me.memoryArray = ['Wired', 'Active', 'Inactive', 'Free'];
@@ -158,7 +170,7 @@ Ext.define('MyDesktop.SystemStatus', {
                 lineWidth: 4,
                 showMarkers: false,
                 fill: true,
-                axis: 'left',
+                axis: 'right',
                 xField: 'time',
                 yField: 'core1',
                 style: {
@@ -199,7 +211,7 @@ Ext.define('MyDesktop.SystemStatus', {
                 lineWidth: 4,
                 showMarkers: false,
                 fill: true,
-                axis: 'left',
+                axis: 'right',
                 xField: 'time',
                 yField: 'core2',
                 style: {
@@ -411,7 +423,6 @@ Ext.define('MyDesktop.SystemStatus', {
         var me = this;
         clearTimeout(me.updateTimer);
         me.updateTimer = setTimeout(function() {
-            var start = new Date().getTime();
             if (me.pass % 3 === 0) {
                 me.memoryStore.loadData(me.generateData(me.memoryArray));
             }
@@ -421,14 +432,9 @@ Ext.define('MyDesktop.SystemStatus', {
             }
 
             me.generateCpuLoad();
-
-            var end = new Date().getTime();
-
-            // no more than 25% average CPU load
-            me.refreshRate = Math.max(me.refreshRate, (end - start) * 4);
-
             me.updateCharts();
             me.pass++;
-        }, me.refreshRate);
+        }, 500);
     }
 });
+

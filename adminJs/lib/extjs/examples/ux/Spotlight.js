@@ -1,3 +1,17 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
  * @class Ext.ux.Spotlight
  * UX used to provide a spotlight around a specified component/element.
@@ -107,8 +121,8 @@ Ext.define('Ext.ux.Spotlight', {
             box = me.el.getBox();
 
         //get the current view width and height
-        var viewWidth = Ext.Element.getViewWidth(true);
-        var viewHeight = Ext.Element.getViewHeight(true);
+        var viewWidth = Ext.core.Element.getViewWidth(true);
+        var viewHeight = Ext.core.Element.getViewHeight(true);
 
         var i = 0,
             config = false,
@@ -206,3 +220,4 @@ Ext.define('Ext.ux.Spotlight', {
         delete this.all;
     }
 });
+

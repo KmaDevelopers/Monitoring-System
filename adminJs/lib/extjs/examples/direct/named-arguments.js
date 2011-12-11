@@ -1,3 +1,17 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 Ext.require([
     'Ext.direct.*',
     'Ext.form.Panel',
@@ -17,27 +31,23 @@ Ext.onReady(function(){
             xtype: 'textfield',
             fieldLabel: 'First Name',
             name: 'firstName',
-            value: 'Evan',
-            allowBlank: false
+            value: 'Evan'
         }, {
             xtype: 'textfield',
             fieldLabel: 'Last Name',
             name: 'lastName',
-            value: 'Trimboli',
-            allowBlank: false
+            value: 'Trimboli'
         }, {
             xtype: 'numberfield',
             fieldLabel: 'Age',
             name: 'age',
-            value: 25,
-            allowBlank: false
+            value: 25
         }],
         dockedItems: [{
             dock: 'bottom',
             ui: 'footer',
             xtype: 'toolbar',
             items: ['->', {
-                formBind: true,
                 text: 'Send',
                 handler: function(){
                     var values = form.getForm().getValues();
@@ -49,3 +59,4 @@ Ext.onReady(function(){
         }]  
     });
 });
+

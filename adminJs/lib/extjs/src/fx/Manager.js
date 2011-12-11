@@ -1,3 +1,17 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
  * @class Ext.fx.Manager
  * Animation Manager which keeps track of all current animations and manages them on a frame by frame basis.
@@ -25,7 +39,7 @@ Ext.define('Ext.fx.Manager', {
     /* End Definitions */
 
     constructor: function() {
-        this.items = new Ext.util.MixedCollection();
+        this.items = Ext.create('Ext.util.MixedCollection');
         this.mixins.queue.constructor.call(this);
 
         // this.requestAnimFrame = (function() {
@@ -72,30 +86,30 @@ Ext.define('Ext.fx.Manager', {
         // dom element
         if (target && target.tagName) {
             target = Ext.get(target);
-            targetObj = new Ext.fx.target['Element' + (useCSS3 ? 'CSS' : '')](target);
+            targetObj = Ext.create('Ext.fx.target.' + 'Element' + (useCSS3 ? 'CSS' : ''), target);
             me.targets.add(targetObj);
             return targetObj;
         }
         if (Ext.isObject(target)) {
             // Element
             if (target.dom) {
-                targetObj = new Ext.fx.target['Element' + (useCSS3 ? 'CSS' : '')](target);
+                targetObj = Ext.create('Ext.fx.target.' + 'Element' + (useCSS3 ? 'CSS' : ''), target);
             }
             // Element Composite
             else if (target.isComposite) {
-                targetObj = new Ext.fx.target['CompositeElement' + (useCSS3 ? 'CSS' : '')](target);
+                targetObj = Ext.create('Ext.fx.target.' + 'CompositeElement' + (useCSS3 ? 'CSS' : ''), target);
             }
             // Draw Sprite
             else if (target.isSprite) {
-                targetObj = new Ext.fx.target.Sprite(target);
+                targetObj = Ext.create('Ext.fx.target.Sprite', target);
             }
             // Draw Sprite Composite
             else if (target.isCompositeSprite) {
-                targetObj = new Ext.fx.target.CompositeSprite(target);
+                targetObj = Ext.create('Ext.fx.target.CompositeSprite', target);
             }
             // Component
             else if (target.isComponent) {
-                targetObj = new Ext.fx.target.Component(target);
+                targetObj = Ext.create('Ext.fx.target.Component', target);
             }
             else if (target.isAnimTarget) {
                 return target;
@@ -303,3 +317,4 @@ Ext.define('Ext.fx.Manager', {
         }
     }
 });
+

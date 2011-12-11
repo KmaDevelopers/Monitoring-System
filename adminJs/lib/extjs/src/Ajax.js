@@ -1,7 +1,22 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
  * @class Ext.Ajax
  * @singleton
  * @markdown
+ * @extends Ext.data.Connection
 
 A singleton instance of an {@link Ext.data.Connection}. This class
 is used to communicate with your server side code. It can be used as follows:
@@ -42,8 +57,7 @@ Ext.define('Ext.Ajax', {
     singleton: true,
 
     /**
-     * @property {Boolean} disableCaching
-     * True to add a unique cache-buster param to GET requests. Defaults to true.
+     * @cfg {String} url @hide
      */
     /**
      * @cfg {Object} extraParams @hide
@@ -66,39 +80,47 @@ Ext.define('Ext.Ajax', {
      */
 
     /**
-     * @property {Boolean} disableCaching
-     * True to add a unique cache-buster param to GET requests. Defaults to true.
+     * @property  disableCaching
+     * True to add a unique cache-buster param to GET requests. (defaults to true)
+     * @type Boolean
      */
     /**
-     * @property {String} url
-     * The default URL to be used for requests to the server.
+     * @property  url
+     * The default URL to be used for requests to the server. (defaults to undefined)
      * If the server receives all requests through one URL, setting this once is easier than
      * entering it on every request.
+     * @type String
      */
     /**
-     * @property {Object} extraParams
+     * @property  extraParams
      * An object containing properties which are used as extra parameters to each request made
-     * by this object. Session information and other data that you need
+     * by this object (defaults to undefined). Session information and other data that you need
      * to pass with each request are commonly put here.
+     * @type Object
      */
     /**
-     * @property {Object} defaultHeaders
-     * An object containing request headers which are added to each request made by this object.
+     * @property  defaultHeaders
+     * An object containing request headers which are added to each request made by this object
+     * (defaults to undefined).
+     * @type Object
      */
     /**
-     * @property {String} method
+     * @property  method
      * The default HTTP method to be used for requests. Note that this is case-sensitive and
-     * should be all caps (if not set but params are present will use
+     * should be all caps (defaults to undefined; if not set but params are present will use
      * <tt>"POST"</tt>, otherwise will use <tt>"GET"</tt>.)
+     * @type String
      */
     /**
-     * @property {Number} timeout
-     * The timeout in milliseconds to be used for requests. Defaults to 30000.
+     * @property  timeout
+     * The timeout in milliseconds to be used for requests. (defaults to 30000)
+     * @type Number
      */
 
     /**
-     * @property {Boolean} autoAbort
-     * Whether a new request should abort any pending requests.
+     * @property  autoAbort
+     * Whether a new request should abort any pending requests. (defaults to false)
+     * @type Boolean
      */
     autoAbort : false
 });

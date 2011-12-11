@@ -1,5 +1,19 @@
-describe("Ext.Element.static", function() {
-    var proto = Ext.Element,
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
+describe("Ext.core.Element.static", function() {
+    var proto = Ext.core.Element,
         el, testEl,
         input, testInputEl,
         child1, child2, child3;
@@ -21,8 +35,8 @@ describe("Ext.Element.static", function() {
             type: 'text'
         });
         
-        el    = new Ext.Element(Ext.getDom(testEl));
-        input = new Ext.Element(Ext.getDom(testInputEl));
+        el    = new Ext.core.Element(Ext.getDom(testEl));
+        input = new Ext.core.Element(Ext.getDom(testInputEl));
         
         child1 = Ext.get('child1');
         child2 = Ext.get('child2');
@@ -87,10 +101,10 @@ describe("Ext.Element.static", function() {
             
             describe("when 3 arguments", function() {
                 it("should return an object with correct values", function() {
-                    expect(proto.parseBox("10 5 15")).toEqual({
+                    expect(proto.parseBox("10 5 10")).toEqual({
                         top   : 10,
                         right : 5,
-                        bottom: 15,
+                        bottom: 10,
                         left  : 5
                     });
                 });
@@ -180,3 +194,4 @@ describe("Ext.Element.static", function() {
         });
     }
 }, "/src/dom/Element.static.js");
+

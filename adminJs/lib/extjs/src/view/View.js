@@ -1,21 +1,36 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
- * A mechanism for displaying data using custom layout templates and formatting.
+ * @class Ext.view.View
+ * @extends Ext.view.AbstractView
  *
- * The View uses an {@link Ext.XTemplate} as its internal templating mechanism, and is bound to an
- * {@link Ext.data.Store} so that as the data in the store changes the view is automatically updated
- * to reflect the changes. The view also provides built-in behavior for many common events that can
- * occur for its contained items including click, doubleclick, mouseover, mouseout, etc. as well as a
- * built-in selection model. **In order to use these features, an {@link #itemSelector} config must
- * be provided for the DataView to determine what nodes it will be working with.**
+ * A mechanism for displaying data using custom layout templates and formatting. DataView uses an {@link Ext.XTemplate}
+ * as its internal templating mechanism, and is bound to an {@link Ext.data.Store}
+ * so that as the data in the store changes the view is automatically updated to reflect the changes.  The view also
+ * provides built-in behavior for many common events that can occur for its contained items including click, doubleclick,
+ * mouseover, mouseout, etc. as well as a built-in selection model. <b>In order to use these features, an {@link #itemSelector}
+ * config must be provided for the DataView to determine what nodes it will be working with.</b>
  *
- * The example below binds a View to a {@link Ext.data.Store} and renders it into an {@link Ext.panel.Panel}.
+ * The example below binds a DataView to a {@link Ext.data.Store} and renders it into an {@link Ext.panel.Panel}.
  *
- *     @example
- *     Ext.define('Image', {
- *         extend: 'Ext.data.Model',
- *         fields: [
- *             { name:'src', type:'string' },
- *             { name:'caption', type:'string' }
+ * {@img Ext.DataView/Ext.DataView.png Ext.DataView component}
+ *
+ *     Ext.regModel('Image', {
+ *         Fields: [
+ *             {name:'src', type:'string'},
+ *             {name:'caption', type:'string'}
  *         ]
  *     });
  *
@@ -23,23 +38,23 @@
  *         id:'imagesStore',
  *         model: 'Image',
  *         data: [
- *             { src:'http://www.sencha.com/img/20110215-feat-drawing.png', caption:'Drawing & Charts' },
- *             { src:'http://www.sencha.com/img/20110215-feat-data.png', caption:'Advanced Data' },
- *             { src:'http://www.sencha.com/img/20110215-feat-html5.png', caption:'Overhauled Theme' },
- *             { src:'http://www.sencha.com/img/20110215-feat-perf.png', caption:'Performance Tuned' }
+ *             {src:'http://www.sencha.com/img/20110215-feat-drawing.png', caption:'Drawing & Charts'},
+ *             {src:'http://www.sencha.com/img/20110215-feat-data.png', caption:'Advanced Data'},
+ *             {src:'http://www.sencha.com/img/20110215-feat-html5.png', caption:'Overhauled Theme'},
+ *             {src:'http://www.sencha.com/img/20110215-feat-perf.png', caption:'Performance Tuned'}
  *         ]
  *     });
  *
  *     var imageTpl = new Ext.XTemplate(
- *         '<tpl for=".">',
- *             '<div style="margin-bottom: 10px;" class="thumb-wrap">',
- *               '<img src="{src}" />',
- *               '<br/><span>{caption}</span>',
- *             '</div>',
- *         '</tpl>'
+ *         '&lt;tpl for="."&gt;',
+ *             '&lt;div style="thumb-wrap"&gt;',
+ *               '&lt;img src="{src}" /&gt;',
+ *               '&lt;br/&gt;&lt;span&gt;{caption}&lt;/span&gt;',
+ *             '&lt;/div&gt;',
+ *         '&lt;/tpl&gt;'
  *     );
  *
- *     Ext.create('Ext.view.View', {
+ *     Ext.create('Ext.DataView', {
  *         store: Ext.data.StoreManager.lookup('imagesStore'),
  *         tpl: imageTpl,
  *         itemSelector: 'div.thumb-wrap',
@@ -340,7 +355,7 @@ Ext.define('Ext.view.View', {
              * @event selectionchange
              * Fires when the selected nodes change. Relayed event from the underlying selection model.
              * @param {Ext.view.View} this
-             * @param {HTMLElement[]} selections Array of the selected nodes
+             * @param {Array} selections Array of the selected nodes
              */
             'selectionchange',
             /**
@@ -348,25 +363,9 @@ Ext.define('Ext.view.View', {
              * Fires before a selection is made. If any handlers return false, the selection is cancelled.
              * @param {Ext.view.View} this
              * @param {HTMLElement} node The node to be selected
-             * @param {HTMLElement[]} selections Array of currently selected nodes
+             * @param {Array} selections Array of currently selected nodes
              */
-            'beforeselect',
-            
-            /**
-             * @event highlightitem
-             * Fires when a node is highlighted using keyboard navigation, or mouseover.
-             * @param {Ext.view.View} view This View Component.
-             * @param {Ext.Element} node The highlighted node.
-             */
-            'highlightitem',
-            
-            /**
-             * @event unhighlightitem
-             * Fires when a node is unhighlighted using keyboard navigation, or mouseout.
-             * @param {Ext.view.View} view This View Component.
-             * @param {Ext.Element} node The previously highlighted node.
-             */
-            'unhighlightitem'
+            'beforeselect'
         );
     },
     // private
@@ -574,7 +573,7 @@ Ext.define('Ext.view.View', {
     onBeforeContainerKeyDown: Ext.emptyFn,
 
     /**
-     * Highlights a given item in the DataView. This is called by the mouseover handler if {@link #overItemCls}
+     * Highlight a given item in the DataView. This is called by the mouseover handler if {@link #overItemCls}
      * and {@link #trackOver} are configured, but can also be called manually by other code, for instance to
      * handle stepping through the list via keyboard navigation.
      * @param {HTMLElement} item The item to highlight
@@ -584,11 +583,10 @@ Ext.define('Ext.view.View', {
         me.clearHighlight();
         me.highlightedItem = item;
         Ext.fly(item).addCls(me.overItemCls);
-        me.fireEvent('highlightitem', me, item);
     },
 
     /**
-     * Un-highlights the currently highlighted item, if any.
+     * Un-highlight the currently highlighted item, if any.
      */
     clearHighlight: function() {
         var me = this,
@@ -596,21 +594,16 @@ Ext.define('Ext.view.View', {
 
         if (highlighted) {
             Ext.fly(highlighted).removeCls(me.overItemCls);
-            me.fireEvent('unhighlightitem', me, highlighted);
             delete me.highlightedItem;
         }
     },
 
     refresh: function() {
-        this.clearHighlight();
-        this.callParent(arguments);
-        this.refreshHeight();
-        
-    },
-    
-    refreshHeight: function(){
-        if (!this.isFixedHeight()) {
-            this.doComponentLayout();
+        var me = this;
+        me.clearHighlight();
+        me.callParent(arguments);
+        if (!me.isFixedHeight()) {
+            me.doComponentLayout();
         }
     }
 });

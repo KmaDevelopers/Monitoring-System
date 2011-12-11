@@ -1,45 +1,57 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
- * Tracks what records are currently selected in a databound component.
+ * @class Ext.selection.Model
+ * @extends Ext.util.Observable
  *
- * This is an abstract class and is not meant to be directly used. Databound UI widgets such as
- * {@link Ext.grid.Panel Grid} and {@link Ext.tree.Panel Tree} should subclass Ext.selection.Model
- * and provide a way to binding to the component.
+ * Tracks what records are currently selected in a databound widget.
  *
- * The abstract methods `onSelectChange` and `onLastFocusChanged` should be implemented in these
- * subclasses to update the UI widget.
+ * This is an abstract class and is not meant to be directly used.
+ *
+ * DataBound UI widgets such as GridPanel, TreePanel, and ListView
+ * should subclass AbstractStoreSelectionModel and provide a way
+ * to binding to the component.
+ *
+ * The abstract methods onSelectChange and onLastFocusChanged should
+ * be implemented in these subclasses to update the UI widget.
  */
 Ext.define('Ext.selection.Model', {
     extend: 'Ext.util.Observable',
     alternateClassName: 'Ext.AbstractSelectionModel',
     requires: ['Ext.data.StoreManager'],
-    mixins: {
-        bindable: 'Ext.util.Bindable'    
-    },
     // lastSelected
 
     /**
      * @cfg {String} mode
-     * Mode of selection.  Valid values are:
-     *
-     * - **SINGLE** - Only allows selecting one item at a time.  Use {@link #allowDeselect} to allow
-     *   deselecting that item.  This is the default.
-     * - **SIMPLE** - Allows simple selection of multiple items one-by-one. Each click in grid will either
-     *   select or deselect an item.
-     * - **MULTI** - Allows complex selection of multiple items using Ctrl and Shift keys.
+     * Modes of selection.
+     * Valid values are SINGLE, SIMPLE, and MULTI. Defaults to 'SINGLE'
      */
 
     /**
      * @cfg {Boolean} allowDeselect
-     * Allow users to deselect a record in a DataView, List or Grid.
-     * Only applicable when the {@link #mode} is 'SINGLE'.
+     * Allow users to deselect a record in a DataView, List or Grid. Only applicable when the SelectionModel's mode is 'SINGLE'. Defaults to false.
      */
     allowDeselect: false,
 
     /**
-     * @property {Ext.util.MixedCollection} selected
-     * A MixedCollection that maintains all of the currently selected records. Read-only.
+     * @property selected
+     * READ-ONLY A MixedCollection that maintains all of the currently selected
+     * records.
      */
     selected: null,
+
 
     /**
      * Prune records when they are removed from the store from the selection.
@@ -57,20 +69,12 @@ Ext.define('Ext.selection.Model', {
 
         me.addEvents(
             /**
-             * @event
+             * @event selectionchange
              * Fired after a selection change has occurred
              * @param {Ext.selection.Model} this
-             * @param {Ext.data.Model[]} selected The selected records
+             * @param  {Array} selected The selected records
              */
-            'selectionchange',
-            /**
-             * @event
-             * Fired when a row is focused
-             * @param {Ext.selection.Model} this
-             * @param {Ext.data.Model} oldFocused The previously focused record
-             * @param {Ext.data.Model} newFocused The newly focused record
-             */
-            'focuschange'
+             'selectionchange'
         );
 
         me.modes = {
@@ -83,33 +87,44 @@ Ext.define('Ext.selection.Model', {
         me.setSelectionMode(cfg.mode || me.mode);
 
         // maintains the currently selected records.
-        me.selected = new Ext.util.MixedCollection();
+        me.selected = Ext.create('Ext.util.MixedCollection');
 
         me.callParent(arguments);
     },
 
     // binds the store to the selModel.
-    bindStore: function(store, initial){
+    bind : function(store, initial){
         var me = this;
-        me.mixins.bindable.bindStore.apply(me, arguments);
-        if(me.store && !initial) {
+
+        if(!initial && me.store){
+            if(store !== me.store && me.store.autoDestroy){
+                me.store.destroy();
+            }else{
+                me.store.un("add", me.onStoreAdd, me);
+                me.store.un("clear", me.onStoreClear, me);
+                me.store.un("remove", me.onStoreRemove, me);
+                me.store.un("update", me.onStoreUpdate, me);
+            }
+        }
+        if(store){
+            store = Ext.data.StoreManager.lookup(store);
+            store.on({
+                add: me.onStoreAdd,
+                clear: me.onStoreClear,
+                remove: me.onStoreRemove,
+                update: me.onStoreUpdate,
+                scope: me
+            });
+        }
+        me.store = store;
+        if(store && !initial) {
             me.refresh();
         }
     },
-    
-    getStoreListeners: function() {
-        var me = this;
-        return {
-            add: me.onStoreAdd,
-            clear: me.onStoreClear,
-            remove: me.onStoreRemove,
-            update: me.onStoreUpdate    
-        }; 
-    },
 
     /**
-     * Selects all records in the view.
-     * @param {Boolean} suppressEvent True to suppress any select events
+     * Select all records in the view.
+     * @param {Boolean} suppressEvent True to suppress any selects event
      */
     selectAll: function(suppressEvent) {
         var me = this,
@@ -128,7 +143,7 @@ Ext.define('Ext.selection.Model', {
     },
 
     /**
-     * Deselects all records in the view.
+     * Deselect all records in the view.
      * @param {Boolean} suppressEvent True to suppress any deselect events
      */
     deselectAll: function(suppressEvent) {
@@ -250,21 +265,18 @@ Ext.define('Ext.selection.Model', {
 
     /**
      * Selects a record instance by record instance or index.
-     * @param {Ext.data.Model[]/Number} records An array of records or an index
-     * @param {Boolean} keepExisting (optional)
-     * @param {Boolean} suppressEvent (optional) Set to false to not fire a select event
+     * @param {Ext.data.Model/Index} records An array of records or an index
+     * @param {Boolean} keepExisting
+     * @param {Boolean} suppressEvent Set to false to not fire a select event
      */
     select: function(records, keepExisting, suppressEvent) {
-        // Automatically selecting eg store.first() or store.last() will pass undefined, so that must just return;
-        if (Ext.isDefined(records)) {
-            this.doSelect(records, keepExisting, suppressEvent);
-        }
+        this.doSelect(records, keepExisting, suppressEvent);
     },
 
     /**
      * Deselects a record instance by record instance or index.
-     * @param {Ext.data.Model[]/Number} records An array of records or an index
-     * @param {Boolean} suppressEvent (optional) Set to false to not fire a deselect event
+     * @param {Ext.data.Model/Index} records An array of records or an index
+     * @param {Boolean} suppressEvent Set to false to not fire a deselect event
      */
     deselect: function(records, suppressEvent) {
         this.doDeselect(records, suppressEvent);
@@ -323,9 +335,7 @@ Ext.define('Ext.selection.Model', {
 
             me.onSelectChange(record, true, suppressEvent, commit);
         }
-        if (!me.preventFocus) {
-            me.setLastFocused(record, suppressEvent);
-        }
+        me.setLastFocused(record, suppressEvent);
         // fire selchange if there was a change and there is no suppressEvent flag
         me.maybeFireSelectionChange(change && !suppressEvent);
     },
@@ -355,7 +365,7 @@ Ext.define('Ext.selection.Model', {
         }
 
         len = records.length;
-
+        
         for (; i < len; i++) {
             record = records[i];
             if (me.isSelected(record)) {
@@ -410,25 +420,20 @@ Ext.define('Ext.selection.Model', {
     },
 
     /**
-     * Sets a record as the last focused record. This does NOT mean
-     * that the record has been selected.
      * @param {Ext.data.Model} record
+     * Set a record as the last focused record. This does NOT mean
+     * that the record has been selected.
      */
     setLastFocused: function(record, supressFocus) {
         var me = this,
             recordBeforeLast = me.lastFocused;
-
         me.lastFocused = record;
-         
-        // Only call the changed method if in fact the selected record *has* changed.
-        if (record !== recordBeforeLast) {
-            me.onLastFocusChanged(recordBeforeLast, record, supressFocus);
-        }
+        me.onLastFocusChanged(recordBeforeLast, record, supressFocus);
     },
 
     /**
      * Determines if this record is currently focused.
-     * @param {Ext.data.Model} record
+     * @param Ext.data.Record record
      */
     isFocused: function(record) {
         return record === this.getLastFocused();
@@ -457,23 +462,22 @@ Ext.define('Ext.selection.Model', {
 
     /**
      * Returns an array of the currently selected records.
-     * @return {Ext.data.Model[]} The selected records
+     * @return {Array} The selected records
      */
     getSelection: function() {
         return this.selected.getRange();
     },
 
     /**
-     * Returns the current selectionMode.
-     * @return {String} The selectionMode: 'SINGLE', 'MULTI' or 'SIMPLE'.
+     * Returns the current selectionMode. SINGLE, MULTI or SIMPLE.
+     * @return {String} The selectionMode
      */
     getSelectionMode: function() {
         return this.selectionMode;
     },
 
     /**
-     * Sets the current selectionMode.
-     * @param {String} selModel 'SINGLE', 'MULTI' or 'SIMPLE'.
+     * Sets the current selectionMode. SINGLE, MULTI or SIMPLE.
      */
     setSelectionMode: function(selMode) {
         selMode = selMode ? selMode.toUpperCase() : 'SINGLE';
@@ -491,16 +495,17 @@ Ext.define('Ext.selection.Model', {
     },
 
     /**
-     * Locks the current selection and disables any changes from happening to the selection.
-     * @param {Boolean} locked  True to lock, false to unlock.
+     * Locks the current selection and disables any changes from
+     * happening to the selection.
+     * @param {Boolean} locked
      */
     setLocked: function(locked) {
         this.locked = !!locked;
     },
 
     /**
-     * Returns true if the specified row is selected.
-     * @param {Ext.data.Model/Number} record The record or index of the record to check
+     * Returns <tt>true</tt> if the specified row is selected.
+     * @param {Record/Number} record The record or index of the record to check
      * @return {Boolean}
      */
     isSelected: function(record) {
@@ -606,7 +611,7 @@ Ext.define('Ext.selection.Model', {
     },
 
     /**
-     * Returns the count of selected records.
+     * Gets the count of selected records.
      * @return {Number} The number of selected records
      */
     getCount: function() {
@@ -630,7 +635,7 @@ Ext.define('Ext.selection.Model', {
 
     // @abstract
     onLastFocusChanged: function(oldFocused, newFocused) {
-        this.fireEvent('focuschange', this, oldFocused, newFocused);
+
     },
 
     // @abstract

@@ -1,32 +1,46 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
  * @class Ext.slider.Thumb
+ * @extends Ext.Base
  * @private
  * Represents a single thumb element on a Slider. This would not usually be created manually and would instead
- * be created internally by an {@link Ext.slider.Multi Multi slider}.
+ * be created internally by an {@link Ext.slider.Multi Ext.Slider}.
  */
 Ext.define('Ext.slider.Thumb', {
     requires: ['Ext.dd.DragTracker', 'Ext.util.Format'],
     /**
      * @private
-     * @property {Number} topThumbZIndex
+     * @property topThumbZIndex
+     * @type Number
      * The number used internally to set the z index of the top thumb (see promoteThumb for details)
      */
     topZIndex: 10000,
-
     /**
-     * @cfg {Ext.slider.MultiSlider} slider (required)
-     * The Slider to render to.
+     * @cfg {Ext.slider.MultiSlider} slider The Slider to render to (required)
      */
-
     /**
      * Creates new slider thumb.
      * @param {Object} config (optional) Config object.
      */
     constructor: function(config) {
         var me = this;
-
+        
         /**
-         * @property {Ext.slider.MultiSlider} slider
+         * @property slider
+         * @type Ext.slider.MultiSlider
          * The slider this thumb is contained within
          */
         Ext.apply(me, config || {}, {
@@ -49,24 +63,14 @@ Ext.define('Ext.slider.Thumb', {
      */
     render: function() {
         var me = this;
-        me.el = me.slider.innerEl.insertFirst(me.getElConfig());
-        me.onRender();
+        
+        me.el = me.slider.innerEl.insertFirst({cls: me.cls});
+        if (me.disabled) {
+            me.disable();
+        }
+        me.initEvents();
     },
     
-    onRender: function() {
-        if (this.disabled) {
-            this.disable();
-        }
-        this.initEvents();
-    },
-
-    getElConfig: function() {
-        return {
-            id  : this.id,
-            cls : this.cls
-        };
-    },
-
     /**
      * @private
      * move the thumb
@@ -75,7 +79,7 @@ Ext.define('Ext.slider.Thumb', {
         if(!animate){
             this.el.setLeft(v);
         }else{
-            new Ext.fx.Anim({
+            Ext.create('Ext.fx.Anim', {
                 target: this.el,
                 duration: 350,
                 to: {
@@ -92,7 +96,7 @@ Ext.define('Ext.slider.Thumb', {
     bringToFront: function() {
         this.el.setStyle('zIndex', this.topZIndex);
     },
-
+    
     /**
      * @private
      * Send thumb dom element to back.
@@ -100,13 +104,13 @@ Ext.define('Ext.slider.Thumb', {
     sendToBack: function() {
         this.el.setStyle('zIndex', '');
     },
-
+    
     /**
      * Enables the thumb if it is currently disabled
      */
     enable: function() {
         var me = this;
-
+        
         me.disabled = false;
         if (me.el) {
             me.el.removeCls(me.slider.disabledCls);
@@ -118,7 +122,7 @@ Ext.define('Ext.slider.Thumb', {
      */
     disable: function() {
         var me = this;
-
+        
         me.disabled = true;
         if (me.el) {
             me.el.addCls(me.slider.disabledCls);
@@ -132,7 +136,7 @@ Ext.define('Ext.slider.Thumb', {
         var me = this,
             el = me.el;
 
-        me.tracker = new Ext.dd.DragTracker({
+        me.tracker = Ext.create('Ext.dd.DragTracker', {
             onBeforeStart: Ext.Function.bind(me.onBeforeDragStart, me),
             onStart      : Ext.Function.bind(me.onDragStart, me),
             onDrag       : Ext.Function.bind(me.onDrag, me),
@@ -167,7 +171,7 @@ Ext.define('Ext.slider.Thumb', {
      */
     onDragStart: function(e){
         var me = this;
-
+        
         me.el.addCls(Ext.baseCSSPrefix + 'slider-thumb-drag');
         me.dragging = true;
         me.dragStartValue = me.value;
@@ -195,7 +199,7 @@ Ext.define('Ext.slider.Thumb', {
             if (below !== undefined && newValue <= below.value) {
                 newValue = below.value;
             }
-
+            
             if (above !== undefined && newValue >= above.value) {
                 newValue = above.value;
             }
@@ -250,7 +254,7 @@ Ext.define('Ext.slider.Thumb', {
                 if (!animate) {
                     this.el.setBottom(v);
                 } else {
-                    new Ext.fx.Anim({
+                    Ext.create('Ext.fx.Anim', {
                         target: this.el,
                         duration: 350,
                         to: {
@@ -262,3 +266,4 @@ Ext.define('Ext.slider.Thumb', {
         }
     }
 });
+

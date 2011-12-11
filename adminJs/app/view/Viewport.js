@@ -9,10 +9,10 @@ Ext.define("MsAdmin.view.Viewport", {
     },
     constructor: function(config) {
         this.callParent([Ext.apply(config || {}, {
-            items: this.getItems()
+            items: this.getCmpItems()
         })]);  
     },
-    getItems: function() {
+    getCmpItems: function() {
         return[{            
             width: 300,
             region: "west",
@@ -36,7 +36,8 @@ Ext.define("MsAdmin.view.Viewport", {
                 }]
             }]
         }, {
-            region: 'center'
+            region: 'center',
+            xtype: "MapLayout"
         }]
     },
     getCenter: function() {

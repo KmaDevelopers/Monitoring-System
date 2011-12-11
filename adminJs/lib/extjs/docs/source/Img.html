@@ -3,8 +3,8 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>The source code</title>
-  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
-  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <link href="../prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../prettify/prettify.js"></script>
   <style type="text/css">
     .highlight { display: block; background-color: #ddd; }
   </style>
@@ -16,7 +16,10 @@
 </head>
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js"><span id='Ext-Img'>/**
-</span> * Simple helper class for easily creating image components. This simply renders an image tag to the DOM
+</span> * @class Ext.Img
+ * @extends Ext.Component
+ *
+ * Simple helper class for easily creating image components. This simply renders an image tag to the DOM
  * with the configured src.
  *
  * {@img Ext.Img/Ext.Img.png Ext.Img component}
@@ -34,33 +37,21 @@
 Ext.define('Ext.Img', {
     extend: 'Ext.Component',
     alias: ['widget.image', 'widget.imagecomponent'],
-
-    autoEl: 'img',
-
-<span id='Ext-Img-cfg-src'>    /**
-</span>     * @cfg {String} src
-     * The image src.
-     */
-    src: '',
-
-<span id='Ext-Img-cfg-alt'>    /**
-</span>     * @cfg {String} alt
-     * The descriptive text for non-visual UI description.
-     */
-    alt: '',
+<span id='Ext-Img-cfg-src'>    /** @cfg {String} src The image src */
+</span>    src: '',
 
     getElConfig: function() {
-        return Ext.apply(this.callParent(), {
-            src: this.src,
-            alt: this.alt
-        });
+        return {
+            tag: 'img',
+            src: this.src
+        };
     },
     
     // null out this function, we can't set any html inside the image
     initRenderTpl: Ext.emptyFn,
     
 <span id='Ext-Img-method-setSrc'>    /**
-</span>     * Updates the {@link #src} of the image.
+</span>     * Updates the {@link #src} of the image
      */
     setSrc: function(src) {
         var me = this,

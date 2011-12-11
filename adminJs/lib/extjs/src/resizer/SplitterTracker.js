@@ -1,4 +1,20 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
+ * @class Ext.resizer.SplitterTracker
+ * @extends Ext.dd.DragTracker
  * Private utility class for Ext.Splitter.
  * @private
  */
@@ -8,19 +24,6 @@ Ext.define('Ext.resizer.SplitterTracker', {
     enabled: true,
     
     overlayCls: Ext.baseCSSPrefix + 'resizable-overlay',
-
-    createDragOverlay: function () {
-        var overlay;
-
-        overlay = this.overlay =  Ext.getBody().createChild({
-            cls: this.overlayCls, 
-            html: '&#160;'
-        });
-
-        overlay.unselectable();
-        overlay.setSize(Ext.Element.getViewWidth(true), Ext.Element.getViewHeight(true));
-        overlay.show();
-    },
 
     getPrevCmp: function() {
         var splitter = this.getSplitter();
@@ -39,10 +42,9 @@ Ext.define('Ext.resizer.SplitterTracker', {
             prevCmp = me.getPrevCmp(),
             nextCmp = me.getNextCmp(),
             collapseEl = me.getSplitter().collapseEl,
-            target = e.getTarget(),
-            box;
-
-        if (collapseEl && target === me.getSplitter().collapseEl.dom) {
+            overlay;
+            
+        if (collapseEl && (e.getTarget() === me.getSplitter().collapseEl.dom)) {
             return false;
         }
 
@@ -50,19 +52,19 @@ Ext.define('Ext.resizer.SplitterTracker', {
         if (nextCmp.collapsed || prevCmp.collapsed) {
             return false;
         }
-
+        
+        overlay = me.overlay =  Ext.getBody().createChild({
+            cls: me.overlayCls, 
+            html: '&#160;'
+        });
+        overlay.unselectable();
+        overlay.setSize(Ext.core.Element.getViewWidth(true), Ext.core.Element.getViewHeight(true));
+        overlay.show();
+        
         // store boxes of previous and next
         me.prevBox  = prevCmp.getEl().getBox();
         me.nextBox  = nextCmp.getEl().getBox();
-        me.constrainTo = box = me.calculateConstrainRegion();
-
-        if (!box) {
-            return false;
-        }
-
-        me.createDragOverlay();
-
-        return box;
+        me.constrainTo = me.calculateConstrainRegion();
     },
 
     // We move the splitter el. Add the proxy class.
@@ -92,7 +94,7 @@ Ext.define('Ext.resizer.SplitterTracker', {
 
             // Region constructor accepts (top, right, bottom, left)
             // anchored/calculated from the left
-            prevConstrainRegion = new Ext.util.Region(
+            prevConstrainRegion = Ext.create('Ext.util.Region',
                 prevBox.y,
                 // Right boundary is x + maxWidth if there IS a maxWidth.
                 // Otherwise it is calculated based upon the minWidth of the next Component
@@ -101,7 +103,7 @@ Ext.define('Ext.resizer.SplitterTracker', {
                 prevBox.x + (prevCmp.minWidth || defaultMin)
             );
             // anchored/calculated from the right
-            nextConstrainRegion = new Ext.util.Region(
+            nextConstrainRegion = Ext.create('Ext.util.Region',
                 nextBox.y,
                 nextBox.right - (nextCmp.minWidth || defaultMin),
                 nextBox.bottom,
@@ -111,7 +113,7 @@ Ext.define('Ext.resizer.SplitterTracker', {
             );
         } else {
             // anchored/calculated from the top
-            prevConstrainRegion = new Ext.util.Region(
+            prevConstrainRegion = Ext.create('Ext.util.Region',
                 prevBox.y + (prevCmp.minHeight || defaultMin),
                 prevBox.right,
                 // Bottom boundary is y + maxHeight if there IS a maxHeight.
@@ -120,7 +122,7 @@ Ext.define('Ext.resizer.SplitterTracker', {
                 prevBox.x
             );
             // anchored/calculated from the bottom
-            nextConstrainRegion = new Ext.util.Region(
+            nextConstrainRegion = Ext.create('Ext.util.Region',
                 // Top boundary is bottom - maxHeight if there IS a maxHeight.
                 // Otherwise it is calculated based upon the minHeight of the previous Component
                 (nextCmp.maxHeight ? nextBox.bottom - nextCmp.maxHeight : prevBox.y + (prevCmp.minHeight || defaultMin)) - splitWidth,
@@ -135,8 +137,9 @@ Ext.define('Ext.resizer.SplitterTracker', {
     },
 
     // Performs the actual resizing of the previous and next components
-    performResize: function(e, offset) {
+    performResize: function(e) {
         var me       = this,
+            offset   = me.getOffset('dragTarget'),
             splitter = me.getSplitter(),
             orient   = splitter.orientation,
             prevCmp  = me.getPrevCmp(),
@@ -144,10 +147,8 @@ Ext.define('Ext.resizer.SplitterTracker', {
             owner    = splitter.ownerCt,
             layout   = owner.getLayout();
 
-        offset = offset || me.getOffset('dragTarget');
-
         // Inhibit automatic container layout caused by setSize calls below.
-        owner.suspendLayouts();
+        owner.suspendLayout = true;
 
         if (orient === 'vertical') {
             if (prevCmp) {
@@ -177,8 +178,8 @@ Ext.define('Ext.resizer.SplitterTracker', {
                 }
             }
         }
-
-        owner.resumeLayouts(true);
+        delete owner.suspendLayout;
+        layout.onLayout();
     },
 
     // Cleans up the overlay (if we have one) and calls the base. This cannot be done in
@@ -201,7 +202,7 @@ Ext.define('Ext.resizer.SplitterTracker', {
             splitter = me.getSplitter();
             
         splitter.removeCls(splitter.baseCls + '-active');
-        me.performResize(e, me.getOffset('dragTarget'));
+        me.performResize();
     },
 
     // Track the proxy and set the proper XY coordinates
@@ -221,6 +222,6 @@ Ext.define('Ext.resizer.SplitterTracker', {
     },
 
     getSplitter: function() {
-        return this.splitter;
+        return Ext.getCmp(this.getDragCt().id);
     }
 });

@@ -1,8 +1,8 @@
 Ext.define("MsAdmin.model.Server", {
 	extend: "Ext.data.Model",
-    idProperty: "id",
+    idProperty: "serverId",
 	fields: [{
-        name: 'id',
+        name: 'serverId',
         type: 'int'
     }, {
 	   name: 'name'

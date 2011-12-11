@@ -3,8 +3,8 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>The source code</title>
-  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
-  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <link href="../prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../prettify/prettify.js"></script>
   <style type="text/css">
     .highlight { display: block; background-color: #ddd; }
   </style>
@@ -17,6 +17,7 @@
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js"><span id='Ext-tree-ViewDropZone'>/**
 </span> * @class Ext.tree.ViewDropZone
+ * @extends Ext.view.DropZone
  * @private
  */
 Ext.define('Ext.tree.ViewDropZone', {
@@ -25,30 +26,30 @@ Ext.define('Ext.tree.ViewDropZone', {
 <span id='Ext-tree-ViewDropZone-cfg-allowParentInsert'>    /**
 </span>     * @cfg {Boolean} allowParentInsert
      * Allow inserting a dragged node between an expanded parent node and its first child that will become a
-     * sibling of the parent when dropped.
+     * sibling of the parent when dropped (defaults to false)
      */
     allowParentInserts: false,
  
 <span id='Ext-tree-ViewDropZone-cfg-allowContainerDrop'>    /**
 </span>     * @cfg {String} allowContainerDrop
-     * True if drops on the tree container (outside of a specific tree node) are allowed.
+     * True if drops on the tree container (outside of a specific tree node) are allowed (defaults to false)
      */
     allowContainerDrops: false,
 
 <span id='Ext-tree-ViewDropZone-cfg-appendOnly'>    /**
 </span>     * @cfg {String} appendOnly
-     * True if the tree should only allow append drops (use for trees which are sorted).
+     * True if the tree should only allow append drops (use for trees which are sorted, defaults to false)
      */
     appendOnly: false,
 
 <span id='Ext-tree-ViewDropZone-cfg-expandDelay'>    /**
 </span>     * @cfg {String} expandDelay
      * The delay in milliseconds to wait before expanding a target tree node while dragging a droppable node
-     * over the target.
+     * over the target (defaults to 500)
      */
     expandDelay : 500,
 
-    indicatorCls: Ext.baseCSSPrefix + 'tree-ddindicator',
+    indicatorCls: 'x-tree-ddindicator',
 
     // private
     expandNode : function(node) {

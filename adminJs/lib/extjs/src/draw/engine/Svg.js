@@ -1,5 +1,20 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
  * @class Ext.draw.engine.Svg
+ * @extends Ext.draw.Surface
  * Provides specific methods to draw with SVG.
  */
 Ext.define('Ext.draw.engine.Svg', {
@@ -8,7 +23,7 @@ Ext.define('Ext.draw.engine.Svg', {
 
     extend: 'Ext.draw.Surface',
 
-    requires: ['Ext.draw.Draw', 'Ext.draw.Sprite', 'Ext.draw.Matrix', 'Ext.Element'],
+    requires: ['Ext.draw.Draw', 'Ext.draw.Sprite', 'Ext.draw.Matrix', 'Ext.core.Element'],
 
     /* End Definitions */
 
@@ -28,7 +43,7 @@ Ext.define('Ext.draw.engine.Svg', {
         strokeOpacity: "stroke-opacity",
         strokeLinejoin: "stroke-linejoin"
     },
-
+    
     parsers: {},
 
     minDefaults: {
@@ -123,7 +138,7 @@ Ext.define('Ext.draw.engine.Svg', {
         }
         sprite.el = Ext.get(el);
         this.applyZIndex(sprite); //performs the insertion
-        sprite.matrix = new Ext.draw.Matrix();
+        sprite.matrix = Ext.create('Ext.draw.Matrix');
         sprite.bbox = {
             plain: 0,
             transform: 0
@@ -190,7 +205,7 @@ Ext.define('Ext.draw.engine.Svg', {
 
     transform: function(sprite) {
         var me = this,
-            matrix = new Ext.draw.Matrix(),
+            matrix = Ext.create('Ext.draw.Matrix'),
             transforms = sprite.transformations,
             transformsLength = transforms.length,
             i = 0,
@@ -565,25 +580,23 @@ Ext.define('Ext.draw.engine.Svg', {
      * @param {Ext.draw.Sprite} sprite
      */
     applyZIndex: function(sprite) {
-        var me = this,
-            items = me.items,
-            idx = items.indexOf(sprite),
+        var idx = this.normalizeSpriteCollection(sprite),
             el = sprite.el,
             prevEl;
-        if (me.el.dom.childNodes[idx + 2] !== el.dom) { //shift by 2 to account for defs and bg rect
+        if (this.el.dom.childNodes[idx + 2] !== el.dom) { //shift by 2 to account for defs and bg rect 
             if (idx > 0) {
                 // Find the first previous sprite which has its DOM element created already
                 do {
-                    prevEl = items.getAt(--idx).el;
+                    prevEl = this.items.getAt(--idx).el;
                 } while (!prevEl && idx > 0);
             }
-            el.insertAfter(prevEl || me.bgRect);
+            el.insertAfter(prevEl || this.bgRect);
         }
         sprite.zIndexDirty = false;
     },
 
     createItem: function (config) {
-        var sprite = new Ext.draw.Sprite(config);
+        var sprite = Ext.create('Ext.draw.Sprite', config);
         sprite.surface = this;
         return sprite;
     },

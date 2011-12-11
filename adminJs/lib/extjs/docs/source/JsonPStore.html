@@ -3,8 +3,8 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>The source code</title>
-  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
-  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <link href="../prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../prettify/prettify.js"></script>
   <style type="text/css">
     .highlight { display: block; background-color: #ddd; }
   </style>
@@ -18,7 +18,9 @@
   <pre class="prettyprint lang-js"><span id='Ext-data-JsonPStore'>/**
 </span> * @class Ext.data.JsonPStore
  * @extends Ext.data.Store
+ * @ignore
  * @private
+ * &lt;p&gt;&lt;b&gt;NOTE:&lt;/b&gt; This class is in need of migration to the new API.&lt;/p&gt;
  * &lt;p&gt;Small helper class to make creating {@link Ext.data.Store}s from different domain JSON data easier.
  * A JsonPStore will be automatically configured with a {@link Ext.data.reader.Json} and a {@link Ext.data.proxy.JsonP JsonPProxy}.&lt;/p&gt;
  * &lt;p&gt;A store configuration would be something like:&lt;pre&gt;&lt;code&gt;
@@ -55,10 +57,13 @@ Ext.define('Ext.data.JsonPStore', {
     extend: 'Ext.data.Store',
     alias : 'store.jsonp',
 
+<span id='Ext-data-JsonPStore-cfg-reader'>    /**
+</span>     * @cfg {Ext.data.DataReader} reader @hide
+     */
     constructor: function(config) {
         this.callParent(Ext.apply(config, {
-            reader: new Ext.data.reader.Json(config),
-            proxy : new Ext.data.proxy.JsonP(config)
+            reader: Ext.create('Ext.data.reader.Json', config),
+            proxy : Ext.create('Ext.data.proxy.JsonP', config)
         }));
     }
 });

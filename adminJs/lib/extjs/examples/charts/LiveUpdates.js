@@ -1,3 +1,17 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 Ext.require([
     'Ext.window.Window',
     'Ext.chart.*'
@@ -67,8 +81,6 @@ Ext.onReady(function () {
     Ext.create('Ext.Window', {
         width: 800,
         height: 600,
-        minHeight: 400,
-        minWidth: 550,
         maximizable: true,
         title: 'Live Updated Chart',
         layout: 'fit',
@@ -107,7 +119,7 @@ Ext.onReady(function () {
             }],
             series: [{
                 type: 'line',
-                axis: ['left', 'bottom'],
+                axis: 'left',
                 xField: 'date',
                 yField: 'visits',
                 label: {
@@ -122,7 +134,7 @@ Ext.onReady(function () {
                 }
             },{
                 type: 'line',
-                axis: ['left', 'bottom'],
+                axis: 'left',
                 xField: 'date',
                 yField: 'views',
                 label: {
@@ -137,7 +149,7 @@ Ext.onReady(function () {
                 }
             },{
                 type: 'line',
-                axis: ['left', 'bottom'],
+                axis: 'left',
                 xField: 'date',
                 yField: 'veins',
                 label: {
@@ -156,3 +168,4 @@ Ext.onReady(function () {
     chart = Ext.getCmp('chartCmp');
     var timeAxis = chart.axes.get(1);
 });
+

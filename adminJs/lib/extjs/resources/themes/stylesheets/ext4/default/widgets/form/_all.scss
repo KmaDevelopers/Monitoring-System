@@ -16,11 +16,6 @@
         margin-bottom: 5px;
     }
     
-    // No margins when inside an Editor
-    .#{$prefix}editor .#{$prefix}form-item {
-        margin: 0;
-    }
-    
     .#{$prefix}form-item-label {
         float: left;
         padding: 3px 0 0;
@@ -55,8 +50,7 @@
         font: $form-error-msg-font;
         line-height: $form-error-msg-line-height;
 
-        background: no-repeat 0 2px;
-        background-image: theme-background-image($theme-name, $form-exclamation-icon);
+        background: theme-image($theme-name, $form-exclamation-icon) no-repeat 0 2px;
     }
     
     .#{$prefix}form-invalid-icon {
@@ -69,8 +63,7 @@
         left: 0;
         top: 0;
         
-        background: no-repeat 2px 3px;
-        background-image: theme-background-image($theme-name, $form-exclamation-icon);
+        background: theme-image($theme-name, $form-exclamation-icon) no-repeat 2px 3px;
 
         ul {
             /* prevent inner elements from interfering with QuickTip hovering */

@@ -3,8 +3,8 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>The source code</title>
-  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
-  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <link href="../prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../prettify/prettify.js"></script>
   <style type="text/css">
     .highlight { display: block; background-color: #ddd; }
   </style>
@@ -147,13 +147,13 @@ Ext.define('Ext.app.Application', {
 
         this.callParent(arguments);
 
-        this.eventbus = new Ext.app.EventBus;
+        this.eventbus = Ext.create('Ext.app.EventBus');
 
         var controllers = Ext.Array.from(this.controllers),
             ln = controllers &amp;&amp; controllers.length,
             i, controller;
 
-        this.controllers = new Ext.util.MixedCollection();
+        this.controllers = Ext.create('Ext.util.MixedCollection');
 
         if (this.autoCreateViewport) {
             requires.push(this.getModuleClassName('Viewport', 'view'));

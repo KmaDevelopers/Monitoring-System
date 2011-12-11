@@ -1,15 +1,36 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
- * This class encapsulates the user interface for a tabular data set.
- * It acts as a centralized manager for controlling the various interface
- * elements of the view. This includes handling events, such as row and cell
- * level based DOM events. It also reacts to events from the underlying {@link Ext.selection.Model}
- * to provide visual feedback to the user.
- *
- * This class does not provide ways to manipulate the underlying data of the configured
- * {@link Ext.data.Store}.
- *
- * This is the base class for both {@link Ext.grid.View} and {@link Ext.tree.View} and is not
- * to be used directly.
+ * @class Ext.view.Table
+ * @extends Ext.view.View
+
+This class encapsulates the user interface for a tabular data set.
+It acts as a centralized manager for controlling the various interface
+elements of the view. This includes handling events, such as row and cell
+level based DOM events. It also reacts to events from the underlying {@link Ext.selection.Model}
+to provide visual feedback to the user.
+
+This class does not provide ways to manipulate the underlying data of the configured
+{@link Ext.data.Store}.
+
+This is the base class for both {@link Ext.grid.View} and {@link Ext.tree.View} and is not
+to be used directly.
+
+ * @markdown
+ * @abstract
+ * @author Nicolas Ferrero
  */
 Ext.define('Ext.view.Table', {
     extend: 'Ext.view.View',
@@ -20,14 +41,12 @@ Ext.define('Ext.view.Table', {
         'Ext.util.MixedCollection'
     ],
 
-    baseCls: Ext.baseCSSPrefix + 'grid-view',
+    cls: Ext.baseCSSPrefix + 'grid-view',
 
     // row
-    itemSelector: 'tr.' + Ext.baseCSSPrefix + 'grid-row',
+    itemSelector: '.' + Ext.baseCSSPrefix + 'grid-row',
     // cell
-    cellSelector: 'td.' + Ext.baseCSSPrefix + 'grid-cell',
-    
-    headerRowSelector: 'tr.' + Ext.baseCSSPrefix + 'grid-header-row',
+    cellSelector: '.' + Ext.baseCSSPrefix + 'grid-cell',
 
     selectedItemCls: Ext.baseCSSPrefix + 'grid-row-selected',
     selectedCellCls: Ext.baseCSSPrefix + 'grid-cell-selected',
@@ -35,74 +54,64 @@ Ext.define('Ext.view.Table', {
     overItemCls: Ext.baseCSSPrefix + 'grid-row-over',
     altRowCls:   Ext.baseCSSPrefix + 'grid-row-alt',
     rowClsRe: /(?:^|\s*)grid-row-(first|last|alt)(?:\s+|$)/g,
-    cellRe: new RegExp(Ext.baseCSSPrefix + 'grid-cell-([^\\s]+) ', ''),
+    cellRe: new RegExp('x-grid-cell-([^\\s]+) ', ''),
 
     // cfg docs inherited
     trackOver: true,
 
     /**
-     * Override this function to apply custom CSS classes to rows during rendering. This function should return the
-     * CSS class name (or empty string '' for none) that will be added to the row's wrapping div. To apply multiple
-     * class names, simply return them space-delimited within the string (e.g. 'my-class another-class').
-     * Example usage:
-     *
-     *     viewConfig: {
-     *         getRowClass: function(record, rowIndex, rowParams, store){
-     *             return record.get("valid") ? "row-valid" : "row-error";
-     *         }
-     *     }
-     *
-     * @param {Ext.data.Model} record The record corresponding to the current row.
+     * Override this function to apply custom CSS classes to rows during rendering.  You can also supply custom
+     * parameters to the row template for the current row to customize how it is rendered using the <b>rowParams</b>
+     * parameter.  This function should return the CSS class name (or empty string '' for none) that will be added
+     * to the row's wrapping div.  To apply multiple class names, simply return them space-delimited within the string
+     * (e.g., 'my-class another-class'). Example usage:
+    <pre><code>
+viewConfig: {
+    forceFit: true,
+    showPreview: true, // custom property
+    enableRowBody: true, // required to create a second, full-width row to show expanded Record data
+    getRowClass: function(record, rowIndex, rp, ds){ // rp = rowParams
+        if(this.showPreview){
+            rp.body = '&lt;p>'+record.data.excerpt+'&lt;/p>';
+            return 'x-grid3-row-expanded';
+        }
+        return 'x-grid3-row-collapsed';
+    }
+},
+    </code></pre>
+     * @param {Model} model The {@link Ext.data.Model} corresponding to the current row.
      * @param {Number} index The row index.
-     * @param {Object} rowParams **DEPRECATED.** For row body use the
-     * {@link Ext.grid.feature.RowBody#getAdditionalData getAdditionalData} method of the rowbody feature.
-     * @param {Ext.data.Store} store The store this grid is bound to
+     * @param {Object} rowParams (DEPRECATED) A config object that is passed to the row template during rendering that allows
+     * customization of various aspects of a grid row.
+     * <p>If {@link #enableRowBody} is configured <b><tt></tt>true</b>, then the following properties may be set
+     * by this function, and will be used to render a full-width expansion row below each grid row:</p>
+     * <ul>
+     * <li><code>body</code> : String <div class="sub-desc">An HTML fragment to be used as the expansion row's body content (defaults to '').</div></li>
+     * <li><code>bodyStyle</code> : String <div class="sub-desc">A CSS style specification that will be applied to the expansion row's &lt;tr> element. (defaults to '').</div></li>
+     * </ul>
+     * The following property will be passed in, and may be appended to:
+     * <ul>
+     * <li><code>tstyle</code> : String <div class="sub-desc">A CSS style specification that willl be applied to the &lt;table> element which encapsulates
+     * both the standard grid row, and any expansion row.</div></li>
+     * </ul>
+     * @param {Store} store The {@link Ext.data.Store} this grid is bound to
+     * @method getRowClass
      * @return {String} a CSS class name to add to the row.
-     * @method
      */
     getRowClass: null,
 
-    /**
-     * @cfg {Boolean} stripeRows <tt>true</tt> to stripe the rows.
-     * <p>This causes the CSS class <tt><b>x-grid-row-alt</b></tt> to be added to alternate rows of
-     * the grid. A default CSS rule is provided which sets a background color, but you can override this
-     * with a rule which either overrides the <b>background-color</b> style using the '!important'
-     * modifier, or which uses a CSS selector of higher specificity.</p>
-     */
-    stripeRows: true,
-
-    /**
-     * @cfg {Boolean} enableTextSelection   True to enable text selections.
-     */
-
     initComponent: function() {
-        var me = this,
-            scroll = me.scroll;
+        var me = this;
 
-        // Scrolling within a TableView is controlled by the scroll config of its owning GridPanel
-        // It must see undefined in this property in order to leave the scroll styles alone at afterRender time
-        me.autoScroll = undefined;
-
-        //Scrolling is handled at the View's element level
-        if (scroll === true || scroll === 'both') {
-            me.style = Ext.apply(me.style||{}, {
-                overflow: 'auto'
-            });
-        } else if (scroll === 'horizontal') {
-            me.style = Ext.apply(me.style||{}, {
-                "overflow-x": 'auto',
-                "overflow-y": 'hidden'
-            });
-        } else if (scroll === 'vertical') {
-            me.style = Ext.apply(me.style||{}, {
-                "overflow-x": 'hidden',
-                "overflow-y": 'auto'
-            });
-        } else {
-            me.style = Ext.apply(me.style||{}, {
-                overflow: 'hidden'
-            });
+        if (me.deferRowRender !== false) {
+            me.refresh = function() {
+                delete me.refresh;
+                setTimeout(function() {
+                    me.refresh();
+                }, 0);
+            };
         }
+
         me.scrollState = {};
         me.selModel.view = me;
         me.headerCt.view = me;
@@ -113,46 +122,16 @@ Ext.define('Ext.view.Table', {
             load: me.onStoreLoad,
             scope: me
         });
-        me.on({
-            scroll: me.fireBodyScroll,
-            element: 'el',
-            scope: me
-        });
-    },
-    
-    /**
-     * @private
-     * Move a grid column from one position to another
-     */
-    moveColumn: function(fromIdx, toIdx) {
-        var me = this,
-            i = 0,
-            rows, len, tr,
-            headerCells,
-            toWidth, fromWidth;
-            
-        if (me.rendered) {
-            rows = me.el.query(me.itemSelector);
-            headerCells = me.el.query(me.headerRowSelector)[0].cells;
-            len = rows.length;
-            toWidth = headerCells[toIdx].style.width;
-            fromWidth = headerCells[fromIdx].style.width;
-            
-            // update the widths of the two moved cells in the header
-            headerCells[toIdx].style.width = fromWidth;
-            headerCells[fromIdx].style.width = toWidth;
-            
-            if (toIdx > fromIdx) {
-                toIdx++;
-            }
-            
-            for (; i < len; i++) {
-                tr = rows[i];
-                // In IE, we need to explicitly pass null instead of a falsey value to insert last
-                tr.insertBefore(tr.cells[fromIdx], tr.cells[toIdx] || null);
-            }
-            me.setNewTemplate();
-        }
+
+        // this.addEvents(
+        //     /**
+        //      * @event rowfocus
+        //      * @param {Ext.data.Record} record
+        //      * @param {HTMLElement} row
+        //      * @param {Number} rowIdx
+        //      */
+        //     'rowfocus'
+        // );
     },
 
     // scroll to top of the grid when store loads
@@ -162,11 +141,11 @@ Ext.define('Ext.view.Table', {
         if (me.invalidateScrollerOnRefresh) {
             if (Ext.isGecko) {
                 if (!me.scrollToTopTask) {
-                    me.scrollToTopTask = new Ext.util.DelayedTask(me.scrollToTop, me);
+                    me.scrollToTopTask = Ext.create('Ext.util.DelayedTask', me.scrollToTop, me);
                 }
                 me.scrollToTopTask.delay(1);
             } else {
-                me.scrollToTop();
+                me    .scrollToTop();
             }
         }
     },
@@ -206,7 +185,7 @@ Ext.define('Ext.view.Table', {
     /**
      * Get the cell (td) for a particular record and column.
      * @param {Ext.data.Model} record
-     * @param {Ext.grid.column.Column} column
+     * @param {Ext.grid.column.Colunm} column
      * @private
      */
     getCell: function(record, column) {
@@ -240,7 +219,7 @@ Ext.define('Ext.view.Table', {
         features = me.features;
         len = features.length;
 
-        me.featuresMC = new Ext.util.MixedCollection();
+        me.featuresMC = Ext.create('Ext.util.MixedCollection');
         for (; i < len; i++) {
             // ensure feature hasnt already been instantiated
             if (!features[i].isFeature) {
@@ -271,11 +250,13 @@ Ext.define('Ext.view.Table', {
 
     afterRender: function() {
         var me = this;
-        me.callParent();
 
-        if (!me.enableTextSelection) {
-            me.el.unselectable();
-    }
+        me.callParent();
+        me.mon(me.el, {
+            scroll: me.fireBodyScroll,
+            scope: me
+        });
+        me.el.unselectable();
         me.attachEventsForFeatures();
     },
 
@@ -331,7 +312,7 @@ Ext.define('Ext.view.Table', {
         if (this.getRowClass) {
             for (; j < jln; j++) {
                 rowParams = {};
-                preppedRecords[j].rowCls = this.getRowClass(records[j], j, rowParams, this.store);
+                preppedRecords[j]['rowCls'] = this.getRowClass(records[j], j, rowParams, this.store);
                 //<debug>
                 if (rowParams.alt) {
                     Ext.Error.raise("The getRowClass alt property is no longer supported.");
@@ -366,6 +347,7 @@ Ext.define('Ext.view.Table', {
         return o;
     },
 
+    // TODO: Refactor header resizing to column resizing
     /**
      * When a header is resized, setWidth on the individual columns resizer class,
      * the top level table, save/restore scroll state, generate a new template and
@@ -391,12 +373,10 @@ Ext.define('Ext.view.Table', {
                     w += 1;
                 }
             }
-            el.select('th.' + Ext.baseCSSPrefix + 'grid-col-resizer-'+header.id).setWidth(w);
-            el.select('table.' + Ext.baseCSSPrefix + 'grid-table-resizer').setWidth(me.headerCt.getFullWidth());
+            el.select('.' + Ext.baseCSSPrefix + 'grid-col-resizer-'+header.id).setWidth(w);
+            el.select('.' + Ext.baseCSSPrefix + 'grid-table-resizer').setWidth(me.headerCt.getFullWidth());
             me.restoreScrollState();
-            if (!me.ignoreTemplate) {
-                me.setNewTemplate();
-            }
+            me.setNewTemplate();
             if (!suppressFocus) {
                 me.el.focus();
             }
@@ -408,20 +388,17 @@ Ext.define('Ext.view.Table', {
      * @private
      */
     onHeaderShow: function(headerCt, header, suppressFocus) {
-        var me = this;
-        me.ignoreTemplate = true;
         // restore headers that were dynamically hidden
         if (header.oldWidth) {
-            me.onHeaderResize(header, header.oldWidth, suppressFocus);
+            this.onHeaderResize(header, header.oldWidth, suppressFocus);
             delete header.oldWidth;
         // flexed headers will have a calculated size set
         // this additional check has to do with the fact that
         // defaults: {width: 100} will fight with a flex value
         } else if (header.width && !header.flex) {
-            me.onHeaderResize(header, header.width, suppressFocus);
+            this.onHeaderResize(header, header.width, suppressFocus);
         }
-        delete me.ignoreTemplate;
-        me.setNewTemplate();
+        this.setNewTemplate();
     },
 
     /**
@@ -441,26 +418,22 @@ Ext.define('Ext.view.Table', {
         var me = this,
             columns = me.headerCt.getColumnsForTpl(true);
 
-        // Template generation requires the rowCount as well as the column definitions and features.
         me.tpl = me.getTableChunker().getTableTpl({
-            rowCount: me.store.getCount(),
             columns: columns,
-            features: me.features,
-            enableTextSelection: me.enableTextSelection
+            features: me.features
         });
     },
 
     /**
-     * Returns the configured chunker or default of Ext.view.TableChunker
+     * Get the configured chunker or default of Ext.view.TableChunker
      */
     getTableChunker: function() {
         return this.chunker || Ext.view.TableChunker;
     },
 
     /**
-     * Adds a CSS Class to a specific row.
-     * @param {HTMLElement/String/Number/Ext.data.Model} rowInfo An HTMLElement, index or instance of a model
-     * representing this row
+     * Add a CSS Class to a specific row.
+     * @param {HTMLElement/String/Number/Ext.data.Model} rowInfo An HTMLElement, index or instance of a model representing this row
      * @param {String} cls
      */
     addRowCls: function(rowInfo, cls) {
@@ -471,9 +444,8 @@ Ext.define('Ext.view.Table', {
     },
 
     /**
-     * Removes a CSS Class from a specific row.
-     * @param {HTMLElement/String/Number/Ext.data.Model} rowInfo An HTMLElement, index or instance of a model
-     * representing this row
+     * Remove a CSS Class from a specific row.
+     * @param {HTMLElement/String/Number/Ext.data.Model} rowInfo An HTMLElement, index or instance of a model representing this row
      * @param {String} cls
      */
     removeRowCls: function(rowInfo, cls) {
@@ -550,10 +522,9 @@ Ext.define('Ext.view.Table', {
     },
 
     /**
-     * Focuses a particular row and brings it into view. Will fire the rowfocus event.
-     * @param {HTMLElement/String/Number/Ext.data.Model} rowIdx
-     * An HTMLElement template node, index of a template node, the id of a template node or the
-     * record associated with the node.
+     * Focus a particular row and bring it into view. Will fire the rowfocus event.
+     * @param {Mixed} rowIdx An HTMLElement template node, index of a template node, the
+     * id of a template node or the record associated with the node.
      */
     focusRow: function(rowIdx) {
         var me         = this,
@@ -562,27 +533,24 @@ Ext.define('Ext.view.Table', {
             adjustment = 0,
             panel      = me.ownerCt,
             rowRegion,
-            elTop,
-            elBottom,
+            elRegion,
             record;
 
         if (row && el) {
-            // Viewable region must not include scrollbars, so use
-            // DOM clientHeight to determine height
-            elTop = el.getY();
-            elBottom = elTop + el.dom.clientHeight;
+            elRegion  = el.getRegion();
             rowRegion = Ext.fly(row).getRegion();
             // row is above
-            if (rowRegion.top < elTop) {
-                adjustment = rowRegion.top - elTop;
+            if (rowRegion.top < elRegion.top) {
+                adjustment = rowRegion.top - elRegion.top;
             // row is below
-            } else if (rowRegion.bottom > elBottom) {
-                adjustment = rowRegion.bottom - elBottom;
+            } else if (rowRegion.bottom > elRegion.bottom) {
+                adjustment = rowRegion.bottom - elRegion.bottom;
             }
             record = me.getRecord(row);
             rowIdx = me.store.indexOf(record);
 
             if (adjustment) {
+                // scroll the grid itself, so that all gridview's update.
                 panel.scrollByDeltaY(adjustment);
             }
             me.fireEvent('rowfocus', record, row, rowIdx);
@@ -600,10 +568,6 @@ Ext.define('Ext.view.Table', {
             cellRegion,
             record;
 
-        // Viewable region must not include scrollbars, so use
-        // DOM client dimensions
-        elRegion.bottom = elRegion.top + el.dom.clientHeight;
-        elRegion.right = elRegion.left + el.dom.clientWidth;
         if (cell) {
             cellRegion = cell.getRegion();
             // cell is above
@@ -623,6 +587,7 @@ Ext.define('Ext.view.Table', {
             }
 
             if (adjustmentY) {
+                // scroll the grid itself, so that all gridview's update.
                 panel.scrollByDeltaY(adjustmentY);
             }
             if (adjustmentX) {
@@ -634,7 +599,7 @@ Ext.define('Ext.view.Table', {
     },
 
     /**
-     * Scrolls by delta. This affects this individual view ONLY and does not
+     * Scroll by delta. This affects this individual view ONLY and does not
      * synchronize across views or scrollers.
      * @param {Number} delta
      * @param {String} dir (optional) Valid values are scrollTop and scrollLeft. Defaults to scrollTop.
@@ -646,80 +611,44 @@ Ext.define('Ext.view.Table', {
         elDom[dir] = (elDom[dir] += delta);
     },
 
-    // private
-    onUpdate : function(store, record, operation, changedFieldNames) {
-        var me = this,
-            index = me.store.indexOf(record),
-            newRow, oldRow,
-            oldCells, newCells, len, i,
-            columns = me.headerCt.getGridColumns(),
-            fieldName;
-
-        if (index > -1) {
-            newRow = me.bufferRender([record], index)[0];
-            oldRow = me.all.item(index);
-            oldRow.dom.className = newRow.className;
-
-            // Replace changed cells in the existing row structure with the new version from the rendered row.
-            oldCells = oldRow.query(this.cellSelector);
-            newCells = Ext.fly(newRow).query(this.cellSelector);
-            len = newCells.length;
-            for (i = 0; i < len; i++) {
-                fieldName = columns[i].dataIndex;
-
-                // If the field at this column index was changed, or if the column is a treecolumn and the checked field was changed, replace the cell.
-                if (!changedFieldNames || Ext.Array.contains(changedFieldNames, fieldName) || (columns[i].xtype === 'treecolumn' && Ext.Array.contains(changedFieldNames, 'checked'))) {
-                    oldRow.dom.insertBefore(newCells[i], oldCells[i]);
-                    oldRow.dom.removeChild(oldCells[i]);
-                }
-            }
-
-            // Maintain selection after update
-            // TODO: Move to approriate event handler.
-            me.selModel.refresh();
-            me.doStripeRows(index, index);
-            me.fireEvent('itemupdate', record, index, newRow);
-        }
-
+    onUpdate: function(ds, index) {
+        this.callParent(arguments);
     },
 
     /**
-     * Saves the scrollState in a private variable. Must be used in conjunction with restoreScrollState
+     * Save the scrollState in a private variable.
+     * Must be used in conjunction with restoreScrollState
      */
     saveScrollState: function() {
-        if (this.rendered) {
-            var dom = this.el.dom, 
-                state = this.scrollState;
-            
-            state.left = dom.scrollLeft;
-            state.top = dom.scrollTop;
-        }
+        var dom = this.el.dom,
+            state = this.scrollState;
+
+        state.left = dom.scrollLeft;
+        state.top = dom.scrollTop;
     },
 
     /**
-     * Restores the scrollState.
+     * Restore the scrollState.
      * Must be used in conjunction with saveScrollState
      * @private
      */
     restoreScrollState: function() {
-        if (this.rendered) {
-            var dom = this.el.dom, 
-                state = this.scrollState, 
-                headerEl = this.headerCt.el.dom;
-            
-            headerEl.scrollLeft = dom.scrollLeft = state.left;
-            dom.scrollTop = state.top;
-        }
+        var dom = this.el.dom,
+            state = this.scrollState,
+            headerEl = this.headerCt.el.dom;
+
+        headerEl.scrollLeft = dom.scrollLeft = state.left;
+        dom.scrollTop = state.top;
     },
 
     /**
-     * Refreshes the grid view. Saves and restores the scroll state, generates a new template, stripes rows and
-     * invalidates the scrollers.
+     * Refresh the grid view.
+     * Saves and restores the scroll state, generates a new template, stripes rows
+     * and invalidates the scrollers.
      */
     refresh: function() {
         this.setNewTemplate();
         this.callParent(arguments);
-        this.doStripeRows(0);
     },
 
     processItemEvent: function(record, row, rowIndex, e) {
@@ -819,7 +748,7 @@ Ext.define('Ext.view.Table', {
     onBeforeCellKeyDown: Ext.emptyFn,
 
     /**
-     * Expands a particular header to fit the max content width.
+     * Expand a particular header to fit the max content width.
      * This will ONLY expand, not contract.
      * @private
      */
@@ -832,7 +761,7 @@ Ext.define('Ext.view.Table', {
     },
 
     /**
-     * Returns the max contentWidth of the header's text and all cells
+     * Get the max contentWidth of the header's text and all cells
      * in the grid under this header.
      * @private
      */
@@ -874,22 +803,19 @@ Ext.define('Ext.view.Table', {
     },
 
     /**
-     * @param {Object} position The current row and column: an object containing the following properties:
-     *
-     * - row - The row index
-     * - column - The column index
-     *
+     * @param {Object} position The current row and column: an object containing the following properties:<ul>
+     * <li>row<div class="sub-desc"> The row <b>index</b></div></li>
+     * <li>column<div class="sub-desc">The column <b>index</b></div></li>
+     * </ul>
      * @param {String} direction 'up', 'down', 'right' and 'left'
      * @param {Ext.EventObject} e event
      * @param {Boolean} preventWrap Set to true to prevent wrap around to the next or previous row.
-     * @param {Function} verifierFn A function to verify the validity of the calculated position.
-     * When using this function, you must return true to allow the newPosition to be returned.
-     * @param {Object} scope Scope to run the verifierFn in
-     * @returns {Object} newPosition An object containing the following properties:
-     *
-     * - row - The row index
-     * - column - The column index
-     *
+     * @param {Function} verifierFn A function to verify the validity of the calculated position. When using this function, you must return true to allow the newPosition to be returned.
+     * @param {Scope} scope Scope to run the verifierFn in
+     * @returns {Object} newPosition An object containing the following properties:<ul>
+     * <li>row<div class="sub-desc"> The row <b>index</b></div></li>
+     * <li>column<div class="sub-desc">The column <b>index</b></div></li>
+     * </ul>
      * @private
      */
     walkCells: function(pos, direction, e, preventWrap, verifierFn, scope) {
@@ -1071,45 +997,5 @@ Ext.define('Ext.view.Table', {
         }
 
         return prevIdx - activeHeaderIdx;
-    },
-
-    // after adding a row stripe rows from then on
-    onAdd: function(ds, records, index) {
-        this.callParent(arguments);
-        this.doStripeRows(index);
-    },
-    
-    // after removing a row stripe rows from then on
-    onRemove: function(ds, records, index) {
-        this.callParent(arguments);
-        this.doStripeRows(index);
-    },
-    
-    /**
-     * Stripe rows from a particular row index
-     * @param {Number} startRow
-     * @param {Number} endRow (Optional) argument specifying the last row to process. By default process up to the last row.
-     * @private
-     */
-    doStripeRows: function(startRow, endRow) {
-        // ensure stripeRows configuration is turned on
-        if (this.stripeRows) {
-            var rows   = this.getNodes(startRow, endRow),
-                rowsLn = rows.length,
-                i      = 0,
-                row;
-                
-            for (; i < rowsLn; i++) {
-                row = rows[i];
-                // Remove prior applied row classes.
-                row.className = row.className.replace(this.rowClsRe, ' ');
-                startRow++;
-                // Every odd row will get an additional cls
-                if (startRow % 2 === 0) {
-                    row.className += (' ' + this.altRowCls);
-                }
-            }
-        }
     }
- 
 });

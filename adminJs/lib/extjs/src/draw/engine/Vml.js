@@ -1,5 +1,20 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
  * @class Ext.draw.engine.Vml
+ * @extends Ext.draw.Surface
  * Provides specific methods to draw with VML.
  */
 
@@ -9,7 +24,7 @@ Ext.define('Ext.draw.engine.Vml', {
 
     extend: 'Ext.draw.Surface',
 
-    requires: ['Ext.draw.Draw', 'Ext.draw.Color', 'Ext.draw.Sprite', 'Ext.draw.Matrix', 'Ext.Element'],
+    requires: ['Ext.draw.Draw', 'Ext.draw.Color', 'Ext.draw.Sprite', 'Ext.draw.Matrix', 'Ext.core.Element'],
 
     /* End Definitions */
 
@@ -31,9 +46,6 @@ Ext.define('Ext.draw.engine.Vml', {
     coordsize: 1000,
     coordorigin: '0 0',
 
-    // VML uses CSS z-index and therefore doesn't need sprites to be kept in zIndex order
-    orderSpritesByZIndex: false,
-
     // @private
     // Convert an SVG standard path into a VML path
     path2vml: function (path) {
@@ -53,7 +65,7 @@ Ext.define('Ext.draw.engine.Vml', {
                     isMove = command.toLowerCase() == "m",
                     res = map[command];
                 args.replace(val, function (value) {
-                    if (isMove && vals.length === 2) {
+                    if (isMove && vals[length] == 2) {
                         res += vals + map[command == "m" ? "l" : "L"];
                         vals = [];
                     }
@@ -210,7 +222,7 @@ Ext.define('Ext.draw.engine.Vml', {
             el.appendChild(skew);
             sprite.skew = skew;
         }
-        sprite.matrix = new Ext.draw.Matrix();
+        sprite.matrix = Ext.create('Ext.draw.Matrix');
         sprite.bbox = {
             plain: null,
             transform: null
@@ -610,6 +622,9 @@ Ext.define('Ext.draw.engine.Vml', {
                 me.el.setHeight(height);
             }
 
+            // Handle viewBox sizing
+            me.applyViewBox();
+
             me.callParent(arguments);
         }
     },
@@ -633,9 +648,32 @@ Ext.define('Ext.draw.engine.Vml', {
         var me = this,
             viewBox = me.viewBox,
             width = me.width,
-            height = me.height;
-        me.callParent();
+            height = me.height,
+            viewBoxX, viewBoxY, viewBoxWidth, viewBoxHeight,
+            relativeHeight, relativeWidth, size;
+
         if (viewBox && (width || height)) {
+            viewBoxX = viewBox.x;
+            viewBoxY = viewBox.y;
+            viewBoxWidth = viewBox.width;
+            viewBoxHeight = viewBox.height;
+            relativeHeight = height / viewBoxHeight;
+            relativeWidth = width / viewBoxWidth;
+
+            if (viewBoxWidth * relativeHeight < width) {
+                viewBoxX -= (width - viewBoxWidth * relativeHeight) / 2 / relativeHeight;
+            }
+            if (viewBoxHeight * relativeWidth < height) {
+                viewBoxY -= (height - viewBoxHeight * relativeWidth) / 2 / relativeWidth;
+            }
+
+            size = 1 / Math.max(viewBoxWidth / width, viewBoxHeight / height);
+
+            me.viewBoxShift = {
+                dx: -viewBoxX,
+                dy: -viewBoxY,
+                scale: size
+            };
             me.items.each(function(item) {
                 me.transform(item);
             });
@@ -731,7 +769,7 @@ Ext.define('Ext.draw.engine.Vml', {
     },
 
     rotationCompensation: function (deg, dx, dy) {
-        var matrix = new Ext.draw.Matrix();
+        var matrix = Ext.create('Ext.draw.Matrix');
         matrix.rotate(-deg, 0.5, 0.5);
         return {
             x: matrix.x(dx, dy),
@@ -741,7 +779,7 @@ Ext.define('Ext.draw.engine.Vml', {
 
     transform: function(sprite) {
         var me = this,
-            matrix = new Ext.draw.Matrix(),
+            matrix = Ext.create('Ext.draw.Matrix'),
             transforms = sprite.transformations,
             transformsLength = transforms.length,
             i = 0,
@@ -754,8 +792,7 @@ Ext.define('Ext.draw.engine.Vml', {
             domStyle = dom.style,
             zoom = me.zoom,
             skew = sprite.skew,
-            shift = me.viewBoxShift,
-            deltaX, deltaY, transform, type, compensate, y, fill, newAngle,zoomScaleX, zoomScaleY, newOrigin, offset;
+            deltaX, deltaY, transform, type, compensate, y, fill, newAngle,zoomScaleX, zoomScaleY, newOrigin;
 
         for (; i < transformsLength; i++) {
             transform = transforms[i];
@@ -774,9 +811,9 @@ Ext.define('Ext.draw.engine.Vml', {
             }
         }
 
-        if (shift) {
-            matrix.add(1, 0, 0, 1, shift.dx, shift.dy);
-            matrix.prepend(1 / shift.scale, 0, 0, 1 / shift.scale, 0, 0);
+        if (me.viewBoxShift) {
+            matrix.scale(me.viewBoxShift.scale, me.viewBoxShift.scale, -1, -1);
+            matrix.add(1, 0, 0, 1, me.viewBoxShift.dx, me.viewBoxShift.dy);
         }
 
         sprite.matrix = matrix;
@@ -787,21 +824,7 @@ Ext.define('Ext.draw.engine.Vml', {
         if (sprite.type != "image" && skew) {
             // matrix transform via VML skew
             skew.matrix = matrix.toString();
-            // skew.offset = '32767,1' OK
-            // skew.offset = '32768,1' Crash
-            // M$, R U kidding??
-            offset = matrix.offset();
-            if (offset[0] > 32767) {
-                offset[0] = 32767;
-            } else if (offset[0] < -32768) {
-                offset[0] = -32768
-            }
-            if (offset[1] > 32767) {
-                offset[1] = 32767;
-            } else if (offset[1] < -32768) {
-                offset[1] = -32768
-            }
-            skew.offset = offset;
+            skew.offset = matrix.offset();
         }
         else {
             deltaX = matrix.matrix[0][2];
@@ -901,3 +924,4 @@ Ext.define('Ext.draw.engine.Vml', {
         delete me.el;
     }
 });
+
