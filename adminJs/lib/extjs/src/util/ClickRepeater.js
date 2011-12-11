@@ -1,5 +1,20 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
  * @class Ext.util.ClickRepeater
+ * @extends Ext.util.Observable
  *
  * A wrapper class which can be applied to any element. Fires a "click" event while the
  * mouse is pressed. The interval between firings may be specified in the config but
@@ -13,7 +28,7 @@ Ext.define('Ext.util.ClickRepeater', {
 
     /**
      * Creates new ClickRepeater.
-     * @param {String/HTMLElement/Ext.Element} el The element or its ID to listen on
+     * @param {Mixed} el The element to listen on
      * @param {Object} config (optional) Config object.
      */
     constructor : function(el, config){
@@ -60,7 +75,7 @@ Ext.define('Ext.util.ClickRepeater', {
     },
 
     /**
-     * @cfg {String/HTMLElement/Ext.Element} el The element to act as a button.
+     * @cfg {Mixed} el The element to act as a button.
      */
 
     /**
@@ -229,3 +244,4 @@ Ext.define('Ext.util.ClickRepeater', {
         this.fireEvent("mouseup", this, e);
     }
 });
+

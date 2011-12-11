@@ -1,8 +1,25 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
- * This class is intended to be extended or created via the {@link Ext.Component#componentLayout layout}
- * configuration property.  See {@link Ext.Component#componentLayout} for additional details.
+ * @class Ext.layout.component.Component
+ * @extends Ext.layout.Layout
  * @private
+ * <p>This class is intended to be extended or created via the <tt><b>{@link Ext.Component#componentLayout layout}</b></tt>
+ * configuration property.  See <tt><b>{@link Ext.Component#componentLayout}</b></tt> for additional details.</p>
  */
+
 Ext.define('Ext.layout.component.Component', {
 
     /* Begin Definitions */
@@ -13,91 +30,78 @@ Ext.define('Ext.layout.component.Component', {
 
     type: 'component',
 
-    isComponentLayout: true,
-
     monitorChildren: true,
 
-    nullBox: {},
-    
-    beginLayoutCycle: function (ownerContext, firstCycle) {
+    initLayout : function() {
         var me = this,
             owner = me.owner,
-            heightAuthority = ownerContext.heightAuthority,
-            widthAuthority = ownerContext.widthAuthority,
-            body = owner.el.dom === document.body,
-            lastBox = ownerContext.lastBox || me.nullBox,
-            dirty;
+            ownerEl = owner.el;
 
-        me.callParent(arguments);
-
-        // we want to publish configured dimensions as early as possible and since this is
-        // a write phase...
-
-        if (widthAuthority == 1) {
-            // If the owner.el is the body, owner.width is not dirty (we don't want to write
-            // it to the body el). For other el's, the width may already be correct in the
-            // DOM (e.g., it is rendered in the markup initially). If the width is not
-            // correct in the DOM, this is only going to be the case on the first cycle.
-
-            dirty = !body && firstCycle && owner.width !== lastBox.width;
-            
-            ownerContext.setWidth(owner.width, dirty);
-        } else if (ownerContext.isTopLevel && widthAuthority) {
-            ownerContext.setWidth(me.lastComponentSize.width, /*dirty=*/false, /*force=*/true);
-        }
-
-        if (heightAuthority == 1) {
-            dirty = !body && firstCycle && owner.height !== lastBox.height;
-            ownerContext.setHeight(owner.height, dirty);
-        } else if (ownerContext.isTopLevel && heightAuthority) {
-            ownerContext.setHeight(me.lastComponentSize.height, false, true);
-        }
-    },
-
-    finishedLayout: function(ownerContext) {
-        var me = this,
-            elementChildren = ownerContext.children,
-            len, i, elContext;
-
-        // NOTE: In the code below we cannot use getProp because that will generate a layout dependency
-
-        // Set lastBox on managed child Elements.
-        // So that ContextItem.constructor can snag the lastBox for use by its undo method.
-        if (elementChildren) {
-            len = elementChildren.length;
-            for (i = 0; i < len; i++) {
-                elContext = elementChildren[i];
-                elContext.el.lastBox = elContext.props;
+        if (!me.initialized) {
+            if (owner.frameSize) {
+                me.frameSize = owner.frameSize;
+            }
+            else {
+                owner.frameSize = me.frameSize = {
+                    top: 0,
+                    left: 0,
+                    bottom: 0,
+                    right: 0
+                }; 
             }
         }
-
-        // Cache the size from which we are changing so that notifyOwner can notify the owningComponent with all essential information
-        ownerContext.previousSize = me.lastComponentSize;
-
-        // Cache the currently layed out size
-        me.owner.lastBox = me.lastComponentSize = ownerContext.props;
+        me.callParent(arguments);
     },
-    
-    notifyOwner: function(ownerContext) {
-        var me = this,
-            currentSize = me.lastComponentSize,
-            prevSize = ownerContext.previousSize,
-            args = [currentSize.width, currentSize.height];
 
-        if (prevSize) {
-            args.push(prevSize.width, prevSize.height);
+    beforeLayout : function(width, height, isSetSize, callingContainer) {
+        this.callParent(arguments);
+
+        var me = this,
+            owner = me.owner,
+            ownerCt = owner.ownerCt,
+            layout = owner.layout,
+            isVisible = owner.isVisible(true),
+            ownerElChild = owner.el.child,
+            layoutCollection;
+
+        // Cache the size we began with so we can see if there has been any effect.
+        me.previousComponentSize = me.lastComponentSize;
+
+        //Do not allow autoing of any dimensions which are fixed, unless we are being told to do so by the ownerCt's layout.
+        if (!isSetSize && ((!Ext.isNumber(width) && owner.isFixedWidth()) || (!Ext.isNumber(height) && owner.isFixedHeight())) && callingContainer !== ownerCt) {
+            me.doContainerLayout();
+            return false;
         }
-        
-        // Call afterComponentLayout passing new size, and only passing old size if there *was* an old size.
-        me.owner.afterComponentLayout.apply(me.owner, args);
+
+        // If an ownerCt is hidden, add my reference onto the layoutOnShow stack.  Set the needsLayout flag.
+        // If the owner itself is a directly hidden floater, set the needsLayout object on that for when it is shown.
+        if (!isVisible && (owner.hiddenAncestor || owner.floating)) {
+            if (owner.hiddenAncestor) {
+                layoutCollection = owner.hiddenAncestor.layoutOnShow;
+                layoutCollection.remove(owner);
+                layoutCollection.add(owner);
+            }
+            owner.needsLayout = {
+                width: width,
+                height: height,
+                isSetSize: false
+            };
+        }
+
+        if (isVisible && this.needsLayout(width, height)) {
+            return owner.beforeComponentLayout(width, height, isSetSize, callingContainer);
+        }
+        else {
+            return false;
+        }
     },
 
     /**
-     * Check if the new size is different from the current size and only
-     * trigger a layout if it is necessary.
-     * @param {Number} width The new width to set.
-     * @param {Number} height The new height to set.
-     */
+    * Check if the new size is different from the current size and only
+    * trigger a layout if it is necessary.
+    * @param {Mixed} width The new width to set.
+    * @param {Mixed} height The new height to set.
+    */
     needsLayout : function(width, height) {
         var me = this,
             widthBeingChanged,
@@ -114,193 +118,167 @@ Ext.define('Ext.layout.component.Component', {
         heightBeingChanged = !Ext.isDefined(height) || me.lastComponentSize.height !== height;
 
 
-        // Return true if the managed Component needs to be layed out.
-        return (me.childrenChanged || widthBeingChanged || heightBeingChanged);
+        // isSizing flag added to prevent redundant layouts when going up the layout chain
+        return !me.isSizing && (me.childrenChanged || widthBeingChanged || heightBeingChanged);
+    },
+
+    /**
+    * Set the size of any element supporting undefined, null, and values.
+    * @param {Mixed} width The new width to set.
+    * @param {Mixed} height The new height to set.
+    */
+    setElementSize: function(el, width, height) {
+        if (width !== undefined && height !== undefined) {
+            el.setSize(width, height);
+        }
+        else if (height !== undefined) {
+            el.setHeight(height);
+        }
+        else if (width !== undefined) {
+            el.setWidth(width);
+        }
     },
 
     /**
      * Returns the owner component's resize element.
-     * @return {Ext.Element}
+     * @return {Ext.core.Element}
      */
-    getTarget : function() {
-        return this.owner.el;
-    },
+     getTarget : function() {
+         return this.owner.el;
+     },
 
     /**
-     * Returns the element into which rendering must take place. Defaults to the owner Component's encapsulating element.
-     *
+     * <p>Returns the element into which rendering must take place. Defaults to the owner Component's encapsulating element.</p>
      * May be overridden in Component layout managers which implement an inner element.
-     * @return {Ext.Element}
+     * @return {Ext.core.Element}
      */
     getRenderTarget : function() {
         return this.owner.el;
     },
 
-    cacheTargetInfo: function(ownerContext) {
-        var me = this,
-            targetInfo = me.targetInfo,
-            target, body;
+    /**
+    * Set the size of the target element.
+    * @param {Mixed} width The new width to set.
+    * @param {Mixed} height The new height to set.
+    */
+    setTargetSize : function(width, height) {
+        var me = this;
+        me.setElementSize(me.owner.el, width, height);
 
-        if (!targetInfo) {
-            target = ownerContext.getEl('getTarget', me);
-            body = ownerContext.getEl('getTargetEl');
+        if (me.owner.frameBody) {
+            var targetInfo = me.getTargetInfo(),
+                padding = targetInfo.padding,
+                border = targetInfo.border,
+                frameSize = me.frameSize;
 
-            me.targetInfo = targetInfo = {
-                padding: target.getPaddingInfo(),
-                border: target.getBorderInfo()
+            me.setElementSize(me.owner.frameBody,
+                Ext.isNumber(width) ? (width - frameSize.left - frameSize.right - padding.left - padding.right - border.left - border.right) : width,
+                Ext.isNumber(height) ? (height - frameSize.top - frameSize.bottom - padding.top - padding.bottom - border.top - border.bottom) : height
+            );
+        }
+
+        me.autoSized = {
+            width: !Ext.isNumber(width),
+            height: !Ext.isNumber(height)
+        };
+
+        me.lastComponentSize = {
+            width: width,
+            height: height
+        };
+    },
+
+    getTargetInfo : function() {
+        if (!this.targetInfo) {
+            var target = this.getTarget(),
+                body = this.owner.getTargetEl();
+
+            this.targetInfo = {
+                padding: {
+                    top: target.getPadding('t'),
+                    right: target.getPadding('r'),
+                    bottom: target.getPadding('b'),
+                    left: target.getPadding('l')
+                },
+                border: {
+                    top: target.getBorderWidth('t'),
+                    right: target.getBorderWidth('r'),
+                    bottom: target.getBorderWidth('b'),
+                    left: target.getBorderWidth('l')
+                },
+                bodyMargin: {
+                    top: body.getMargin('t'),
+                    right: body.getMargin('r'),
+                    bottom: body.getMargin('b'),
+                    left: body.getMargin('l')
+                } 
             };
         }
-
-        return targetInfo;
+        return this.targetInfo;
     },
 
-    measureAutoDimensions: function (ownerContext, dimensions) {
-        // Subtle But Important:
-        // 
-        // We don't want to call getProp/hasProp et.al. unless we in fact need that value
-        // for our results! If we call it and don't need it, the layout manager will think
-        // we depend on it and will schedule us again should it change.
+    // Start laying out UP the ownerCt's layout when flagged to do so.
+    doOwnerCtLayouts: function() {
+        var owner = this.owner,
+            ownerCt = owner.ownerCt,
+            ownerCtComponentLayout, ownerCtContainerLayout,
+            curSize = this.lastComponentSize,
+            prevSize = this.previousComponentSize,
+            widthChange  = (prevSize && curSize && curSize.width) ? curSize.width !== prevSize.width : true,
+            heightChange = (prevSize && curSize && curSize.height) ? curSize.height !== prevSize.height : true;
 
-        var me = this,
-            owner = me.owner,
-            autoHeight = ownerContext.autoHeight,
-            autoWidth  = ownerContext.autoWidth,
-            boxParent = ownerContext.boxParent,
-            isBoxParent = ownerContext.isBoxParent,
-            state = ownerContext.state,
-            ret = {
-                gotWidth: false,
-                gotHeight: false,
-                isContainer: !ownerContext.hasRawContent
-            },
-            hv = dimensions || 3,
-            zeroWidth = !(hv & 1),
-            zeroHeight = !(hv & 2),
-            needed = 0,
-            got = 0,
-            ready, size;
 
-        if (ret.isContainer) {
-            if (autoHeight) {
-                ++needed;
+        // If size has not changed, do not inform upstream layouts
+        if (!ownerCt || (!widthChange && !heightChange)) {
+            return;
+        }
+        
+        ownerCtComponentLayout = ownerCt.componentLayout;
+        ownerCtContainerLayout = ownerCt.layout;
 
-                // don't ask unless we need to know...
-                if (zeroHeight) {
-                    ret.contentHeight = 0;
-                    ret.gotHeight = true;
-                    ++got;
-                } else if ((ret.contentHeight = ownerContext.getProp('contentHeight')) !== undefined) {
-                    ret.gotHeight = true;
-                    ++got;
+        if (!owner.floating && ownerCtComponentLayout && ownerCtComponentLayout.monitorChildren && !ownerCtComponentLayout.layoutBusy) {
+            if (!ownerCt.suspendLayout && ownerCtContainerLayout && !ownerCtContainerLayout.layoutBusy) {
+
+                // If the owning Container may be adjusted in any of the the dimension which have changed, perform its Component layout
+                if (((widthChange && !ownerCt.isFixedWidth()) || (heightChange && !ownerCt.isFixedHeight()))) {
+                    // Set the isSizing flag so that the upstream Container layout (called after a Component layout) can omit this component from sizing operations
+                    this.isSizing = true;
+                    ownerCt.doComponentLayout();
+                    this.isSizing = false;
                 }
-            }
-
-            if (autoWidth) {
-                ++needed;
-
-                // don't ask unless we need to know...
-                if (zeroWidth) {
-                    ret.contentWidth = 0;
-                    ret.gotWidth = true;
-                    ++got;
-                } else if ((ret.contentWidth = ownerContext.getProp('contentWidth')) !== undefined) {
-                    ret.gotWidth = true;
-                    ++got;
+                // Execute upstream Container layout
+                else if (ownerCtContainerLayout.bindToOwnerCtContainer === true) {
+                    ownerCtContainerLayout.layout();
                 }
-            }
-        } else {
-            // This is the 98% use case of auto-sizing
-            if (autoHeight) {
-                ++needed;
-
-                size = ownerContext.props.contentHeight;
-                if (typeof size == 'number') { // if (already determined)
-                    ret.contentHeight = size;
-                    ret.gotHeight = true;
-                    ++got;
-                } else {
-                    if (zeroHeight || ownerContext.target.noWrap) {
-                        ready = true;
-                    } else if (!autoWidth || owner.minWidth !== undefined || owner.maxWidth !== undefined) {
-                        // fixed width, so we need the width to determine the height...
-                        ready = ownerContext.hasDomProp('width');
-                    } else if (isBoxParent || !boxParent || boxParent.autoWidth) {
-                        // if we have no boxParent, we are ready, but an autoWidth boxParent
-                        // artificially provides width early in the measurement process so
-                        // we are ready to go in that case as well...
-                        ready = true;
-                    } else {
-                        // lastly, we have a boxParent that will be given a width, so we
-                        // can wait for that width to be set in order to properly measure
-                        // whatever is inside...
-                        ready = boxParent.hasDomProp('width');
-                    }
-
-                    if (ready) {
-                        ret.contentHeight = zeroHeight ? 0 : me.getContentHeight(ownerContext);
-                        ownerContext.setContentHeight(ret.contentHeight, true);
-                        ret.gotHeight = true;
-                        ++got;
-                    }
-                }
-            }
-
-            // A minority use case, but often occurs with autoHeight... also useful for
-            // things like images
-            if (autoWidth) {
-                ++needed;
-
-                size = ownerContext.props.contentWidth;
-                if (typeof size == 'number') { // if (already determined)
-                    ret.contentWidth = size;
-                    ret.gotWidth = true;
-                    ++got;
-                } else {
-                    if (zeroWidth) {
-                        ready = true;
-                    } else if (isBoxParent || !boxParent || boxParent.autoWidth) {
-                        // if we have no boxParent, we are ready, but an autoWidth boxParent
-                        // artificially provides width early in the measurement process so
-                        // we are ready to go in that case as well...
-                        ready = true;
-                    } else {
-                        // lastly, we have a boxParent that will be given a width, so we
-                        // can wait for that width to be set in order to properly measure
-                        // whatever is inside...
-                        ready = boxParent.hasDomProp('width');
-                    }
-
-                    if (ready) {
-                        ret.contentWidth = zeroWidth ? 0 : me.getContentWidth(ownerContext);
-                        ownerContext.setContentWidth(ret.contentWidth, true);
-                        ret.gotWidth = true;
-                        ++got;
-                    }
-                }
-            }
-
-            if (boxParent && boxParent.autoWidth && !state.boxMeasured && ownerContext.measuresBox) {
-                // since an autoWidth boxParent is holding a width on itself to allow each
-                // child to measure
-                state.boxMeasured = 1; // best to only call once per child
-                boxParent.boxChildMeasured();
             }
         }
-
-        // TODO - enforce min/maxHeight and min/maxWidth?
-
-        ret.gotAll = got == needed;
-        // see if we can avoid calling this method by storing something on ownerContext.
-        return ret;
     },
 
-    getContentWidth: function (ownerContext) {
-        // contentWidth includes padding, but not border, framing or margins
-        return ownerContext.el.getWidth() + ownerContext.getPaddingInfo().width - ownerContext.getFrameInfo().width;
+    doContainerLayout: function() {
+        var me = this,
+            owner = me.owner,
+            ownerCt = owner.ownerCt,
+            layout = owner.layout,
+            ownerCtComponentLayout;
+
+        // Run the container layout if it exists (layout for child items)
+        // **Unless automatic laying out is suspended, or the layout is currently running**
+        if (!owner.suspendLayout && layout && layout.isLayout && !layout.layoutBusy && !layout.isAutoDock) {
+            layout.layout();
+        }
+
+        // Tell the ownerCt that it's child has changed and can be re-layed by ignoring the lastComponentSize cache.
+        if (ownerCt && ownerCt.componentLayout) {
+            ownerCtComponentLayout = ownerCt.componentLayout;
+            if (!owner.floating && ownerCtComponentLayout.monitorChildren && !ownerCtComponentLayout.layoutBusy) {
+                ownerCtComponentLayout.childrenChanged = true;
+            }
+        }
     },
 
-    getContentHeight: function (ownerContext) {
-        // contentHeight includes padding, but not border, framing or margins
-        return ownerContext.el.getHeight() + ownerContext.getPaddingInfo().height - ownerContext.getFrameInfo().height;
+    afterLayout : function(width, height, isSetSize, layoutOwner) {
+        this.doContainerLayout();
+        this.owner.afterComponentLayout(width, height, isSetSize, layoutOwner);
     }
 });
+

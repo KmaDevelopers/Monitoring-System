@@ -1,49 +1,39 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
- * Simple header class which is used for on {@link Ext.panel.Panel} and {@link Ext.window.Window}.
+ * @class Ext.panel.Header
+ * @extends Ext.container.Container
+ * Simple header class which is used for on {@link Ext.panel.Panel} and {@link Ext.window.Window}
  */
 Ext.define('Ext.panel.Header', {
     extend: 'Ext.container.Container',
-    uses: ['Ext.panel.Tool', 'Ext.draw.Component', 'Ext.util.CSS', 'Ext.layout.component.Body', 'Ext.Img'],
+    uses: ['Ext.panel.Tool', 'Ext.draw.Component', 'Ext.util.CSS'],
     alias: 'widget.header',
 
     isHeader       : true,
-    focusable      : false,
     defaultType    : 'tool',
     indicateDrag   : false,
     weight         : -1,
-    componentLayout: 'body',
 
-    childEls: [
-        'body'
-    ],
-
-    renderTpl: [
-        '<div id="{id}-body" class="{baseCls}-body<tpl if="bodyCls"> {bodyCls}</tpl>',
-        '<tpl if="uiCls">',
-            '<tpl for="uiCls"> {parent.baseCls}-body-{parent.ui}-{.}</tpl>',
-        '</tpl>"',
-        '<tpl if="bodyStyle"> style="{bodyStyle}"</tpl>>',
-            '{%this.renderContainer(out,values)%}',
-        '</div>'
-    ],
-
-    headingTpl: '<span id="{id}-textEl" class="{cls}-text {cls}-text-{ui}">{title}</span>',
-
-    /**
-     * @cfg {String} title
-     * The title text to display.
-     */
-
-    /**
-     * @cfg {String} iconCls
-     * CSS class for icon in header. Used for displaying an icon to the left of a title.
-     */
+    renderTpl: ['<div class="{baseCls}-body<tpl if="bodyCls"> {bodyCls}</tpl><tpl if="uiCls"><tpl for="uiCls"> {parent.baseCls}-body-{parent.ui}-{.}</tpl></tpl>"<tpl if="bodyStyle"> style="{bodyStyle}"</tpl>></div>'],
 
     initComponent: function() {
         var me = this,
-            ruleStyle,
             rule,
             style,
+            titleTextEl,
             ui;
 
         me.indicateDragCls = me.baseCls + '-draggable';
@@ -55,11 +45,12 @@ Ext.define('Ext.panel.Header', {
 
         //add the dock as a ui
         //this is so we support top/right/left/bottom headers
-        me.addClsWithUI([me.orientation, me.dock]);
+        me.addClsWithUI(me.orientation);
+        me.addClsWithUI(me.dock);
 
-        if (me.indicateDrag) {
-            me.addCls(me.indicateDragCls);
-        }
+        Ext.applyIf(me.renderSelectors, {
+            body: '.' + me.baseCls + '-body'
+        });
 
         // Add Icon
         if (!Ext.isEmpty(me.iconCls)) {
@@ -69,12 +60,20 @@ Ext.define('Ext.panel.Header', {
 
         // Add Title
         if (me.orientation == 'vertical') {
+            // Hack for IE6/7's inability to display an inline-block
+            if (Ext.isIE6 || Ext.isIE7) {
+                me.width = this.width || 24;
+            } else if (Ext.isIEQuirks) {
+                me.width = this.width || 25;
+            }
+
             me.layout = {
                 type : 'vbox',
-                align: 'center'
+                align: 'center',
+                clearInnerCtOnLayout: true,
+                bindToOwnerCtContainer: false
             };
             me.textConfig = {
-                width: 15,
                 cls: me.baseCls + '-text',
                 type: 'text',
                 text: me.title,
@@ -86,11 +85,7 @@ Ext.define('Ext.panel.Header', {
             if (Ext.isArray(ui)) {
                 ui = ui[0];
             }
-            ruleStyle = '.' + me.baseCls + '-text-' + ui;
-            if (Ext.scopeResetCSS) {
-                ruleStyle = '.' + Ext.baseCSSPrefix + 'reset ' + ruleStyle;
-            }
-            rule = Ext.util.CSS.getRule(ruleStyle);
+            rule = Ext.util.CSS.getRule('.' + me.baseCls + '-text-' + ui);
             if (rule) {
                 style = rule.style;
             }
@@ -102,81 +97,87 @@ Ext.define('Ext.panel.Header', {
                     fill: style.color
                 });
             }
-            me.titleCmp = new Ext.draw.Component({
-                width     : 15,
+            me.titleCmp = Ext.create('Ext.draw.Component', {
                 ariaRole  : 'heading',
-                focusable : false,
-                viewBox   : false,
-                flex      : 1,
-                id        : me.id + '_hd',
-                autoSize  : true,
-                margins   : '5 0 0 0',
-                items     : [ me.textConfig ],
-                xhooks: {
-                    setSize: function (width) {
-                        // don't pass 2nd arg (height) on to setSize or we break 'flex:1'
-                        this.callParent([width]);
-                    }
-                },
-                // this is a bit of a cheat: we are not selecting an element of titleCmp
-                // but rather of titleCmp.items[0] (so we cannot use childEls)
-                childEls  : [
-                    { name: 'textEl', select: '.' + me.baseCls + '-text' }
-                ]
+                focusable: false,
+                viewBox: false,
+                flex : 1,
+                autoSize: true,
+                margins: '5 0 0 0',
+                items: [ me.textConfig ],
+                renderSelectors: {
+                    textEl: '.' + me.baseCls + '-text'
+                }
             });
         } else {
             me.layout = {
                 type : 'hbox',
-                align: 'middle'
+                align: 'middle',
+                clearInnerCtOnLayout: true,
+                bindToOwnerCtContainer: false
             };
-            me.titleCmp = new Ext.Component({
-                height    : 15,
+            me.titleCmp = Ext.create('Ext.Component', {
                 xtype     : 'component',
                 ariaRole  : 'heading',
-                focusable : false,
-                noWrap    : true,
-                flex      : 1,
-                id        : me.id + '_hd',
-                cls       : me.baseCls + '-text-container',
-                renderTpl : me.getTpl('headingTpl'),
+                focusable: false,
+                flex : 1,
+                renderTpl : ['<span class="{cls}-text {cls}-text-{ui}">{title}</span>'],
                 renderData: {
                     title: me.title,
                     cls  : me.baseCls,
                     ui   : me.ui
                 },
-                childEls  : ['textEl']
+                renderSelectors: {
+                    textEl: '.' + me.baseCls + '-text'
+                }
             });
         }
         me.items.push(me.titleCmp);
 
         // Add Tools
         me.items = me.items.concat(me.tools);
-        me.callParent();
-        
-        me.on({
-            click: me.onClick,
-            element: 'el',
-            scope: me
-        });
+        this.callParent();
     },
 
     initIconCmp: function() {
-        var me = this;
-        
-        me.iconCmp = new Ext.Img({
-            width: 15,
-            height: 15,
+        this.iconCmp = Ext.create('Ext.Component', {
             focusable: false,
-            src: Ext.BLANK_IMAGE_URL,
-            cls: [me.baseCls + '-icon', me.iconCls],
-            id: me.id + '-iconEl',
-            iconCls: me.iconCls
+            renderTpl : ['<img alt="" src="{blank}" class="{cls}-icon {iconCls}"/>'],
+            renderData: {
+                blank  : Ext.BLANK_IMAGE_URL,
+                cls    : this.baseCls,
+                iconCls: this.iconCls,
+                orientation: this.orientation
+            },
+            renderSelectors: {
+                iconEl: '.' + this.baseCls + '-icon'
+            },
+            iconCls: this.iconCls
         });
     },
 
     afterRender: function() {
-        this.el.unselectable();
-        this.callParent();
+        var me = this;
+
+        me.el.unselectable();
+        if (me.indicateDrag) {
+            me.el.addCls(me.indicateDragCls);
+        }
+        me.mon(me.el, {
+            click: me.onClick,
+            scope: me
+        });
+        me.callParent();
+    },
+
+    afterLayout: function() {
+        var me = this;
+        me.callParent(arguments);
+
+        // IE7 needs a forced repaint to make the top framing div expand to full width
+        if (Ext.isIE7) {
+            me.el.repaint();
+        }
     },
 
     // inherit docs
@@ -207,7 +208,7 @@ Ext.define('Ext.panel.Header', {
                 me.bodyCls = classes.join(' ');
             }
         }
-
+ 
         return result;
     },
 
@@ -316,15 +317,13 @@ Ext.define('Ext.panel.Header', {
      * @param {String} title The title to be set
      */
     setTitle: function(title) {
-        var me = this,
-            sprite,
-            surface;
+        var me = this;
         if (me.rendered) {
             if (me.titleCmp.rendered) {
                 if (me.titleCmp.surface) {
                     me.title = title || '';
-                    sprite = me.titleCmp.surface.items.items[0];
-                    surface = me.titleCmp.surface;
+                    var sprite = me.titleCmp.surface.items.items[0],
+                        surface = me.titleCmp.surface;
 
                     surface.remove(sprite);
                     me.textConfig.type = 'text';
@@ -360,26 +359,26 @@ Ext.define('Ext.panel.Header', {
     },
 
     /**
-     * Sets the CSS class that provides the icon image for this header.  This method will replace any existing
-     * icon class if one has already been set.
+     * Sets the CSS class that provides the icon image for this panel.  This method will replace any existing
+     * icon class if one has already been set and fire the {@link #iconchange} event after completion.
      * @param {String} cls The new CSS class name
      */
     setIconCls: function(cls) {
-        var me = this,
-            isEmpty = !cls || !cls.length,
-            iconCmp = me.iconCmp;
-        
-        me.iconCls = cls;
-        if (!me.iconCmp && !isEmpty) {
-            me.initIconCmp();
-            me.insert(0, me.iconCmp);
-        } else if (iconCmp) {
-            if (isEmpty) {
-                me.iconCmp.destroy();
-                delete me.iconCmp;
-            } else {
-                iconCmp.removeCls(iconCmp.iconCls);
-                iconCmp.addCls(cls);
+        this.iconCls = cls;
+        if (!this.iconCmp) {
+            this.initIconCmp();
+            this.insert(0, this.iconCmp);
+        }
+        else {
+            if (!cls || !cls.length) {
+                this.iconCmp.destroy();
+            }
+            else {
+                var iconCmp = this.iconCmp,
+                    el      = iconCmp.iconEl;
+
+                el.removeCls(iconCmp.iconCls);
+                el.addCls(cls);
                 iconCmp.iconCls = cls;
             }
         }
@@ -401,10 +400,11 @@ Ext.define('Ext.panel.Header', {
      * @param index
      */
     onAdd: function(component, index) {
-        this.callParent(arguments);
+        this.callParent([arguments]);
         if (component instanceof Ext.panel.Tool) {
             component.bindTo(this.ownerCt);
             this.tools[component.type] = component;
         }
     }
 });
+

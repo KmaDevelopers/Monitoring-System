@@ -15,10 +15,7 @@ class ServerController extends KmaController {
 					'index',
 					'list',
 					'delete',
-<<<<<<< HEAD
-=======
 					'update',
->>>>>>> b9db33af46f6a0caf34c55bf7752e9fef29533e7
 					'create',
 				),
 				'users' => array('*'),
@@ -31,23 +28,12 @@ class ServerController extends KmaController {
 
 	public function actionCreate() {
 
-<<<<<<< HEAD
-		$json = file_get_contents('php://input');
-
-		$serv = new Server();
-		$serv->attributes = CJSON::decode($json);
-
-		if ($serv->validate()) {
-			if ($serv->save()) {
-				$this->result($serv);
-=======
 		$serv = new Server();
 		$serv->attributes = $_POST['Server'];
 
 		if ($serv->validate()) {
 			if ($serv->save()) {
 				$this->result($serv->getItemArray(NULL),1);
->>>>>>> b9db33af46f6a0caf34c55bf7752e9fef29533e7
 			} else {
 				$this->error("Can't save server!");
 			}

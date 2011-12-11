@@ -59,7 +59,6 @@ Ext.define("MsAdmin.controller.ServerController", {
 					this.getServerEditWindow().close()
 				}
 			},
-
 			'ServerViewWindow[ref="create"] [ref="saveBtn"]': {
 				click: this.onCreateServerClick
 			},
@@ -80,11 +79,14 @@ Ext.define("MsAdmin.controller.ServerController", {
 	},
 
 	onListItemClick: function(grid, item) {
-		this.showSensors(item.sensors());
+		this.showSensors(item);
 	},
-	showSensors: function(newStore) {
+	showSensors: function(server) {
+		var newStore = server.sensors();
 		var sensorList = this.getSensorList();
-		sensorList.reconfigure(newStore, sensorList.initialConfig.columns);	
+			sensorList.reconfigure(newStore, sensorList.initialConfig.columns);	
+
+		MsAdmin.Event.fire('server.selected', server);
 	},
 	onDataLoad: function(store) {
 		if(store.getCount() == 0) {
@@ -94,14 +96,17 @@ Ext.define("MsAdmin.controller.ServerController", {
 		var serverList = this.getServerList();
 
 		serverList.getSelectionModel().select(0);
-		this.showSensors(store.getAt(0).sensors());
+		this.showSensors(store.getAt(0));
 	},
 	onEditIconClick: function(model, rIdx, cIdx) {
-		!this.editWindow && (this.editWindow = this.getView("server.ServerViewWindow").create({
-			renderTo: this.getViewport().getCenter().getEl(),
-			ref: "edit"
-		}));
-
+		if(this.editWindow == undefined) {
+			this.editWindow = this.getView("server.ServerViewWindow").create({
+								//renderTo: this.getViewport().getCenter().getEl(),
+								ref: "edit"
+							});
+			//this.getViewport().getCenter().add(this.editWindow);
+		}
+		
 		this.editWindow.loadModel(model);
 		this.editWindow.center();
 		this.editWindow.show();

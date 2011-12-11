@@ -127,9 +127,6 @@ $tab-closable-width: 16px;
 $tabbar-strip-background-color: $orange;
 
 //grid
-$grid-row-height: 22px;
-$grid-row-cell-font-size: 14px;
-$grid-row-cell-line-height: 17px;
 $grid-header-background-color: #373c4b;
 $grid-header-over-background-color: #496085;
 $grid-header-background-gradient: 'glossy';
@@ -153,18 +150,6 @@ $grid-row-cell-selected-border-color: #101010;
 $grid-row-cell-over-background-gradient: 'flat';
 $grid-row-cell-focus-background-gradient: 'flat';
 
-$grid-editor-line-height: $grid-row-height - 7;
-$grid-row-editor-field-padding-horizontal: 1px;
-$grid-cell-editor-field-padding-horizontal: 3px;
-$grid-cell-treecolumn-editor-field-padding-horizontal: 0;
-$grid-row-editor-checkbox-padding-top: 0;
-$grid-cell-editor-checkbox-padding-top: 1px;
-
-//tree
-$tree-elbow-height: 22px;
-$tree-checkbox-margin-top: 2px;
-$tree-icon-margin-top: 3px;
-
 //layout
 $accordion-header-color: #fff;
 $accordion-header-background-color: #5c6b82;
@@ -174,13 +159,6 @@ $progress-border-color: #18181a;
 $progress-background-color: #232d38;
 $progress-text-color-back: #aaa;
 $progress-bar-background-color: $orange;
-
-//btn group
-$btn-group-background-color: #393d4e;
-$btn-group-header-background-color: #676772;
-$btn-group-border-color: #606068;
-$btn-group-inner-border-color: #757478;
-$btn-group-header-color: #D2D2D2;
 
 //datepicker
 $datepicker-background-color: #21252e;

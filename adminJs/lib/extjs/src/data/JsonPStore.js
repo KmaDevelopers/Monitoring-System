@@ -1,7 +1,23 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
  * @class Ext.data.JsonPStore
  * @extends Ext.data.Store
+ * @ignore
  * @private
+ * <p><b>NOTE:</b> This class is in need of migration to the new API.</p>
  * <p>Small helper class to make creating {@link Ext.data.Store}s from different domain JSON data easier.
  * A JsonPStore will be automatically configured with a {@link Ext.data.reader.Json} and a {@link Ext.data.proxy.JsonP JsonPProxy}.</p>
  * <p>A store configuration would be something like:<pre><code>
@@ -38,10 +54,14 @@ Ext.define('Ext.data.JsonPStore', {
     extend: 'Ext.data.Store',
     alias : 'store.jsonp',
 
+    /**
+     * @cfg {Ext.data.DataReader} reader @hide
+     */
     constructor: function(config) {
         this.callParent(Ext.apply(config, {
-            reader: new Ext.data.reader.Json(config),
-            proxy : new Ext.data.proxy.JsonP(config)
+            reader: Ext.create('Ext.data.reader.Json', config),
+            proxy : Ext.create('Ext.data.proxy.JsonP', config)
         }));
     }
 });
+

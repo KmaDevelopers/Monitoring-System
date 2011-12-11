@@ -39,7 +39,7 @@ Ext.define("MsAdmin.controller.SensorController", {
 		});
 	},
 	onListItemClick: function(grid, model) {
-		
+		MsAdmin.Event.fire("sensor.selected", model);
 	},
 
 	onAddButtonClick: function() {
@@ -52,7 +52,7 @@ Ext.define("MsAdmin.controller.SensorController", {
 		MsAdmin.Event.fire('server.current', {
 			callback: function(server) {
 				var model = Ext.create("MsAdmin.model.Sensor", {
-					serverId: server.get('id')
+					serverId: server.get('serverId')
 				});
 				this.createWindow.getForm().loadRecord(model);
 				this.createWindow.center();
@@ -82,7 +82,7 @@ Ext.define("MsAdmin.controller.SensorController", {
 	},
 
 	onSensorSaveSuccess: function(model) {		
-		var server = this.getStore('Servers').findRecord('id', model.get('serverId'));
+		var server = this.getStore('Servers').findRecord('serverId', model.get('serverId'));
 			server.sensors().add(model);
 		this.createWindow.close();
 
@@ -116,6 +116,7 @@ Ext.define("MsAdmin.controller.SensorController", {
 
 	onSensorDestroySuccess: function(model, operation) {
 		var model = operation.request.records[0];
+		MsAdmin.Event.fire('sensor.destroyed', model);
 		model.store.remove(model);
 		MsAdmin.Event.fire('notice', {
 			msg: "Sensor was successfully removed"

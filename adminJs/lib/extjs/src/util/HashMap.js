@@ -1,3 +1,17 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
  * @class Ext.util.HashMap
  * <p>
@@ -22,9 +36,6 @@ map.each(function(key, value, length){
  * </p>
  */
 Ext.define('Ext.util.HashMap', {
-    mixins: {
-        observable: 'Ext.util.Observable'
-    },
 
     /**
      * @cfg {Function} keyFn A function that is used to retrieve a default key for a passed object.
@@ -32,13 +43,17 @@ Ext.define('Ext.util.HashMap', {
      * if the add method is called with a single argument.
      */
 
+    mixins: {
+        observable: 'Ext.util.Observable'
+    },
+
     /**
      * Creates new HashMap.
      * @param {Object} config (optional) Config object.
      */
     constructor: function(config) {
         config = config || {};
-
+        
         var me = this,
             keyFn = config.keyFn;
 
@@ -78,7 +93,7 @@ Ext.define('Ext.util.HashMap', {
 
         me.mixins.observable.constructor.call(me, config);
         me.clear(true);
-
+        
         if (keyFn) {
             me.getKey = keyFn;
         }
@@ -139,7 +154,7 @@ Ext.define('Ext.util.HashMap', {
         }
 
         if (me.containsKey(key)) {
-            return me.replace(key, value);
+            me.replace(key, value);
         }
 
         data = me.getData(key, value);
@@ -347,3 +362,4 @@ Ext.define('Ext.util.HashMap', {
         return undefined;
     }
 });
+

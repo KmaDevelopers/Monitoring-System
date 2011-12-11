@@ -1,5 +1,20 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
  * @class Ext.dd.DragSource
+ * @extends Ext.dd.DDProxy
  * A simple class that provides the basic implementation needed to make any element draggable.
  */
 Ext.define('Ext.dd.DragSource', {
@@ -12,30 +27,30 @@ Ext.define('Ext.dd.DragSource', {
     /**
      * @cfg {String} ddGroup
      * A named drag drop group to which this object belongs.  If a group is specified, then this object will only
-     * interact with other drag drop objects in the same group.
+     * interact with other drag drop objects in the same group (defaults to undefined).
      */
 
     /**
-     * @cfg {String} [dropAllowed="x-dd-drop-ok"]
-     * The CSS class returned to the drag source when drop is allowed.
+     * @cfg {String} dropAllowed
+     * The CSS class returned to the drag source when drop is allowed (defaults to "x-dd-drop-ok").
      */
+
     dropAllowed : Ext.baseCSSPrefix + 'dd-drop-ok',
     /**
-     * @cfg {String} [dropNotAllowed="x-dd-drop-nodrop"]
-     * The CSS class returned to the drag source when drop is not allowed.
+     * @cfg {String} dropNotAllowed
+     * The CSS class returned to the drag source when drop is not allowed (defaults to "x-dd-drop-nodrop").
      */
     dropNotAllowed : Ext.baseCSSPrefix + 'dd-drop-nodrop',
 
     /**
      * @cfg {Boolean} animRepair
-     * If true, animates the proxy element back to the position of the handle element used to trigger the drag.
+     * Defaults to true. If true, animates the proxy element back to the position of the handle element used to trigger the drag.
      */
     animRepair: true,
 
     /**
-     * @cfg {String} repairHighlightColor
-     * The color to use when visually highlighting the drag source in the afterRepair
-     * method after a failed drop (defaults to light blue). The color must be a 6 digit hex value, without
+     * @cfg {String} repairHighlightColor The color to use when visually highlighting the drag source in the afterRepair
+     * method after a failed drop (defaults to 'c3daf9' - light blue). The color must be a 6 digit hex value, without
      * a preceding '#'.
      */
     repairHighlightColor: 'c3daf9',
@@ -43,7 +58,7 @@ Ext.define('Ext.dd.DragSource', {
     /**
      * Creates new drag-source.
      * @constructor
-     * @param {String/HTMLElement/Ext.Element} el The container element or ID of it.
+     * @param {Mixed} el The container element
      * @param {Object} config (optional) Config object.
      */
     constructor: function(el, config) {
@@ -55,8 +70,7 @@ Ext.define('Ext.dd.DragSource', {
         Ext.apply(this, config);
 
         if(!this.proxy){
-            this.proxy = new Ext.dd.StatusProxy({
-                id: this.el.id + '-drag-status-proxy',
+            this.proxy = Ext.create('Ext.dd.StatusProxy', {
                 animRepair: this.animRepair
             });
         }
@@ -239,7 +253,7 @@ Ext.define('Ext.dd.DragSource', {
              * @param {Object} target The target DD
              * @param {Event} e The event object
              * @param {String} id The id of the dropped element
-             * @method afterValidDrop
+             * @method afterInvalidDrop
              */
             this.afterValidDrop(target, e, id);
         }
@@ -327,15 +341,9 @@ Ext.define('Ext.dd.DragSource', {
      */
     onStartDrag: Ext.emptyFn,
 
-    alignElWithMouse: function() {
-        this.proxy.ensureAttachedToBody(true);
-        return this.callParent(arguments);
-    },
-
     // private override
     startDrag: function(x, y) {
         this.proxy.reset();
-        this.proxy.hidden = false;
         this.dragging = true;
         this.proxy.update("");
         this.onInitDrag(x, y);
@@ -396,3 +404,4 @@ Ext.define('Ext.dd.DragSource', {
         Ext.destroy(this.proxy);
     }
 });
+

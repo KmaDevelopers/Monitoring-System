@@ -2,9 +2,9 @@ Ext.ns("MsAdmin");
 MsAdmin.links = {
 	server: {
 		methods: {
-			create: "PUT",
+			create: "POST",
 			read: "GET",
-			update: "POST",
+			update: "PUT",
 			destroy: "DELETE"
 		},
 		url: "/server"
@@ -12,9 +12,9 @@ MsAdmin.links = {
 	},
 	sensor: {
 		methods: {
-			create: "PUT",
+			create: "POST",
 			read: "GET",
-			update: "POST",
+			update: "PUT",
 			destroy: "DELETE"
 		},
 		//url: "/adminJs/app/data/sensor.php"

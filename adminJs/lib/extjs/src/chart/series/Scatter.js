@@ -1,24 +1,39 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
  * @class Ext.chart.series.Scatter
  * @extends Ext.chart.series.Cartesian
- *
- * Creates a Scatter Chart. The scatter plot is useful when trying to display more than two variables in the same visualization.
+ * 
+ * Creates a Scatter Chart. The scatter plot is useful when trying to display more than two variables in the same visualization. 
  * These variables can be mapped into x, y coordinates and also to an element's radius/size, color, etc.
- * As with all other series, the Scatter Series must be appended in the *series* Chart array configuration. See the Chart
+ * As with all other series, the Scatter Series must be appended in the *series* Chart array configuration. See the Chart 
  * documentation for more information on creating charts. A typical configuration object for the scatter could be:
  *
- *     @example
+ * {@img Ext.chart.series.Scatter/Ext.chart.series.Scatter.png Ext.chart.series.Scatter chart series}  
+ *
  *     var store = Ext.create('Ext.data.JsonStore', {
  *         fields: ['name', 'data1', 'data2', 'data3', 'data4', 'data5'],
  *         data: [
- *             { 'name': 'metric one',   'data1': 10, 'data2': 12, 'data3': 14, 'data4': 8,  'data5': 13 },
- *             { 'name': 'metric two',   'data1': 7,  'data2': 8,  'data3': 16, 'data4': 10, 'data5': 3  },
- *             { 'name': 'metric three', 'data1': 5,  'data2': 2,  'data3': 14, 'data4': 12, 'data5': 7  },
- *             { 'name': 'metric four',  'data1': 2,  'data2': 14, 'data3': 6,  'data4': 1,  'data5': 23 },
- *             { 'name': 'metric five',  'data1': 27, 'data2': 38, 'data3': 36, 'data4': 13, 'data5': 33 }
+ *             {'name':'metric one', 'data1':10, 'data2':12, 'data3':14, 'data4':8, 'data5':13},
+ *             {'name':'metric two', 'data1':7, 'data2':8, 'data3':16, 'data4':10, 'data5':3},
+ *             {'name':'metric three', 'data1':5, 'data2':2, 'data3':14, 'data4':12, 'data5':7},
+ *             {'name':'metric four', 'data1':2, 'data2':14, 'data3':6, 'data4':1, 'data5':23},
+ *             {'name':'metric five', 'data1':27, 'data2':38, 'data3':36, 'data4':13, 'data5':33}                                                
  *         ]
  *     });
- *
+ *     
  *     Ext.create('Ext.chart.Chart', {
  *         renderTo: Ext.getBody(),
  *         width: 500,
@@ -28,14 +43,14 @@
  *         store: store,
  *         axes: [{
  *             type: 'Numeric',
- *             position: 'left',
- *             fields: ['data2', 'data3'],
+ *             position: 'bottom',
+ *             fields: ['data1', 'data2', 'data3'],
  *             title: 'Sample Values',
  *             grid: true,
  *             minimum: 0
  *         }, {
  *             type: 'Category',
- *             position: 'bottom',
+ *             position: 'left',
  *             fields: ['name'],
  *             title: 'Sample Metrics'
  *         }],
@@ -57,14 +72,14 @@
  *             axis: 'left',
  *             xField: 'name',
  *             yField: 'data3'
- *         }]
+ *         }]   
  *     });
- *
- * In this configuration we add three different categories of scatter series. Each of them is bound to a different field of the same data store,
- * `data1`, `data2` and `data3` respectively. All x-fields for the series must be the same field, in this case `name`.
- * Each scatter series has a different styling configuration for markers, specified by the `markerConfig` object. Finally we set the left axis as
+ * 
+ * In this configuration we add three different categories of scatter series. Each of them is bound to a different field of the same data store, 
+ * `data1`, `data2` and `data3` respectively. All x-fields for the series must be the same field, in this case `name`. 
+ * Each scatter series has a different styling configuration for markers, specified by the `markerConfig` object. Finally we set the left axis as 
  * axis to show the current values of the elements.
- *
+ * 
  * @xtype scatter
  */
 Ext.define('Ext.chart.series.Scatter', {
@@ -84,17 +99,10 @@ Ext.define('Ext.chart.series.Scatter', {
      * @cfg {Object} markerConfig
      * The display style for the scatter series markers.
      */
-
-    /**
-     * @cfg {Object} style
-     * Append styling properties to this object for it to override theme properties.
-     */
     
     /**
-     * @cfg {String/Array} axis
-     * The position of the axis to bind the values to. Possible values are 'left', 'bottom', 'top' and 'right'.
-     * You must explicitly set this value to bind the values of the line series to the ones in the axis, otherwise a
-     * relative scale will be used. If multiple axes are being used, they should both be specified in in the configuration.
+     * @cfg {Object} style 
+     * Append styling properties to this object for it to override theme properties.
      */
 
     constructor: function(config) {
@@ -131,14 +139,14 @@ Ext.define('Ext.chart.series.Scatter', {
     getBounds: function() {
         var me = this,
             chart = me.chart,
-            store = chart.getChartStore(),
+            store = chart.substore || chart.store,
             axes = [].concat(me.axis),
             bbox, xScale, yScale, ln, minX, minY, maxX, maxY, i, axis, ends;
 
         me.setBBox();
         bbox = me.bbox;
 
-        for (i = 0, ln = axes.length; i < ln; i++) {
+        for (i = 0, ln = axes.length; i < ln; i++) { 
             axis = chart.axes.get(axes[i]);
             if (axis) {
                 ends = axis.calcEnds();
@@ -183,7 +191,7 @@ Ext.define('Ext.chart.series.Scatter', {
             minY = 0;
             maxY = store.getCount() - 1;
             yScale = bbox.height / (store.getCount() - 1);
-        }
+        } 
         else {
             yScale = bbox.height / (maxY - minY);
         }
@@ -202,7 +210,7 @@ Ext.define('Ext.chart.series.Scatter', {
         var me = this,
             chart = me.chart,
             enableShadows = chart.shadow,
-            store = chart.getChartStore(),
+            store = chart.substore || chart.store,
             group = me.group,
             bounds = me.bounds = me.getBounds(),
             bbox = me.bbox,
@@ -220,21 +228,20 @@ Ext.define('Ext.chart.series.Scatter', {
         store.each(function(record, i) {
             xValue = record.get(me.xField);
             yValue = record.get(me.yField);
-            //skip undefined or null values
-            if (typeof yValue == 'undefined' || (typeof yValue == 'string' && !yValue)
-                || xValue == null || yValue == null) {
+            //skip undefined values
+            if (typeof yValue == 'undefined' || (typeof yValue == 'string' && !yValue)) {
                 //<debug warn>
                 if (Ext.isDefined(Ext.global.console)) {
-                    Ext.global.console.warn("[Ext.chart.series.Scatter]  Skipping a store element with a value which is either undefined or null  at ", record, xValue, yValue);
+                    Ext.global.console.warn("[Ext.chart.series.Scatter]  Skipping a store element with an undefined value at ", record, xValue, yValue);
                 }
                 //</debug>
                 return;
             }
             // Ensure a value
-            if (typeof xValue == 'string' || typeof xValue == 'object' && !Ext.isDate(xValue)) {
+            if (typeof xValue == 'string' || typeof xValue == 'object') {
                 xValue = i;
             }
-            if (typeof yValue == 'string' || typeof yValue == 'object' && !Ext.isDate(yValue)) {
+            if (typeof yValue == 'string' || typeof yValue == 'object') {
                 yValue = i;
             }
             x = boxX + (xValue - minX) * xScale;
@@ -360,7 +367,7 @@ Ext.define('Ext.chart.series.Scatter', {
     drawSeries: function() {
         var me = this,
             chart = me.chart,
-            store = chart.getChartStore(),
+            store = chart.substore || chart.store,
             group = me.group,
             enableShadows = chart.shadow,
             shadowGroups = me.shadowGroups,
@@ -407,28 +414,23 @@ Ext.define('Ext.chart.series.Scatter', {
                 for (shindex = 0; shindex < lnsh; shindex++) {
                     shadowAttribute = Ext.apply({}, shadowAttributes[shindex]);
                     rendererAttributes = me.renderer(shadows[shindex], store.getAt(i), Ext.apply({}, { 
-                        hidden: false,
                         translate: {
                             x: attr.x + (shadowAttribute.translate? shadowAttribute.translate.x : 0),
                             y: attr.y + (shadowAttribute.translate? shadowAttribute.translate.y : 0)
-                        }
+                        } 
                     }, shadowAttribute), i, store);
                     me.onAnimate(shadows[shindex], { to: rendererAttributes });
                 }
             }
             else {
-                rendererAttributes = me.renderer(sprite, store.getAt(i), { translate: attr }, i, store);
-                sprite._to = rendererAttributes;
+                rendererAttributes = me.renderer(sprite, store.getAt(i), Ext.apply({ translate: attr }, { hidden: false }), i, store);
                 sprite.setAttributes(rendererAttributes, true);
-                //animate shadows
+                //update shadows
                 for (shindex = 0; shindex < lnsh; shindex++) {
-                    shadowAttribute = Ext.apply({}, shadowAttributes[shindex]);
-                    rendererAttributes = me.renderer(shadows[shindex], store.getAt(i), Ext.apply({}, { 
-                        hidden: false,
-                        translate: {
-                            x: attr.x + (shadowAttribute.translate? shadowAttribute.translate.x : 0),
-                            y: attr.y + (shadowAttribute.translate? shadowAttribute.translate.y : 0)
-                        } 
+                    shadowAttribute = shadowAttributes[shindex];
+                    rendererAttributes = me.renderer(shadows[shindex], store.getAt(i), Ext.apply({ 
+                        x: attr.x,
+                        y: attr.y
                     }, shadowAttribute), i, store);
                     shadows[shindex].setAttributes(rendererAttributes, true);
                 }
@@ -444,7 +446,7 @@ Ext.define('Ext.chart.series.Scatter', {
         me.renderLabels();
         me.renderCallouts();
     },
-
+    
     // @private callback for when creating a label sprite.
     onCreateLabel: function(storeItem, item, i, display) {
         var me = this,
@@ -452,7 +454,7 @@ Ext.define('Ext.chart.series.Scatter', {
             config = me.label,
             endLabelStyle = Ext.apply({}, config, me.seriesLabelStyle),
             bbox = me.bbox;
-
+        
         return me.chart.surface.add(Ext.apply({
             type: 'text',
             group: group,
@@ -460,7 +462,7 @@ Ext.define('Ext.chart.series.Scatter', {
             y: bbox.y + bbox.height / 2
         }, endLabelStyle));
     },
-
+    
     // @private callback for when placing a label sprite.
     onPlaceLabel: function(label, storeItem, item, i, display, animate) {
         var me = this,
@@ -474,12 +476,12 @@ Ext.define('Ext.chart.series.Scatter', {
             y = item.point[1],
             radius = item.sprite.attr.radius,
             bb, width, height, anim;
-
+        
         label.setAttributes({
             text: format(storeItem.get(field)),
             hidden: true
         }, true);
-
+        
         if (display == 'rotate') {
             label.setAttributes({
                 'text-anchor': 'start',
@@ -496,7 +498,7 @@ Ext.define('Ext.chart.series.Scatter', {
             x = x < bbox.x? bbox.x : x;
             x = (x + width > bbox.x + bbox.width)? (x - (x + width - bbox.x - bbox.width)) : x;
             y = (y - height < bbox.y)? bbox.y + height : y;
-
+        
         } else if (display == 'under' || display == 'over') {
             //TODO(nicolas): find out why width/height values in circle bounding boxes are undefined.
             bb = item.sprite.getBBox();
@@ -530,7 +532,7 @@ Ext.define('Ext.chart.series.Scatter', {
                             y: y
                         }, true);
                         label.show(true);
-                    });
+                    });   
                 }
                 else {
                     label.show(true);
@@ -546,8 +548,8 @@ Ext.define('Ext.chart.series.Scatter', {
             }
         }
     },
-
-    // @private callback for when placing a callout sprite.
+    
+    // @private callback for when placing a callout sprite.    
     onPlaceCallout: function(callout, storeItem, item, i, display, animate, index) {
         var me = this,
             chart = me.chart,
@@ -564,18 +566,18 @@ Ext.define('Ext.chart.series.Scatter', {
             boxx, boxy, boxw, boxh,
             p, clipRect = me.bbox,
             x, y;
-
+    
         //position
         normal = [Math.cos(Math.PI /4), -Math.sin(Math.PI /4)];
         x = cur[0] + normal[0] * offsetFromViz;
         y = cur[1] + normal[1] * offsetFromViz;
-
+        
         //box position and dimensions
         boxx = x + (normal[0] > 0? 0 : -(bbox.width + 2 * offsetBox));
         boxy = y - bbox.height /2 - offsetBox;
         boxw = bbox.width + 2 * offsetBox;
         boxh = bbox.height + 2 * offsetBox;
-
+        
         //now check if we're out of bounds and invert the normal vector correspondingly
         //this may add new overlaps between labels (but labels won't be out of bounds).
         if (boxx < clipRect[0] || (boxx + boxw) > (clipRect[0] + clipRect[2])) {
@@ -584,17 +586,17 @@ Ext.define('Ext.chart.series.Scatter', {
         if (boxy < clipRect[1] || (boxy + boxh) > (clipRect[1] + clipRect[3])) {
             normal[1] *= -1;
         }
-
+    
         //update positions
         x = cur[0] + normal[0] * offsetFromViz;
         y = cur[1] + normal[1] * offsetFromViz;
-
+        
         //update box position and dimensions
         boxx = x + (normal[0] > 0? 0 : -(bbox.width + 2 * offsetBox));
         boxy = y - bbox.height /2 - offsetBox;
         boxw = bbox.width + 2 * offsetBox;
         boxh = bbox.height + 2 * offsetBox;
-
+        
         if (chart.animate) {
             //set the line from the middle of the pie to the box.
             me.onAnimate(callout.lines, {
@@ -662,4 +664,5 @@ Ext.define('Ext.chart.series.Scatter', {
             point[1] - tolerance <= y && point[1] + tolerance >= y);
     }
 });
+
 

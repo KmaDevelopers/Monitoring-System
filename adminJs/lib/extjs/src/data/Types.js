@@ -1,6 +1,20 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
  * @class Ext.data.Types
- * <p>This is a static class containing the system-supplied data types which may be given to a {@link Ext.data.Field Field}.<p/>
+ * <p>This is s static class containing the system-supplied data types which may be given to a {@link Ext.data.Field Field}.<p/>
  * <p>The properties in this class are used as type indicators in the {@link Ext.data.Field Field} class, so to
  * test whether a Field is of a certain type, compare the {@link Ext.data.Field#type type} property against properties
  * of this class.</p>
@@ -33,15 +47,15 @@ Ext.data.Types.VELATLONG = {
     type: 'VELatLong'
 };
 </code></pre>
- * <p>Then, when declaring a Model, use: <pre><code>
+ * <p>Then, when declaring a Model, use <pre><code>
 var types = Ext.data.Types; // allow shorthand type access
 Ext.define('Unit',
-    extend: 'Ext.data.Model',
+    extend: 'Ext.data.Model', 
     fields: [
         { name: 'unitName', mapping: 'UnitName' },
         { name: 'curSpeed', mapping: 'CurSpeed', type: types.INT },
         { name: 'latitude', mapping: 'lat', type: types.FLOAT },
-        { name: 'longitude', mapping: 'long', type: types.FLOAT },
+        { name: 'latitude', mapping: 'lat', type: types.FLOAT },
         { name: 'position', type: types.VELATLONG }
     ]
 });
@@ -53,26 +67,32 @@ Ext.define('Ext.data.Types', {
     requires: ['Ext.data.SortTypes']
 }, function() {
     var st = Ext.data.SortTypes;
-
+    
     Ext.apply(Ext.data.Types, {
         /**
-         * @property {RegExp} stripRe
+         * @type Regexp
+         * @property stripRe
          * A regular expression for stripping non-numeric characters from a numeric value. Defaults to <tt>/[\$,%]/g</tt>.
          * This should be overridden for localization.
          */
         stripRe: /[\$,%]/g,
-
+        
         /**
-         * @property {Object} AUTO
+         * @type Object.
+         * @property AUTO
          * This data type means that no conversion is applied to the raw data before it is placed into a Record.
          */
         AUTO: {
+            convert: function(v) {
+                return v;
+            },
             sortType: st.none,
             type: 'auto'
         },
 
         /**
-         * @property {Object} STRING
+         * @type Object.
+         * @property STRING
          * This data type means that the raw data is converted into a String before it is placed into a Record.
          */
         STRING: {
@@ -85,7 +105,8 @@ Ext.define('Ext.data.Types', {
         },
 
         /**
-         * @property {Object} INT
+         * @type Object.
+         * @property INT
          * This data type means that the raw data is converted into an integer before it is placed into a Record.
          * <p>The synonym <code>INTEGER</code> is equivalent.</p>
          */
@@ -97,9 +118,10 @@ Ext.define('Ext.data.Types', {
             sortType: st.none,
             type: 'int'
         },
-
+        
         /**
-         * @property {Object} FLOAT
+         * @type Object.
+         * @property FLOAT
          * This data type means that the raw data is converted into a number before it is placed into a Record.
          * <p>The synonym <code>NUMBER</code> is equivalent.</p>
          */
@@ -111,16 +133,17 @@ Ext.define('Ext.data.Types', {
             sortType: st.none,
             type: 'float'
         },
-
+        
         /**
-         * @property {Object} BOOL
+         * @type Object.
+         * @property BOOL
          * <p>This data type means that the raw data is converted into a boolean before it is placed into
          * a Record. The string "true" and the number 1 are converted to boolean <code>true</code>.</p>
          * <p>The synonym <code>BOOLEAN</code> is equivalent.</p>
          */
         BOOL: {
             convert: function(v) {
-                if (this.useNull && (v === undefined || v === null || v === '')) {
+                if (this.useNull && v === undefined || v === null || v === '') {
                     return null;
                 }
                 return v === true || v === 'true' || v == 1;
@@ -128,18 +151,17 @@ Ext.define('Ext.data.Types', {
             sortType: st.none,
             type: 'bool'
         },
-
+        
         /**
-         * @property {Object} DATE
+         * @type Object.
+         * @property DATE
          * This data type means that the raw data is converted into a Date before it is placed into a Record.
          * The date format is specified in the constructor of the {@link Ext.data.Field} to which this type is
          * being applied.
          */
         DATE: {
             convert: function(v) {
-                var df = this.dateFormat,
-                    parsed;
-
+                var df = this.dateFormat;
                 if (!v) {
                     return null;
                 }
@@ -155,36 +177,40 @@ Ext.define('Ext.data.Types', {
                     }
                     return Ext.Date.parse(v, df);
                 }
-
-                parsed = Date.parse(v);
+                
+                var parsed = Date.parse(v);
                 return parsed ? new Date(parsed) : null;
             },
             sortType: st.asDate,
             type: 'date'
         }
     });
-
+    
     Ext.apply(Ext.data.Types, {
         /**
-         * @property {Object} BOOLEAN
+         * @type Object.
+         * @property BOOLEAN
          * <p>This data type means that the raw data is converted into a boolean before it is placed into
          * a Record. The string "true" and the number 1 are converted to boolean <code>true</code>.</p>
          * <p>The synonym <code>BOOL</code> is equivalent.</p>
          */
         BOOLEAN: this.BOOL,
-
+        
         /**
-         * @property {Object} INTEGER
+         * @type Object.
+         * @property INTEGER
          * This data type means that the raw data is converted into an integer before it is placed into a Record.
          * <p>The synonym <code>INT</code> is equivalent.</p>
          */
         INTEGER: this.INT,
-
+        
         /**
-         * @property {Object} NUMBER
+         * @type Object.
+         * @property NUMBER
          * This data type means that the raw data is converted into a number before it is placed into a Record.
          * <p>The synonym <code>FLOAT</code> is equivalent.</p>
          */
-        NUMBER: this.FLOAT
+        NUMBER: this.FLOAT    
     });
 });
+

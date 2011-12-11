@@ -5,7 +5,6 @@ class AdminController extends KmaController {
 	public $layout = 'admin';
 
 	public function actionIndex() {
-		// echo $this->id;
 		$this->render('index');
 	}
 

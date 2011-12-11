@@ -1,5 +1,20 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
  * @class Ext.dd.DragZone
+ * @extends Ext.dd.DragSource
  * <p>This class provides a container DD instance that allows dragging of multiple child source nodes.</p>
  * <p>This class does not move the drag target nodes, but a proxy element which may contain
  * any DOM structure you wish. The DOM element to show in the proxy is provided by either a
@@ -53,11 +68,12 @@ myDataView.on('render', function(v) {
  * cooperates with this DragZone.
  */
 Ext.define('Ext.dd.DragZone', {
+
     extend: 'Ext.dd.DragSource',
 
     /**
      * Creates new DragZone.
-     * @param {String/HTMLElement/Ext.Element} el The container element or ID of it.
+     * @param {Mixed} el The container element
      * @param {Object} config
      */
     constructor : function(el, config){
@@ -85,7 +101,7 @@ Ext.define('Ext.dd.DragZone', {
      * for a valid target to drag based on the mouse down. Override this method
      * to provide your own lookup logic (e.g. finding a child by class name). Make sure your returned
      * object has a "ddel" attribute (with an HTML Element) for other functions to work.
-     * @param {Event} e The mouse down event
+     * @param {EventObject} e The mouse down event
      * @return {Object} The dragData
      */
     getDragData : function(e){
@@ -119,11 +135,11 @@ Ext.define('Ext.dd.DragZone', {
     /**
      * Called before a repair of an invalid drop to get the XY to animate to. By default returns
      * the XY of this.dragData.ddel
-     * @param {Event} e The mouse up event
-     * @return {Number[]} The xy location (e.g. [100, 200])
+     * @param {EventObject} e The mouse up event
+     * @return {Array} The xy location (e.g. [100, 200])
      */
     getRepairXY : function(e){
-        return Ext.Element.fly(this.dragData.ddel).getXY();
+        return Ext.core.Element.fly(this.dragData.ddel).getXY();
     },
 
     destroy : function(){
@@ -133,3 +149,4 @@ Ext.define('Ext.dd.DragZone', {
         }
     }
 });
+

@@ -1,4 +1,22 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
+ * @class Ext.ComponentQuery
+ * @extends Object
+ * @singleton
+ *
  * Provides searching of Components within Ext.ComponentManager (globally) or a specific
  * Ext.container.Container on the document with a similar syntax to a CSS selector.
  *
@@ -45,7 +63,6 @@
  * Default pseudos include:
  *
  * - not
- * - last
  *
  * Queries return an array of components.
  * Here are some example queries.
@@ -156,7 +173,7 @@ Ext.define('Ext.ComponentQuery', {
                 candidate;
             for (; i < length; i++) {
                 candidate = items[i];
-                if (candidate.hasCls(className)) {
+                if (candidate.el ? candidate.el.hasCls(className) : EA.contains(candidate.initCls(), className)) {
                     result.push(candidate);
                 }
             }
@@ -229,6 +246,7 @@ Ext.define('Ext.ComponentQuery', {
 
     /**
      * @class Ext.ComponentQuery.Query
+     * @extends Object
      * @private
      */
     cq.Query = Ext.extend(Object, {
@@ -338,9 +356,6 @@ Ext.define('Ext.ComponentQuery', {
                     }
                 }
                 return results;
-            },
-            last: function(components) {
-                return components[components.length - 1];
             }
         },
 
@@ -357,7 +372,7 @@ Ext.define('Ext.ComponentQuery', {
          * If omitted, all Components within the document are included in the search.
          * 
          * This parameter may also be an array of Components to filter according to the selector.</p>
-         * @returns {Ext.Component[]} The matched Components.
+         * @returns {[Ext.Component]} The matched Components.
          * 
          * @member Ext.ComponentQuery
          */

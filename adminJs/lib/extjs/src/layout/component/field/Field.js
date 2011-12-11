@@ -1,4 +1,20 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
+ * @class Ext.layout.component.field.Field
+ * @extends Ext.layout.component.Component
  * Layout class for components with {@link Ext.form.Labelable field labeling}, handling the sizing and alignment of
  * the form control, label, and error message treatment.
  * @private
@@ -22,161 +38,111 @@ Ext.define('Ext.layout.component.field.Field', {
         return me.callParent(arguments) || (!me.owner.preventMark && me.activeError !== me.owner.getActiveError());
     },
 
-    beginLayout: function(ownerContext) {
-        var me = this,
-            owner = me.owner;
-
-        me.callParent(arguments);
-
-        // Ensure that during a layout there is ample space to measure a naturally laid out body width.
-        owner.bodyEl.setStyle('width', '1000em');
-
-        ownerContext.labelStrategy = me.getLabelStrategy();
-        ownerContext.errorStrategy = me.getErrorStrategy();
-
-        ownerContext.bodyContext = ownerContext.getEl('bodyEl');
-        ownerContext.labelContext = ownerContext.getEl('labelEl');
-        ownerContext.inputContext = ownerContext.getEl('inputEl');
-        ownerContext.errorContext = ownerContext.getEl('errorEl');
-
-        // perform preparation on the label and error (setting css classes, qtips, etc.)
-        ownerContext.labelStrategy.prepare(ownerContext, owner);
-        ownerContext.errorStrategy.prepare(ownerContext, owner);
-    },
-
-    calculate: function(ownerContext) {
+    onLayout: function(width, height) {
         var me = this,
             owner = me.owner,
             labelStrategy = me.getLabelStrategy(),
             errorStrategy = me.getErrorStrategy(),
-            autoWidth = ownerContext.autoWidth,
-            bodyContext = ownerContext.bodyContext,
-            size = {},
-            height, width;
+            isDefined = Ext.isDefined,
+            isNumber = Ext.isNumber,
+            lastSize, autoWidth, autoHeight, info, undef;
 
-        if (autoWidth) {
-            size.width = me.getBodyNaturalWidth(ownerContext);
-            ownerContext.setWidth(size.width);
-            // TODO - CheckBoxGroup?
-        } else {
-            size.width = ownerContext.getProp('width');
-
-            // Cannot lay out before width is published.
-            if (!size.width) {
-                me.done = false;
-                return;
+        lastSize = me.lastComponentSize || {};
+        if (!isDefined(width)) {
+            width = lastSize.width;
+            if (width < 0) { //first pass lastComponentSize.width is -Infinity
+                width = undef;
             }
         }
+        if (!isDefined(height)) {
+            height = lastSize.height;
+            if (height < 0) { //first pass lastComponentSize.height is -Infinity
+                height = undef;
+            }
+        }
+        autoWidth = !isNumber(width);
+        autoHeight = !isNumber(height);
 
-        // insets for the bodyEl from each side of the component layout area
-        // Insets gets calculated each time by running through the strategies below, so must zero them each time.
-        ownerContext.insets = { top: 0, right: 0, bottom: 0, left: 0 };
+        info = {
+            autoWidth: autoWidth,
+            autoHeight: autoHeight,
+            width: autoWidth ? owner.getBodyNaturalWidth() : width, //always give a pixel width
+            height: height,
+            setOuterWidth: false, //whether the outer el width should be set to the calculated width
+
+            // insets for the bodyEl from each side of the component layout area
+            insets: {
+                top: 0,
+                right: 0,
+                bottom: 0,
+                left: 0
+            }
+        };
 
         // NOTE the order of calculating insets and setting styles here is very important; we must first
         // calculate and set horizontal layout alone, as the horizontal sizing of elements can have an impact
         // on the vertical sizes due to wrapping, then calculate and set the vertical layout.
 
+        // perform preparation on the label and error (setting css classes, qtips, etc.)
+        labelStrategy.prepare(owner, info);
+        errorStrategy.prepare(owner, info);
+
         // calculate the horizontal insets for the label and error
-        labelStrategy.adjustHorizInsets(ownerContext, owner, size);
-        errorStrategy.adjustHorizInsets(ownerContext, owner, size);
+        labelStrategy.adjustHorizInsets(owner, info);
+        errorStrategy.adjustHorizInsets(owner, info);
 
         // set horizontal styles for label and error based on the current insets
-        labelStrategy.layoutHoriz(ownerContext, owner, size);
-        errorStrategy.layoutHoriz(ownerContext, owner, size);
+        labelStrategy.layoutHoriz(owner, info);
+        errorStrategy.layoutHoriz(owner, info);
 
-        width = size.width - ownerContext.insets.left - ownerContext.insets.right,
-        bodyContext.setWidth(width);
+        // calculate the vertical insets for the label and error
+        labelStrategy.adjustVertInsets(owner, info);
+        errorStrategy.adjustVertInsets(owner, info);
 
-        if (ownerContext.bodyContext.hasDomProp('width')) {
-            if (ownerContext.autoHeight) {
-                if (ownerContext.hasRawContent) {
-                    size.height = owner.el.getHeight();
-                } else {
-                    size.height = ownerContext.getProp('contentHeight') + ownerContext.getPaddingInfo().height + ownerContext.getBorderInfo().height;
-                }
-                ownerContext.setProp('height', size.height, false);
-            } else {
-                size.height = ownerContext.getProp('height');
-            }
+        // set vertical styles for label and error based on the current insets
+        labelStrategy.layoutVert(owner, info);
+        errorStrategy.layoutVert(owner, info);
 
-            // calculate the vertical insets for the label and error
-            labelStrategy.adjustVertInsets(ownerContext, owner, size);
-            errorStrategy.adjustVertInsets(ownerContext, owner, size);
-
-            // set vertical styles for label and error based on the current insets
-            labelStrategy.layoutVert(ownerContext, owner, size);
-            errorStrategy.layoutVert(ownerContext, owner, size);
-
-            if (Ext.isNumber(size.height)) {
-                height = ownerContext.autoHeight ? null : size.height - ownerContext.insets.top - ownerContext.insets.bottom;
-                bodyContext.setHeight(height);
-            } else {
-                me.done = false;
-            }
+        // perform sizing of the elements based on the final dimensions and insets
+        if (autoWidth && autoHeight) {
+            // Don't use setTargetSize if auto-sized, so the calculated size is not reused next time
+            me.setElementSize(owner.el, (info.setOuterWidth ? info.width : undef), info.height);
         } else {
-            me.done = false;
+            me.setTargetSize((!autoWidth || info.setOuterWidth ? info.width : undef), info.height);
         }
+        me.sizeBody(info);
 
-        // Ensure inner elements are always synched so that wrapping never happens on a flush which shortens the width
-        me.sizeBodyContents(width, height, ownerContext);
         me.activeError = owner.getActiveError();
     },
-    
-    onFocus: function(){
-        this.getErrorStrategy().onFocus(this.owner);    
-    },
 
-
-    /*
-     * @private
-     * Perform sizing and alignment of the bodyEl (and children) to match the calculated insets.
-     */
-    /*sizeBody: function(ownerContext, size) {
-        var bodyContext = ownerContext.getEl('bodyEl'),
-            insets = ownerContext.insets,
-            totalWidth = size.width,
-            totalHeight = size.height,
-            width = Ext.isNumber(totalWidth) ? totalWidth - insets.left - insets.right : totalWidth,
-            height = ownerContext.autoHeight ? null : Ext.isNumber(totalHeight) ? totalHeight - insets.top - insets.bottom : totalHeight;
-
-        // size the bodyEl
-        bodyContext.setSize(width, height);
-
-        // size the bodyEl's inner contents if necessary
-        this.sizeBodyContents(width, height, ownerContext);
-    },*/
 
     /**
-     * @private
+     * Perform sizing and alignment of the bodyEl (and children) to match the calculated insets.
+     */
+    sizeBody: function(info) {
+        var me = this,
+            owner = me.owner,
+            insets = info.insets,
+            totalWidth = info.width,
+            totalHeight = info.height,
+            width = Ext.isNumber(totalWidth) ? totalWidth - insets.left - insets.right : totalWidth,
+            height = Ext.isNumber(totalHeight) ? totalHeight - insets.top - insets.bottom : totalHeight;
+
+        // size the bodyEl
+        me.setElementSize(owner.bodyEl, width, height);
+
+        // size the bodyEl's inner contents if necessary
+        me.sizeBodyContents(width, height);
+    },
+
+    /**
      * Size the contents of the field body, given the full dimensions of the bodyEl. Does nothing by
      * default, subclasses can override to handle their specific contents.
      * @param {Number} width The bodyEl width
      * @param {Number} height The bodyEl height
-     * @param {Ext.layout.ContextItem} ownerContext The context of the owner component.
      */
     sizeBodyContents: Ext.emptyFn,
 
-    getBodyNaturalWidth: function (ownerContext) {
-        // store this value in "state" since those values are dropped by invalidate
-        var state = ownerContext.state,
-            width = state.bodyNaturalWidth ||
-                   (state.bodyNaturalWidth = Math.ceil(this.calculateBodyNaturalWidth(ownerContext)));
-
-        return width;
-    },
-
-    calculateBodyNaturalWidth: function (ownerContext) {
-        var owner = this.owner,
-            labelEl = owner.labelEl,
-            width = owner.size ? (owner.size * 6.5 + 20) :  owner.inputEl.getWidth() +
-                    ownerContext.inputContext.getMarginInfo().width;
-
-        if (labelEl) {
-            width += labelEl.getWidth() + ownerContext.labelContext.getMarginInfo().width;
-        }
-
-        return width;
-    },
 
     /**
      * Return the set of strategy functions from the {@link #labelStrategies labelStrategies collection}
@@ -203,6 +169,8 @@ Ext.define('Ext.layout.component.field.Field', {
                 strategies.none;
     },
 
+
+
     /**
      * Collection of named strategies for laying out and adjusting labels to accommodate error messages.
      * An appropriate one will be chosen based on the owner field's {@link Ext.form.Labelable#labelAlign} config.
@@ -210,46 +178,43 @@ Ext.define('Ext.layout.component.field.Field', {
     labelStrategies: (function() {
         var applyIf = Ext.applyIf,
             emptyFn = Ext.emptyFn,
-
             base = {
-                prepare: function(ownerContext, owner) {
+                prepare: function(owner, info) {
                     var cls = owner.labelCls + '-' + owner.labelAlign,
                         labelEl = owner.labelEl;
-
-                    // Queue the addition of the label alignment class
                     if (labelEl && !labelEl.hasCls(cls)) {
                         labelEl.addCls(cls);
                     }
                 },
-
                 adjustHorizInsets: emptyFn,
                 adjustVertInsets: emptyFn,
                 layoutHoriz: emptyFn,
                 layoutVert: emptyFn
             },
-
             left = applyIf({
-                prepare: function(ownerContext) {
-                    base.prepare.apply(this, arguments);
-
+                prepare: function(owner, info) {
+                    base.prepare(owner, info);
+                    // If auto width, add the label width to the body's natural width.
+                    if (info.autoWidth) {
+                        info.width += (!owner.labelEl ? 0 : owner.labelWidth + owner.labelPad);
+                    }
                     // Must set outer width to prevent field from wrapping below floated label
-                    if (ownerContext.widthAuthority === 0) {
-                        ownerContext.widthAuthority = 1;
-                    }
+                    info.setOuterWidth = true;
                 },
-                adjustHorizInsets: function(ownerContext, owner, size) {
+                adjustHorizInsets: function(owner, info) {
                     if (owner.labelEl) {
-                        ownerContext.insets.left += owner.labelWidth + owner.labelPad;
+                        info.insets.left += owner.labelWidth + owner.labelPad;
                     }
                 },
-                layoutHoriz: function(ownerContext, owner) {
+                layoutHoriz: function(owner, info) {
                     // For content-box browsers we can't rely on Labelable.js#getLabelableRenderData
                     // setting the width style because it needs to account for the final calculated
                     // padding/border styles for the label. So we set the width programmatically here to
                     // normalize content-box sizing, while letting border-box browsers use the original
                     // width style.
-                    if (owner.labelEl && !owner.isLabelSized && !Ext.isBorderBox) {
-                        ownerContext.labelContext.setWidth(owner.labelWidth);
+                    var labelEl = owner.labelEl;
+                    if (labelEl && !owner.isLabelSized && !Ext.isBorderBox) {
+                        labelEl.setWidth(owner.labelWidth);
                         owner.isLabelSized = true;
                     }
                 }
@@ -263,11 +228,11 @@ Ext.define('Ext.layout.component.field.Field', {
              * Label displayed above the bodyEl
              */
             top: applyIf({
-                adjustVertInsets: function(ownerContext, owner) {
+                adjustVertInsets: function(owner, info) {
                     var labelEl = owner.labelEl;
                     if (labelEl) {
-                        ownerContext.insets.top += owner.bodyEl.getOffsetsTo(labelEl)[1];
-                                                //owner.inputEl.getOffsetsTo(labelEl)[1];
+                        info.insets.top += Ext.util.TextMetrics.measure(labelEl, owner.fieldLabel, info.width).height +
+                                           labelEl.getFrameWidth('tb') + owner.labelPad;
                     }
                 }
             }, base),
@@ -284,34 +249,36 @@ Ext.define('Ext.layout.component.field.Field', {
         };
     })(),
 
+
+
     /**
      * Collection of named strategies for laying out and adjusting insets to accommodate error messages.
      * An appropriate one will be chosen based on the owner field's {@link Ext.form.Labelable#msgTarget} config.
      */
     errorStrategies: (function() {
-        function showTip(owner) {
-            var tip = Ext.layout.component.field.Field.tip,
-                target;
-                
-            if (tip && tip.isVisible()) {
-                target = tip.activeTarget;
-                if (target && target.el === owner.getActionEl().dom) {
-                    tip.toFront(true);
-                }
+        function setDisplayed(el, displayed) {
+            var wasDisplayed = el.getStyle('display') !== 'none';
+            if (displayed !== wasDisplayed) {
+                el.setDisplayed(displayed);
+            }
+        }
+
+        function setStyle(el, name, value) {
+            if (el.getStyle(name) !== value) {
+                el.setStyle(name, value);
             }
         }
 
         var applyIf = Ext.applyIf,
             emptyFn = Ext.emptyFn,
             base = {
-                prepare: function(ownerContext, owner) {
-                    owner.errorEl.setDisplayed(false);
+                prepare: function(owner) {
+                    setDisplayed(owner.errorEl, false);
                 },
                 adjustHorizInsets: emptyFn,
                 adjustVertInsets: emptyFn,
                 layoutHoriz: emptyFn,
-                layoutVert: emptyFn,
-                onFocus: emptyFn
+                layoutVert: emptyFn
             };
 
         return {
@@ -321,56 +288,53 @@ Ext.define('Ext.layout.component.field.Field', {
              * Error displayed as icon (with QuickTip on hover) to right of the bodyEl
              */
             side: applyIf({
-                prepare: function(ownerContext, owner) {
+                prepare: function(owner) {
                     var errorEl = owner.errorEl;
-
                     errorEl.addCls(Ext.baseCSSPrefix + 'form-invalid-icon');
-                    errorEl.set({'data-errorqtip': owner.getActiveError() || ''});
-                    errorEl.setDisplayed(owner.hasActiveError());
-
-                    // TODO: defer the tip call until after the layout to avoid immediate DOM reads now
                     Ext.layout.component.field.Field.initTip();
+                    errorEl.dom.setAttribute('data-errorqtip', owner.getActiveError() || '');
+                    setDisplayed(errorEl, owner.hasActiveError());
                 },
-                adjustHorizInsets: function(ownerContext, owner) {
+                adjustHorizInsets: function(owner, info) {
                     if (owner.autoFitErrors && owner.hasActiveError()) {
-                        ownerContext.insets.right += owner.errorEl.getWidth();
+                        info.insets.right += owner.errorEl.getWidth();
                     }
                 },
-                layoutHoriz: function(ownerContext, owner, size) {
+                layoutHoriz: function(owner, info) {
                     if (owner.hasActiveError()) {
-                        ownerContext.errorContext.setProp('x', size.width - ownerContext.insets.right);
+                        setStyle(owner.errorEl, 'left', info.width - info.insets.right + 'px');
                     }
                 },
-                layoutVert: function(ownerContext, owner) {
+                layoutVert: function(owner, info) {
                     if (owner.hasActiveError()) {
-                        ownerContext.errorContext.setProp('y', ownerContext.insets.top);
+                        setStyle(owner.errorEl, 'top', info.insets.top + 'px');
                     }
-                },
-                onFocus: showTip
+                }
             }, base),
 
             /**
              * Error message displayed underneath the bodyEl
              */
             under: applyIf({
-                prepare: function(ownerContext, owner) {
+                prepare: function(owner) {
                     var errorEl = owner.errorEl,
                         cls = Ext.baseCSSPrefix + 'form-invalid-under';
-
-                    errorEl.addCls(cls);
-                    errorEl.setDisplayed(owner.hasActiveError());
+                    if (!errorEl.hasCls(cls)) {
+                        errorEl.addCls(cls);
+                    }
+                    setDisplayed(errorEl, owner.hasActiveError());
                 },
-                adjustVertInsets: function(ownerContext, owner) {
+                adjustVertInsets: function(owner, info) {
                     if (owner.autoFitErrors) {
-                        ownerContext.insets.bottom += owner.errorEl.getHeight();
+                        info.insets.bottom += owner.errorEl.getHeight();
                     }
                 },
-                layoutHoriz: function(ownerContext, owner, size) {
-                    var errorContext = ownerContext.errorContext,
-                        insets = ownerContext.insets;
+                layoutHoriz: function(owner, info) {
+                    var errorEl = owner.errorEl,
+                        insets = info.insets;
 
-                    errorContext.setProp('width', size.width - insets.right - insets.left + 'px');
-                    errorContext.setProp('margin-left', insets.left);
+                    setStyle(errorEl, 'width', info.width - insets.right - insets.left + 'px');
+                    setStyle(errorEl, 'marginLeft', insets.left + 'px');
                 }
             }, base),
 
@@ -378,21 +342,20 @@ Ext.define('Ext.layout.component.field.Field', {
              * Error displayed as QuickTip on hover of the field container
              */
             qtip: applyIf({
-                prepare: function(ownerContext, owner) {
-                    owner.errorEl.setDisplayed(false);
+                prepare: function(owner) {
+                    setDisplayed(owner.errorEl, false);
                     Ext.layout.component.field.Field.initTip();
-                    owner.getActionEl().set({'data-errorqtip': owner.getActiveError() || ''});
-                },
-                onFocus: showTip
+                    owner.getActionEl().dom.setAttribute('data-errorqtip', owner.getActiveError() || '');
+                }
             }, base),
 
             /**
              * Error displayed as title tip on hover of the field container
              */
             title: applyIf({
-                prepare: function(ownerContext, owner) {
-                    owner.errorEl.setDisplayed(owner.errorEl, false);
-                    owner.el.set({'title': owner.getActiveError() || ''});
+                prepare: function(owner) {
+                    setDisplayed(owner.errorEl, false);
+                    owner.el.dom.title = owner.getActiveError() || '';
                 }
             }, base),
 
@@ -400,8 +363,8 @@ Ext.define('Ext.layout.component.field.Field', {
              * Error message displayed as content of an element with a given id elsewhere in the app
              */
             elementId: applyIf({
-                prepare: function(ownerContext, owner) {
-                    owner.errorEl.setDisplayed(false);
+                prepare: function(owner) {
+                    setDisplayed(owner.errorEl, false);
                     var targetEl = Ext.fly(owner.msgTarget);
                     if (targetEl) {
                         targetEl.dom.innerHTML = owner.getActiveError() || '';
@@ -416,13 +379,13 @@ Ext.define('Ext.layout.component.field.Field', {
         /**
          * Use a custom QuickTip instance separate from the main QuickTips singleton, so that we
          * can give it a custom frame style. Responds to errorqtip rather than the qtip property.
-         * @static
          */
         initTip: function() {
             var tip = this.tip;
             if (!tip) {
                 tip = this.tip = Ext.create('Ext.tip.QuickTip', {
-                    baseCls: Ext.baseCSSPrefix + 'form-invalid-tip'
+                    baseCls: Ext.baseCSSPrefix + 'form-invalid-tip',
+                    renderTo: Ext.getBody()
                 });
                 tip.tagConfig = Ext.apply({}, {attribute: 'errorqtip'}, tip.tagConfig);
             }
@@ -430,7 +393,6 @@ Ext.define('Ext.layout.component.field.Field', {
 
         /**
          * Destroy the error tip instance.
-         * @static
          */
         destroyTip: function() {
             var tip = this.tip;
@@ -440,4 +402,6 @@ Ext.define('Ext.layout.component.field.Field', {
             }
         }
     }
+
 });
+

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-layout-component-field-Slider'>/**
+</span> * @class Ext.layout.component.field.Slider
+ * @private
+ */
+
+Ext.define('Ext.layout.component.field.Slider', {
+
+    /* Begin Definitions */
+
+    alias: ['layout.sliderfield'],
+
+    extend: 'Ext.layout.component.field.Field',
+
+    /* End Definitions */
+
+    type: 'sliderfield',
+
+    sizeBodyContents: function(width, height, ownerContext) {
+        var me = this,
+            owner = me.owner,
+            thumbs = owner.thumbs,
+            length = thumbs.length,
+            endElContextItem = ownerContext.getEl('endEl'),
+            endElPad = endElContextItem.getPaddingInfo(),
+            inputContextItem = ownerContext.getEl('inputEl'),
+            inputPad = inputContextItem.getPaddingInfo(),
+            innerElContextItem = ownerContext.getEl('innerEl'),
+            i = 0;
+
+        /*
+         * If we happen to be animating during a resize, the position of the thumb will likely be off
+         * when the animation stops. As such, just stop any animations before syncing the thumbs.
+         */
+        for(; i &lt; length; ++i) {
+            thumbs[i].el.stopAnimation();
+        }
+
+        if (owner.vertical) {
+            innerElContextItem.setHeight(height - inputPad.top - endElPad.bottom);
+        } else {
+            innerElContextItem.setWidth(width - inputPad.left - endElPad.right);
+        }
+
+        owner.syncThumbs();
+    }
+});
+</pre>
+</body>
+</html>

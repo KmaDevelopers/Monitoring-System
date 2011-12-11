@@ -5,9 +5,12 @@ Ext.define("MsAdmin.view.server.ServerViewWindow", {
 		this.callParent([
 			Ext.applyIf(config || {}, {
 				constrain: true,
+				autoShow: true,
+				minimizable: true,
+				maximizable: true,
 				closeAction: 'hide',
 				layout: 'fit',
-				constrainHeader: true,
+				//constrainHeader: true,
 				buttons: this.getCmpButtons(),
 				items: this.getCmpItems()
 			})

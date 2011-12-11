@@ -1,13 +1,14 @@
 Ext.define("MsAdmin.model.Sensor", {
 	extend: "Ext.data.Model",
-    idProperty: "id",
+    idProperty: "sensorId",
 	fields: [
-        'id',
+        'sensorId',
         'serial',
     	'serverId',
         'location', 
         'name',
-        'position'
+        'x',
+        'y'
     ],
     proxy: {
     	type: 'ajax',

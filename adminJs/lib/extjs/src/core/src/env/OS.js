@@ -1,19 +1,33 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
  * @class Ext.env.OS
- * Provides useful information about the current operating system environment.
- * Access the global instance stored in {@link Ext#os}. Example:
+ * Provide useful information about the current operating system environment. Access the global instance stored in Ext.os. Example:
+ * <pre><code>
+ * if (Ext.os.is.Windows) {
+ *      // Windows specific code here
+ * }
  *
- *     if (Ext.os.is.Windows) {
- *          // Windows specific code here
- *     }
+ * if (Ext.os.is.iOS) {
+ *      // iPad, iPod, iPhone, etc.
+ * }
  *
- *     if (Ext.os.is.iOS) {
- *          // iPad, iPod, iPhone, etc.
- *     }
+ * console.log("Version " + Ext.os.version);
+ * </code></pre>
  *
- *     console.log("Version " + Ext.os.version);
- *
- * For a full list of supported values, refer to: {@link Ext.env.OS#is}
+ * For a full list of supported values, refer to: {@link Ext.env.OS#is Ext.env.OS.is}
  */
 Ext.define('Ext.env.OS', {
 
@@ -38,18 +52,21 @@ Ext.define('Ext.env.OS', {
 
     /**
      * A "hybrid" property, can be either accessed as a method call, i.e:
-     *
-     *     if (Ext.os.is('Android')) { ... }
+     * <pre><code>
+     * if (Ext.os.is('Android')) { ... }
+     * </code></pre>
      *
      * or as an object with boolean properties, i.e:
-     *
-     *     if (Ext.os.is.Android) { ... }
+     * <pre><code>
+     * if (Ext.os.is.Android) { ... }
+     * </code></pre>
      *
      * Versions can be conveniently checked as well. For example:
+     * <pre><code>
+     * if (Ext.os.is.Android2) { ... } // Equivalent to (Ext.os.is.Android && Ext.os.version.equals(2))
      *
-     *     if (Ext.os.is.Android2) { ... } // Equivalent to (Ext.os.is.Android && Ext.os.version.equals(2))
-     * 
-     *     if (Ext.os.is.iOS32) { ... } // Equivalent to (Ext.os.is.iOS && Ext.os.version.equals(3.2))
+     * if (Ext.os.is.iOS32) { ... } // Equivalent to (Ext.os.is.iOS && Ext.os.version.equals(3.2))
+     * </code></pre>
      *
      * Note that only {@link Ext.Version#getMajor major component}  and {@link Ext.Version#getShortVersion shortVersion}
      * value of the version are available via direct property checking.
@@ -63,15 +80,15 @@ Ext.define('Ext.env.OS', {
     is: Ext.emptyFn,
 
     /**
-     * @property {String} name
      * Read-only - the full name of the current operating system
      * Possible values are: iOS, Android, WebOS, BlackBerry, MacOSX, Windows, Linux and Other
+     * @type String
      */
     name: null,
 
     /**
-     * @property {Ext.Version} version
      * Read-only, refer to {@link Ext.Version}
+     * @type Ext.Version
      */
     version: null,
 
@@ -125,11 +142,7 @@ Ext.define('Ext.env.OS', {
     }
 }, function() {
 
-    /**
-     * @property {Ext.env.OS} os
-     * @member Ext
-     * Global convenient instance of {@link Ext.env.OS}.
-     */
-    Ext.os = new Ext.env.OS();
+Ext.os = new Ext.env.OS();
 
 });
+

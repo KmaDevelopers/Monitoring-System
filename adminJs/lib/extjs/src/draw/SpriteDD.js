@@ -1,3 +1,17 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 // private - DD implementation for Panels
 Ext.define('Ext.draw.SpriteDD', {
     extend: 'Ext.dd.DragSource',
@@ -28,7 +42,7 @@ Ext.define('Ext.draw.SpriteDD', {
         bbox = sprite.getBBox();
         
         try {
-            pos = Ext.Element.getXY(el);
+            pos = Ext.core.Element.getXY(el);
         } catch (e) { }
 
         if (!pos) {
@@ -40,7 +54,7 @@ Ext.define('Ext.draw.SpriteDD', {
         y1 = pos[1];
         y2 = y1 + bbox.height;
         
-        return new Ext.util.Region(y1, x2, y2, x1);
+        return Ext.create('Ext.util.Region', y1, x2, y2, x1);
     },
 
     /*
@@ -56,29 +70,33 @@ Ext.define('Ext.draw.SpriteDD', {
      
     startDrag: function(x, y) {
         var me = this,
-            attr = me.sprite.attr;
-        me.prev = me.sprite.surface.transformToViewBox(x, y);
+            attr = me.sprite.attr,
+            trans = attr.translation;
+        if (me.sprite.vml) {
+            me.prevX = x + attr.x;
+            me.prevY = y + attr.y;
+        } else {
+            me.prevX = x - trans.x;
+            me.prevY = y - trans.y;
+        }
     },
 
     onDrag: function(e) {
         var xy = e.getXY(),
             me = this,
             sprite = me.sprite,
-            attr = sprite.attr, dx, dy;
-        xy = me.sprite.surface.transformToViewBox(xy[0], xy[1]);
-        dx = xy[0] - me.prev[0];
-        dy = xy[1] - me.prev[1];
+            attr = sprite.attr;
+        me.translateX = xy[0] - me.prevX;
+        me.translateY = xy[1] - me.prevY;
         sprite.setAttributes({
             translate: {
-                x: attr.translation.x + dx,
-                y: attr.translation.y + dy
+                x: me.translateX,
+                y: me.translateY
             }
         }, true);
-        me.prev = xy;
-    },
-
-    setDragElPos: function () {
-        // Disable automatic DOM move in DD that spoils layout of VML engine.
-        return false;
+        if (sprite.vml) {
+            me.prevX = xy[0] + attr.x || 0;
+            me.prevY = xy[1] + attr.y || 0;
+        }
     }
 });

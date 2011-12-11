@@ -1,5 +1,20 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
  * @class Ext.tree.ViewDropZone
+ * @extends Ext.view.DropZone
  * @private
  */
 Ext.define('Ext.tree.ViewDropZone', {
@@ -8,30 +23,30 @@ Ext.define('Ext.tree.ViewDropZone', {
     /**
      * @cfg {Boolean} allowParentInsert
      * Allow inserting a dragged node between an expanded parent node and its first child that will become a
-     * sibling of the parent when dropped.
+     * sibling of the parent when dropped (defaults to false)
      */
     allowParentInserts: false,
  
     /**
      * @cfg {String} allowContainerDrop
-     * True if drops on the tree container (outside of a specific tree node) are allowed.
+     * True if drops on the tree container (outside of a specific tree node) are allowed (defaults to false)
      */
     allowContainerDrops: false,
 
     /**
      * @cfg {String} appendOnly
-     * True if the tree should only allow append drops (use for trees which are sorted).
+     * True if the tree should only allow append drops (use for trees which are sorted, defaults to false)
      */
     appendOnly: false,
 
     /**
      * @cfg {String} expandDelay
      * The delay in milliseconds to wait before expanding a target tree node while dragging a droppable node
-     * over the target.
+     * over the target (defaults to 500)
      */
     expandDelay : 500,
 
-    indicatorCls: Ext.baseCSSPrefix + 'tree-ddindicator',
+    indicatorCls: 'x-tree-ddindicator',
 
     // private
     expandNode : function(node) {

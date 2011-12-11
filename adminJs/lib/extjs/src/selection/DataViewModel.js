@@ -1,3 +1,17 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
  * @class Ext.selection.DataViewModel
  * @ignore
@@ -12,7 +26,7 @@ Ext.define('Ext.selection.DataViewModel', {
     /**
      * @cfg {Boolean} enableKeyNav
      *
-     * Turns on/off keyboard navigation within the DataView.
+     * Turns on/off keyboard navigation within the DataView. Defaults to true.
      */
     enableKeyNav: true,
 
@@ -63,7 +77,7 @@ Ext.define('Ext.selection.DataViewModel', {
             };
 
         me.view = view;
-        me.bindStore(view.getStore());
+        me.bind(view.getStore());
 
         view.on(view.triggerEvent, me.onItemClick, me);
         view.on(view.triggerCtEvent, me.onContainerClick, me);
@@ -96,7 +110,7 @@ Ext.define('Ext.selection.DataViewModel', {
         view.el.set({
             tabIndex: -1
         });
-        me.keyNav = new Ext.util.KeyNav(view.el, {
+        me.keyNav = Ext.create('Ext.util.KeyNav', view.el, {
             down: Ext.pass(me.onNavKey, [1], me),
             right: Ext.pass(me.onNavKey, [1], me),
             left: Ext.pass(me.onNavKey, [-1], me),
@@ -147,10 +161,6 @@ Ext.define('Ext.selection.DataViewModel', {
                 me.fireEvent(eventName, me, record);
             }
         }
-    },
-    
-    destroy: function(){
-        Ext.destroy(this.keyNav);
-        this.callParent();
     }
 });
+

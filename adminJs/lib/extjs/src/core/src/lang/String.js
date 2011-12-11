@@ -1,3 +1,17 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
  * @class Ext.String
  *
@@ -10,11 +24,9 @@ Ext.String = {
     escapeRe: /('|\\)/g,
     formatRe: /\{(\d+)\}/g,
     escapeRegexRe: /([-.*+?^${}()|[\]\/\\])/g,
-    basicTrimRe: /^\s+|\s+$/g,
-    whitespaceRe: /\s+/,
 
     /**
-     * Convert certain characters (&, <, >, and ") to their HTML character equivalents for literal display in web pages.
+     * Convert certain characters (&, <, >, and ') to their HTML character equivalents for literal display in web pages.
      * @param {String} value The string to encode
      * @return {String} The encoded text
      * @method
@@ -26,22 +38,22 @@ Ext.String = {
             '<': '&lt;',
             '"': '&quot;'
         }, keys = [], p, regex;
-
+        
         for (p in entities) {
             keys.push(p);
         }
-
+        
         regex = new RegExp('(' + keys.join('|') + ')', 'g');
-
+        
         return function(value) {
             return (!value) ? value : String(value).replace(regex, function(match, capture) {
-                return entities[capture];
+                return entities[capture];    
             });
         };
     })(),
 
     /**
-     * Convert certain characters (&, <, >, and ") from their HTML character equivalents.
+     * Convert certain characters (&, <, >, and ') from their HTML character equivalents.
      * @param {String} value The string to decode
      * @return {String} The decoded text
      * @method
@@ -53,13 +65,13 @@ Ext.String = {
             '&lt;': '<',
             '&quot;': '"'
         }, keys = [], p, regex;
-
+        
         for (p in entities) {
             keys.push(p);
         }
-
+        
         regex = new RegExp('(' + keys.join('|') + '|&#[0-9]{1,5};' + ')', 'g');
-
+        
         return function(value) {
             return (!value) ? value : String(value).replace(regex, function(match, capture) {
                 if (capture in entities) {
@@ -76,7 +88,7 @@ Ext.String = {
      * a question mark or ampersand.
      * @param {String} url The URL to append to.
      * @param {String} string The content to append to the URL.
-     * @return {String} The resulting URL
+     * @return (String) The resulting URL
      */
     urlAppend : function(url, string) {
         if (!Ext.isEmpty(string)) {
@@ -209,64 +221,6 @@ var s = Ext.String.format('&lt;div class="{0}">{1}&lt;/div>', cls, text);
         return format.replace(Ext.String.formatRe, function(m, i) {
             return args[i];
         });
-    },
-
-    /**
-     * Returns a string with a specified number of repititions a given string pattern.
-     * The pattern be separated by a different string.
-     *
-     *      var s = Ext.String.repeat('---', 4); // = '------------'
-     *      var t = Ext.String.repeat('--', 3, '/'); // = '--/--/--'
-     *
-     * @param {String} pattern The pattern to repeat.
-     * @param {Number} count The number of times to repeat the pattern (may be 0).
-     * @param {String} sep An option string to separate each pattern.
-     */
-    repeat: function(pattern, count, sep) {
-        for (var buf = [], i = count; i--; ) {
-            buf.push(pattern);
-        }
-        return buf.join(sep || '');
-    },
-
-    /**
-     * Splits a string of space separated words into an array, trimming as needed. If the
-     * words are already an array, it is returned.
-     *
-     * @param {String/Array} words
-     */
-    splitWords: function (words) {
-        if (words && typeof words == 'string') {
-            return words.replace(Ext.String.basicTrimRe, '').split(Ext.String.whitespaceRe);
-        }
-        return words || [];
     }
 };
 
-/**
- * Old alias to {@link Ext.String#htmlEncode}
- * @deprecated Use {@link Ext.String#htmlEncode} instead
- * @method
- * @member Ext
- * @alias Ext.String#htmlEncode
- */
-Ext.htmlEncode = Ext.String.htmlEncode;
-
-
-/**
- * Old alias to {@link Ext.String#htmlDecode}
- * @deprecated Use {@link Ext.String#htmlDecode} instead
- * @method
- * @member Ext
- * @alias Ext.String#htmlDecode
- */
-Ext.htmlDecode = Ext.String.htmlDecode;
-
-/**
- * Old alias to {@link Ext.String#urlAppend}
- * @deprecated Use {@link Ext.String#urlAppend} instead
- * @method
- * @member Ext
- * @alias Ext.String#urlAppend
- */
-Ext.urlAppend = Ext.String.urlAppend;

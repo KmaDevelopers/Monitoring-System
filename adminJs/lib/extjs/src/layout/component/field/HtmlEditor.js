@@ -1,6 +1,21 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
  * @private
  * @class Ext.layout.component.field.HtmlEditor
+ * @extends Ext.layout.component.field.Field
  * Layout class for {@link Ext.form.field.HtmlEditor} fields. Sizes the toolbar, textarea, and iframe elements.
  * @private
  */
@@ -11,61 +26,27 @@ Ext.define('Ext.layout.component.field.HtmlEditor', {
 
     type: 'htmleditor',
 
-    // Flags to say that the item is autoheighting itself based upon a managed width.
-    // This Component's component layout explicitly manages the toolbar's width.
-    toolbarSizePolicy: {
-        setsWidth: 1,
-        setsHeight: 0
-    },
-
-    calculateBodyNaturalWidth: function() {
-        return 565;
-    },
-
-    getItemSizePolicy: function (item) {
-        // we are only ever called by the toolbar
-        return this.toolbarSizePolicy;
-    },
-
-    getLayoutItems: function () {
-        return [ this.owner.getToolbar() ];
-    },
-
-    getRenderTarget: function() {
-        return this.owner.bodyEl;
-    },
-
-    sizeBodyContents: function(width, height, ownerContext) {
+    sizeBodyContents: function(width, height) {
         var me = this,
             owner = me.owner,
-            bodyContext = ownerContext.getEl('bodyEl'),
+            bodyEl = owner.bodyEl,
             toolbar = owner.getToolbar(),
-            toolbarContext = ownerContext.context.getCmp(toolbar),
-            toolbarHeight,
-            textareaContext = ownerContext.getEl('textareaEl'),
+            textarea = owner.textareaEl,
             iframe = owner.iframeEl,
-            iframeContext = ownerContext.getEl('iframeEl'),
             editorHeight;
 
         if (Ext.isNumber(width)) {
-            width -= bodyContext.getFrameInfo().width;
+            width -= bodyEl.getFrameWidth('lr');
         }
-        toolbarContext.setWidth(width);
-        textareaContext.setWidth(width);
-        iframeContext.setWidth(width);
+        toolbar.setWidth(width);
+        textarea.setWidth(width);
+        iframe.setWidth(width);
 
         // If fixed height, subtract toolbar height from the input area height
-        // If the Toolbar has not acheieved a height yest, we are not done laying out.
         if (Ext.isNumber(height)) {
-            toolbarHeight = toolbarContext.getProp('height');
-            if (toolbarHeight) {
-                editorHeight = height - toolbarHeight - bodyContext.getFrameInfo().height;
-                textareaContext.setHeight(editorHeight);
-                iframeContext.setHeight(editorHeight);
-            }
-            else {
-                me.done = false;
-            }
+            editorHeight = height - toolbar.getHeight() - bodyEl.getFrameWidth('tb');
+            textarea.setHeight(editorHeight);
+            iframe.setHeight(editorHeight);
         }
     }
 });

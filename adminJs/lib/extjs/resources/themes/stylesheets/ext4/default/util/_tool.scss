@@ -12,7 +12,7 @@
 
             background-color: transparent;
             background-repeat: no-repeat;
-            background-image: theme-background-image($theme-name, 'tools/tool-sprites.gif');
+            @include theme-background-image($theme-name, 'tools/tool-sprites.gif');
 
             margin: 0;
         }
@@ -135,6 +135,14 @@
         background-position: 0 -195px;
     }
     
+    .#{$prefix}tool-move {
+        background-position: 0 -375px;
+    }
+
+    .#{$prefix}tool-resize {
+        background-position: 0 -360px;
+    }
+    
     .#{$prefix}tool-collapse {
         background-position: 0 -345px;
     }
@@ -254,6 +262,14 @@
 
         .#{$prefix}tool-collapse {
             background-position: -15px -345px;
+        }
+    
+        .#{$prefix}tool-resize {
+            background-position: -15px -360px;
+        }
+    
+        .#{$prefix}tool-move {
+            background-position: -15px -375px;
         }
         
         .#{$prefix}tool-expand-bottom,

@@ -1,0 +1,10 @@
+$include-default: true;
+$relative-image-path-for-uis: true;
+
+/** Custom Theme **/
+@import 'kma_ms/ext-overrides';
+@import 'kma_ms/variables';
+/** /Custom Theme **/
+
+@import 'ext4/default/all';
+@import 'kma_ms/widgets';

@@ -1,3 +1,17 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
  * @class Ext.Number
  *
@@ -80,7 +94,7 @@ Ext.Number = {
 Ext.Number.from('1.23', 1); // returns 1.23
 Ext.Number.from('abc', 1); // returns 1
 
-     * @param {Object} value
+     * @param {Mixed} value
      * @param {Number} defaultValue The value to return if the original value is non-numeric
      * @return {Number} value, if numeric, defaultValue otherwise
      */
@@ -90,26 +104,17 @@ Ext.Number.from('abc', 1); // returns 1
         }
 
         return !isNaN(value) ? value : defaultValue;
-    },
-
-    /**
-     * Returns a random integer between the specified range (inclusive)
-     * @param {Number} from Lowest value to return.
-     * @param {Number} to Highst value to return.
-     * @return {Number} A random integer within the specified range.
-     */
-    randomInt: function (from, to) {
-       return Math.floor(Math.random() * (to - from + 1) + from);
     }
 };
 
 })();
 
 /**
- * @deprecated 4.0.0 Please use {@link Ext.Number#from} instead.
+ * This method is deprecated, please use {@link Ext.Number#from Ext.Number.from} instead
+ *
+ * @deprecated 4.0.0 Replaced by Ext.Number.from
  * @member Ext
  * @method num
- * @alias Ext.Number#from
  */
 Ext.num = function() {
     return Ext.Number.from.apply(this, arguments);

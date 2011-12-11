@@ -1,3 +1,17 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 describe("Ext.EventManager", function() {
     var element,
         elementWithId,
@@ -70,7 +84,7 @@ describe("Ext.EventManager", function() {
                     afterEach(function() {
                         delete Ext.cache[Ext.documentId];
                     });
-                    it("should add document Ext.Element to cache", function() {
+                    it("should add document Ext.core.Element to cache", function() {
                         expect(Ext.cache[Ext.documentId].el.dom).toBe(document);
                     });
                     
@@ -92,7 +106,7 @@ describe("Ext.EventManager", function() {
                     afterEach(function() {
                         delete Ext.cache[Ext.windowId];
                     });
-                    it("should add window Ext.Element to cache", function() {
+                    it("should add window Ext.core.Element to cache", function() {
                         expect(Ext.cache[Ext.windowId].el.dom).toBe(window);
                     });
                     
@@ -172,8 +186,20 @@ describe("Ext.EventManager", function() {
                     Ext.EventManager.addListener(element, eventName);
                     expect(Ext.EventManager.prepareListenerConfig).toHaveBeenCalledWith(element, eventName);
                 });
+                
+                it("should throw an error if the element doesn't exist", function() {
+                    expect(function() {
+                        Ext.EventManager.addListener(undefined, "click");
+                    }).toRaiseExtError();
+                });
             });
-             
+            
+            it("should throw an error if the element doesn't exist", function() {
+                expect(function() {
+                    Ext.EventManager.addListener(undefined, "click");
+                }).toRaiseExtError();
+            });
+            
             describe("event firing", function() {
                 var config;
    
@@ -645,3 +671,4 @@ describe("Ext.EventManager", function() {
         });
     });
 });
+

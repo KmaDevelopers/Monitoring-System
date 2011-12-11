@@ -56,11 +56,6 @@
         top:0;
     }
 
-    .#{$prefix}rtl .#{$prefix}box-item {
-        right: 0;
-        left: auto;
-    }
-
     .#{$prefix}box-layout-ct,
     .#{$prefix}border-layout-ct {
         overflow: hidden;
@@ -75,16 +70,8 @@
         display: inline-block !important;
     }
 
-    .#{$prefix}abs-layout-ct {
-        position: relative;
-    }
-
     .#{$prefix}abs-layout-item {
         position: absolute;
-    }
-
-    .#{$prefix}fit-item {
-        position: relative;
     }
 
     .#{$prefix}border-layout-ct {
@@ -197,7 +184,7 @@
             cursor: pointer;
             height: $tab-height;
             background: transparent no-repeat -18px 0;
-            background-image: theme-background-image($theme-name, 'tab-bar/scroll-left.gif');
+            @include theme-background-image($theme-name, 'tab-bar/scroll-left.gif');
         }
         .#{$prefix}toolbar-scroll-left-hover {
             background-position: 0 0;
@@ -211,7 +198,7 @@
         }
 
         .#{$prefix}toolbar-scroll-left {
-            background-image: theme-background-image($theme-name, 'toolbar/scroll-left.gif');
+            @include theme-background-image($theme-name, 'toolbar/scroll-left.gif');
             background-position: -14px 0;
         }
         .#{$prefix}toolbar-scroll-left-hover {
@@ -245,7 +232,7 @@
             cursor: pointer;
             height: $tab-height;
             background: transparent no-repeat 0 0;
-            background-image: theme-background-image($theme-name, 'tab-bar/scroll-right.gif');
+            @include theme-background-image($theme-name, 'tab-bar/scroll-right.gif');
         }
         .#{$prefix}toolbar-scroll-right-hover {
             background-position: -18px 0;
@@ -259,7 +246,7 @@
         }
 
         .#{$prefix}toolbar-scroll-right {
-            background-image: theme-background-image($theme-name, 'toolbar/scroll-right.gif');
+            @include theme-background-image($theme-name, 'toolbar/scroll-right.gif');
         }
         .#{$prefix}toolbar-scroll-right-hover {
             background-position: -14px 0;
@@ -284,7 +271,7 @@
         }
         .#{$prefix}menu-scroll-top {
             background: transparent no-repeat center center;
-            background-image: theme-background-image($theme-name, 'layout/mini-top.gif');
+            @include theme-background-image($theme-name, 'layout/mini-top.gif');
             height: 8px;
             cursor: pointer;
         }
@@ -296,7 +283,7 @@
         }
         .#{$prefix}menu-scroll-bottom {
             background: transparent no-repeat center center;
-            background-image: theme-background-image($theme-name, 'layout/mini-bottom.gif');
+            @include theme-background-image($theme-name, 'layout/mini-bottom.gif');
             height: 8px;
             cursor: pointer;
         }

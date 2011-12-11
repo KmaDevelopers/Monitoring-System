@@ -1,6 +1,21 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
  * Component layout for buttons
  * @class Ext.layout.component.Button
+ * @extends Ext.layout.component.Component
  * @private
  */
 Ext.define('Ext.layout.component.Button', {
@@ -9,7 +24,7 @@ Ext.define('Ext.layout.component.Button', {
 
     alias: ['layout.button'],
 
-    extend: 'Ext.layout.component.Auto',
+    extend: 'Ext.layout.component.Component',
 
     /* End Definitions */
 
@@ -18,147 +33,87 @@ Ext.define('Ext.layout.component.Button', {
     cellClsRE: /-btn-(tl|br)\b/,
     htmlRE: /<.*>/,
 
-    constructor: function () {
-        this.callParent(arguments);
-
-        this.hackWidth = (Ext.isIE6 || Ext.isIE7) && Ext.isStrict;
+    beforeLayout: function() {
+        return this.callParent(arguments) || this.lastText !== this.owner.text;
     },
 
-    // TODO - use last run results if text has not changed?
-
-    beginLayout: function (ownerContext) {
-        this.callParent(arguments);
-
-        this.cacheTargetInfo(ownerContext);
-    },
-
-    beginLayoutCycle: function(ownerContext) {
-        var empty = '',
-            owner = this.owner;
-
-        this.callParent(arguments);
-
-        owner.btnInnerEl.setStyle('overflow', empty);
-
-        // Clear all element widths
-        owner.el.setStyle('width', empty);
-        owner.btnEl.setStyle('width', empty);
-        owner.btnInnerEl.setStyle('width', empty);
-        owner.btnIconEl.setStyle('width', empty);
-    },
-
-    calculate: function (ownerContext) {
+    /**
+     * Set the dimensions of the inner &lt;button&gt; element to match the
+     * component dimensions.
+     */
+    onLayout: function(width, height) {
         var me = this,
-            state = ownerContext.state,
-            fixed, height, width;
-
-        me.callParent(arguments);
-
-        if (!ownerContext.autoWidth) {
-            width = ownerContext.getProp('width');
-            if (state.btnWidth !== width) {
-                state.btnWidth = width;
-                fixed = true;
-            }
-        }
-
-        if (!ownerContext.autoHeight) {
-            height = ownerContext.getProp('height');
-            if (state.btnHeight !== height) {
-                state.btnHeight = height;
-                fixed = true;
-            }
-        }
-
-        if (fixed) {
-            me.setButtonSize(ownerContext, width, height);
-        }
-    },
-
-    calculateOwnerHeightFromContentHeight: function (ownerContext, contentHeight) {
-        return contentHeight;
-    },
-
-    calculateOwnerWidthFromContentWidth: function (ownerContext, contentWidth) {
-        return contentWidth;
-    },
-
-    getContentWidth: function (ownerContext) {
-        var me = this,
+            isNum = Ext.isNumber,
             owner = me.owner,
+            ownerEl = owner.el,
             btnEl = owner.btnEl,
             btnInnerEl = owner.btnInnerEl,
-            btnFrameWidth, metrics, sizeIconEl, width, btnElContext, btnInnerElContext;
+            btnIconEl = owner.btnIconEl,
+            sizeIconEl = (owner.icon || owner.iconCls) && (owner.iconAlign == "top" || owner.iconAlign == "bottom"),
+            minWidth = owner.minWidth,
+            maxWidth = owner.maxWidth,
+            ownerWidth, btnFrameWidth, metrics;
 
-        // In IE7 strict mode button elements with width:auto get strange extra side margins within
-        // the wrapping table cell, but they go away if the width is explicitly set. So we measure
-        // the size of the text and set the width to match.
-        if (owner.text && me.hackWidth && btnEl && btnEl.getWidth() > 20) {
-            btnFrameWidth = me.btnFrameWidth;
-            metrics = Ext.util.TextMetrics.measure(btnInnerEl, owner.text);
-            width = metrics.width + btnFrameWidth + me.adjWidth;
+        me.getTargetInfo();
+        me.callParent(arguments);
 
-            btnElContext = ownerContext.getEl('btnEl');
-            btnInnerElContext = ownerContext.getEl('btnInnerEl');
-            sizeIconEl = (owner.icon || owner.iconCls) && 
-                    (owner.iconAlign == "top" || owner.iconAlign == "bottom");
+        btnInnerEl.unclip();
+        me.setTargetSize(width, height);
 
-            // This cheat works (barely) with publishOwnerWidth which calls setProp also
-            // to publish the width. Since it is the same value we set here, the dirty bit
-            // we set true will not be cleared by publishOwnerWidth.
-            ownerContext.setWidth(width); // not setWidth (no framing)
+        if (!isNum(width)) {
+            // In IE7 strict mode button elements with width:auto get strange extra side margins within
+            // the wrapping table cell, but they go away if the width is explicitly set. So we measure
+            // the size of the text and set the width to match.
+            if (owner.text && Ext.isIE7 && Ext.isStrict && btnEl && btnEl.getWidth() > 20) {
+                btnFrameWidth = me.btnFrameWidth;
+                metrics = Ext.util.TextMetrics.measure(btnInnerEl, owner.text);
+                ownerEl.setWidth(metrics.width + btnFrameWidth + me.adjWidth);
+                btnEl.setWidth(metrics.width + btnFrameWidth);
+                btnInnerEl.setWidth(metrics.width + btnFrameWidth);
 
-            btnElContext.setWidth(metrics.width + btnFrameWidth);
-            btnInnerElContext.setWidth(metrics.width + btnFrameWidth);
-
-            if (sizeIconEl) {
-                owner.btnIconEl.setWidth(metrics.width + btnFrameWidth);
+                if (sizeIconEl) {
+                    btnIconEl.setWidth(metrics.width + btnFrameWidth);
+                }
+            } else {
+                // Remove any previous fixed widths
+                ownerEl.setWidth(null);
+                btnEl.setWidth(null);
+                btnInnerEl.setWidth(null);
+                btnIconEl.setWidth(null);
             }
-        } else {
-            width = ownerContext.el.getWidth();
+
+            // Handle maxWidth/minWidth config
+            if (minWidth || maxWidth) {
+                ownerWidth = ownerEl.getWidth();
+                if (minWidth && (ownerWidth < minWidth)) {
+                    me.setTargetSize(minWidth, height);
+                }
+                else if (maxWidth && (ownerWidth > maxWidth)) {
+                    btnInnerEl.clip();
+                    me.setTargetSize(maxWidth, height);
+                }
+            }
         }
 
-        return width;
+        this.lastText = owner.text;
     },
 
-    getContentHeight: function (ownerContext) {
-        var me = this,
-            owner = me.owner,
-            btnInnerEl = owner.btnInnerEl,
-            height;
-
-        if (owner.vertical) {
-            height = Ext.util.TextMetrics.measure(btnInnerEl, owner.text).width;
-            height += me.btnFrameHeight + me.adjHeight;
-
-            // Vertical buttons need height explicitly set
-            ownerContext.setHeight(height, true, true);
-        } else {
-            height = ownerContext.el.getHeight();
-        }
-
-        return height;
-    },
-
-    setButtonSize: function(ownerContext, width, height) {
+    setTargetSize: function(width, height) {
         var me = this,
             owner = me.owner,
             isNum = Ext.isNumber,
-            btnItem = ownerContext.getEl('btnEl'),
             btnInnerEl = owner.btnInnerEl,
-            btnInnerItem = ownerContext.getEl('btnInnerEl'),
-            btnWidth = isNum(width) ? width - me.adjWidth : width,
-            btnHeight = isNum(height) ? height - me.adjHeight : height,
+            btnWidth = (isNum(width) ? width - me.adjWidth : width),
+            btnHeight = (isNum(height) ? height - me.adjHeight : height),
             btnFrameHeight = me.btnFrameHeight,
             text = owner.getText(),
             textHeight;
 
-        btnItem.setSize(btnWidth, btnHeight);
-        btnInnerItem.setSize(btnWidth, btnHeight);
-
-        // Only need the line-height setting for regular, horizontal Buttons
-        if (!owner.vertical && btnHeight >= 0) {
-            btnInnerItem.setProp('line-height', btnHeight - btnFrameHeight + 'px');
+        me.callParent(arguments);
+        me.setElementSize(owner.btnEl, btnWidth, btnHeight);
+        me.setElementSize(btnInnerEl, btnWidth, btnHeight);
+        if (isNum(btnHeight)) {
+            btnInnerEl.setStyle('line-height', btnHeight - btnFrameHeight + 'px');
         }
 
         // Button text may contain markup that would force it to wrap to more than one line (e.g. 'Button<br>Label').
@@ -166,35 +121,36 @@ Ext.define('Ext.layout.component.Button', {
         // line-height to normal, measure the rendered text height, and add padding-top to center the text block
         // vertically within the button's height. This is more expensive than the basic line-height approach so
         // we only do it if the text contains markup.
-        if (text && me.htmlRE.test(text)) {
-            btnInnerItem.setProp('line-height', 'normal');
+        if (text && this.htmlRE.test(text)) {
+            btnInnerEl.setStyle('line-height', 'normal');
             textHeight = Ext.util.TextMetrics.measure(btnInnerEl, text).height;
-            btnInnerItem.setProp('padding-top',
-                me.btnFrameTop + Math.max(btnInnerEl.getHeight() - btnFrameHeight - textHeight, 0) / 2);
-            btnInnerItem.setSize(btnWidth, btnHeight);
+            btnInnerEl.setStyle('padding-top', me.btnFrameTop + Math.max(btnInnerEl.getHeight() - btnFrameHeight - textHeight, 0) / 2 + 'px');
+            me.setElementSize(btnInnerEl, btnWidth, btnHeight);
         }
     },
 
-    cacheTargetInfo: function(ownerContext) {
+    getTargetInfo: function() {
         var me = this,
-            owner, frameSize, btnWrapPadding, innerFrameSize;
+            owner = me.owner,
+            ownerEl = owner.el,
+            frameSize = me.frameSize,
+            frameBody = owner.frameBody,
+            btnWrap = owner.btnWrap,
+            innerEl = owner.btnInnerEl;
 
         if (!('adjWidth' in me)) {
-            owner = me.owner;
-            frameSize = ownerContext.getFrameInfo();
-            btnWrapPadding = ownerContext.getEl('btnWrap').getPaddingInfo();
-            innerFrameSize = ownerContext.getEl('btnInnerEl').getFrameInfo();
-
             Ext.apply(me, {
                 // Width adjustment must take into account the arrow area. The btnWrap is the <em> which has padding to accommodate the arrow.
-                adjWidth       : btnWrapPadding.width + frameSize.width,
-                adjHeight      : btnWrapPadding.height + frameSize.height,
-                btnFrameWidth  : innerFrameSize.width,
-                btnFrameHeight : innerFrameSize.height,
-                btnFrameTop    : innerFrameSize.top
+                adjWidth: frameSize.left + frameSize.right + ownerEl.getBorderWidth('lr') + ownerEl.getPadding('lr') +
+                          btnWrap.getPadding('lr') + (frameBody ? frameBody.getFrameWidth('lr') : 0),
+                adjHeight: frameSize.top + frameSize.bottom + ownerEl.getBorderWidth('tb') + ownerEl.getPadding('tb') +
+                           btnWrap.getPadding('tb') + (frameBody ? frameBody.getFrameWidth('tb') : 0),
+                btnFrameWidth: innerEl.getFrameWidth('lr'),
+                btnFrameHeight: innerEl.getFrameWidth('tb'),
+                btnFrameTop: innerEl.getFrameWidth('t')
             });
         }
 
-        me.callParent(arguments);
+        return me.callParent();
     }
 });

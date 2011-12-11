@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-grid-View'>/**
+</span> * @class Ext.grid.View
+ * @extends Ext.view.Table
+ *
+ * The grid View class provides extra {@link Ext.grid.Panel} specific functionality to the
+ * {@link Ext.view.Table}. In general, this class is not instanced directly, instead a viewConfig
+ * option is passed to the grid:
+ *
+ *     Ext.create('Ext.grid.Panel', {
+ *         // other options
+ *         viewConfig: {
+ *             stripeRows: false
+ *         }
+ *     });
+ *
+ * ## Drag Drop
+ *
+ * Drag and drop functionality can be achieved in the grid by attaching a {@link Ext.grid.plugin.DragDrop} plugin
+ * when creating the view.
+ *
+ *     Ext.create('Ext.grid.Panel', {
+ *         // other options
+ *         viewConfig: {
+ *             plugins: {
+ *                 ddGroup: 'people-group',
+ *                 ptype: 'gridviewdragdrop',
+ *                 enableDrop: false
+ *             }
+ *         }
+ *     });
+ */
+Ext.define('Ext.grid.View', {
+    extend: 'Ext.view.Table',
+    alias: 'widget.gridview',
+
+<span id='Ext-grid-View-cfg-stripeRows'>    /**
+</span>     * @cfg {Boolean} stripeRows &lt;tt&gt;true&lt;/tt&gt; to stripe the rows. Default is &lt;tt&gt;true&lt;/tt&gt;.
+     * &lt;p&gt;This causes the CSS class &lt;tt&gt;&lt;b&gt;x-grid-row-alt&lt;/b&gt;&lt;/tt&gt; to be added to alternate rows of
+     * the grid. A default CSS rule is provided which sets a background color, but you can override this
+     * with a rule which either overrides the &lt;b&gt;background-color&lt;/b&gt; style using the '!important'
+     * modifier, or which uses a CSS selector of higher specificity.&lt;/p&gt;
+     */
+    stripeRows: true,
+
+    autoScroll: true,
+    
+<span id='Ext-grid-View-method-scrollToTop'>    /**
+</span>     * Scroll the GridView to the top by scrolling the scroller.
+     * @private
+     */
+    scrollToTop : function(){
+        if (this.rendered) {
+            var section = this.ownerCt,
+                verticalScroller = section.verticalScroller;
+
+            if (verticalScroller) {
+                verticalScroller.scrollToTop();
+            }
+        }
+    }
+});
+</pre>
+</body>
+</html>

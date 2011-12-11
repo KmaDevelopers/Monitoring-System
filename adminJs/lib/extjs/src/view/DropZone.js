@@ -1,12 +1,27 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
  * @class Ext.view.DropZone
+ * @extends Ext.dd.DropZone
  * @private
  */
 Ext.define('Ext.view.DropZone', {
     extend: 'Ext.dd.DropZone',
 
-    indicatorHtml: '<div class="' + Ext.baseCSSPrefix + 'grid-drop-indicator-left"></div><div class="' + Ext.baseCSSPrefix + 'grid-drop-indicator-right"></div>',
-    indicatorCls: Ext.baseCSSPrefix + 'grid-drop-indicator',
+    indicatorHtml: '<div class="x-grid-drop-indicator-left"></div><div class="x-grid-drop-indicator-right"></div>',
+    indicatorCls: 'x-grid-drop-indicator',
 
     constructor: function(config) {
         var me = this;
@@ -32,7 +47,7 @@ Ext.define('Ext.view.DropZone', {
     fireViewEvent: function() {
         var me = this,
             result;
-
+            
         me.lock();
         result = me.view.fireEvent.apply(me.view, arguments);
         me.unlock();
@@ -62,7 +77,7 @@ Ext.define('Ext.view.DropZone', {
         var me = this;
 
         if (!me.indicator) {
-            me.indicator = new Ext.Component({
+            me.indicator = Ext.createWidget('component', {
                 html: me.indicatorHtml,
                 cls: me.indicatorCls,
                 ownerCt: me.view,
@@ -147,7 +162,7 @@ Ext.define('Ext.view.DropZone', {
     // The mouse is over a View node
     onNodeOver: function(node, dragZone, e, data) {
         var me = this;
-
+        
         if (!Ext.Array.contains(data.records, me.view.getRecord(node))) {
             me.positionIndicator(node, data, e);
         }
@@ -158,7 +173,7 @@ Ext.define('Ext.view.DropZone', {
     // Remove drop position indicator
     notifyOut: function(node, dragZone, e, data) {
         var me = this;
-
+        
         me.callParent(arguments);
         delete me.overRecord;
         delete me.currentPosition;
@@ -194,48 +209,30 @@ Ext.define('Ext.view.DropZone', {
 
     onNodeDrop: function(node, dragZone, e, data) {
         var me = this,
-            dropHandled = false,
- 
+            dropped = false,
+
             // Create a closure to perform the operation which the event handler may use.
-            // Users may now set the wait parameter in the beforedrop handler, and perform any kind
+            // Users may now return <code>false</code> from the beforedrop handler, and perform any kind
             // of asynchronous processing such as an Ext.Msg.confirm, or an Ajax request,
-            // and complete the drop gesture at some point in the future by calling either the
-            // processDrop or cancelDrop methods.
-            dropHandlers = {
-                wait: false,
-                processDrop: function () {
-                    me.invalidateDrop();
-                    me.handleNodeDrop(data, me.overRecord, me.currentPosition);
-                    dropHandled = true;
-                    me.fireViewEvent('drop', node, data, me.overRecord, me.currentPosition);
-                },
- 
-                cancelDrop: function() {
-                    me.invalidateDrop();
-                    dropHandled = true;
-                }
+            // and complete the drop gesture at some point in the future by calling this function.
+            processDrop = function () {
+                me.invalidateDrop();
+                me.handleNodeDrop(data, me.overRecord, me.currentPosition);
+                dropped = true;
+                me.fireViewEvent('drop', node, data, me.overRecord, me.currentPosition);
             },
             performOperation = false;
- 
+
         if (me.valid) {
-            performOperation = me.fireViewEvent('beforedrop', node, data, me.overRecord, me.currentPosition, dropHandlers);
-            if (dropHandlers.wait) {
-                return;
-            }
- 
+            performOperation = me.fireViewEvent('beforedrop', node, data, me.overRecord, me.currentPosition, processDrop);
             if (performOperation !== false) {
-                // If either of the drop handlers were called in the event handler, do not do it again.
-                if (!dropHandled) {
-                    dropHandlers.processDrop();
+                // If the processDrop function was called in the event handler, do not do it again.
+                if (!dropped) {
+                    processDrop();
                 }
             }
         }
         return performOperation;
-    },
-    
-    destroy: function(){
-        Ext.destroy(this.indicator);
-        delete this.indicator;
-        this.callParent();
     }
 });
+

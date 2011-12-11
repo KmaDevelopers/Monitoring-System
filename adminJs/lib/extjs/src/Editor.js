@@ -1,5 +1,20 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
  * @class Ext.Editor
+ * @extends Ext.Component
  *
  * <p>
  * The Editor class is used to provide inline editing for elements on the page. The editor
@@ -37,15 +52,15 @@ Ext.define('Ext.Editor', {
 
     /* Begin Definitions */
 
-    extend: 'Ext.container.Container',
+    extend: 'Ext.Component',
 
     alias: 'widget.editor',
 
-    requires: ['Ext.layout.container.Editor'],
+    requires: ['Ext.layout.component.Editor'],
 
     /* End Definitions */
 
-   layout: 'editor',
+   componentLayout: 'editor',
 
     /**
     * @cfg {Ext.form.field.Field} field
@@ -55,7 +70,7 @@ Ext.define('Ext.Editor', {
     /**
      * @cfg {Boolean} allowBlur
      * True to {@link #completeEdit complete the editing process} if in edit mode when the
-     * field is blurred.
+     * field is blurred. Defaults to <tt>true</tt>.
      */
     allowBlur: true,
 
@@ -84,79 +99,73 @@ autoSize: {
     /**
      * @cfg {Boolean} revertInvalid
      * True to automatically revert the field value and cancel the edit when the user completes an edit and the field
-     * validation fails
+     * validation fails (defaults to true)
      */
     revertInvalid: true,
 
     /**
-     * @cfg {Boolean} [ignoreNoChange=false]
+     * @cfg {Boolean} ignoreNoChange
      * True to skip the edit completion process (no save, no events fired) if the user completes an edit and
-     * the value has not changed.  Applies only to string values - edits for other data types
+     * the value has not changed (defaults to false).  Applies only to string values - edits for other data types
      * will never be ignored.
      */
 
     /**
-     * @cfg {Boolean} [hideEl=true]
-     * False to keep the bound element visible while the editor is displayed
+     * @cfg {Boolean} hideEl
+     * False to keep the bound element visible while the editor is displayed (defaults to true)
      */
 
     /**
-     * @cfg {Object} value
-     * The data value of the underlying field
+     * @cfg {Mixed} value
+     * The data value of the underlying field (defaults to "")
      */
     value : '',
 
     /**
      * @cfg {String} alignment
-     * The position to align to (see {@link Ext.Element#alignTo} for more details).
+     * The position to align to (see {@link Ext.core.Element#alignTo} for more details, defaults to "c-c?").
      */
     alignment: 'c-c?',
 
     /**
-     * @cfg {Number[]} offsets
-     * The offsets to use when aligning (see {@link Ext.Element#alignTo} for more details.
+     * @cfg {Array} offsets
+     * The offsets to use when aligning (see {@link Ext.core.Element#alignTo} for more details. Defaults to <tt>[0, 0]</tt>.
      */
     offsets: [0, 0],
 
     /**
-     * @cfg {Boolean/String} shadow
-     * "sides" for sides/bottom only, "frame" for 4-way shadow, and "drop" for bottom-right shadow.
+     * @cfg {Boolean/String} shadow "sides" for sides/bottom only, "frame" for 4-way shadow, and "drop"
+     * for bottom-right shadow (defaults to "frame")
      */
     shadow : 'frame',
 
     /**
-     * @cfg {Boolean} constrain
-     * True to constrain the editor to the viewport
+     * @cfg {Boolean} constrain True to constrain the editor to the viewport
      */
     constrain : false,
 
     /**
-     * @cfg {Boolean} swallowKeys
-     * Handle the keydown/keypress events so they don't propagate
+     * @cfg {Boolean} swallowKeys Handle the keydown/keypress events so they don't propagate (defaults to true)
      */
     swallowKeys : true,
 
     /**
-     * @cfg {Boolean} completeOnEnter
-     * True to complete the edit when the enter key is pressed.
+     * @cfg {Boolean} completeOnEnter True to complete the edit when the enter key is pressed. Defaults to <tt>true</tt>.
      */
     completeOnEnter : true,
 
     /**
-     * @cfg {Boolean} cancelOnEsc
-     * True to cancel the edit when the escape key is pressed.
+     * @cfg {Boolean} cancelOnEsc True to cancel the edit when the escape key is pressed. Defaults to <tt>true</tt>.
      */
     cancelOnEsc : true,
 
     /**
-     * @cfg {Boolean} updateEl
-     * True to update the innerHTML of the bound element when the update completes
+     * @cfg {Boolean} updateEl True to update the innerHTML of the bound element when the update completes (defaults to false)
      */
     updateEl : false,
 
     /**
-     * @cfg {String/HTMLElement/Ext.Element} parentEl
-     * An element to render to. Defaults to the <tt>document.body</tt>.
+     * @cfg {Mixed} parentEl An element to render to. Defaults to the <tt>document.body</tt>.
      */
 
     // private overrides
@@ -174,7 +183,7 @@ autoSize: {
         me.mon(field, {
             scope: me,
             blur: {
-                fn: me.onFieldBlur,
+                fn: me.onBlur,
                 // slight delay to avoid race condition with startEdits (e.g. grid view refresh)
                 delay: 1
             },
@@ -182,12 +191,11 @@ autoSize: {
         });
 
         if (field.grow) {
-            me.mon(field, 'autosize', me.onFieldAutosize,  me, {delay: 1});
+            me.mon(field, 'autosize', me.onAutoSize,  me, {delay: 1});
         }
         me.floating = {
             constrain: me.constrain
         };
-        me.items = field;
 
         me.callParent(arguments);
 
@@ -197,45 +205,43 @@ autoSize: {
              * Fires when editing is initiated, but before the value changes.  Editing can be canceled by returning
              * false from the handler of this event.
              * @param {Ext.Editor} this
-             * @param {Ext.Element} boundEl The underlying element bound to this editor
-             * @param {Object} value The field value being set
+             * @param {Ext.core.Element} boundEl The underlying element bound to this editor
+             * @param {Mixed} value The field value being set
              */
             'beforestartedit',
-
             /**
              * @event startedit
              * Fires when this editor is displayed
              * @param {Ext.Editor} this
-             * @param {Ext.Element} boundEl The underlying element bound to this editor
-             * @param {Object} value The starting field value
+             * @param {Ext.core.Element} boundEl The underlying element bound to this editor
+             * @param {Mixed} value The starting field value
              */
             'startedit',
-
             /**
              * @event beforecomplete
              * Fires after a change has been made to the field, but before the change is reflected in the underlying
              * field.  Saving the change to the field can be canceled by returning false from the handler of this event.
              * Note that if the value has not changed and ignoreNoChange = true, the editing will still end but this
              * event will not fire since no edit actually occurred.
-             * @param {Ext.Editor} this
-             * @param {Object} value The current field value
-             * @param {Object} startValue The original field value
+             * @param {Editor} this
+             * @param {Mixed} value The current field value
+             * @param {Mixed} startValue The original field value
              */
             'beforecomplete',
             /**
              * @event complete
              * Fires after editing is complete and any changed value has been written to the underlying field.
              * @param {Ext.Editor} this
-             * @param {Object} value The current field value
-             * @param {Object} startValue The original field value
+             * @param {Mixed} value The current field value
+             * @param {Mixed} startValue The original field value
              */
             'complete',
             /**
              * @event canceledit
              * Fires after editing has been canceled and the editor's value has been reset.
              * @param {Ext.Editor} this
-             * @param {Object} value The user-entered field value that was discarded
-             * @param {Object} startValue The original field value that was set back into the editor after cancel
+             * @param {Mixed} value The user-entered field value that was discarded
+             * @param {Mixed} startValue The original field value that was set back into the editor after cancel
              */
             'canceledit',
             /**
@@ -251,27 +257,26 @@ autoSize: {
     },
 
     // private
-    onFieldAutosize: function(){
-        this.updateLayout();
+    onAutoSize: function(){
+        this.doComponentLayout();
     },
 
     // private
-    afterRender : function(ct, position) {
+    onRender : function(ct, position) {
         var me = this,
-            field = me.field,
-            inputEl = field.inputEl;
+            field = me.field;
 
         me.callParent(arguments);
 
+        field.render(me.el);
+        //field.hide();
         // Ensure the field doesn't get submitted as part of any form
-        if (inputEl) {
-            inputEl.dom.name = '';
-            if (me.swallowKeys) {
-                inputEl.swallowEvent([
-                    'keypress', // *** Opera
-                    'keydown'   // *** all other browsers
-                ]);
-            }
+        field.inputEl.dom.name = '';
+        if (me.swallowKeys) {
+            field.inputEl.swallowEvent([
+                'keypress', // *** Opera
+                'keydown'   // *** all other browsers
+            ]);
         }
     },
 
@@ -298,12 +303,12 @@ autoSize: {
             }, 10);
         }
 
-        me.fireEvent('specialkey', me, field, event);
+        this.fireEvent('specialkey', this, field, event);
     },
 
     /**
      * Starts the editing process and shows the editor.
-     * @param {String/HTMLElement/Ext.Element} el The element to edit
+     * @param {Mixed} el The element to edit
      * @param {String} value (optional) A value to initialize the editor with. If a value is not provided, it defaults
       * to the innerHTML of el.
      */
@@ -322,11 +327,8 @@ autoSize: {
         if (me.fireEvent('beforestartedit', me, me.boundEl, value) !== false) {
             me.startValue = value;
             me.show();
-            // temporarily suspend events on field to prevent the "change" event from firing when reset() and setValue() are called
-            field.suspendEvents();
             field.reset();
             field.setValue(value);
-            field.resumeEvents();
             me.realign(true);
             field.focus(false, 10);
             if (field.autoSize) {
@@ -343,14 +345,14 @@ autoSize: {
     realign : function(autoSize) {
         var me = this;
         if (autoSize === true) {
-            me.updateLayout();
+            me.doComponentLayout();
         }
         me.alignTo(me.boundEl, me.alignment, me.offsets);
     },
 
     /**
      * Ends the editing process, persists the changed value to the underlying field, and hides the editor.
-     * @param {Boolean} [remainVisible=false] Override the default behavior and keep the editor visible after edit
+     * @param {Boolean} remainVisible Override the default behavior and keep the editor visible after edit (defaults to false)
      */
     completeEdit : function(remainVisible) {
         var me = this,
@@ -404,20 +406,17 @@ autoSize: {
     /**
      * Cancels the editing process and hides the editor without persisting any changes.  The field value will be
      * reverted to the original starting value.
-     * @param {Boolean} [remainVisible=false] Override the default behavior and keep the editor visible after cancel
+     * @param {Boolean} remainVisible Override the default behavior and keep the editor visible after
+     * cancel (defaults to false)
      */
     cancelEdit : function(remainVisible) {
         var me = this,
             startValue = me.startValue,
-            field = me.field,
             value;
 
         if (me.editing) {
             value = me.getValue();
-            // temporarily suspend events on field to prevent the "change" event from firing when setValue() is called
-            field.suspendEvents();
             me.setValue(startValue);
-            field.resumeEvents();
             me.hideEdit(remainVisible);
             me.fireEvent('canceledit', me, value, startValue);
         }
@@ -432,10 +431,10 @@ autoSize: {
     },
 
     // private
-    onFieldBlur : function() {
+    onBlur : function() {
         var me = this;
 
-        // selectSameEditor flag allows the same editor to be started without onFieldBlur firing on itself
+        // selectSameEditor flag allows the same editor to be started without onBlur firing on itself
         if(me.allowBlur === true && me.editing && me.selectSameEditor !== true) {
             me.completeEdit();
         }
@@ -450,9 +449,7 @@ autoSize: {
             me.completeEdit();
             return;
         }
-        if (field.hasFocus) {
-            field.blur();
-        }
+        field.blur();
         if (field.collapse) {
             field.collapse();
         }
@@ -466,7 +463,7 @@ autoSize: {
 
     /**
      * Sets the data value of the editor
-     * @param {Object} value Any valid value supported by the underlying field
+     * @param {Mixed} value Any valid value supported by the underlying field
      */
     setValue : function(value) {
         this.field.setValue(value);
@@ -474,7 +471,7 @@ autoSize: {
 
     /**
      * Gets the data value of the editor
-     * @return {Object} The data value
+     * @return {Mixed} The data value
      */
     getValue : function() {
         return this.field.getValue();

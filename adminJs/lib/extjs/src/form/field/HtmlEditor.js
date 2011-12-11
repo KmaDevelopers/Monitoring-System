@@ -1,31 +1,48 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
+ * @class Ext.form.field.HtmlEditor
+ * @extends Ext.Component
+ *
  * Provides a lightweight HTML Editor component. Some toolbar features are not supported by Safari and will be
  * automatically hidden when needed. These are noted in the config options where appropriate.
- *
+ * 
  * The editor's toolbar buttons have tooltips defined in the {@link #buttonTips} property, but they are not
- * enabled by default unless the global {@link Ext.tip.QuickTipManager} singleton is
- * {@link Ext.tip.QuickTipManager#init initialized}.
+ * enabled by default unless the global {@link Ext.tip.QuickTipManager} singleton is {@link Ext.tip.QuickTipManager#init initialized}.
+ * 
+ * An Editor is a sensitive component that can't be used in all spots standard fields can be used. Putting an Editor within
+ * any element that has display set to 'none' can cause problems in Safari and Firefox due to their default iframe reloading bugs.
  *
- * An Editor is a sensitive component that can't be used in all spots standard fields can be used. Putting an
- * Editor within any element that has display set to 'none' can cause problems in Safari and Firefox due to their
- * default iframe reloading bugs.
+ * {@img Ext.form.HtmlEditor/Ext.form.HtmlEditor1.png Ext.form.HtmlEditor component}
  *
- * # Example usage
+ * ## Example usage
  *
- * Simple example rendered with default options:
+ * {@img Ext.form.HtmlEditor/Ext.form.HtmlEditor2.png Ext.form.HtmlEditor component}
  *
- *     @example
- *     Ext.tip.QuickTipManager.init();  // enable tooltips
+ *     // Simple example rendered with default options:
+ *     Ext.tip.QuickTips.init();  // enable tooltips
  *     Ext.create('Ext.form.HtmlEditor', {
  *         width: 580,
  *         height: 250,
- *         renderTo: Ext.getBody()
+ *         renderTo: Ext.getBody()        
  *     });
- *
- * Passed via xtype into a container and with custom options:
- *
- *     @example
- *     Ext.tip.QuickTipManager.init();  // enable tooltips
+ * 
+ * {@img Ext.form.HtmlEditor/Ext.form.HtmlEditor2.png Ext.form.HtmlEditor component}
+ * 
+ *     // Passed via xtype into a container and with custom options:
+ *     Ext.tip.QuickTips.init();  // enable tooltips
  *     new Ext.panel.Panel({
  *         title: 'HTML Editor',
  *         renderTo: Ext.getBody(),
@@ -39,12 +56,7 @@
  *             enableAlignments: false
  *         }
  *     });
- *     
- * # Reflow issues
- * 
- * In some browsers, a layout reflow will cause the underlying editor iframe to be reset. This
- * is most commonly seen when using the editor in collapsed panels with animation. In these cases
- * it is best to avoid animation. More information can be found here: https://bugzilla.mozilla.org/show_bug.cgi?id=90268 
+ *
  */
 Ext.define('Ext.form.field.HtmlEditor', {
     extend:'Ext.Component',
@@ -63,79 +75,59 @@ Ext.define('Ext.form.field.HtmlEditor', {
         'Ext.layout.component.field.HtmlEditor'
     ],
 
-    childEls: [
-        'iframeEl', 'textareaEl'
-    ],
-
     fieldSubTpl: [
-        '{%this.renderToolbar(out, values)%}',
-        '<textarea id="{cmpId}-textareaEl" name="{name}" tabIndex="-1" class="{textareaCls}" style="{size}" autocomplete="off">',
-            '{value}',
-        '</textarea>',
-        '<iframe id="{cmpId}-iframeEl" name="{iframeName}" frameBorder="0" style="overflow:auto;{size}" src="{iframeSrc}"></iframe>',
+        '<div class="{toolbarWrapCls}"></div>',
+        '<textarea id="{id}" name="{name}" tabIndex="-1" class="{textareaCls}" ',
+            'style="{size}" autocomplete="off"></textarea>',
+        '<iframe name="{iframeName}" frameBorder="0" style="overflow:auto;{size}" src="{iframeSrc}"></iframe>',
         {
-            disableFormats: true,
-
-            // Insert the markup for the toolbar's render tree into the output buffer
-            renderToolbar: function(out, values) {
-                Ext.DomHelper.generateMarkup(values.$comp.toolbar.getRenderTree(), out);
-            }
+            compiled: true,
+            disableFormats: true
         }
     ],
 
     /**
-     * @cfg {Boolean} enableFormat
-     * Enable the bold, italic and underline buttons
+     * @cfg {Boolean} enableFormat Enable the bold, italic and underline buttons (defaults to true)
      */
     enableFormat : true,
     /**
-     * @cfg {Boolean} enableFontSize
-     * Enable the increase/decrease font size buttons
+     * @cfg {Boolean} enableFontSize Enable the increase/decrease font size buttons (defaults to true)
      */
     enableFontSize : true,
     /**
-     * @cfg {Boolean} enableColors
-     * Enable the fore/highlight color buttons
+     * @cfg {Boolean} enableColors Enable the fore/highlight color buttons (defaults to true)
      */
     enableColors : true,
     /**
-     * @cfg {Boolean} enableAlignments
-     * Enable the left, center, right alignment buttons
+     * @cfg {Boolean} enableAlignments Enable the left, center, right alignment buttons (defaults to true)
      */
     enableAlignments : true,
     /**
-     * @cfg {Boolean} enableLists
-     * Enable the bullet and numbered list buttons. Not available in Safari.
+     * @cfg {Boolean} enableLists Enable the bullet and numbered list buttons. Not available in Safari. (defaults to true)
      */
     enableLists : true,
     /**
-     * @cfg {Boolean} enableSourceEdit
-     * Enable the switch to source edit button. Not available in Safari.
+     * @cfg {Boolean} enableSourceEdit Enable the switch to source edit button. Not available in Safari. (defaults to true)
      */
     enableSourceEdit : true,
     /**
-     * @cfg {Boolean} enableLinks
-     * Enable the create link button. Not available in Safari.
+     * @cfg {Boolean} enableLinks Enable the create link button. Not available in Safari. (defaults to true)
      */
     enableLinks : true,
     /**
-     * @cfg {Boolean} enableFont
-     * Enable font selection. Not available in Safari.
+     * @cfg {Boolean} enableFont Enable font selection. Not available in Safari. (defaults to true)
      */
     enableFont : true,
     /**
-     * @cfg {String} createLinkText
-     * The default text for the create link prompt
+     * @cfg {String} createLinkText The default text for the create link prompt
      */
     createLinkText : 'Please enter the URL for the link:',
     /**
-     * @cfg {String} [defaultLinkValue='http://']
-     * The default value for the create link prompt
+     * @cfg {String} defaultLinkValue The default value for the create link prompt (defaults to http:/ /)
      */
     defaultLinkValue : 'http:/'+'/',
     /**
-     * @cfg {String[]} fontFamilies
-     * An array of available font families
+     * @cfg {Array} fontFamilies An array of available font families
      */
     fontFamilies : [
         'Arial',
@@ -146,9 +138,7 @@ Ext.define('Ext.form.field.HtmlEditor', {
     ],
     defaultFont: 'tahoma',
     /**
-     * @cfg {String} defaultValue
-     * A default value to be put into the editor to resolve focus issues (defaults to (Non-breaking space) in Opera
-     * and IE6, ​(Zero-width space) in all other browsers).
+     * @cfg {String} defaultValue A default value to be put into the editor to resolve focus issues (defaults to &#160; (Non-breaking space) in Opera and IE6, &#8203; (Zero-width space) in all other browsers).
      */
     defaultValue: (Ext.isOpera || Ext.isIE6) ? '&#160;' : '&#8203;',
 
@@ -164,7 +154,7 @@ Ext.define('Ext.form.field.HtmlEditor', {
     hideMode:'offsets',
 
     maskOnDisable: true,
-
+    
     // private
     initComponent : function(){
         var me = this;
@@ -178,22 +168,23 @@ Ext.define('Ext.form.field.HtmlEditor', {
             'initialize',
             /**
              * @event activate
-             * Fires when the editor is first receives the focus. Any insertion must wait until after this event.
+             * Fires when the editor is first receives the focus. Any insertion must wait
+             * until after this event.
              * @param {Ext.form.field.HtmlEditor} this
              */
             'activate',
              /**
              * @event beforesync
-             * Fires before the textarea is updated with content from the editor iframe. Return false to cancel the
-             * sync.
+             * Fires before the textarea is updated with content from the editor iframe. Return false
+             * to cancel the sync.
              * @param {Ext.form.field.HtmlEditor} this
              * @param {String} html
              */
             'beforesync',
              /**
              * @event beforepush
-             * Fires before the iframe editor is updated with content from the textarea. Return false to cancel the
-             * push.
+             * Fires before the iframe editor is updated with content from the textarea. Return false
+             * to cancel the push.
              * @param {Ext.form.field.HtmlEditor} this
              * @param {String} html
              */
@@ -222,30 +213,21 @@ Ext.define('Ext.form.field.HtmlEditor', {
         );
 
         me.callParent(arguments);
-        me.createToolbar(me);
 
         // Init mixins
         me.initLabelable();
         me.initField();
     },
 
-    /**
-     * @private
-     * Must define this function to allow the Layout base class to collect all descendant layouts to be run.
-     */
-    getRefItems: function() {
-        return [ this.toolbar ];
-    },
-
     /*
-     * Called when the editor creates its toolbar. Override this method if you need to
+     * Protected method that will not generally be called directly. It
+     * is called when the editor creates its toolbar. Override this method if you need to
      * add custom toolbar buttons.
      * @param {Ext.form.field.HtmlEditor} editor
-     * @protected
      */
     createToolbar : function(editor){
         var me = this,
-            items = [], i,
+            items = [],
             tipsEnabled = Ext.tip.QuickTipManager && Ext.tip.QuickTipManager.isEnabled(),
             baseCSSPrefix = Ext.baseCSSPrefix,
             fontSelectItem, toolbar, undef;
@@ -258,10 +240,10 @@ Ext.define('Ext.form.field.HtmlEditor', {
                 enableToggle:toggle !== false,
                 scope: editor,
                 handler:handler||editor.relayBtnCmd,
-                clickEvent: 'mousedown',
+                clickEvent:'mousedown',
                 tooltip: tipsEnabled ? editor.buttonTips[id] || undef : undef,
                 overflowText: editor.buttonTips[id].title || undef,
-                tabIndex: -1
+                tabIndex:-1
             };
         }
 
@@ -269,7 +251,7 @@ Ext.define('Ext.form.field.HtmlEditor', {
         if (me.enableFont && !Ext.isSafari2) {
             fontSelectItem = Ext.widget('component', {
                 renderTpl: [
-                    '<select id="{id}-selectEl" class="{cls}">',
+                    '<select class="{cls}">',
                         '<tpl for="fonts">',
                             '<option value="{[values.toLowerCase()]}" style="font-family:{.}"<tpl if="values.toLowerCase()==parent.defaultFont"> selected</tpl>>{.}</option>',
                         '</tpl>',
@@ -280,31 +262,22 @@ Ext.define('Ext.form.field.HtmlEditor', {
                     fonts: me.fontFamilies,
                     defaultFont: me.defaultFont
                 },
-                childEls: ['selectEl'],
-                afterRender: function() {
-                    me.fontSelect = this.selectEl;
-                    Ext.Component.prototype.afterRender.apply(this, arguments);
+                renderSelectors: {
+                    selectEl: 'select'
                 },
                 onDisable: function() {
                     var selectEl = this.selectEl;
                     if (selectEl) {
                         selectEl.dom.disabled = true;
                     }
-                    Ext.Component.prototype.onDisable.apply(this, arguments);
+                    Ext.Component.superclass.onDisable.apply(this, arguments);
                 },
                 onEnable: function() {
                     var selectEl = this.selectEl;
                     if (selectEl) {
                         selectEl.dom.disabled = false;
                     }
-                    Ext.Component.prototype.onEnable.apply(this, arguments);
-                },
-                listeners: {
-                    change: function() {
-                        me.relayCmd('fontname', me.fontSelect.dom.value);
-                        me.deferFocus();
-                    },
-                    element: 'selectEl'
+                    Ext.Component.superclass.onEnable.apply(this, arguments);
                 }
             });
 
@@ -422,31 +395,26 @@ Ext.define('Ext.form.field.HtmlEditor', {
                 );
             }
         }
-        
-        // Everything starts disabled.
-        for (i = 0; i < items.length; i++) {
-            if (items[i].id !== 'sourceedit') {
-                items[i].disabled = true;
-            }
-        }
 
         // build the toolbar
-        // Automatically rendered in AbstractComponent.afterRender's renderChildren call
         toolbar = Ext.widget('toolbar', {
-            id: me.id + '-toolbar',
-            ownerCt: me,
-            cls: Ext.baseCSSPrefix + 'html-editor-tb',
+            renderTo: me.toolbarWrap,
             enableOverflow: true,
-            items: items,
-            ownerLayout: me.getComponentLayout(),
+            items: items
+        });
 
-            // stop form submits
-            listeners: {
-                click: function(e){
-                    e.preventDefault();
-                },
-                element: 'el'
-            }
+        if (fontSelectItem) {
+            me.fontSelect = fontSelectItem.selectEl;
+
+            me.mon(me.fontSelect, 'change', function(){
+                me.relayCmd('fontname', me.fontSelect.dom.value);
+                me.deferFocus();
+            });
+        }
+
+        // stop form submits
+        me.mon(toolbar.el, 'click', function(e){
+            e.preventDefault();
         });
 
         me.toolbar = toolbar;
@@ -496,14 +464,14 @@ Ext.define('Ext.form.field.HtmlEditor', {
     },
 
     /**
-     * Called when the editor initializes the iframe with HTML contents. Override this method if you
+     * Protected method that will not generally be called directly. It
+     * is called when the editor initializes the iframe with HTML contents. Override this method if you
      * want to change the initialization markup of the iframe (e.g. to add stylesheets).
      *
-     * **Note:** IE8-Standards has unwanted scroller behavior, so the default meta tag forces IE7 compatibility.
+     * Note: IE8-Standards has unwanted scroller behavior, so the default meta tag forces IE7 compatibility.
      * Also note that forcing IE7 mode works when the page is loaded normally, but if you are using IE's Web
      * Developer Tools to manually set the document mode, that will take precedence and override what this
      * code sets by default. This can be confusing when developing, but is not a user-facing issue.
-     * @protected
      */
     getDocMarkup: function() {
         var me = this,
@@ -527,29 +495,32 @@ Ext.define('Ext.form.field.HtmlEditor', {
         return Ext.isIE ? this.iframeEl.dom.contentWindow : window.frames[this.iframeEl.dom.name];
     },
 
-    // Do the job of a container layout at this point even though we are not a Container.
-    // TODO: Refactor as a Container.
-    finishRenderChildren: function () {
-        this.callParent();
-        this.toolbar.finishRender();
-    },
-
     // private
     onRender: function() {
-        var me = this;
+        var me = this,
+            renderSelectors = me.renderSelectors;
+
+        Ext.applyIf(renderSelectors, me.getLabelableSelectors());
+
+        Ext.applyIf(renderSelectors, {
+            toolbarWrap: 'div.' + Ext.baseCSSPrefix + 'html-editor-tb',
+            iframeEl: 'iframe',
+            textareaEl: 'textarea'
+        });
 
         me.callParent(arguments);
 
-        // The input element is interrogated by the layout to extract height when labelAlign is 'top'
-        // It must be set, and then switched between the iframe and the textarea
-        me.inputEl = me.iframeEl;
+        me.textareaEl.dom.value = me.value || '';
 
         // Start polling for when the iframe document is ready to be manipulated
         me.monitorTask = Ext.TaskManager.start({
             run: me.checkDesignMode,
             scope: me,
-            interval: 100
+            interval:100
         });
+
+        me.createToolbar(me);
+        me.disableItems(true);
     },
 
     initRenderTpl: function() {
@@ -565,20 +536,22 @@ Ext.define('Ext.form.field.HtmlEditor', {
     },
 
     getSubTplData: function() {
+        var cssPrefix = Ext.baseCSSPrefix;
         return {
-            $comp       : this,
-            cmpId       : this.id,
-            id          : this.getInputId(),
-            textareaCls : Ext.baseCSSPrefix + 'hidden',
-            value       : this.value,
-            iframeName  : Ext.id(),
-            iframeSrc   : Ext.SSL_SECURE_URL,
-            size        : 'height:100px;'
+            toolbarWrapCls: cssPrefix + 'html-editor-tb',
+            textareaCls: cssPrefix + 'hidden',
+            iframeName: Ext.id(),
+            iframeSrc: Ext.SSL_SECURE_URL,
+            size: 'height:100px;'
         };
     },
 
     getSubTplMarkup: function() {
         return this.getTpl('fieldSubTpl').apply(this.getSubTplData());
+    },
+
+    getBodyNaturalWidth: function() {
+        return 565;
     },
 
     initFrameDoc: function() {
@@ -618,9 +591,8 @@ Ext.define('Ext.form.field.HtmlEditor', {
         }
     },
 
-    /**
-     * @private
-     * Sets current design mode. To enable, mode can be true or 'on', off otherwise
+    /* private
+     * set current design mode. To enable, mode can be true or 'on', off otherwise
      */
     setDesignMode: function(mode) {
         var me = this,
@@ -673,7 +645,6 @@ Ext.define('Ext.form.field.HtmlEditor', {
             textarea.removeCls(hiddenCls);
             textarea.dom.removeAttribute('tabIndex');
             textarea.focus();
-            me.inputEl = textarea;
         }
         else {
             if (me.initialized) {
@@ -684,7 +655,6 @@ Ext.define('Ext.form.field.HtmlEditor', {
             textarea.addCls(hiddenCls);
             textarea.dom.setAttribute('tabIndex', -1);
             me.deferFocus();
-            me.inputEl = iframe;
         }
         me.fireEvent('editmodechange', me, sourceEditMode);
         me.doComponentLayout();
@@ -716,10 +686,10 @@ Ext.define('Ext.form.field.HtmlEditor', {
     },
 
     /**
-     * If you need/want custom HTML cleanup, this is the method you should override.
+     * Protected method that will not generally be called directly. If you need/want
+     * custom HTML cleanup, this is the method you should override.
      * @param {String} html The HTML to be cleaned
      * @return {String} The cleaned HTML
-     * @protected
      */
     cleanHtml: function(html) {
         html = String(html);
@@ -730,18 +700,17 @@ Ext.define('Ext.form.field.HtmlEditor', {
         /*
          * Neat little hack. Strips out all the non-digit characters from the default
          * value and compares it to the character code of the first character in the string
-         * because it can cause encoding issues when posted to the server. We need the
-         * parseInt here because charCodeAt will return a number.
+         * because it can cause encoding issues when posted to the server.
          */
-        if (html.charCodeAt(0) === parseInt(this.defaultValue.replace(/\D/g, ''), 10)) {
+        if (html.charCodeAt(0) === this.defaultValue.replace(/\D/g, '')) {
             html = html.substring(1);
         }
         return html;
     },
 
     /**
-     * Syncs the contents of the editor iframe with the textarea.
-     * @protected
+     * @protected method that will not generally be called directly. Syncs the contents
+     * of the editor iframe with the textarea.
      */
     syncValue : function(){
         var me = this,
@@ -777,8 +746,8 @@ Ext.define('Ext.form.field.HtmlEditor', {
     },
 
     /**
-     * Pushes the value of the textarea into the iframe editor.
-     * @protected
+     * @protected method that will not generally be called directly. Pushes the value of the textarea
+     * into the iframe editor.
      */
     pushValue: function() {
         var me = this,
@@ -824,7 +793,7 @@ Ext.define('Ext.form.field.HtmlEditor', {
             ss['background-attachment'] = 'fixed'; // w3c
             dbody.bgProperties = 'fixed'; // ie
 
-            Ext.DomHelper.applyStyles(dbody, ss);
+            Ext.core.DomHelper.applyStyles(dbody, ss);
 
             doc = me.getDoc();
 
@@ -907,7 +876,7 @@ Ext.define('Ext.form.field.HtmlEditor', {
             } catch(e) {
                 // ignore (why?)
             }
-            Ext.destroyMembers(me, 'toolbar', 'iframeEl', 'textareaEl');
+            Ext.destroyMembers('tb', 'toolbarWrap', 'iframeEl', 'textareaEl');
         }
         me.callParent();
     },
@@ -999,8 +968,8 @@ Ext.define('Ext.form.field.HtmlEditor', {
     },
 
     /**
-     * Triggers a toolbar update by reading the markup state of the current selection in the editor.
-     * @protected
+     * Protected method that will not generally be called directly. It triggers
+     * a toolbar update by reading the markup state of the current selection in the editor.
      */
     updateToolbar: function() {
         var me = this,
@@ -1027,10 +996,9 @@ Ext.define('Ext.form.field.HtmlEditor', {
         }
 
         function updateButtons() {
-            for (var i = 0, l = arguments.length, name; i < l; i++) {
-                name = arguments[i];
+            Ext.Array.forEach(Ext.Array.toArray(arguments), function(name) {
                 btns[name].toggle(doc.queryCommandState(name));
-            };
+            });
         }
         if(me.enableFormat){
             updateButtons('bold', 'italic', 'underline');
@@ -1053,10 +1021,10 @@ Ext.define('Ext.form.field.HtmlEditor', {
     },
 
     /**
-     * Executes a Midas editor command on the editor document and performs necessary focus and toolbar updates.
-     * **This should only be called after the editor is initialized.**
+     * Executes a Midas editor command on the editor document and performs necessary focus and
+     * toolbar updates. <b>This should only be called after the editor is initialized.</b>
      * @param {String} cmd The Midas command
-     * @param {String/Boolean} [value=null] The value to pass to the command
+     * @param {String/Boolean} value (optional) The value to pass to the command (defaults to null)
      */
     relayCmd: function(cmd, value) {
         Ext.defer(function() {
@@ -1068,8 +1036,9 @@ Ext.define('Ext.form.field.HtmlEditor', {
     },
 
     /**
-     * Executes a Midas editor command directly on the editor document. For visual commands, you should use
-     * {@link #relayCmd} instead. **This should only be called after the editor is initialized.**
+     * Executes a Midas editor command directly on the editor document.
+     * For visual commands, you should use {@link #relayCmd} instead.
+     * <b>This should only be called after the editor is initialized.</b>
      * @param {String} cmd The Midas command
      * @param {String/Boolean} value (optional) The value to pass to the command (defaults to null)
      */
@@ -1110,8 +1079,8 @@ Ext.define('Ext.form.field.HtmlEditor', {
     },
 
     /**
-     * Inserts the passed text at the current cursor position.
-     * Note: the editor must be initialized and activated to insert text.
+     * Inserts the passed text at the current cursor position. Note: the editor must be initialized and activated
+     * to insert text.
      * @param {String} text
      */
     insertAtCursor : function(text){
@@ -1199,7 +1168,7 @@ Ext.define('Ext.form.field.HtmlEditor', {
     }(),
 
     /**
-     * Returns the editor's toolbar. **This is only available after the editor has been rendered.**
+     * Returns the editor's toolbar. <b>This is only available after the editor has been rendered.</b>
      * @return {Ext.toolbar.Toolbar}
      */
     getToolbar : function(){
@@ -1207,22 +1176,24 @@ Ext.define('Ext.form.field.HtmlEditor', {
     },
 
     /**
-     * @property {Object} buttonTips
-     * Object collection of toolbar tooltips for the buttons in the editor. The key is the command id associated with
-     * that button and the value is a valid QuickTips object. For example:
-     *
-     *     {
-     *         bold : {
-     *             title: 'Bold (Ctrl+B)',
-     *             text: 'Make the selected text bold.',
-     *             cls: 'x-html-editor-tip'
-     *         },
-     *         italic : {
-     *             title: 'Italic (Ctrl+I)',
-     *             text: 'Make the selected text italic.',
-     *             cls: 'x-html-editor-tip'
-     *         },
-     *         ...
+     * Object collection of toolbar tooltips for the buttons in the editor. The key
+     * is the command id associated with that button and the value is a valid QuickTips object.
+     * For example:
+<pre><code>
+{
+    bold : {
+        title: 'Bold (Ctrl+B)',
+        text: 'Make the selected text bold.',
+        cls: 'x-html-editor-tip'
+    },
+    italic : {
+        title: 'Italic (Ctrl+I)',
+        text: 'Make the selected text italic.',
+        cls: 'x-html-editor-tip'
+    },
+    ...
+</code></pre>
+    * @type Object
      */
     buttonTips : {
         bold : {
@@ -1300,66 +1271,56 @@ Ext.define('Ext.form.field.HtmlEditor', {
     // hide stuff that is not compatible
     /**
      * @event blur
-     * Not applicable for HtmlEditor.
+     * @hide
      */
     /**
      * @event change
-     * Not applicable for HtmlEditor.
+     * @hide
      */
     /**
      * @event focus
-     * Not applicable for HtmlEditor.
+     * @hide
      */
     /**
      * @event specialkey
-     * Not applicable for HtmlEditor.
+     * @hide
      */
     /**
-     * @cfg {String} fieldCls
-     * Not applicable for HtmlEditor.
+     * @cfg {String} fieldCls @hide
      */
     /**
-     * @cfg {String} focusCls
-     * Not applicable for HtmlEditor.
+     * @cfg {String} focusCls @hide
      */
     /**
-     * @cfg {String} autoCreate
-     * Not applicable for HtmlEditor.
+     * @cfg {String} autoCreate @hide
      */
     /**
-     * @cfg {String} inputType
-     * Not applicable for HtmlEditor.
+     * @cfg {String} inputType @hide
      */
     /**
-     * @cfg {String} invalidCls
-     * Not applicable for HtmlEditor.
+     * @cfg {String} invalidCls @hide
      */
     /**
-     * @cfg {String} invalidText
-     * Not applicable for HtmlEditor.
+     * @cfg {String} invalidText @hide
      */
     /**
-     * @cfg {String} msgFx
-     * Not applicable for HtmlEditor.
+     * @cfg {String} msgFx @hide
      */
     /**
-     * @cfg {Boolean} allowDomMove
-     * Not applicable for HtmlEditor.
+     * @cfg {Boolean} allowDomMove  @hide
      */
     /**
-     * @cfg {String} applyTo
-     * Not applicable for HtmlEditor.
+     * @cfg {String} applyTo @hide
      */
     /**
-     * @cfg {String} readOnly
-     * Not applicable for HtmlEditor.
+     * @cfg {String} readOnly  @hide
      */
     /**
-     * @cfg {String} tabIndex
-     * Not applicable for HtmlEditor.
+     * @cfg {String} tabIndex  @hide
      */
     /**
      * @method validate
-     * Not applicable for HtmlEditor.
+     * @hide
      */
 });
+

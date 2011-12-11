@@ -1,0 +1,37 @@
+$base-color: white;
+
+$button-small-border-radius: 4px;
+$button-small-border-width: 1px;
+$button-small-text-padding: 10px;
+
+$panel-header-color: #598AEB;
+$panel-header-border-width: 2px;
+$panel-header-inner-border: false;
+$panel-header-inner-border-width: 0px 0 0;
+//$panel-header-background-gradient: 'bevel';
+$panel-header-background-color: white;
+
+$button-toolbar-color: #598AEB;
+$button-toolbar-background-color-pressed: white;
+
+//window
+$window-border-radius: 10px;
+$window-header-color: #598AEB;
+//padding
+$panel-header-padding: 7px;
+
+$button-default-color: white;
+$button-default-base-color: #739EF5 !default; 
+$button-default-base-color-over: adjust-color($button-default-base-color, $hue: -2.667deg, $lightness: 10.588%) !default; //E4F3FF
+$button-default-base-color-focus: $button-default-base-color-over !default;
+$button-default-base-color-pressed: adjust-color($button-default-base-color, $hue: -0.725deg, $saturation: -9.556%, $lightness: -3.725%) !default; //B6CBE4
+$button-default-base-color-disabled: adjust-color($button-default-base-color, $hue: 0deg, $saturation: -35.556%, $lightness: 12.745%) !default; //F7F7F7
+$button-background-start: #497CE3;
+$button-background-stop: #739EF5;
+$button-default-background-gradient: color_stops($button-background-start, $button-background-stop) !default;
+$button-default-background-gradient-over: color_stops($button-default-base-color-over, $button-background-stop) !default;
+$button-default-background-gradient-pressed: color_stops($button-default-base-color-pressed, $button-background-stop) !default;
+$button-default-background-gradient-disabled: color_stops($button-default-base-color-disabled, $button-background-stop) !default;
+
+$grid-row-cell-selected-background-color: adjust-color(#598AEB, $hue: 0deg, $saturation: 0%, $lightness: 25.992%);
+$grid-row-cell-over-background-color: adjust-color(#598AEB, $hue: 0deg, $saturation: 0%, $lightness: 12.792%);

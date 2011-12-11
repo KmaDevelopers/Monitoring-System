@@ -1,5 +1,20 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
  * @class Ext.grid.feature.AbstractSummary
+ * @extends Ext.grid.feature.Feature
  * A small abstract class that contains the shared behaviour for any summary
  * calculations to be used in the grid.
  */
@@ -23,7 +38,7 @@ Ext.define('Ext.grid.feature.AbstractSummary', {
     
     /**
      * Toggle whether or not to show the summary row.
-     * @param {Boolean} visible True to show the summary row
+     * @param {Boolan} visible True to show the summary row
      */
     toggleSummaryRow: function(visible){
         this.showSummaryRow = !!visible;
@@ -51,15 +66,14 @@ Ext.define('Ext.grid.feature.AbstractSummary', {
      * @return {String} The value of the summary row
      */
     printSummaryRow: function(index){
-        var inner = this.view.getTableChunker().metaRowTpl.join(''),
-            prefix = Ext.baseCSSPrefix;
+        var inner = this.view.getTableChunker().metaRowTpl.join('');
         
-        inner = inner.replace(prefix + 'grid-row', prefix + 'grid-row-summary');
+        inner = inner.replace('x-grid-row', 'x-grid-row-summary');
         inner = inner.replace('{{id}}', '{gridSummaryValue}');
         inner = inner.replace(this.nestedIdRe, '{id$1}');  
         inner = inner.replace('{[this.embedRowCls()]}', '{rowCls}');
         inner = inner.replace('{[this.embedRowAttr()]}', '{rowAttr}');
-        inner = new Ext.XTemplate(inner, {
+        inner = Ext.create('Ext.XTemplate', inner, {
             firstOrLastCls: Ext.view.TableChunker.firstOrLastCls
         });
         
@@ -98,7 +112,7 @@ Ext.define('Ext.grid.feature.AbstractSummary', {
      * be passed to the stores aggregate function.
      * @param {String} field The field to aggregate on
      * @param {Boolean} group True to aggregate in grouped mode 
-     * @return {Number/String/Object} See the return type for the store functions.
+     * @return {Mixed} See the return type for the store functions.
      */
     getSummary: function(store, type, field, group){
         if (type) {
@@ -125,3 +139,4 @@ Ext.define('Ext.grid.feature.AbstractSummary', {
     }
     
 });
+

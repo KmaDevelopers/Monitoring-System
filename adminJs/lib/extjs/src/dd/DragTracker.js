@@ -1,3 +1,17 @@
+/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
 /**
  * @class Ext.dd.DragTracker
  * A DragTracker listens for drag events on an Element and fires events at the start and end of the drag,
@@ -16,14 +30,16 @@ Ext.define('Ext.dd.DragTracker', {
     },
 
     /**
-     * @property {Boolean} active
+     * @property active
+     * @type Boolean
      * Read-only property indicated whether the user is currently dragging this
      * tracker.
      */
     active: false,
 
     /**
-     * @property {HTMLElement} dragTarget
+     * @property dragTarget
+     * @type HtmlElement
      * <p><b>Only valid during drag operations. Read-only.</b></p>
      * <p>The element being dragged.</p>
      * <p>If the {@link #delegate} option is used, this will be the delegate element which was mousedowned.</p>
@@ -45,7 +61,7 @@ Ext.define('Ext.dd.DragTracker', {
      */
 
     /**
-     * @cfg {Ext.util.Region/Ext.Element} constrainTo
+     * @cfg {Ext.util.Region/Element} constrainTo
      * <p>A {@link Ext.util.Region Region} (Or an element from which a Region measurement will be read) which is used to constrain
      * the result of the {@link #getOffset} call.</p>
      * <p>This may be set any time during the DragTracker's lifecycle to set a dynamic constraining region.</p>
@@ -91,7 +107,7 @@ Ext.define('Ext.dd.DragTracker', {
              * used, when the mouse enters a delegate element).</p>
              * @param {Object} this
              * @param {Object} e event object
-             * @param {HTMLElement} target The element mouseovered.
+             * @param {HtmlElement} target The element mouseovered.
              */
             'mouseover',
 
@@ -157,7 +173,7 @@ Ext.define('Ext.dd.DragTracker', {
             'drag'
         );
 
-        this.dragRegion = new Ext.util.Region(0,0,0,0);
+        this.dragRegion = Ext.create('Ext.util.Region', 0,0,0,0);
 
         if (this.el) {
             this.initEl(this.el);
@@ -173,7 +189,7 @@ Ext.define('Ext.dd.DragTracker', {
 
     /**
      * Initializes the DragTracker on a given element.
-     * @param {Ext.Element/HTMLElement} el The element
+     * @param {Ext.core.Element/HTMLElement} el The element
      */
     initEl: function(el) {
         this.el = Ext.get(el);
@@ -310,7 +326,7 @@ Ext.define('Ext.dd.DragTracker', {
             }
         }
 
-        // Returning false from a mousemove listener deactivates
+        // Returning false from a mousemove listener deactivates 
         if (this.fireEvent('mousemove', this, e) === false) {
             this.onMouseUp(e);
         } else {
@@ -381,7 +397,6 @@ Ext.define('Ext.dd.DragTracker', {
      * Template method which should be overridden by each DragTracker instance. Called when the user first clicks and
      * holds the mouse button down. Return false to disallow the drag
      * @param {Ext.EventObject} e The event object
-     * @template
      */
     onBeforeStart : function(e) {
 
@@ -391,7 +406,6 @@ Ext.define('Ext.dd.DragTracker', {
      * Template method which should be overridden by each DragTracker instance. Called when a drag operation starts
      * (e.g. the user has moved the tracked element beyond the specified tolerance)
      * @param {Ext.EventObject} e The event object
-     * @template
      */
     onStart : function(xy) {
 
@@ -400,7 +414,6 @@ Ext.define('Ext.dd.DragTracker', {
     /**
      * Template method which should be overridden by each DragTracker instance. Called whenever a drag has been detected.
      * @param {Ext.EventObject} e The event object
-     * @template
      */
     onDrag : function(e) {
 
@@ -410,7 +423,6 @@ Ext.define('Ext.dd.DragTracker', {
      * Template method which should be overridden by each DragTracker instance. Called when a drag operation has been completed
      * (e.g. the user clicked and held the mouse down, dragged the element and then released the mouse button)
      * @param {Ext.EventObject} e The event object
-     * @template
      */
     onEnd : function(e) {
 
@@ -420,7 +432,7 @@ Ext.define('Ext.dd.DragTracker', {
      * </p>Returns the drag target. This is usually the DragTracker's encapsulating element.</p>
      * <p>If the {@link #delegate} option is being used, this may be a child element which matches the
      * {@link #delegate} selector.</p>
-     * @return {Ext.Element} The element currently being tracked.
+     * @return {Ext.core.Element} The element currently being tracked.
      */
     getDragTarget : function(){
         return this.dragTarget;
@@ -428,7 +440,7 @@ Ext.define('Ext.dd.DragTracker', {
 
     /**
      * @private
-     * @returns {Ext.Element} The DragTracker's encapsulating element.
+     * @returns {Element} The DragTracker's encapsulating element.
      */
     getDragCt : function(){
         return this.el;
@@ -461,21 +473,19 @@ Ext.define('Ext.dd.DragTracker', {
     },
 
     /**
-     * Returns the X, Y offset of the current mouse position from the mousedown point.
-     *
-     * This method may optionally constrain the real offset values, and returns a point coerced in one
-     * of two modes:
-     *
-     *  - `point`
-     *    The current mouse position is coerced into the constrainRegion and the resulting position is returned.
-     *  - `dragTarget`
-     *    The new {@link Ext.util.Region Region} of the {@link #getDragTarget dragTarget} is calculated
-     *    based upon the current mouse position, and then coerced into the constrainRegion. The returned
-     *    mouse position is then adjusted by the same delta as was used to coerce the region.\
-     *
-     * @param constrainMode {String} (Optional) If omitted the true mouse position is returned. May be passed
-     * as `point` or `dragTarget`. See above.
-     * @returns {Number[]} The `X, Y` offset from the mousedown point, optionally constrained.
+     * <p>Returns the X, Y offset of the current mouse position from the mousedown point.</p>
+     * <p>This method may optionally constrain the real offset values, and returns a point coerced in one
+     * of two modes:</p><ul>
+     * <li><code>point</code><div class="sub-desc">The current mouse position is coerced into the
+     * {@link #constrainRegion}, and the resulting position is returned.</div></li>
+     * <li><code>dragTarget</code><div class="sub-desc">The new {@link Ext.util.Region Region} of the
+     * {@link #getDragTarget dragTarget} is calculated based upon the current mouse position, and then
+     * coerced into the {@link #constrainRegion}. The returned mouse position is then adjusted by the
+     * same delta as was used to coerce the region.</div></li>
+     * </ul>
+     * @param constrainMode {String} Optional. If omitted the true mouse position is returned. May be passed
+     * as <code>'point'</code> or <code>'dragTarget'. See above.</code>.
+     * @returns {Array} The <code>X, Y</code> offset from the mousedown point, optionally constrained.
      */
     getOffset : function(constrain){
         var xy = this.getXY(constrain),

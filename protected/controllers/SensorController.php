@@ -15,10 +15,7 @@ class SensorController extends KmaController
 						   'index',
 						   'create',
 						   'delete',
-<<<<<<< HEAD
-=======
 						   'update',
->>>>>>> b9db33af46f6a0caf34c55bf7752e9fef29533e7
 						   ),
 				'users' => array('*'),
 			),
@@ -29,24 +26,11 @@ class SensorController extends KmaController
 	}
 	
 	public function actionCreate() {
-<<<<<<< HEAD
-		
-		
-		
-		$json = file_get_contents('php://input');
-
-		
-		$serv = new Sensor();
-		$serv->attributes = CJSON::decode($json);
-		
-		$serv->attributes = isset($_POST['Sensor']) ? $_POST['Sensor'] : array();
-=======
 		
 		$sens = new Sensor();
 		$sens->attributes = $_POST['Sensor'];
 		
 		$sens->attributes = isset($_POST['Sensor']) ? $_POST['Sensor'] : array();
->>>>>>> b9db33af46f6a0caf34c55bf7752e9fef29533e7
 		
 		if($sens->validate()){
 			if($sens->save()){
