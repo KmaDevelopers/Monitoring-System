@@ -154,3 +154,14 @@ Stack trace:
 #1 /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
 #2 /home/artiom/htdocs/kma_monitoring_system/index.php(13): CApplication->run()
 #3 {main} REQUEST_URI=/ico%3C/div%3E%3C/td%3E%3Ctd%20class=
+2011/12/11 16:28:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "index".' in /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/web/CController.php(262): CController->missingAction('')
+#1 /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/web/CWebApplication.php(309): CController->run('')
+#2 /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('sensor')
+#3 /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /home/artiom/htdocs/kma_monitoring_system/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/sensor?_dc=1323613722220
+2011/12/11 16:29:16 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artiom/htdocs/kma_monitoring_system/protected/components/actions/UpdateAction.php (15)
+in /home/artiom/htdocs/kma_monitoring_system/index.php (13)

@@ -52,10 +52,11 @@
                 'caseSensitive' => false,
              'rules' => array(
                     'graphic/<name>' => 'graphic/index/name/<name>',                  
+                    
                     array('sensor/get', 'pattern'=>'sensor', 'verb'=>'GET'),
                     array('sensor/get', 'pattern'=>'sensor/<id:\d+>', 'verb'=>'GET'),
-                    array('sensor/update', 'pattern'=>'sensor/<id:\d+>', 'verb'=>'PUT'),
-                    array('sensor/delete', 'pattern'=>'sensor/<id:\d+>', 'verb'=>'DELETE'),
+                    array('sensor/update', 'pattern'=>'sensor', 'verb'=>'PUT'),
+                    array('sensor/delete', 'pattern'=>'sensor', 'verb'=>'DELETE'),
                     array('sensor/create', 'pattern'=>'sensor', 'verb'=>'POST'),
                     
                     array('server/get', 'pattern'=>'server/<id:\d+>', 'verb'=>'GET'),
