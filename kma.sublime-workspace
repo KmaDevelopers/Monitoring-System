@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"th",
+				"this"
+			],
+			[
 				"ex",
 				"execute  (function)"
 			],
@@ -456,82 +460,10 @@
 	"buffers":
 	[
 		{
-			"file": "protected/controllers/ServerController.php",
-			"settings":
-			{
-				"buffer_size": 2275,
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "protected/components/actions/DeleteAction.php",
 			"settings":
 			{
-				"buffer_size": 620,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "protected/components/actions/GetAction.php",
-			"settings":
-			{
-				"buffer_size": 738,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "protected/controllers/SensorController.php",
-			"settings":
-			{
-				"buffer_size": 1091,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "protected/models/Server.php",
-			"settings":
-			{
-				"buffer_size": 2628,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "protected/models/Sensor.php",
-			"settings":
-			{
-				"buffer_size": 3542,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "protected/migrations/m110926_122500_AddStatistics.php",
-			"settings":
-			{
-				"buffer_size": 402,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "protected/migrations/m111129_181922_someData.php",
-			"settings":
-			{
-				"buffer_size": 1793,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "protected/migrations/m111209_124601_DayStat.php",
-			"settings":
-			{
-				"buffer_size": 396,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "protected/commands/DayStat.html",
-			"settings":
-			{
-				"buffer_size": 1823,
+				"buffer_size": 723,
 				"line_ending": "Unix"
 			}
 		},
@@ -547,7 +479,15 @@
 			"file": "protected/config/main.php",
 			"settings":
 			{
-				"buffer_size": 5112,
+				"buffer_size": 4630,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "protected/components/actions/UpdateAction.php",
+			"settings":
+			{
+				"buffer_size": 726,
 				"line_ending": "Unix"
 			}
 		}
@@ -580,22 +520,31 @@
 	},
 	"file_history":
 	[
+		"/home/artiom/htdocs/kma_monitoring_system/protected/components/KmaActiveRecord.php",
+		"/home/artiom/htdocs/kma_monitoring_system/adminJs/app/controller/SensorController.js",
+		"/home/artiom/htdocs/kma_monitoring_system/protected/commands/DayStat.html",
+		"/home/artiom/htdocs/kma_monitoring_system/protected/migrations/m111209_124601_DayStat.php",
+		"/home/artiom/htdocs/kma_monitoring_system/protected/controllers/ServerController.php",
+		"/home/artiom/htdocs/kma_monitoring_system/protected/models/Server.php",
+		"/home/artiom/htdocs/kma_monitoring_system/protected/controllers/SensorController.php",
+		"/home/artiom/htdocs/kma_monitoring_system/protected/components/actions/GetAction.php",
+		"/home/artiom/htdocs/kma_monitoring_system/protected/models/Sensor.php",
+		"/home/artiom/htdocs/kma_monitoring_system/protected/migrations/m110926_122500_AddStatistics.php",
+		"/home/artiom/htdocs/kma_monitoring_system/protected/migrations/m111129_181922_someData.php",
+		"/home/artiom/htdocs/kma_monitoring_system/protected/migrations/m110925_213211_AddSensor.php",
+		"/home/artiom/htdocs/kma_monitoring_system/adminJs/app/constants.js",
+		"/home/artiom/htdocs/kma_monitoring_system/.gitignore",
 		"/home/artiom/htdocs/kma_monitoring_system/protected/migrations/m111204_073257_upActive.php",
 		"/home/artiom/htdocs/kma_monitoring_system/protected/migrations/m111129_181922_someData.php;",
-		"/home/artiom/htdocs/kma_monitoring_system/protected/migrations/m111129_181922_someData.php",
-		"/home/artiom/htdocs/kma_monitoring_system/protected/migrations/m110926_122500_AddStatistics.php",
 		"/home/artiom/htdocs/kma_monitoring_system/protected/migrations/m111129_175556_upSensors.php",
-		"/home/artiom/htdocs/kma_monitoring_system/protected/migrations/m110925_213211_AddSensor.php",
 		"/home/artiom/htdocs/kma_monitoring_system/protected/migrations/m110925_213204_AddServer.php",
 		"/home/artiom/htdocs/kma_monitoring_system/protected/migrations/m110923_134705_user.php",
 		"/home/artiom/htdocs/kma_monitoring_system/protected/migrations/m111129_141922_someData.php",
 		"/home/artiom/htdocs/kma_monitoring_system/protected/migrations/m111129_141922_someData.php;",
 		"/home/artiom/htdocs/kma_monitoring_system/protected/commands/LoadSensorDataCommand.php",
 		"/home/artiom/htdocs/kma_monitoring_system/protected/components/KmaController.php",
-		"/home/artiom/htdocs/kma_monitoring_system/protected/models/Sensor.php",
 		"/home/artiom/htdocs/kma_monitoring_system/protected/controllers/StatisticsController.php",
 		"/home/artiom/htdocs/kma_monitoring_system/protected/controllers/AdminController.php",
-		"/home/artiom/htdocs/kma_monitoring_system/protected/components/actions/GetAction.php",
 		"/home/artiom/htdocs/kma_monitoring_system/protected/components/actions/UpdateAction.php",
 		"/home/artiom/htdocs/kma_monitoring_system/protected/components/actions/DeleteAction.php",
 		"/home/artiom/htdocs/kma_monitoring_system/protected/config/main.php",
@@ -619,10 +568,8 @@
 		"/home/artiom/Загрузки/crm.up.sql",
 		"/home/artiom/htdocs/kma_monitoring_system/protected/components/DeleteAction.php",
 		"/home/artiom/htdocs/kma_monitoring_system/nodeJsSevers/test.serv.js",
-		"/home/artiom/htdocs/kma_monitoring_system/protected/controllers/SensorController.php",
 		"/home/artiom/htdocs/kma_monitoring_system/js/app/controller/MapController.js",
 		"/home/artiom/test.py",
-		"/home/artiom/htdocs/kma_monitoring_system/protected/controllers/ServerController.php",
 		"/home/artiom/test1.py",
 		"/home/artiom/htdocs/yii-1.1.7.r3135/framework/yiilite.php",
 		"/home/artiom/.config/sublime-text-2/Packages/User/Base File.sublime-settings",
@@ -711,150 +658,15 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 3,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "protected/controllers/ServerController.php",
-					"settings":
-					{
-						"buffer_size": 2275,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								763,
-								763
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 576.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
 					"file": "protected/components/actions/DeleteAction.php",
 					"settings":
 					{
-						"buffer_size": 620,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								190,
-								168
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "protected/components/actions/GetAction.php",
-					"settings":
-					{
-						"buffer_size": 738,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								197,
-								197
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "protected/controllers/SensorController.php",
-					"settings":
-					{
-						"buffer_size": 1091,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								5,
-								5
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "protected/models/Server.php",
-					"settings":
-					{
-						"buffer_size": 2628,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								446,
-								446
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "protected/models/Sensor.php",
-					"settings":
-					{
-						"buffer_size": 3542,
+						"buffer_size": 723,
 						"regions":
 						{
 						},
@@ -871,121 +683,13 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 32.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "protected/migrations/m110926_122500_AddStatistics.php",
-					"settings":
-					{
-						"buffer_size": 402,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								329,
-								92
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 7,
-					"file": "protected/migrations/m111129_181922_someData.php",
-					"settings":
-					{
-						"buffer_size": 1793,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1790,
-								1790
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 256.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "protected/migrations/m111209_124601_DayStat.php",
-					"settings":
-					{
-						"buffer_size": 396,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								389,
-								389
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 9,
-					"file": "protected/commands/DayStat.html",
-					"settings":
-					{
-						"buffer_size": 1823,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1199,
-								1199
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 696.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 10,
+					"buffer": 1,
 					"file": "protected/components/KmaController.php",
 					"settings":
 					{
@@ -996,8 +700,8 @@
 						"selection":
 						[
 							[
-								1494,
-								1494
+								572,
+								572
 							]
 						],
 						"settings":
@@ -1007,25 +711,25 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 256.0,
+						"translation.y": 48.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 11,
+					"buffer": 2,
 					"file": "protected/config/main.php",
 					"settings":
 					{
-						"buffer_size": 5112,
+						"buffer_size": 4630,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1633,
-								1633
+								2320,
+								2320
 							]
 						],
 						"settings":
@@ -1035,7 +739,34 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 640.0,
+						"translation.y": 576.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "protected/components/actions/UpdateAction.php",
+					"settings":
+					{
+						"buffer_size": 726,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								211,
+								211
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1085,6 +816,38 @@
 		"selected_items":
 		[
 			[
+				"updateac",
+				"kma_monitoring_system/protected/components/actions/UpdateAction.php"
+			],
+			[
+				"sensorcon",
+				"kma_monitoring_system/adminJs/app/controller/SensorController.js"
+			],
+			[
+				"addsenso",
+				"kma_monitoring_system/protected/migrations/m110925_213211_AddSensor.php"
+			],
+			[
+				"cons",
+				"kma_monitoring_system/adminJs/app/constants.js"
+			],
+			[
+				"server",
+				"kma_monitoring_system/protected/controllers/ServerController.php"
+			],
+			[
+				"main",
+				"kma_monitoring_system/protected/config/main.php"
+			],
+			[
+				"kmaact",
+				"kma_monitoring_system/protected/components/KmaActiveRecord.php"
+			],
+			[
+				"sensor",
+				"kma_monitoring_system/protected/models/Sensor.php"
+			],
+			[
 				"ser",
 				"kma_monitoring_system/protected/controllers/ServerController.php"
 			],
@@ -1103,10 +866,6 @@
 			[
 				"senso",
 				"kma_monitoring_system/protected/models/Sensor.php"
-			],
-			[
-				"server",
-				"kma_monitoring_system/protected/models/Server.php"
 			],
 			[
 				"get",
@@ -1159,10 +918,6 @@
 			[
 				"clist",
 				"yii-1.1.7.r3135/framework/collections/CList.php"
-			],
-			[
-				"main",
-				"kma_monitoring_system/protected/config/main.php"
 			],
 			[
 				"getac",
