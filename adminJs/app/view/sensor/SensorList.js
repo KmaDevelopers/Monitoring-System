@@ -14,9 +14,11 @@ Ext.define("MsAdmin.view.sensor.SensorList", {
             columns: [{
                 tdCls: 'list-td',
                 flex: .7,
+                editable: false,
                 header: "Location",
                 dataIndex: "name"
-            }, this.getEditActionColumn()]
+            }, this.getActiveActionColumn()
+            , this.getEditActionColumn()]
 		})]);
 
         //this.store.on('load', this.onStoreLoad, this);

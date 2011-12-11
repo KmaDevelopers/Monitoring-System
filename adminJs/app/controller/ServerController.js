@@ -42,7 +42,8 @@ Ext.define("MsAdmin.controller.ServerController", {
 		this.control({
 			'ServerList': {
 				itemclick: this.onListItemClick,
-				editiconclick: this.onEditIconClick
+				editiconclick: this.onEditIconClick,
+				activeiconclick: this.onActiveIconClick
 			}, 
 			'ServerListPanel [ref="addBtn"]': {
 				click: this.onAddServerClick
@@ -55,7 +56,7 @@ Ext.define("MsAdmin.controller.ServerController", {
 				click: this.onUpdateServerInfoClick
 			},
 			'ServerViewWindow[ref="edit"] [ref="closeBtn"]': {
-				click: function(){
+				click: function() {
 					this.getServerEditWindow().close()
 				}
 			},
@@ -109,6 +110,9 @@ Ext.define("MsAdmin.controller.ServerController", {
 		this.editWindow.center();
 		this.editWindow.show();
 	},
+	onActiveIconClick: function(model, rIdx, cIdx) {
+		Ext.Msg.alert('works');
+	},
 	onUpdateServerInfoClick: function() {	
 		var form, model, errors;
 
@@ -132,7 +136,7 @@ Ext.define("MsAdmin.controller.ServerController", {
 	onServerSaveSuccess: function(model) {
 		//this.getServerEditForm().getForm().loadRecord(model);
 		this.getServerEditWindow().close();
-
+		
 		MsAdmin.Event.fire("notice", {
 			msg: "Server information was successfully updated"
 		});
@@ -157,8 +161,8 @@ Ext.define("MsAdmin.controller.ServerController", {
 		var item = this.getServerList().getSelectionModel().getSelection()[0];
 		Ext.Msg.confirm("Delete A Server", 
 						"Are you really want to delete server " + item.get('name'), 
-						function() {
-							this.onDeleteServerConfirm(item);
+						function(result) {
+							(result == 'yes') && this.onDeleteServerConfirm(item);
 						},this);
 	},
 	onDeleteServerConfirm: function(model) {

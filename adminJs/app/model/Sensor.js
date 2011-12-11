@@ -8,7 +8,11 @@ Ext.define("MsAdmin.model.Sensor", {
         'location', 
         'name',
         'x',
-        'y'
+        'y', {
+            name: 'active',
+            defaultValue: true,
+            type: "bool"
+        }
     ],
     proxy: {
     	type: 'ajax',

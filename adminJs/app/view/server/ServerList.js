@@ -9,7 +9,8 @@ Ext.define("MsAdmin.view.server.ServerList", {
                 tdCls: 'list-td',
                 header: "Name",
                 dataIndex: "name"
-            }, this.getEditActionColumn()]
+            }, this.getActiveActionColumn()
+            ,this.getEditActionColumn()]
 		})]);
 
         this.addEvents({

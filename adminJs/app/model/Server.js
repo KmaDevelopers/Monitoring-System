@@ -10,6 +10,10 @@ Ext.define("MsAdmin.model.Server", {
        name: 'path' 
     }, {
         name: 'ip'
+    }, {
+        name: 'active',
+        defaultValue: true,
+        type: "bool"
     }],
 	proxy: {
         type: "ajax",

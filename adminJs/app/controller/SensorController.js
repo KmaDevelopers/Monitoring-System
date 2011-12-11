@@ -25,6 +25,7 @@ Ext.define("MsAdmin.controller.SensorController", {
 		this.control({
 			'SensorList': {
 				itemclick: this.onListItemClick,
+				activeiconclick: this.onActiveIconClick,
 				editiconclick: this.onEditIconClick
 			},
 			'SensorListPanel [ref="addButton"]': {
@@ -139,4 +140,8 @@ Ext.define("MsAdmin.controller.SensorController", {
 		this.editWindow.center();
 		this.editWindow.show();
 	},
+
+	onActiveIconClick: function(model, rIdx, cIdx) {
+		Ext.Msg.alert('works');
+	}
 });
