@@ -479,7 +479,7 @@
 			"file": "protected/config/main.php",
 			"settings":
 			{
-				"buffer_size": 4630,
+				"buffer_size": 4633,
 				"line_ending": "Unix"
 			}
 		},
@@ -658,7 +658,7 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -721,15 +721,15 @@
 					"file": "protected/config/main.php",
 					"settings":
 					{
-						"buffer_size": 4630,
+						"buffer_size": 4633,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2320,
-								2320
+								2097,
+								2097
 							]
 						],
 						"settings":
