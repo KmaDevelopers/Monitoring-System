@@ -17,6 +17,7 @@ class UpdateAction extends CAction {
 				if ($model->save()) {
 					$this->getController()->result(array($model->getItemArray()), 1);
 				} else {
+					print_r ($model->getErrors());
 					$this->getController()->error("{$name} item can't be updated!");
 				}
 			} else {
