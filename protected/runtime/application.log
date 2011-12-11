@@ -1,0 +1,66 @@
+2011/12/11 15:35:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "ico</div></td><td class=".' in /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('ico</div></td><...')
+#1 /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /home/artiom/htdocs/kma_monitoring_system/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/ico%3C/div%3E%3C/td%3E%3Ctd%20class=
+2011/12/11 15:36:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "ico</div></td><td class=".' in /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('ico</div></td><...')
+#1 /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /home/artiom/htdocs/kma_monitoring_system/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/ico%3C/div%3E%3C/td%3E%3Ctd%20class=
+2011/12/11 15:38:23 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "ico</div></td><td class=".' in /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('ico</div></td><...')
+#1 /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /home/artiom/htdocs/kma_monitoring_system/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/ico%3C/div%3E%3C/td%3E%3Ctd%20class=
+2011/12/11 15:38:26 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "ico</div></td><td class=".' in /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('ico</div></td><...')
+#1 /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /home/artiom/htdocs/kma_monitoring_system/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/ico%3C/div%3E%3C/td%3E%3Ctd%20class=
+2011/12/11 15:38:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "ico</div></td><td class=".' in /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('ico</div></td><...')
+#1 /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /home/artiom/htdocs/kma_monitoring_system/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/ico%3C/div%3E%3C/td%3E%3Ctd%20class=
+2011/12/11 15:39:26 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "ico</div></td><td class=".' in /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('ico</div></td><...')
+#1 /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /home/artiom/htdocs/kma_monitoring_system/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/ico%3C/div%3E%3C/td%3E%3Ctd%20class=
+2011/12/11 15:39:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "ico</div></td><td class=".' in /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('ico</div></td><...')
+#1 /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /home/artiom/htdocs/kma_monitoring_system/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/ico%3C/div%3E%3C/td%3E%3Ctd%20class=
+2011/12/11 15:39:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "ico</div></td><td class=".' in /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('ico</div></td><...')
+#1 /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /home/artiom/htdocs/kma_monitoring_system/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/ico%3C/div%3E%3C/td%3E%3Ctd%20class=
+2011/12/11 15:42:20 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "ico</div></td><td class=".' in /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('ico</div></td><...')
+#1 /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /home/artiom/htdocs/kma_monitoring_system/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/ico%3C/div%3E%3C/td%3E%3Ctd%20class=
+2011/12/11 15:42:31 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "ico</div></td><td class=".' in /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('ico</div></td><...')
+#1 /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /home/artiom/htdocs/kma_monitoring_system/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/ico%3C/div%3E%3C/td%3E%3Ctd%20class=
+2011/12/11 15:42:36 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "ico</div></td><td class=".' in /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('ico</div></td><...')
+#1 /home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /home/artiom/htdocs/kma_monitoring_system/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/ico%3C/div%3E%3C/td%3E%3Ctd%20class=
