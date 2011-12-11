@@ -89,7 +89,7 @@ Ext.define("MsAdmin.controller.SensorController", {
 	},
 
 	onCellEdited: function(plugin, e) {
-		e.record.save(this.getSensorUpdateConfig());
+		e.record.dirty && e.record.save(this.getSensorUpdateConfig());
 	},
 
 	createSensor: function() {
