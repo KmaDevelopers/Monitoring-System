@@ -15,6 +15,7 @@ Ext.define("MsAdmin.view.Viewport", {
     getCmpItems: function() {
         return[{            
             width: 300,
+            title: "Temperature's Monitoring System",
             collapsible: true,
             region: "west",
             xtype: "panel",

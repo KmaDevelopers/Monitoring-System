@@ -1,6 +1,7 @@
 Ext.define("MsAdmin.view.sensor.SensorViewWindow", {
 	extend: "Ext.window.Window",
 	alias: 'widget.SensorViewWindow',
+	border: false,
 	constructor: function(config) {
 		this.callParent([
 			Ext.applyIf(config || {}, {
