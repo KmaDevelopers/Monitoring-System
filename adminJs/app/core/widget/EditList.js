@@ -17,6 +17,13 @@ Ext.define("MsAdmin.core.widget.EditList", {
                 tooltip: 'Edit',
                 handler: this.onIconClick('edit'),
                 scope: this
+            }, {
+                tooltip: 'Edit',
+                handler: this.onIconClick('active'),
+                getClass: function(htmlEl, meta, record) {
+                    return record.get('active') == 0 ? 'inactive-icon' : 'active-icon';
+                },
+                scope: this
             }]
         };
 	},
@@ -35,6 +42,7 @@ Ext.define("MsAdmin.core.widget.EditList", {
             align: 'center',
             dataIndex: 'active',
             editor: {
+                inputValue: 1,
                 xtype: 'checkbox'
             }
         }

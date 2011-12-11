@@ -17,8 +17,7 @@ Ext.define("MsAdmin.view.sensor.SensorList", {
                 editable: false,
                 header: "Location",
                 dataIndex: "name"
-            }, this.getActiveActionColumn()
-            , this.getEditActionColumn()]
+            }, this.getEditActionColumn()]
 		})]);
 
         //this.store.on('load', this.onStoreLoad, this);

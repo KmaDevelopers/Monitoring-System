@@ -32,8 +32,7 @@ Ext.define("MsAdmin.controller.SensorController", {
 			'SensorList': {
 				itemclick: this.onListItemClick,
 				activeiconclick: this.onActiveIconClick,
-				editiconclick: this.onEditIconClick,
-				edit: this.onCellEdited
+				editiconclick: this.onEditIconClick
 			},
 			'SensorListPanel [ref="addButton"]': {
 				click: this.onAddButtonClick
@@ -88,9 +87,9 @@ Ext.define("MsAdmin.controller.SensorController", {
 		}
 	},
 
-	onCellEdited: function(plugin, e) {
-		e.record.dirty && e.record.save(this.getSensorUpdateConfig());
-	},
+	// onCellEdited: function(plugin, e) {
+	// 	e.record.dirty && e.record.save(this.getSensorUpdateConfig());
+	// },
 
 	createSensor: function() {
 		var form = this.createWindow.getForm();
@@ -207,6 +206,10 @@ Ext.define("MsAdmin.controller.SensorController", {
 	},
 
 	onActiveIconClick: function(model, rIdx, cIdx) {
-		Ext.Msg.alert('works');
+		model.set('active', !model.get('active'));
+		
+		if(model.dirty) {
+			model.save(this.getSensorUpdateConfig());
+		}
 	}
 });

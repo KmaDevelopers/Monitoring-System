@@ -21,6 +21,20 @@
 	    background-repeat: no-repeat;
 	    background-size: 160px;
 	}
+
+	.active-icon {
+		width: 20px;
+		background: url('/images/admin/active-icon.png') 0px 0px no-repeat;
+		height: 23px;
+		background-size: 40px;
+	}
+
+	.inactive-icon {
+		width: 20px;
+		background: url('/images/admin/active-icon.png') -20px 0px no-repeat;
+		height: 23px;
+		background-size: 40px;
+	}
     </style>
 </head>
 
