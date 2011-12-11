@@ -9,4 +9,11 @@ class KmaActiveRecord extends CActiveRecord {
          */
         return "You have errors!";
     }
+
+    public function beforeSave() {
+    	if(array_key_exists('active',$this->attributes)) {
+    		$this->active = "".(int) $this->active; 
+    	}
+    	return parent::beforeSave();
+    }
 }
