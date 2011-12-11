@@ -4,10 +4,9 @@ Ext.define("MsAdmin.view.sensor.SensorViewWindow", {
 	constructor: function(config) {
 		this.callParent([
 			Ext.applyIf(config || {}, {
-				constrain: true,
 				closeAction: 'hide',
 				layout: 'fit',
-				constrainHeader: true,
+				autoShow: true,
 				buttons: this.getCmpButtons(),
 				items: this.getItemsConfig()
 			})
