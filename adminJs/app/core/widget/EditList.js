@@ -30,6 +30,7 @@ Ext.define("MsAdmin.core.widget.EditList", {
 
     getActiveActionColumn: function() {
         return {
+            flex: 0.1,
             header: "Active",
             align: 'center',
             dataIndex: 'active',

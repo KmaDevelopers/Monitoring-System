@@ -1,5 +1,6 @@
 Ext.define("MsAdmin.view.server.ServerViewWindow", {
 	extend: "Ext.window.Window",
+	border: false,
 	alias: 'widget.ServerViewWindow',
 	constructor: function(config) {
 		this.callParent([
@@ -22,6 +23,7 @@ Ext.define("MsAdmin.view.server.ServerViewWindow", {
 	},
 	getCmpItems: function() {
 		return [{
+			border: true,
 			xtype: 'form',
 			bodyPadding: 15,
 			defaults: {
