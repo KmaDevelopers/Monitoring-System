@@ -90,21 +90,21 @@ class ServerController extends KmaController {
 
 	}
 
-	public function actionList() {
+	// public function actionList() {
 
-		// add pagination
-		$models = KmaActiveRecord::model('Server')->findAll();
+	// 	// add pagination
+	// 	$models = KmaActiveRecord::model('Server')->findAll();
 
-		if (isset($models)) {
-			$res = array_map(function($it) {
+	// 	if (isset($models)) {
+	// 		$res = array_map(function($it) {
 
-						return $it->getItemArray('sensors');
-					}, $models);
+	// 					return $it->getItemArray('sensors');
+	// 				}, $models);
 
-			$this->result($res);
-		} else {
-			$this->error("Can't load servers!");
-		}
-	}
+	// 		$this->result($res);
+	// 	} else {
+	// 		$this->error("Can't load servers!");
+	// 	}
+	// }
 
 }

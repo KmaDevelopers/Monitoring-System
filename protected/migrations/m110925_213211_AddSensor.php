@@ -9,8 +9,8 @@ class m110925_213211_AddSensor extends CDbMigration {
 			'serverId' => 'int(11)',
 			'serial' => 'varchar(50)',
 			'name' => 'varchar(100)',
-			'x' => 'int(5)',
-			'y' => 'int(5)',
+			'x' => 'int(5) DEFAULT 0',
+			'y' => 'int(5) DEFAULT 0',
 			'position' => 'varchar(250)',
 			'active' => 'INT(1) DEFAULT 1'
 		),'ENGINE=INNODB DEFAULT CHARSET=utf8');
