@@ -25,8 +25,8 @@ Ext.define("MsAdmin.view.map.MapLayout", {
     		Ext.applyIf(config || {}, {
     			layout: 'auto',
     			items: {
-    				width: 1300,
-    				height: 850,
+    				width: 850,
+    				height: 550,
 	            	xtype: 'box',
 	            	ref: "map",
 	            	autoEl: {

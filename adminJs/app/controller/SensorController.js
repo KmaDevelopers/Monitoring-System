@@ -20,6 +20,9 @@ Ext.define("MsAdmin.controller.SensorController", {
 	}, {
 		ref: 'SensorList',
 		selector: "SensorList"
+	}, {
+		ref: "ServerEditForm",
+		selector: "SensorViewWindow[ref='edit'] form"
 	}],
 	init: function() {
 		this.control({
@@ -36,6 +39,9 @@ Ext.define("MsAdmin.controller.SensorController", {
 			},
 			'SensorViewWindow[ref="create"] [ref="saveButton"]': {
 				click: this.createSensor
+			},
+			'SensorViewWindow[ref="edit"] [ref="saveButton"]': {
+				click: this.editSensor
 			}
 		});
 	},
@@ -46,8 +52,7 @@ Ext.define("MsAdmin.controller.SensorController", {
 	onAddButtonClick: function() {
 		!this.createWindow && (this.createWindow = this.getView('sensor.SensorViewWindow').create({
 			ref: "create",
-			title: "New Sensor Creation",
-			//renderTo: this.getViewport().getCenter().getEl() 
+			title: "New Sensor Creation"
 		}));
 
 		MsAdmin.Event.fire('server.current', {
@@ -79,6 +84,27 @@ Ext.define("MsAdmin.controller.SensorController", {
 			success: this.onSensorSaveSuccess,
 			failure: this.onSensorSaveFailure,
 			scope: this
+		});
+	},
+
+	editSensor: function() {
+		var form, model, errors;
+
+		form = this.getServerEditForm().getForm();
+		model = form.getRecord();
+
+		form.updateRecord(model);
+		errors = model.validate();
+
+		if(errors.isValid() == false) {
+			form.markInvalid(errors);
+			return ;
+		} 
+		
+		model.dirty && model.save({
+			scope: this,
+			success: this.onSensorSaveSuccess,
+			failure: this.onSensorSaveFailure
 		});
 	},
 

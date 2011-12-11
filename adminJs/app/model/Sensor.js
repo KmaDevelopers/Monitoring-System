@@ -7,8 +7,13 @@ Ext.define("MsAdmin.model.Sensor", {
     	'serverId',
         'location', 
         'name',
-        'x',
-        'y', {
+        {
+            name: 'x',
+            defaultValue: 0
+        }, {
+            name: 'y',
+            defaultValue: 0
+        }, {
             name: 'active',
             defaultValue: true,
             type: "bool"
