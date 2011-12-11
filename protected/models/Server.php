@@ -40,6 +40,7 @@ class Server extends KmaActiveRecord
 			array('ip', 'length', 'max'=>15),
 			array('name', 'length', 'max'=>100),
 			array('path', 'length', 'max'=>250),
+			array('active', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('serverId, ip, name, path', 'safe', 'on'=>'search'),
@@ -90,8 +91,11 @@ class Server extends KmaActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
-	
+
 	public function getItemArray($relation = 'sensors'){
+		/**
+		* OPTIMIZE IF HAVE BIG LOAD
+		*/
 		if(is_null($relation)){
 			return $this->attributes;
 		} else {

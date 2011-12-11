@@ -50,21 +50,19 @@
                 'urlFormat' => 'path',
                 'showScriptName' => false,
                 'caseSensitive' => false,
-                'rules' => array(
-                    'graphic/<name>' => 'graphic/index/name/<name>',
-                                      
+             'rules' => array(
+                    'graphic/<name>' => 'graphic/index/name/<name>',                  
+                    array('sensor/get', 'pattern'=>'sensor', 'verb'=>'GET'),
+                    array('sensor/get', 'pattern'=>'sensor/<id:\d+>', 'verb'=>'GET'),
+                    array('sensor/update', 'pattern'=>'sensor/<id:\d+>', 'verb'=>'PUT'),
+                    array('sensor/delete', 'pattern'=>'sensor/<id:\d+>', 'verb'=>'DELETE'),
+                    array('sensor/create', 'pattern'=>'sensor', 'verb'=>'POST'),
                     array('server/get', 'pattern'=>'server/<id:\d+>', 'verb'=>'GET'),
                     array('server/list', 'pattern'=>'server', 'verb'=>'GET'),
 					array('server/update', 'pattern'=>'server', 'verb'=>'PUT'),
                     array('server/delete', 'pattern'=>'server', 'verb'=>'DELETE'),
                     array('server/create', 'pattern'=>'server', 'verb'=>'POST'),
-                   					
-					array('sensor/get', 'pattern'=>'sensor', 'verb'=>'GET'),
-                    array('sensor/get', 'pattern'=>'sensor/<id:\d+>', 'verb'=>'GET'),
-                    array('sensor/update', 'pattern'=>'sensor', 'verb'=>'PUT'),
-                    array('sensor/delete', 'pattern'=>'sensor', 'verb'=>'DELETE'),
-                    array('sensor/create', 'pattern'=>'sensor', 'verb'=>'POST'),
-                    
+                   					                    
                     array('statistics/list', 'pattern'=>'statistics/<id:\d+>', 'verb'=>'GET'),
                     
                     '<controller:\w+>/<id:\d+>' => '<controller>/list',

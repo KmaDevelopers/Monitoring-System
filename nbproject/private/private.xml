@@ -8,14 +8,6 @@
         <file>file:/home/artiom/htdocs/kma_monitoring_system/protected/models/Server.php</file>
         <file>file:/home/artiom/htdocs/kma_monitoring_system/protected/components/actions/GetAction.php</file>
         <file>file:/home/artiom/htdocs/kma_monitoring_system/protected/controllers/StatisticsController.php</file>
-        <file>file:/home/artiom/htdocs/kma_monitoring_system/index.php</file>
-        <file>file:/home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/web/CWebApplication.php</file>
-        <file>file:/home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/base/CApplication.php</file>
-        <file>file:/home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/yiilite.php</file>
-        <file>file:/home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/web/CUrlManager.php</file>
-        <file>file:/home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/web/CController.php</file>
-        <file>file:/home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/web/filters/CInlineFilter.php</file>
-        <file>file:/home/artiom/htdocs/kma_monitoring_system/protected/controllers/GraphicController.php</file>
-        <file>file:/home/artiom/htdocs/kma_monitoring_system/protected/yii/framework/web/auth/CAccessControlFilter.php</file>
+        <file>file:/home/artiom/htdocs/kma_monitoring_system/protected/models/Sensor.php</file>
     </open-files>
 </project-private>

@@ -13,38 +13,6 @@ Ext.define("MsAdmin.view.map.MapLayout", {
             xtype: "button",
             ref: "refreshBtn",
             text: "Refresh"
-        }, {
-            xtype: "button",
-            text: "Show Form",
-            handler: function() {
-                var w = Ext.create('Ext.Window', {
-                    title: "Just window title",
-                    width: 500,
-                    height: 500,
-                    minimizable: true,
-                    maximizable: true,
-                    items: {
-                        xtype: 'tabpanel',
-                        items: [{
-                            title: 'title1',
-                            html: "Some text goes here"
-                        }, {
-                            title: 'title2',
-                            html: "Some text goes here"
-                        }, {
-                            title: 'title3',
-                            html: "Some text goes here"
-                        }]
-                    },
-                    buttons: [{
-                        text: "Save"
-                    }, {
-                        text: "Close"
-                    }]
-                });
-
-                w.show();
-            }
         }]
     }],
     bodyStyle: {

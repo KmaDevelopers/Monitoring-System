@@ -7,8 +7,10 @@ class GetAction extends CAction {
 	{
 		
 		$name = $this->getController()->id;
-		$id = Yii::app()->request->getParam('id',false);
+		$id = CJSON::decode(file_get_contents('php://input'));
 		
+		$id = $id[$name.'Id'];
+					
 		if(!$id) {
 			/**
 			 *get all models

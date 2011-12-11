@@ -24,11 +24,6 @@ Ext.define("MsAdmin.model.Sensor", {
         }
     },
     validations: [{
-        type: 'format',
-        field: "serial",
-        matcher: /^[0-9]{1,20}$/,
-        message: MsAdmin.t("Serial must be a number")
-    }, {
         type: "presence",
         field: "name",
         message: MsAdmin.t("You should provide sensor name")

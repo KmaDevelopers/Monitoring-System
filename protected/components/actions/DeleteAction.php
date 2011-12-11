@@ -6,12 +6,14 @@ class DeleteAction extends CAction {
 		$name = $this->getController()->id;
 
 		$id = CJSON::decode(file_get_contents('php://input'));
-		$id = $id['id'];
+		$id = $id[$name.'Id'];
 
 		if ($id) {
 			$model = KmaActiveRecord::model(ucfirst($name))->findByPk($id);
 			if($model) {
+
 				if ($model->delete()) {
+					Yii::app()->db->createCommand("Update Sensor set active = 0 where serverId = {$id}")->execute();
 					$this->getController()->result(array(), 0);
 				} else {
 					$this->getController()->error("{$name} item can't be deleted!");
@@ -23,5 +25,4 @@ class DeleteAction extends CAction {
 			$this->getController()->error("No {$name} item to delete!");
 		}
 	}
-
 }

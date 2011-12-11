@@ -7,8 +7,7 @@ class UpdateAction extends CAction {
 
 		$json = file_get_contents('php://input');
 		$data = CJSON::decode($json);
-
-		$id = $data['id'];
+		$id = $data[$name.'Id'];
 
 		if ($id) {
 			$model = KmaActiveRecord::model(ucfirst($name))->findByPk($id);
@@ -27,5 +26,4 @@ class UpdateAction extends CAction {
 			$this->getController()->error("No {$name} item to update!");
 		}
 	}
-
 }

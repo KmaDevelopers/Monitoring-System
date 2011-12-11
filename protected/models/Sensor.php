@@ -41,7 +41,8 @@ class Sensor extends KmaActiveRecord
 		return array(
 			array('serverId, x, y', 'numerical', 'integerOnly'=>true),
 			array('serial', 'length', 'max'=>50),
-			array('name', 'length', 'max'=>100),
+			array('name', 'length', 'max'=>100),			
+			array('active', 'safe'),
 //			array('path', 'length', 'max'=>250),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -111,12 +112,13 @@ class Sensor extends KmaActiveRecord
 		$temp = is_array($this->lastStat) ? $this->lastStat->temperature : 0;
 		
 		return array(
-			     'sensorId' => $this->primaryKey,
-				 'serial' => $this->serial,
-			     'name' => $this->name,
-			     'x' => $this->x,
-			     'y' => $this->y,
-			     'ip' => $this->server->ip,
+			     'sensorId' => $this['sensorId'],
+				 'serial' => $this['serial'],
+			     'name' => $this['name'],
+			     'x' => $this['x'],
+			     'y' => $this['y'],
+				 'serverId' => $this['serverId'],
+			     // 'ip' => $this->server->ip,
 			     'temp' => $temp,
 			     );
 	}
@@ -124,13 +126,15 @@ class Sensor extends KmaActiveRecord
 	protected static $sensorSerialArray = array();
 
 	public static function getSensorIdBySerial($serial) {
-			if(empty($sensorSerialArray)){
-				$res = Yii::app()->db->CreateCommand('Select serial,sensorId from Sensor')->queryAll(false);
+			if(empty(self::$sensorSerialArray)){
+				$res = Yii::app()->db->CreateCommand('Select serial,sensorId from Sensor WHERE active = 1')->queryAll(false);
 				foreach($res as $v){
-					$sensorSerialArray[$v[0]] = $v[1];
+					self::$sensorSerialArray[$v[0]] = $v[1];
 				}
 			}
-
-			return $sensorSerialArray[$serial];
+			if(array_key_exists($serial,self::$sensorSerialArray)){
+							return self::$sensorSerialArray[$serial];
+			}
+			return -1;
 	}
 }

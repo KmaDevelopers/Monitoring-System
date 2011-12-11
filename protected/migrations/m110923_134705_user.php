@@ -7,20 +7,11 @@ class m110923_134705_user extends CDbMigration
 			'userId' => 'pk',
 			'login' => 'varchar(20)',
 			'password' => 'varchar(50)',
-		));
+		),'ENGINE=ARCHIVE DEFAULT CHARSET=utf8');
 	}
 
 	public function down() {
+		$this->dropTable('User');
 	}
 
-	/*
-	// Use safeUp/safeDown to do migration with transaction
-	public function safeUp()
-	{
-	}
-
-	public function safeDown()
-	{
-	}
-	*/
 }
