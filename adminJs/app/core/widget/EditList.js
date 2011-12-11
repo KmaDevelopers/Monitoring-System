@@ -18,15 +18,6 @@ Ext.define("MsAdmin.core.widget.EditList", {
                 handler: this.onIconClick('edit'),
                 scope: this
             }]
-
-            /**
-            , {
-                icon: MsAdmin.constants.IMAGE_PATH + 'active-icon.png',  // Use a URL in the icon config
-                tooltip: 'Change Active State',
-                handler: this.onIconClick('active'),
-                scope: this
-            }
-            **/
         };
 	},
 	onIconClick: function(actionName) {

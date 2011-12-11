@@ -32,7 +32,8 @@ Ext.define("MsAdmin.controller.SensorController", {
 			'SensorList': {
 				itemclick: this.onListItemClick,
 				activeiconclick: this.onActiveIconClick,
-				editiconclick: this.onEditIconClick
+				editiconclick: this.onEditIconClick,
+				edit: this.onCellEdited
 			},
 			'SensorListPanel [ref="addButton"]': {
 				click: this.onAddButtonClick
@@ -71,6 +72,26 @@ Ext.define("MsAdmin.controller.SensorController", {
 		});
 	},
 
+	getSensorUpdateConfig: function() {
+		return {
+			success: this.onSensorEditSuccess,
+			failure: this.onSensorEditFailure,
+			scope: this
+		}
+	},
+
+	getSensorCreateConfig: function() {
+		return {
+			success: this.onSensorSaveSuccess,
+			failure: this.onSensorSaveFailure,
+			scope: this
+		}
+	},
+
+	onCellEdited: function(plugin, e) {
+		e.record.save(this.getSensorUpdateConfig());
+	},
+
 	createSensor: function() {
 		var form = this.createWindow.getForm();
 		var model = form.getRecord();
@@ -83,11 +104,7 @@ Ext.define("MsAdmin.controller.SensorController", {
 			return ;
 		}
 
-		model.save({
-			success: this.onSensorSaveSuccess,
-			failure: this.onSensorSaveFailure,
-			scope: this
-		});
+		model.save(this.getSensorCreateConfig());
 	},
 
 	editSensor: function() {
@@ -105,13 +122,28 @@ Ext.define("MsAdmin.controller.SensorController", {
 		} 
 		
 		if(model.dirty) {
-			model.save({
-				scope: this,
-				success: this.onSensorSaveSuccess,
-				failure: this.onSensorSaveFailure
-			});	
+			model.save(this.getSensorUpdateConfig());	
 		} else {
 			this.getSensorEditWindow().close();
+		}
+	},
+
+	onSensorEditSuccess: function(model) {
+		this.editWindow && this.editWindow.close();
+		MsAdmin.Event.fire("notice", {
+			msg: "Sensor was successfully updated"
+		});
+	},
+
+	onSensorEditFailure: function(model, operation) {
+		var errors = operation.getError();
+
+		if(this.editWindow) {
+			this.markInvalid(this.editWindow.getForm(), errors);
+		} else {
+			MsAdmin.Event.fire("notice", {
+				msg: "Could't update sensor, errors occured"
+			});
 		}
 	},
 
