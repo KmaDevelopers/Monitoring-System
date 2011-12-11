@@ -8,9 +8,9 @@ class m111129_181922_someData extends CDbMigration {
 		$this->execute("Truncate `Server`");
 		$this->execute("Truncate `Statistics`");
 
-		$this->execute("insert into `Server` values (1, '127.0.0.1:8000', 'server1', 'in the room')");
-		$this->execute("insert into `Server` values (2, '127.0.0.1:8000', 'server2', 'in the room')");
-		$this->execute("insert into `Server` values (3, '127.0.0.1:8000', 'server3', 'in the room')");
+		$this->execute("insert into `Server`(`ip`,`name`,`path`) values ('127.0.0.1:8000', 'server1', 'in the room')");
+		$this->execute("insert into `Server`(`ip`,`name`,`path`) values ('127.0.0.1:8000', 'server2', 'in the room')");
+		$this->execute("insert into `Server`(`ip`,`name`,`path`) values ('127.0.0.1:8000', 'server3', 'in the room')");
 
 		//for($i=1;$i<10;$i++){
 		// $this->execute("insert into `Sensor` 
@@ -21,14 +21,14 @@ class m111129_181922_someData extends CDbMigration {
 			$sId = rand(1, 3);
 			$x = rand(0, 400);
 			$y = rand(0, 400);
-			$this->execute("insert into `Sensor` values 
+			$this->execute("insert into `Sensor`(`sensorId`,`serverId`,`serial`,`name`,`x`,`y`,`position`) values 
 				({$i}, {$sId}, 'serial{$i}', 'sensor{$i}', 
 				'100','100','in the room')");
 		}
 
 		date_default_timezone_set('Europe/Kiev');
 		$dataArray = array();
-		for ($i = 0; $i < 10000; $i++) {
+		for ($i = 0; $i < 100; $i++) {
 			$dataArray = array();
 			for ($j = 1; $j <= 50; $j++) {
 				$val = rand(10, 30);

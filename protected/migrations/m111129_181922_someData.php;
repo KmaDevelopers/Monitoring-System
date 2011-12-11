@@ -29,7 +29,7 @@ class m111129_181922_someData extends CDbMigration {
 
 		date_default_timezone_set('Europe/Kiev');
 		$dataArray = array();
-		for ($i = 0; $i < 10000; $i++) {
+		for ($i = 0; $i < 100; $i++) {
 			$dataArray = array();
 			for ($j = 1; $j <= 50; $j++) {
 				$val = rand(10, 30);
