@@ -68,6 +68,7 @@ class Server extends KmaActiveRecord
 			'ip' => 'Ip',
 			'name' => 'Name',
 			'path' => 'Path',
+			
 		);
 	}
 

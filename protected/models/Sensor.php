@@ -120,6 +120,7 @@ class Sensor extends KmaActiveRecord
 				 'serverId' => $this['serverId'],
 			     // 'ip' => $this->server->ip,
 			     'temp' => $temp,
+			     'active' => $this['active'],
 			     );
 	}
 
