@@ -228,3 +228,21 @@ in /home/artiom/htdocs/kma_monitoring_system/index.php (13)
 2011/12/11 17:08:40 [warning] [application] Failed to set unsafe attribute "sensorId".
 in /home/artiom/htdocs/kma_monitoring_system/protected/components/actions/UpdateAction.php (15)
 in /home/artiom/htdocs/kma_monitoring_system/index.php (13)
+2011/12/11 17:14:09 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artiom/htdocs/kma_monitoring_system/protected/components/actions/UpdateAction.php (15)
+in /home/artiom/htdocs/kma_monitoring_system/index.php (13)
+2011/12/11 17:14:15 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artiom/htdocs/kma_monitoring_system/protected/components/actions/UpdateAction.php (15)
+in /home/artiom/htdocs/kma_monitoring_system/index.php (13)
+2011/12/11 17:14:34 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artiom/htdocs/kma_monitoring_system/protected/components/actions/UpdateAction.php (15)
+in /home/artiom/htdocs/kma_monitoring_system/index.php (13)
+2011/12/11 17:14:47 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artiom/htdocs/kma_monitoring_system/protected/components/actions/UpdateAction.php (15)
+in /home/artiom/htdocs/kma_monitoring_system/index.php (13)
+2011/12/11 17:16:21 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artiom/htdocs/kma_monitoring_system/protected/components/actions/UpdateAction.php (15)
+in /home/artiom/htdocs/kma_monitoring_system/index.php (13)
+2011/12/11 17:16:30 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artiom/htdocs/kma_monitoring_system/protected/components/actions/UpdateAction.php (15)
+in /home/artiom/htdocs/kma_monitoring_system/index.php (13)

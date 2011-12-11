@@ -42,7 +42,7 @@ class Sensor extends KmaActiveRecord
 			array('serverId, x, y', 'numerical', 'integerOnly'=>true),
 			array('serial', 'length', 'max'=>50),
 			array('name', 'length', 'max'=>100),			
-			array('active', 'safe'),
+			array('active, x, y', 'safe'),
 //			array('path', 'length', 'max'=>250),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
