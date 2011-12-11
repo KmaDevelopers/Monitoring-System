@@ -490,6 +490,22 @@
 				"buffer_size": 726,
 				"line_ending": "Unix"
 			}
+		},
+		{
+			"file": "adminJs/app/controller/SensorController.js",
+			"settings":
+			{
+				"buffer_size": 4193,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "protected/controllers/SensorController.php",
+			"settings":
+			{
+				"buffer_size": 1091,
+				"line_ending": "Unix"
+			}
 		}
 	],
 	"build_system": "",
@@ -520,6 +536,7 @@
 	},
 	"file_history":
 	[
+		"/home/artiom/htdocs/kma_monitoring_system/.gitignore",
 		"/home/artiom/htdocs/kma_monitoring_system/protected/components/KmaActiveRecord.php",
 		"/home/artiom/htdocs/kma_monitoring_system/adminJs/app/controller/SensorController.js",
 		"/home/artiom/htdocs/kma_monitoring_system/protected/commands/DayStat.html",
@@ -533,7 +550,6 @@
 		"/home/artiom/htdocs/kma_monitoring_system/protected/migrations/m111129_181922_someData.php",
 		"/home/artiom/htdocs/kma_monitoring_system/protected/migrations/m110925_213211_AddSensor.php",
 		"/home/artiom/htdocs/kma_monitoring_system/adminJs/app/constants.js",
-		"/home/artiom/htdocs/kma_monitoring_system/.gitignore",
 		"/home/artiom/htdocs/kma_monitoring_system/protected/migrations/m111204_073257_upActive.php",
 		"/home/artiom/htdocs/kma_monitoring_system/protected/migrations/m111129_181922_someData.php;",
 		"/home/artiom/htdocs/kma_monitoring_system/protected/migrations/m111129_175556_upSensors.php",
@@ -630,6 +646,7 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"Sensor ite",
 			"<<<<< HEAD",
 			"HEAD",
 			"b9db33af46f6a0caf34c55bf7752e9fef29533e7",
@@ -658,7 +675,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 3,
 			"sheets":
 			[
 				{
@@ -756,8 +773,8 @@
 						"selection":
 						[
 							[
-								211,
-								211
+								554,
+								490
 							]
 						],
 						"settings":
@@ -767,6 +784,60 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "adminJs/app/controller/SensorController.js",
+					"settings":
+					{
+						"buffer_size": 4193,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								150,
+								156
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "protected/controllers/SensorController.php",
+					"settings":
+					{
+						"buffer_size": 1091,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								13,
+								19
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 48.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -816,12 +887,24 @@
 		"selected_items":
 		[
 			[
-				"updateac",
+				"upa",
 				"kma_monitoring_system/protected/components/actions/UpdateAction.php"
+			],
+			[
+				"sensorc",
+				"kma_monitoring_system/protected/controllers/SensorController.php"
 			],
 			[
 				"sensorcon",
 				"kma_monitoring_system/adminJs/app/controller/SensorController.js"
+			],
+			[
+				".",
+				"kma_monitoring_system/.gitignore"
+			],
+			[
+				"updateac",
+				"kma_monitoring_system/protected/components/actions/UpdateAction.php"
 			],
 			[
 				"addsenso",
