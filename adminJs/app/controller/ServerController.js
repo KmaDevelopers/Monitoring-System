@@ -101,10 +101,8 @@ Ext.define("MsAdmin.controller.ServerController", {
 	onEditIconClick: function(model, rIdx, cIdx) {
 		if(this.editWindow == undefined) {
 			this.editWindow = this.getView("server.ServerViewWindow").create({
-								//renderTo: this.getViewport().getCenter().getEl(),
-								ref: "edit"
-							});
-			//this.getViewport().getCenter().add(this.editWindow);
+				ref: "edit"
+			});
 		}
 		
 		this.editWindow.loadModel(model);
@@ -146,7 +144,7 @@ Ext.define("MsAdmin.controller.ServerController", {
 	},
 	onAddServerClick: function() {
 		!this.createWindow && (this.createWindow = this.getView("server.ServerViewWindow").create({
-			renderTo: this.getViewport().getCenter().getEl(),
+			//renderTo: this.getViewport().getCenter().getEl(),
 			ref: "create",
 			title: "New Server Creation"
 		}));

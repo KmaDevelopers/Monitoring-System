@@ -46,7 +46,7 @@ Ext.define("MsAdmin.controller.SensorController", {
 		!this.createWindow && (this.createWindow = this.getView('sensor.SensorViewWindow').create({
 			ref: "create",
 			title: "New Sensor Creation",
-			renderTo: this.getViewport().getCenter().getEl() 
+			//renderTo: this.getViewport().getCenter().getEl() 
 		}));
 
 		MsAdmin.Event.fire('server.current', {
@@ -131,7 +131,7 @@ Ext.define("MsAdmin.controller.SensorController", {
 
 	onEditIconClick: function(model, rIdx, cIdx) {
 		!this.editWindow && (this.editWindow = this.getView("sensor.SensorViewWindow").create({
-			renderTo: this.getViewport().getCenter().getEl(),
+			//renderTo: this.getViewport().getCenter().getEl(),
 			ref: "edit"
 		}));
 
