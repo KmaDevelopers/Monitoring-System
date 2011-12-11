@@ -21,8 +21,11 @@ Ext.define("MsAdmin.controller.SensorController", {
 		ref: 'SensorList',
 		selector: "SensorList"
 	}, {
-		ref: "ServerEditForm",
+		ref: "SensorEditForm",
 		selector: "SensorViewWindow[ref='edit'] form"
+	}, {
+		ref: "SensorEditWindow",
+		selector: "SensorViewWindow[ref='edit']"
 	}],
 	init: function() {
 		this.control({
@@ -90,7 +93,7 @@ Ext.define("MsAdmin.controller.SensorController", {
 	editSensor: function() {
 		var form, model, errors;
 
-		form = this.getServerEditForm().getForm();
+		form = this.getSensorEditForm().getForm();
 		model = form.getRecord();
 
 		form.updateRecord(model);
@@ -101,11 +104,15 @@ Ext.define("MsAdmin.controller.SensorController", {
 			return ;
 		} 
 		
-		model.dirty && model.save({
-			scope: this,
-			success: this.onSensorSaveSuccess,
-			failure: this.onSensorSaveFailure
-		});
+		if(model.dirty) {
+			model.save({
+				scope: this,
+				success: this.onSensorSaveSuccess,
+				failure: this.onSensorSaveFailure
+			});	
+		} else {
+			this.getSensorEditWindow().close();
+		}
 	},
 
 	onSensorSaveSuccess: function(model) {		
