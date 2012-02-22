@@ -3,8 +3,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="language" content="en" />
-    <!--<link rel="stylesheet" href="./adminJs/lib/extjs/resources/css/ext-all-gray.css" />-->
-    <link rel="stylesheet" href="./adminJs/resources/css/my-ext-theme.css" />
+    <link rel="stylesheet" href="./adminJs/lib/extjs/resources/css/ext-all-gray.css" />
+    <!--<link rel="stylesheet" href="./adminJs/resources/css/my-ext-theme.css" />-->
     <script type="text/javascript" src="./adminJs/lib/extjs/ext-all-dev.js"></script>
     <script type="text/javascript" src="./adminJs/app.js?<?php echo time();?>"></script>
     <title><?php echo CHtml::encode($this->pageTitle); ?></title>
@@ -23,17 +23,40 @@
 	}
 
 	.active-icon {
-		width: 20px;
-		background: url('/images/admin/active-icon.png') 0px 0px no-repeat;
-		height: 23px;
+		width: 40px;
+		background: url('/images/admin/active-icon.png') no-repeat;
 		background-size: 40px;
+		height: 40px;
 	}
 
 	.inactive-icon {
-		width: 20px;
-		background: url('/images/admin/active-icon.png') -20px 0px no-repeat;
-		height: 23px;
+		width: 40px;
+		background: url('/images/admin/inactive-icon.png')no-repeat;
 		background-size: 40px;
+		height: 40px;
+	}
+
+	.edit-link img{
+		cursor: pointer;
+	}
+
+	.edit-icon,
+	.graphic-icon {
+		margin-right: 5px;
+	}
+
+	.edit-icon {
+		height: 37px;
+	}
+
+	.graphic-icon {
+		width: 40px;
+		height: 40px;
+	}
+
+	.x-grid-row {
+		height: 40px;
+		vertical-align: middle;
 	}
     </style>
 </head>

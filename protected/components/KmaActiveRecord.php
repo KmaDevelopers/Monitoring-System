@@ -13,9 +13,9 @@ class KmaActiveRecord extends CActiveRecord {
     public function beforeSave() {
 
 
-    	if(array_key_exists('active',$this->attributes)) {
-    		$this->active = intval($this->active); 
-    	}
+    	// if(array_key_exists('active',$this->attributes)) {
+    	// 	$this->active = intval($this->active); 
+    	// }
     	return parent::beforeSave();
     }
 }

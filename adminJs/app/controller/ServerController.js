@@ -6,7 +6,8 @@ Ext.define("MsAdmin.controller.ServerController", {
 	views: [
 		'server.ServerList',
 		'server.ServerListPanel',
-		'server.ServerViewWindow'
+		'server.ServerViewWindow',
+		'server.ServerGraphicWindow'
 	],
 	stores: [
 		'Servers',
@@ -43,6 +44,7 @@ Ext.define("MsAdmin.controller.ServerController", {
 			'ServerList': {
 				itemclick: this.onListItemClick,
 				editiconclick: this.onEditIconClick,
+				graphiciconclick: this.onGraphicIconClick,
 				activeiconclick: this.onActiveIconClick
 			}, 
 			'ServerListPanel [ref="addBtn"]': {
@@ -67,11 +69,37 @@ Ext.define("MsAdmin.controller.ServerController", {
 				click: function(){
 					this.getServerCreateWindow().close()
 				}
+			},
+
+			'ServerGraphicWindow [ref="generateBtn"]': {
+				click: this.onGenerateGraphicClick
+			},
+			'ServerGraphicWindow [ref="SensorCombo"]': {
+				change: this.onSensorComboChanged
 			}
 		});
 
 		this.getStore('Servers').on('load', this.onDataLoad, this);
 		MsAdmin.Event.on('server.current', this.getCurrentServer, this);
+	},
+
+	onSensorComboChanged: function(field) {
+		MsAdmin.Event.fire('graphic.rerender', field.getValue());
+	},
+
+	onGenerateGraphicClick: function() {
+		
+	},
+
+	onGraphicIconClick: function(model) {
+		if(this.graphicWindow == undefined) {
+			this.graphicWindow = this.getView("server.ServerGraphicWindow").create();
+		}
+		
+		this.graphicWindow.loadModel(model);
+		this.graphicWindow.center();
+		this.graphicWindow.show();
+		this.getServerList().actionClicked = true;	
 	},
 
 	getCurrentServer: function(config) {
@@ -109,6 +137,7 @@ Ext.define("MsAdmin.controller.ServerController", {
 		this.editWindow.loadModel(model);
 		this.editWindow.center();
 		this.editWindow.show();
+		this.getServerList().actionClicked = true;
 	},
 	onActiveIconClick: function(model, rIdx, cIdx) {
 		Ext.Msg.alert('works');
@@ -203,12 +232,20 @@ Ext.define("MsAdmin.controller.ServerController", {
 		}); 
 	},
 	onCreateServerSuccess: function(model) {
-		this.getStore('Servers').add(model);
-		this.getServerCreateWindow().close();
+		var servers = this.getStore('Servers');
+
+		servers.add(model);
 
 		MsAdmin.Event.fire("notice", {
 			msg: "Server was successfully created"
 		});
+
+		this.getServerCreateWindow().close();
+
+		if(servers.getCount() == 1) {
+			this.getServerList().getSelectionModel().select(0);
+			this.showSensors(model);
+		}
 	},
 	onCreateServerFailure: function(record, operation) {
 		var errors = operation.getError();

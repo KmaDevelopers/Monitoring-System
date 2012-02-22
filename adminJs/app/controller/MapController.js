@@ -16,14 +16,34 @@ Ext.define("MsAdmin.controller.MapController", {
 		});
 
 		MsAdmin.Event.on('server.selected', this.renderSensors, this);
-		MsAdmin.Event.on('sensor.selected', this.highlightSensor, this);
+		MsAdmin.Event.on('sensor.highlight', this.highlightSensor, this);
 		MsAdmin.Event.on('map.sensor.add', this.addSensor, this);
 		MsAdmin.Event.on('sensor.destroyed', this.removeSensor, this);
+		MsAdmin.Event.on('sensor.updateVisibility', this.updateSensorVisibility, this);
 	},
 
 	onSavePositionClick: function() {
 		var sensors = this.getStore('Sensors');
 		sensors.sync();
+	},
+
+	updateSensorVisibility: function(model) {
+		this.eachSensor(function(item) {
+			if(item.getModel() == model) {
+				if(model.get('active') == 1) {
+					item.getEl().show()
+					item.getEl().frame('red', 1);
+				} else {
+					if(item.getEl().isVisible()) {
+						item.getEl().frame('black', 1);
+						//TODO because of YABIE
+						setTimeout(function() {
+							item.getEl().hide();
+						}, 1000);
+					}
+				} 
+			}
+		});
 	},
 
 	addSensor: function(sensor) {
@@ -43,17 +63,21 @@ Ext.define("MsAdmin.controller.MapController", {
 			return false;
 		}
 
-		this.getMapLayout().add({
+		var item = this.getMapLayout().add({
 			xtype: "Sensor",
 			model: sensor
 		});
+
+		if(!sensor.get('active')) {
+			item.hide();
+		}
 	},
 	removeSensor: function(model) {
 		this.eachSensor(function(item) {
 			if(item.getModel() == model) {
 				item.getEl().frame('black', 1);
 				// because of YABIE
-				setTimeout(function(){
+				setTimeout(function() {
 					item.destroy();
 				}, 1000)
 			}
@@ -69,10 +93,13 @@ Ext.define("MsAdmin.controller.MapController", {
 			this.addSensor(sensor);
 		}, this);
 	},
+	/**
+	 * highlight selected sensor
+	 */
 	highlightSensor: function(sensor) {
 		this.eachSensor(function(item) {
 			if(item.getModel() == sensor) {
-				item.getEl().frame('red');
+				item.getEl().isVisible() && item.getEl().frame('red');
 				return ;
 			}
 		});

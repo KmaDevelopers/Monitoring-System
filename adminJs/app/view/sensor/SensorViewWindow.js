@@ -2,6 +2,7 @@ Ext.define("MsAdmin.view.sensor.SensorViewWindow", {
 	extend: "Ext.window.Window",
 	alias: 'widget.SensorViewWindow',
 	border: false,
+	modal: true,
 	constructor: function(config) {
 		this.callParent([
 			Ext.applyIf(config || {}, {
@@ -14,7 +15,7 @@ Ext.define("MsAdmin.view.sensor.SensorViewWindow", {
 		]);
 	},
 	loadModel: function(model) {
-		this.setTitle('Server ' + model.get('name'));
+		this.setTitle('Sensor ' + model.get('name'));
 		this.down('form').getForm().loadRecord(model);
 	},
 	getCmpButtons: function() {
@@ -36,14 +37,18 @@ Ext.define("MsAdmin.view.sensor.SensorViewWindow", {
 			defaults: {
 				labelWidth: 120	
 			},
+			layout: "anchor",
+			defaults: {
+				anchor: "95%"
+			},
 			items: [{
 				xtype: "textfield",
 				name: "name",
 				fieldLabel: MsAdmin.t("Name")
 			}, {
 				xtype: 'textfield',
-				name: "location",
-				fieldLabel: MsAdmin.t("Location")
+				name: "position",
+				fieldLabel: MsAdmin.t("Position")
 			}, {
 				xtype: 'textfield',
 				name: 'serial',

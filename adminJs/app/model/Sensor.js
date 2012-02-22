@@ -5,7 +5,7 @@ Ext.define("MsAdmin.model.Sensor", {
         'sensorId',
         'serial',
     	'serverId',
-        'location', 
+        'position', 
         'name',
         {
             name: 'x',
@@ -15,8 +15,8 @@ Ext.define("MsAdmin.model.Sensor", {
             defaultValue: 0
         }, {
             name: 'active',
-            defaultValue: true,
-            type: "bool"
+            defaultValue: '1',
+            type: 'int'
         }
     ],
     proxy: {
@@ -30,6 +30,11 @@ Ext.define("MsAdmin.model.Sensor", {
         writer: {
             type: 'json',
             writeAllFields: false
+        },
+        afterRequest: function(response) {
+            if(response.action == 'update') {
+                
+            }
         }
     },
     validations: [{

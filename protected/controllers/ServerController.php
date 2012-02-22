@@ -34,25 +34,28 @@ class ServerController extends KmaController {
 		
 		if ($serv->validate()) {
 			if ($serv->save()) {
-				/////
-
+				$serverPath = 'http://'.$serv['ip'].'/';
 				/**
 				* @TODO НУЖНО СРАЗУ ЖЕ СОЗДАВАТЬ СЕНСОРЫ ДЛЯ СЕРВЕРА ПРИ СОЗДАНИИ И ПОМЕЧАТЬ ИХ КАК ДЕАКТИВИРОВАНЫЕ
 				*/
-				try{
-					$results = file_get_contents('http://'.$serv['ip'].'/', 'r');
-				}catch(Exception $e) {
-					$this->result($serv->getItemArray(),1);
-					Yii::app()->end();
-				}
-		
 
-				if(empty($results)) {
-					$this->result($serv->getItemArray(),1);
-					Yii::app()->end();
+				if(YII_DEBUG) {
+					$serverPath = Yii::getPathOfAlias("application") . "/mock/sensors.php";
 				}
 
-				$resArray = explode(";",$results);
+				$results = @file_get_contents($serverPath, 0, stream_context_create(array(
+					'http' => array(
+						'timeout' => 2
+					)
+				)));
+
+				if($results === false) {
+					$this->result($serv->getItemArray(), 1);
+				 	Yii::app()->end();
+				}
+
+				$results = strtr($results, array("{serial}" => "serial" . md5(microtime(true))));
+				$resArray = explode(";", $results);
 
 				/**
 				* create sensors

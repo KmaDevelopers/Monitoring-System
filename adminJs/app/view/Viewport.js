@@ -8,17 +8,18 @@ Ext.define("MsAdmin.view.Viewport", {
         border: false
     },
     constructor: function(config) {
-        this.callParent([Ext.apply(config || {}, {
-            items: this.getCmpItems()
-        })]);  
+        this.callParent([
+            Ext.apply(config || {}, {
+                items: this.getCmpItems()
+            })
+        ]);  
     },
     getCmpItems: function() {
         return[{            
             width: 300,
-            title: "Temperature's Monitoring System",
-            collapsible: true,
             region: "west",
             xtype: "panel",
+            collapsible: true,
             layout: {
                 type: "fit"
             },

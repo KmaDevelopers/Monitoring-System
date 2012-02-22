@@ -3,25 +3,22 @@ Ext.define("MsAdmin.view.server.ServerListPanel", {
 	alias: 'widget.ServerListPanel',
     layout: 'fit',
     title: "Servers",
+    
 	constructor: function(config) {
 		this.callParent([Ext.applyIf(config || {}, {
 			items: this.getCmpItems(),
-			dockedItems: this.getCmpDockedItems()
+            tools: this.getCmpToolsConfig()
 		})]);
 	},
-	getCmpDockedItems: function() {
-		return [{
-            xtype: "toolbar",
-            dock: "bottom",
-            items: [{
-                ref: 'addBtn',
-                text: "Add"
-            }, {
-                ref: 'delBtn',
-                text: "Delete"
-            }]
-        }];
-	},
+
+    getCmpToolsConfig: function() {
+        return [{
+            ref: 'addBtn',
+            xtype: "button",
+            text: "+"
+        }]  
+    },
+
 	getCmpItems: function() {
 		return [{
             layout: 'fit',

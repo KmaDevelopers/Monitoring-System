@@ -47,9 +47,31 @@ Ext.define("MsAdmin.controller.SensorController", {
 				click: this.editSensor
 			}
 		});
+
+		MsAdmin.Event.on('server.selected', this.onServerSelected, this);
 	},
-	onListItemClick: function(grid, model) {
-		MsAdmin.Event.fire("sensor.selected", model);
+	onServerSelected: function(server) {
+		// server.sensors().un('update', this.onSensorUpdated);
+		// server.sensors().on('update', this.onSensorUpdated);
+	},
+	onSensorUpdated: function(store, model, operation, eventOptions) {
+  		if(operation == Ext.data.Model.EDIT) {
+      		return false;
+  		} else if( operation == Ext.data.Model.COMMIT ) {
+  			return true;
+  		}
+	},
+	/**
+	 * fires when user clicks on sensor
+	 */
+	onListItemClick: function(grid, model, a, b) {
+		var isIconClicked = Ext.EventObject.getTarget('.edit-link');
+
+		if(isIconClicked) {
+			return false;
+		}
+		
+		MsAdmin.Event.fire("sensor.highlight", model);
 	},
 
 	onAddButtonClick: function() {
@@ -127,8 +149,17 @@ Ext.define("MsAdmin.controller.SensorController", {
 		}
 	},
 
-	onSensorEditSuccess: function(model) {
-		this.editWindow && this.editWindow.close();
+	onSensorEditSuccess: function(tempModel, operation) {
+		var model = operation.request.records[0];
+
+		model.set(tempModel.data);
+		model.commit(true);
+		
+		if(this.editWindow) {
+			this.editWindow.close();
+		}
+
+		MsAdmin.Event.fire("sensor.updateVisibility", model);
 		MsAdmin.Event.fire("notice", {
 			msg: "Sensor was successfully updated"
 		});
@@ -141,12 +172,13 @@ Ext.define("MsAdmin.controller.SensorController", {
 			this.markInvalid(this.editWindow.getForm(), errors);
 		} else {
 			MsAdmin.Event.fire("notice", {
-				msg: "Could't update sensor, errors occured"
+				msg: errors || "Could't update sensor, errors occured"
 			});
 		}
 	},
 
-	onSensorSaveSuccess: function(model) {		
+	onSensorSaveSuccess: function(tempRecord, operation) {		
+		var model = operation.records[0];
 		var server = this.getStore('Servers').findRecord('serverId', model.get('serverId'));
 			server.sensors().add(model);
 		this.createWindow.close();
@@ -178,22 +210,38 @@ Ext.define("MsAdmin.controller.SensorController", {
 			scope: this
 		});
 	},
-
-	onSensorDestroySuccess: function(model, operation) {
-		var model = operation.request.records[0];
+	/**
+	 * fires when sensor was succesfully destroyed
+	 * removes model from Store
+	 * @param {MsAdmin.model.Sensor} tempModel
+	 * @params {Ext.data.Operation} operation
+	 * @returns {undefined}
+	 */
+	onSensorDestroySuccess: function(tempModel, operation) {
+		var model = operation.request.records[0],
+			store = model.store;
 		MsAdmin.Event.fire('sensor.destroyed', model);
-		model.store.remove(model);
+		store.remove(model);
 		MsAdmin.Event.fire('notice', {
 			msg: "Sensor was successfully removed"
 		});
 	},
-
-	onSensorDestroyFailure: function(model, operation) {
-		MsAdmin.Event.fire('notice',{
-			msg: "Could't not remove server"
+	/**
+	 * fires when errors occured in destroy-procedure
+	 * @returns {undefined}
+	 */
+	onSensorDestroyFailure: function(tempRecord, operation) {
+		MsAdmin.Event.fire('notice', {
+			msg: MsAdmin.constants.AJAX_ERROR_MSG
 		});
 	},
-
+	/**
+	 * shows sensor's edit-window
+	 * @param {MsAdmin.model.Sensor} model
+	 * @param {Integer} rIdx row-index
+	 * @param {Integer} cIdx column-index
+	 * @returns {undefined}
+	 */
 	onEditIconClick: function(model, rIdx, cIdx) {
 		!this.editWindow && (this.editWindow = this.getView("sensor.SensorViewWindow").create({
 			//renderTo: this.getViewport().getCenter().getEl(),
@@ -204,12 +252,24 @@ Ext.define("MsAdmin.controller.SensorController", {
 		this.editWindow.center();
 		this.editWindow.show();
 	},
-
+	/**
+	 * fires when user clicks on active-icon
+	 * changes active-state and saves model
+	 * @param {MsAdmin.model.Sensor} model
+	 * @param {Integer} rIdx row-index
+	 * @param {Integer} cIdx column-index
+	 * @retuns {undefined}
+	 */
 	onActiveIconClick: function(model, rIdx, cIdx) {
-		model.set('active', !model.get('active'));
-		
-		if(model.dirty) {
-			model.save(this.getSensorUpdateConfig());
-		}
+		model.set('active', (!model.get('active')) - 0);
+		model.store.sync({
+			callback: this.onSensorEditSuccess,
+			scope: this
+		});
+		// model.save({
+		// 	success: this.onSensorEditSuccess,
+		// 	failure: this.onSensorEditFailure,
+		// 	scope: this
+		// });
 	}
 });

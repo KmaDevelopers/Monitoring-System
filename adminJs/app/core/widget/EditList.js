@@ -6,6 +6,24 @@ Ext.define("MsAdmin.core.widget.EditList", {
     // requires: [
     //     'Ext.grid.plugin.EditingView'
     // ],
+    constructor: function(config) {
+        this.callParent([
+            Ext.applyIf(config || {}, {
+                actionClicked: false,
+                listeners: {
+                    beforeitemclick: this.onBeforeItemClick
+                }
+            })
+        ]);
+    },
+    
+    onBeforeItemClick: function() {
+        if(this.actionClicked) {
+            this.actionClicked = false;
+            return false;
+        }
+    },
+
 	getEditActionColumn: function() {
 		return {
             xtype:'actioncolumn',
@@ -16,9 +34,12 @@ Ext.define("MsAdmin.core.widget.EditList", {
                 icon: MsAdmin.constants.IMAGE_PATH + 'edit-icon.png',  // Use a URL in the icon config
                 tooltip: 'Edit',
                 handler: this.onIconClick('edit'),
-                scope: this
+                scope: this,
+                getClass: function() {
+                    return 'edit-icon';
+                }
             }, {
-                tooltip: 'Edit',
+                tooltip: 'Active',
                 handler: this.onIconClick('active'),
                 getClass: function(htmlEl, meta, record) {
                     return record.get('active') == 0 ? 'inactive-icon' : 'active-icon';
@@ -29,9 +50,9 @@ Ext.define("MsAdmin.core.widget.EditList", {
 	},
 	onIconClick: function(actionName) {
         return function(grid,rIdx, cIdx) {
-            var selModel = this.getSelectionModel();
-                selModel.select(rIdx);
-            this.fireEvent(actionName + 'iconclick', selModel.getSelection()[0], rIdx, cIdx);
+            // var selModel = this.getSelectionModel();
+            //     selModel.select(rIdx);
+            this.fireEvent(actionName + 'iconclick', grid.getStore().getAt(rIdx), rIdx, cIdx);
         }
 	},
 

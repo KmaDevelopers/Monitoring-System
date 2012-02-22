@@ -2,16 +2,17 @@ Ext.define("MsAdmin.view.server.ServerViewWindow", {
 	extend: "Ext.window.Window",
 	border: false,
 	alias: 'widget.ServerViewWindow',
+	constrain: true,
+	autoShow: true,
+	minimizable: true,
+	maximizable: true,
+	closeAction: 'hide',
+	layout: 'fit',
+	width: 320,
+	modal: true,
 	constructor: function(config) {
 		this.callParent([
 			Ext.applyIf(config || {}, {
-				constrain: true,
-				autoShow: true,
-				minimizable: true,
-				maximizable: true,
-				closeAction: 'hide',
-				layout: 'fit',
-				//constrainHeader: true,
 				buttons: this.getCmpButtons(),
 				items: this.getCmpItems()
 			})
@@ -28,8 +29,10 @@ Ext.define("MsAdmin.view.server.ServerViewWindow", {
 			bodyPadding: 15,
 			defaults: {
 				labelWidth: 120,
-				xtype: 'textfield'
+				xtype: 'textfield',
+				anchor: "95%"
 			},
+			layout: "anchor",
 			items: [{
 				name: "name",
 				fieldLabel: MsAdmin.t("Server Name")

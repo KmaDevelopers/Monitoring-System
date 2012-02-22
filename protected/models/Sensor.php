@@ -39,10 +39,10 @@ class Sensor extends KmaActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('serverId, x, y', 'numerical', 'integerOnly'=>true),
+			array('serverId', 'numerical', 'integerOnly'=>true),
 			array('serial', 'length', 'max'=>50),
 			array('name', 'length', 'max'=>100),			
-			array('active, x, y', 'safe'),
+			array('active, x, y, position', 'safe'),
 //			array('path', 'length', 'max'=>250),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -117,6 +117,7 @@ class Sensor extends KmaActiveRecord
 			     'name' => $this['name'],
 			     'x' => $this['x'],
 			     'y' => $this['y'],
+			     'position' => $this['position'],
 				 'serverId' => $this['serverId'],
 			     // 'ip' => $this->server->ip,
 			     'temp' => $temp,

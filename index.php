@@ -1,5 +1,5 @@
 <?php
-
+date_default_timezone_set("Europe/Kiev");
 // change the following paths if necessary
 $yii=dirname(__FILE__).'/protected/yii/framework/yii.php';
 $config=dirname(__FILE__).'/protected/config/main.php';

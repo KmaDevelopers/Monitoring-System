@@ -1,5 +1,8 @@
 Ext.define("MsAdmin.model.Server", {
 	extend: "Ext.data.Model",
+    // requires: [
+    //     'MsAdmin.model.Statistics'
+    // ],
     idProperty: "serverId",
 	fields: [{
         name: 'serverId',
@@ -32,7 +35,15 @@ Ext.define("MsAdmin.model.Server", {
     associations: [{
     	type: "hasMany",
     	model: "MsAdmin.model.Sensor",
-    	name: 'sensors'
+    	name: 'sensors',
+        primaryKey: "serverId",
+        foreignKey: "serverId"
+    }, {
+        type: "hasMany",
+        model: "Ext.data.Model",
+        name: "statistics",
+        primaryKey: "serverId",
+        foreignKey: "serverId"
     }],
     validations: [{
         type: 'length',
