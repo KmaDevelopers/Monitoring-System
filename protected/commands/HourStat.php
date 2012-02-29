@@ -4,15 +4,15 @@
 */
 
 
-class DayStatCommand extends CConsoleCommand{
+class HourStatCommand extends CConsoleCommand{
 	
 	public function run($args){
 
 		$sql = "SELECT sensorId,AVG(temperature) as 'aTemp',
-			DATE_SUB(DATE_FORMAT(date,'%Y-%m-%d 00:00:00'),INTERVAL 1 DAY) as 'nDate'
+			DATE_SUB(DATE_FORMAT(date,'%Y-%m-%d %H:00:00'),INTERVAL 1 HOUR) as 'nDate'
 			FROM Statistics
 			WHERE 
-			date >= DATE_SUB(DATE_FORMAT(date,'%Y-%m-%d 00:00:00'),INTERVAL 1 DAY)
+			date >= DATE_SUB(DATE_FORMAT(date,'%Y-%m-%d %H:00:00'),INTERVAL 1 HOUR)
 			GROUP BY sensorId
 			";
 
@@ -26,12 +26,13 @@ class DayStatCommand extends CConsoleCommand{
 			return "'{$it['sensorId']}','{$it['aTemp']}','{$it['nDate']}'"; 
 		});
 			
-		$sql = "INSERT INTO DayStatistics(sensorId,temperature,date)
+		$sql = "INSERT INTO HourStatistics(sensorId,temperature,date)
 		VALUES (".implode('),(',$insertIntoArrayRows).")";
 		
 		// create send notifacation to admin if this query return false
 		$res = Yii::app()->db->createCommand($sql)->execute();
-		
+
 	}
+
 
 }

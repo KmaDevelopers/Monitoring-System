@@ -32,7 +32,7 @@ class m111129_181922_someData extends CDbMigration {
 			$dataArray = array();
 			for ($j = 1; $j <= 50; $j++) {
 				$val = rand(10, 30);
-				$time = '\'' . date('Y-m-d H:i:s', (time() + $i * 120) - 100000) . '\'';
+				$time = '\'' . date('Y-m-d H:i:s', (time() + $i * 120) - 1000) . '\'';
 				$dataArray[] = "{$j},{$val},{$time}";
 			}
 			$this->execute("insert into `Statistics` 
