@@ -39,6 +39,17 @@ Ext.define("MsAdmin.view.server.ServerGraphicWindow", {
 		var sensorCombo = this.down("[ref='SensorCombo']");
 		this.removeAll(true);
 
+		var fields = [
+			'name', 
+			'sensor0',
+			'sensor1',
+			'sensor2',
+			'sensor3',
+			'sensor4'
+		];
+
+		this.storeFields = fields;
+
 		var chart = this.add({
 			xtype: "TemperatureGraphic",
 			style: 'background:#fff',
@@ -126,14 +137,7 @@ Ext.define("MsAdmin.view.server.ServerGraphicWindow", {
                 }
             }],
 	        store: Ext.create("Ext.data.Store", {
-				fields: [
-					'name', 
-					'sensor0',
-					'sensor1',
-					'sensor2',
-					'sensor3',
-					'sensor4'
-				],
+				fields: fields,
 				proxy: {
 					type: "ajax",
 					url: "./adminJs/app/mock/stats.php",
@@ -163,6 +167,7 @@ Ext.define("MsAdmin.view.server.ServerGraphicWindow", {
 	getCmpDockedItems: function() {
 		return [{
 			xtype: "toolbar",
+			ref: "filter",
 			items: [/*{
 				xtype: "combo",
 				displayField: "serial",
@@ -204,6 +209,7 @@ Ext.define("MsAdmin.view.server.ServerGraphicWindow", {
 			},'->', {
 				xtype: 'button',
 				text: 'Render',
+				scope: this,
 				handler: this.onRenderButtonClick,
 				ref: 'renderGraphicsButton'
 			}]
@@ -212,17 +218,33 @@ Ext.define("MsAdmin.view.server.ServerGraphicWindow", {
 
 	onRenderButtonClick: function(button) {
 		var toolbar = button.up("toolbar");
+
+		button.up("window").down('TemperatureGraphic').store.load({
+			params: {
+				startDate: this.getStartDate(),
+				endDate: this.getEndDate()
+			}
+		});
+	},
+
+	getStartDate: function() {
+		var toolbar = this.down("toolbar[ref='filter']");
 		var startDate = toolbar.down("[als=startDateField]").getValue();
 		var startTime = toolbar.down("[als=startTimeField]").getValue();
 		var endDate = toolbar.down("[als=endDateField]").getValue();
 		var endTime = toolbar.down("[als=endTimeField]").getValue();
 
-		button.up("window").down('TemperatureGraphic').store.load({
-			params: {
-				startDate: Ext.Date.format(startDate, 'Y-m-d') + " " + Ext.Date.format(startTime, 'H:i:s'),
-				endDate: Ext.Date.format(endDate, 'Y-m-d') + " " + Ext.Date.format(endTime, 'H:i:s')
-			}
-		});
+		return Ext.Date.format(startDate, 'Y-m-d') + " " + Ext.Date.format(startTime, 'H:i:s');
+	},
+
+	getEndDate: function() {
+		var toolbar = this.down("toolbar[ref='filter']");
+		var startDate = toolbar.down("[als=startDateField]").getValue();
+		var startTime = toolbar.down("[als=startTimeField]").getValue();
+		var endDate = toolbar.down("[als=endDateField]").getValue();
+		var endTime = toolbar.down("[als=endTimeField]").getValue();
+
+		return Ext.Date.format(endDate, 'Y-m-d') + " " + Ext.Date.format(endTime, 'H:i:s');
 	},
 
 	getCmpItems: function() {
@@ -231,7 +253,9 @@ Ext.define("MsAdmin.view.server.ServerGraphicWindow", {
 	getCmpButtons: function() {
 		return [{
 			ref: 'generateBtn',
-			text: "Generate"
+			text: "Generate",
+			scope: this,
+			handler: this.generateGpaphic
 		}, {
 			ref: 'closeBtn',
 			text: "Close",
@@ -239,6 +263,34 @@ Ext.define("MsAdmin.view.server.ServerGraphicWindow", {
 				button.up("window").close();
 			}
 		}]
+	},
+
+	generateGpaphic: function() {
+		var chart = this.down("chart");
+		var fields = this.storeFields;
+		var filters = [];
+
+		chart.series.each(function(item, index) {
+			if(item.visibleInLegend()) {
+				filters.push(fields[index + 1]);
+			}
+		}, this);
+
+		Ext.Ajax.request({
+			url: "./admin/chart/generate",
+			params: {
+				startDate: this.getStartDate(),
+				endDate: this.getEndDate(),
+				'sensorId[]': filters
+			},
+			success: function(response) {
+				var result = Ext.decode(response, true);
+
+				if(result != null) {
+					window.location = result.src;
+				}
+			}
+		});
 	},
 
 	getForm: function() {
