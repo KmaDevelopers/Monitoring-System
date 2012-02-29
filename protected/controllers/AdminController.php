@@ -34,17 +34,19 @@ class AdminController extends KmaController {
 		
 		if(isset($_REQUEST['filter']) && !empty($_REQUEST['filter'])){
 			$filter = $_REQUEST['filter'];
-			$dateFrom = $filter['startFrom'];
-			$dateTo = $filter['endTo'];
+			$dateFrom = $filter['startDate'];
+			$dateTo = $filter['endDate'];
 			$sensorIds = $filter['sensorIds'];
 		} else {
-			$date = time();
-			
+			$date = time();			
 			$dateFrom = date('Y-m-d H:i:s',$date-(60*60*2));
 			$dateTo = date('Y-m-d H:i:s',$date);
 			$sensorIds = Yii::app()->db->createCommand("select * from Sensor where active = 1")->queryColumn();
 		}
 		
+		if(!is_array($sensorIds) || empty($sensorIds) ){
+			$sensorIds = Yii::app()->db->createCommand("select * from Sensor where active = 1")->queryColumn();
+		}
 		
 		$sensorList = implode(',',$sensorIds);
 		
