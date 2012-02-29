@@ -141,6 +141,7 @@ Ext.define("MsAdmin.view.server.ServerGraphicWindow", {
 				proxy: {
 					type: "ajax",
 					url: "./adminJs/app/mock/stats.php",
+					//url: "/admin/chart",
 					reader: {
 						type: "json",
 						root: "items"

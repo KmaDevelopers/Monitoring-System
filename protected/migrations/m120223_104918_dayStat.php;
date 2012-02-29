@@ -18,14 +18,4 @@ class m120223_104918_dayStat extends CDbMigration
 		$this->dropTable('DayStatistics');
 	}
 
-	/*
-	// Use safeUp/safeDown to do migration with transaction
-	public function safeUp()
-	{
-	}
-
-	public function safeDown()
-	{
-	}
-	*/
 }

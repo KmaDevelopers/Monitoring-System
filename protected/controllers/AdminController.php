@@ -37,64 +37,82 @@ class AdminController extends KmaController {
 			$dateFrom = $filter['startFrom'];
 			$dateTo = $filter['endTo'];
 			$sensorIds = $filter['sensorIds'];
-			$sensorList = implode(',',$sensorIds);
+		} else {
+			$date = time();
 			
-			$sql = "select sensorId,serial from Sensor where sensorId in ({$sensorList})";
-			$res = Yii::app()->db->createCommand($sql)->queryAll(false);
-			
-			$sensorSerialById = array();
-			
-			foreach($res as $v){
-				$sensorSerialById[$v[0]] = $v[1];
-			}
-			
-			$tableName = 'Statistics'; // change table name when we change period
-			
-			$sql = "
-				select DATE_FORMAT(date,'%Y-%m-%d %H:%i'),sensorId,AVG(temperature)
-				FROM {$tableName} `stat`
-				WHERE date BETWEEN '{$dateFrom}' AND '{$dateTo}'
-				AND sensorId in ({$sensorList})
-				ORDER BY date ASC
-				LIMIT 20
-			";
-			
-			echo $sql;
-			
-			Yii::app()->end();
-			
-			$res = Yii::app()->db->createCommand($sql)->queryAll(false);
-			
-			var_dump($res);
-			
-			Yii::app()->end();
-			
-			$this->result(array(
-					    'period' => '2012-02-22 10:00:00;2012-02-22 11:00:00',
-					    'sensorId1' => '32.4'
-					    ));
-			/**
-			 * calculate period
-			 */
-			
-			
-			/**
-			 * startDate: 2010-02-03 12:00:00
-			 * endDate: 2010-02-03 22:00:00
-			 * 
-			 * [{
-			 *	name: "2010-02-03 12:00",
-			 *	sensor0: "24"
-			 * }, {
-			 * 	name: "2010-02-03 13:00",
-			 *	sensor0: "25"
-			 * }]
-			 *
-			 */
-			Yii::app()->end();	
+			$dateFrom = date('Y-m-d H:i:s',$date-(60*60*2));
+			$dateTo = date('Y-m-d H:i:s',$date);
+			$sensorIds = Yii::app()->db->createCommand("select * from Sensor where active = 1")->queryColumn();
 		}
 		
-		$this->result(array(),0);
+		
+		$sensorList = implode(',',$sensorIds);
+		
+		$sql = "select sensorId,serial from Sensor where sensorId in ({$sensorList})";
+		$res = Yii::app()->db->createCommand($sql)->queryAll(false);
+		
+		$sensorSerialById = array();
+		
+		foreach($res as $v){
+			$sensorSerialById[$v[0]] = $v[1];
+		}
+		
+		$tableName = 'Statistics'; // change table name when we change period
+		
+		//$sql = "
+		//	select DATE_FORMAT(date,'%Y-%m-%d %H:%i'),sensorId,AVG(temperature)
+		//	FROM {$tableName} `stat`
+		//	WHERE date BETWEEN '{$dateFrom}' AND '{$dateTo}'
+		//	AND sensorId in ({$sensorList})
+		//	ORDER BY date ASC
+		//	LIMIT 20
+		//";
+		
+		$period = abs(strtotime($dateTo) - strtotime($dateFrom));
+		
+		if($period <= (60*60*2)){ // 2 hours
+			$tableName = 'Statistics';
+		}elseif($period > (60*60*2) && $period < (60*60*24)){ // 1 day
+			$tableName = 'HourStatistics';
+		}elseif($period > (60*60*24) && $period < (60*60*24 * 2)){ // 2 day
+			$tableName = 'DayStatistics';
+		}else{
+			$tableName = 'MonthStatistics';
+		}
+		
+		$sql = "
+			select DATE_FORMAT(date,'%Y-%m-%d %H:%i'),sensorId,temperature
+			FROM {$tableName} `stat`
+			WHERE date BETWEEN '{$dateFrom}' AND '{$dateTo}'
+			AND sensorId in ({$sensorList})
+			ORDER BY date ASC
+		";
+		
+		
+		$res = Yii::app()->db->createCommand($sql)->queryAll(false);
+				
+		$data = array();
+		
+		foreach($res as $v){
+			$data[$v[0]][] = $v;
+		}
+		
+		$items = array();
+		
+		foreach($data as $d => $v) {
+			$it = array();
+			
+			$it['name'] = $d;
+			foreach($v as $i){
+				$it[$sensorSerialById[(int)$i[1]]] = $i[2]; // $it[1] sensorId
+			}
+			
+			$items[] = $it; 
+		}
+		
+		$this->result($items,count($items));
+		
+		Yii::app()->end();
 	}
 	
 }
