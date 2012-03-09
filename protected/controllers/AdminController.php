@@ -1,8 +1,6 @@
 <?php
 
 class AdminController extends KmaController {
-
-	
 	
 	public $layout = 'admin';
 
@@ -33,7 +31,7 @@ class AdminController extends KmaController {
 		//Yii::app()->end();
 		
 		if(isset($_REQUEST['filter']) && !empty($_REQUEST['filter'])){
-			$filter = $_REQUEST['filter'];
+			$filter = CJSON::decode($_REQUEST['filter']);
 			$dateFrom = $filter['startDate'];
 			$dateTo = $filter['endDate'];
 			$sensorIds = $filter['sensorIds'];
@@ -55,7 +53,7 @@ class AdminController extends KmaController {
 		
 		$sensorSerialById = array();
 		
-		foreach($res as $v){
+		foreach ($res as $v) {
 			$sensorSerialById[$v[0]] = $v[1];
 		}
 		
@@ -69,7 +67,7 @@ class AdminController extends KmaController {
 		//	ORDER BY date ASC
 		//	LIMIT 20
 		//";
-		
+
 		$period = abs(strtotime($dateTo) - strtotime($dateFrom));
 		
 		if($period <= (60*60*2)){ // 2 hours
