@@ -43,7 +43,7 @@
 			"file": "protected/controllers/AdminController.php",
 			"settings":
 			{
-				"buffer_size": 2893,
+				"buffer_size": 3002,
 				"line_ending": "Unix"
 			}
 		},
@@ -60,6 +60,14 @@
 			"settings":
 			{
 				"buffer_size": 2347,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "adminJs/app/view/server/ServerGraphicWindow.js",
+			"settings":
+			{
+				"buffer_size": 7708,
 				"line_ending": "Unix"
 			}
 		}
@@ -146,7 +154,7 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 4,
 			"sheets":
 			[
 				{
@@ -181,15 +189,15 @@
 					"file": "protected/controllers/AdminController.php",
 					"settings":
 					{
-						"buffer_size": 2893,
+						"buffer_size": 3002,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2655,
-								2655
+								0,
+								0
 							]
 						],
 						"settings":
@@ -256,6 +264,32 @@
 						"zoom_level": 1.0
 					},
 					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "adminJs/app/view/server/ServerGraphicWindow.js",
+					"settings":
+					{
+						"buffer_size": 7708,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3005,
+								3005
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 4725.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
 				}
 			]
 		}
@@ -301,6 +335,10 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"servergra",
+				"adminJs/app/view/server/ServerGraphicWindow.js"
+			],
 			[
 				"server",
 				"adminJs/app/view/server/ServerGraphicWindow.js"

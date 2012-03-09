@@ -34,19 +34,43 @@ Ext.define("MsAdmin.view.server.ServerGraphicWindow", {
 			}),
 		]);
 	},
+
+	getSeriesConfig: function(fields) {
+		var series = [];	
+
+		Ext.each(fields, function(serial) {
+			series.push({
+				type: 'line',
+	            highlight: {
+	                size: 7,
+	                radius: 7
+	            },
+	            axis: 'left',
+	            xField: 'name',
+	            fill: false,
+	            yField: serial,
+	            markerConfig: {
+	                type: 'cross',
+	                size: 4,
+	                radius: 4,
+	                'stroke-width': 0
+	            }
+			});
+		});
+
+		return series;
+	},
+
 	loadModel: function(model) {
-		this.setTitle('Server ' + model.get('name'));
+		this.model = model;
 		var sensorCombo = this.down("[ref='SensorCombo']");
+		this.setTitle('Server ' + model.get('name'));
 		this.removeAll(true);
 
-		var fields = [
-			'name', 
-			'sensor0',
-			'sensor1',
-			'sensor2',
-			'sensor3',
-			'sensor4'
-		];
+		var fields = [];
+        model.sensors().each(function(sensor) {
+        	fields.push(sensor.get('serial'));
+        });
 
 		this.storeFields = fields;
 
@@ -63,7 +87,7 @@ Ext.define("MsAdmin.view.server.ServerGraphicWindow", {
                 type: 'Numeric',
                 minimum: 0,
                 position: 'left',
-                fields: ['sensor0', 'sensor1', 'sensor2'],
+                fields: fields,
                 title: 'Temperature',
                 minorTickSteps: 1,
                 grid: {
@@ -78,91 +102,58 @@ Ext.define("MsAdmin.view.server.ServerGraphicWindow", {
                 type: 'Category',
                 position: 'bottom',
                 fields: ['name'],
-                title: 'Month of the Year',
+                title: 'Time axes',
                 label: {
                     rotate: {
                         degrees: 315
                     }
 	            }
             }],
-            series: [{
-                type: 'line',
-                highlight: {
-                    size: 7,
-                    radius: 7
-                },
-                axis: 'left',
-                xField: 'name',
-                fill: false,
-                yField: 'sensor0',
-                markerConfig: {
-                    type: 'cross',
-                    size: 4,
-                    radius: 4,
-                    'stroke-width': 0
-                }
-            }, {
-                type: 'line',
-                highlight: {
-                    size: 7,
-                    radius: 7
-                },
-                axis: 'left',
-                smooth: true,
-                xField: 'name',
-                fill: false,
-                yField: 'sensor1',
-                markerConfig: {
-                    type: 'circle',
-                    size: 4,
-                    radius: 4,
-                    'stroke-width': 0
-                }
-            }, {
-                type: 'line',
-                highlight: {
-                    size: 7,
-                    radius: 7
-                },
-                axis: 'left',
-                smooth: true,
-                fill: false,
-                xField: 'name',
-                yField: 'sensor2',
-                markerConfig: {
-                    type: 'circle',
-                    size: 4,
-                    radius: 4,
-                    'stroke-width': 0
-                }
-            }],
-	        store: Ext.create("Ext.data.Store", {
-				fields: fields,
-				proxy: {
-					type: "ajax",
-					//url: "./adminJs/app/mock/stats.php",
-					url: "/admin/chart",
-					reader: {
-						type: "json",
-						root: "items"
-					}
-				},
-				autoLoad: true
-			})
+            series: this.getSeriesConfig(fields),
+	        store: (function() {
+	        	var store =Ext.create("Ext.data.Store", {
+					fields: (function() {
+						var modelFields = [];
+						Ext.each(fields, function(field) {
+							modelFields.push({
+								name: field,
+								type: "float"
+							});
+						});
+
+						return modelFields;
+					})().concat(['name']),
+					proxy: {
+						type: "ajax",
+						url: "./admin/chart",
+						//url: "./adminJs/app/mock/stats.php",
+						reader: {
+							type: "json",
+							root: "items"
+						},
+						extraParams: {
+							filter: Ext.encode({
+								startDate: Ext.Date.format(new Date(Ext.Date.now() - 1000 * 60 * 120), "Y-m-d H:i:s"),
+								endDate: Ext.Date.format(new Date(), "Y-m-d H:i:s"),
+								sensorIds: (function() {
+									var ids = [];
+									model.sensors().each(function(sensor) {
+										ids.push(sensor.get("sensorId"));
+									});
+
+									return ids;
+								})()
+							})
+						}
+					},
+					autoLoad: true
+				});
+
+	        	return store;
+	        })()
 		});
 
-        // var fields = [];
-        // model.sensors().each(function(sensor) {
-        // 	fields.push(sensor.get('serial'));
-        // });
-
-        // chart.axes.addAll();
-
-        // chart.series.addAll();
-
-        //chart.bindStore();
-
-		//sensorCombo.bindStore(model.sensors());
+		chart.store.getProxy().extraParams = {};
 	},
 
 	getCmpDockedItems: function() {
@@ -219,12 +210,35 @@ Ext.define("MsAdmin.view.server.ServerGraphicWindow", {
 
 	onRenderButtonClick: function(button) {
 		var toolbar = button.up("toolbar");
+		var chart = button.up("window").down('TemperatureGraphic');
+		var store = chart.store;
+		var sensors = this.model.sensors();
+		var sensorIds = [];
+		var fields = this.storeFields;
 
-		button.up("window").down('TemperatureGraphic').store.load({
+		chart.series.each(function(item, index) {
+			var serial = fields[index];
+			var sensorId = sensors.getAt(sensors.findExact("serial", serial)).get("sensorId");
+
+			sensorIds.push(sensorId);
+		}, this);
+
+		store.getProxy().extraParams = {};
+		store.load({
 			params: {
-				startDate: this.getStartDate(),
-				endDate: this.getEndDate()
-			}
+				filter: Ext.encode({
+					startDate: this.getStartDate(),
+					endDate: this.getEndDate(),
+					sensorIds: sensorIds
+				})
+			},
+			callback: (function(store) {
+				return function(me) {
+					if(store.getCount() == 0) {
+						store.removeAll();
+					}
+				}
+			})(store)
 		});
 	},
 
@@ -270,10 +284,15 @@ Ext.define("MsAdmin.view.server.ServerGraphicWindow", {
 		var chart = this.down("chart");
 		var fields = this.storeFields;
 		var filters = [];
+		var model = this.model,
+			sensors = model.sensors();
 
 		chart.series.each(function(item, index) {
 			if(item.visibleInLegend()) {
-				filters.push(fields[index + 1]);
+				var serial = fields[index + 1];
+				var sensorId = sensors.getAt(sensors.findExact("serial", serial)).get("sensorId");
+
+				filters.push(sensorId);
 			}
 		}, this);
 
@@ -282,7 +301,9 @@ Ext.define("MsAdmin.view.server.ServerGraphicWindow", {
 			params: {
 				startDate: this.getStartDate(),
 				endDate: this.getEndDate(),
-				'sensorId[]': filters
+				filter: Ext.encode({
+					'sensorIds': filters
+				})
 			},
 			success: function(response) {
 				var result = Ext.decode(response, true);
