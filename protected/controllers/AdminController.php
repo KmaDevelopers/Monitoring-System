@@ -32,9 +32,9 @@ class AdminController extends KmaController {
 		
 		if(isset($_REQUEST['filter']) && !empty($_REQUEST['filter'])){
 			$filter = CJSON::decode($_REQUEST['filter']);
-			$dateFrom = $filter['startDate'];
-			$dateTo = $filter['endDate'];
-			$sensorIds = $filter['sensorIds'];
+			$dateFrom = isset($filter['startDate']) ? $filter['startDate'] : null;
+			$dateTo = isset($filter['endDate']) ? $filter['endDate'] : null;
+			$sensorIds = isset($filter['sensorIds']) ? $filter['sensorIds'] : null;
 		} else {
 			$date = time();			
 			$dateFrom = date('Y-m-d H:i:s',$date-(60*60*2));

@@ -57,9 +57,12 @@ Ext.define("MsAdmin.view.server.ServerGraphicWindow", {
 	            }
 			});
 		});
+
+		return series;
 	},
 
 	loadModel: function(model) {
+		this.model = model;
 		var sensorCombo = this.down("[ref='SensorCombo']");
 		this.setTitle('Server ' + model.get('name'));
 		this.removeAll(true);
@@ -99,7 +102,7 @@ Ext.define("MsAdmin.view.server.ServerGraphicWindow", {
                 type: 'Category',
                 position: 'bottom',
                 fields: ['name'],
-                title: 'Month of the Year',
+                title: 'Time axes',
                 label: {
                     rotate: {
                         degrees: 315
@@ -107,32 +110,50 @@ Ext.define("MsAdmin.view.server.ServerGraphicWindow", {
 	            }
             }],
             series: this.getSeriesConfig(fields),
-	        store: Ext.create("Ext.data.Store", {
-				fields: fields,
-				proxy: {
-					type: "ajax",
-					url: "./admin/chart",
-					//url: "./adminJs/app/mock/stats.php",
-					reader: {
-						type: "json",
-						root: "items"
-					},
-					extraParams: {
-						filter: Ext.encode({
-							sensorIds: (function() {
-								var ids = [];
-								model.sensors().each(function(sensor) {
-									ids.push(sensor.get("sensorId"));
-								});
+	        store: (function() {
+	        	var store =Ext.create("Ext.data.Store", {
+					fields: (function() {
+						var modelFields = [];
+						Ext.each(fields, function(field) {
+							modelFields.push({
+								name: field,
+								type: "float"
+							});
+						});
 
-								return ids;
-							})()
-						})
-					}
-				},
-				autoLoad: true
-			})
+						return modelFields;
+					})().concat(['name']),
+					proxy: {
+						type: "ajax",
+						url: "./admin/chart",
+						//url: "./adminJs/app/mock/stats.php",
+						reader: {
+							type: "json",
+							root: "items"
+						},
+						extraParams: {
+							filter: Ext.encode({
+								startDate: Ext.Date.format(new Date(Ext.Date.now() - 1000 * 60 * 120), "Y-m-d H:i:s"),
+								endDate: Ext.Date.format(new Date(), "Y-m-d H:i:s"),
+								sensorIds: (function() {
+									var ids = [];
+									model.sensors().each(function(sensor) {
+										ids.push(sensor.get("sensorId"));
+									});
+
+									return ids;
+								})()
+							})
+						}
+					},
+					autoLoad: true
+				});
+
+	        	return store;
+	        })()
 		});
+
+		chart.store.getProxy().extraParams = {};
 	},
 
 	getCmpDockedItems: function() {
@@ -189,12 +210,35 @@ Ext.define("MsAdmin.view.server.ServerGraphicWindow", {
 
 	onRenderButtonClick: function(button) {
 		var toolbar = button.up("toolbar");
+		var chart = button.up("window").down('TemperatureGraphic');
+		var store = chart.store;
+		var sensors = this.model.sensors();
+		var sensorIds = [];
+		var fields = this.storeFields;
 
-		button.up("window").down('TemperatureGraphic').store.load({
+		chart.series.each(function(item, index) {
+			var serial = fields[index];
+			var sensorId = sensors.getAt(sensors.findExact("serial", serial)).get("sensorId");
+
+			sensorIds.push(sensorId);
+		}, this);
+
+		store.getProxy().extraParams = {};
+		store.load({
 			params: {
-				startDate: this.getStartDate(),
-				endDate: this.getEndDate()
-			}
+				filter: Ext.encode({
+					startDate: this.getStartDate(),
+					endDate: this.getEndDate(),
+					sensorIds: sensorIds
+				})
+			},
+			callback: (function(store) {
+				return function(me) {
+					if(store.getCount() == 0) {
+						store.removeAll();
+					}
+				}
+			})(store)
 		});
 	},
 
@@ -240,10 +284,15 @@ Ext.define("MsAdmin.view.server.ServerGraphicWindow", {
 		var chart = this.down("chart");
 		var fields = this.storeFields;
 		var filters = [];
+		var model = this.model,
+			sensors = model.sensors();
 
 		chart.series.each(function(item, index) {
 			if(item.visibleInLegend()) {
-				filters.push(fields[index + 1]);
+				var serial = fields[index + 1];
+				var sensorId = sensors.getAt(sensors.findExact("serial", serial)).get("sensorId");
+
+				filters.push(sensorId);
 			}
 		}, this);
 
@@ -252,7 +301,9 @@ Ext.define("MsAdmin.view.server.ServerGraphicWindow", {
 			params: {
 				startDate: this.getStartDate(),
 				endDate: this.getEndDate(),
-				'sensorId[]': filters
+				filter: Ext.encode({
+					'sensorIds': filters
+				})
 			},
 			success: function(response) {
 				var result = Ext.decode(response, true);
