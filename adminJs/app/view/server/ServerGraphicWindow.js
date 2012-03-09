@@ -34,19 +34,40 @@ Ext.define("MsAdmin.view.server.ServerGraphicWindow", {
 			}),
 		]);
 	},
+
+	getSeriesConfig: function(fields) {
+		var series = [];	
+
+		Ext.each(fields, function(serial) {
+			series.push({
+				type: 'line',
+	            highlight: {
+	                size: 7,
+	                radius: 7
+	            },
+	            axis: 'left',
+	            xField: 'name',
+	            fill: false,
+	            yField: serial,
+	            markerConfig: {
+	                type: 'cross',
+	                size: 4,
+	                radius: 4,
+	                'stroke-width': 0
+	            }
+			});
+		});
+	},
+
 	loadModel: function(model) {
-		this.setTitle('Server ' + model.get('name'));
 		var sensorCombo = this.down("[ref='SensorCombo']");
+		this.setTitle('Server ' + model.get('name'));
 		this.removeAll(true);
 
-		var fields = [
-			'name', 
-			'sensor0',
-			'sensor1',
-			'sensor2',
-			'sensor3',
-			'sensor4'
-		];
+		var fields = [];
+        model.sensors().each(function(sensor) {
+        	fields.push(sensor.get('serial'));
+        });
 
 		this.storeFields = fields;
 
@@ -63,7 +84,7 @@ Ext.define("MsAdmin.view.server.ServerGraphicWindow", {
                 type: 'Numeric',
                 minimum: 0,
                 position: 'left',
-                fields: ['sensor0', 'sensor1', 'sensor2'],
+                fields: fields,
                 title: 'Temperature',
                 minorTickSteps: 1,
                 grid: {
@@ -85,84 +106,33 @@ Ext.define("MsAdmin.view.server.ServerGraphicWindow", {
                     }
 	            }
             }],
-            series: [{
-                type: 'line',
-                highlight: {
-                    size: 7,
-                    radius: 7
-                },
-                axis: 'left',
-                xField: 'name',
-                fill: false,
-                yField: 'sensor0',
-                markerConfig: {
-                    type: 'cross',
-                    size: 4,
-                    radius: 4,
-                    'stroke-width': 0
-                }
-            }, {
-                type: 'line',
-                highlight: {
-                    size: 7,
-                    radius: 7
-                },
-                axis: 'left',
-                smooth: true,
-                xField: 'name',
-                fill: false,
-                yField: 'sensor1',
-                markerConfig: {
-                    type: 'circle',
-                    size: 4,
-                    radius: 4,
-                    'stroke-width': 0
-                }
-            }, {
-                type: 'line',
-                highlight: {
-                    size: 7,
-                    radius: 7
-                },
-                axis: 'left',
-                smooth: true,
-                fill: false,
-                xField: 'name',
-                yField: 'sensor2',
-                markerConfig: {
-                    type: 'circle',
-                    size: 4,
-                    radius: 4,
-                    'stroke-width': 0
-                }
-            }],
+            series: this.getSeriesConfig(fields),
 	        store: Ext.create("Ext.data.Store", {
 				fields: fields,
 				proxy: {
 					type: "ajax",
-					url: "./adminJs/app/mock/stats.php",
-					//url: "/admin/chart",
+					url: "./admin/chart",
+					//url: "./adminJs/app/mock/stats.php",
 					reader: {
 						type: "json",
 						root: "items"
+					},
+					extraParams: {
+						filter: Ext.encode({
+							sensorIds: (function() {
+								var ids = [];
+								model.sensors().each(function(sensor) {
+									ids.push(sensor.get("sensorId"));
+								});
+
+								return ids;
+							})()
+						})
 					}
 				},
 				autoLoad: true
 			})
 		});
-
-        // var fields = [];
-        // model.sensors().each(function(sensor) {
-        // 	fields.push(sensor.get('serial'));
-        // });
-
-        // chart.axes.addAll();
-
-        // chart.series.addAll();
-
-        //chart.bindStore();
-
-		//sensorCombo.bindStore(model.sensors());
 	},
 
 	getCmpDockedItems: function() {
