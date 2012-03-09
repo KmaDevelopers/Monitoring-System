@@ -74,7 +74,7 @@ class AdminController extends KmaController {
 			$tableName = 'Statistics';
 		}elseif($period > (60*60*2) && $period < (60*60*24)){ // 1 day
 			$tableName = 'HourStatistics';
-		}elseif($period > (60*60*24) && $period < (60*60*24 * 2)){ // 2 day
+		}elseif($period > (60*60*24) && $period < (60*60*24 * 20)){ // 20 day
 			$tableName = 'DayStatistics';
 		}else{
 			$tableName = 'MonthStatistics';

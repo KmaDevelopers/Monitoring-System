@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"dec",
+				"dechex"
+			],
+			[
+				"dat",
+				"dates"
+			],
+			[
+				"sen",
+				"sensorIds"
+			],
+			[
 				"s",
 				"show"
 			],
@@ -19,6 +31,38 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "protected/migrations/m110926_122500_AddStatistics.php",
+			"settings":
+			{
+				"buffer_size": 402,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "protected/controllers/AdminController.php",
+			"settings":
+			{
+				"buffer_size": 2893,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "protected/views/layouts/admin.php",
+			"settings":
+			{
+				"buffer_size": 1570,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "protected/controllers/GraphicController.php",
+			"settings":
+			{
+				"buffer_size": 2347,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -52,6 +96,11 @@
 	},
 	"file_history":
 	[
+		"/home/artem/htdocs/Monitoring-System/adminJs/app/view/server/ServerGraphicWindow.js",
+		"/home/artem/htdocs/Monitoring-System/protected/migrations/m111129_181922_someData.php",
+		"/home/artem/htdocs/Monitoring-System/protected/migrations/m111209_124601_DayStat.php",
+		"/home/artem/htdocs/Monitoring-System/protected/controllers/AdminController.php",
+		"/home/artem/htdocs/Monitoring-System/adminJs/lib/ext-4.0.7-gpl/docs/output/Ext.layout.container.boxOverflow.None.js",
 		"/home/artem/Projects/Betfair/pyqtT.py",
 		"/home/artem/Projects/Betfair/bfpy-1.13/makedoc.sh",
 		"/home/artem/Projects/Betfair/bfpy-1.13/epydoc.config",
@@ -77,6 +126,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"		",
 			"epydoc.py",
 			"Downloads"
 		],
@@ -96,8 +146,117 @@
 	"groups":
 	[
 		{
+			"selected": 3,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "protected/migrations/m110926_122500_AddStatistics.php",
+					"settings":
+					{
+						"buffer_size": 402,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "protected/controllers/AdminController.php",
+					"settings":
+					{
+						"buffer_size": 2893,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2655,
+								2655
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 945.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "protected/views/layouts/admin.php",
+					"settings":
+					{
+						"buffer_size": 1570,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								346,
+								346
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "protected/controllers/GraphicController.php",
+					"settings":
+					{
+						"buffer_size": 2347,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1051,
+								1051
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 238.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -143,6 +302,22 @@
 		"selected_items":
 		[
 			[
+				"server",
+				"adminJs/app/view/server/ServerGraphicWindow.js"
+			],
+			[
+				"a",
+				"protected/controllers/AdminController.php"
+			],
+			[
+				"admin",
+				"protected/controllers/AdminController.php"
+			],
+			[
+				"admion",
+				"adminJs/lib/ext-4.0.7-gpl/docs/output/Ext.layout.container.boxOverflow.None.js"
+			],
+			[
 				"epy",
 				"src/tests/events.py"
 			]
@@ -161,6 +336,6 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 150.0,
+	"side_bar_width": 256.0,
 	"status_bar_visible": true
 }

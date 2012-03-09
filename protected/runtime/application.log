@@ -667,3 +667,373 @@ Stack trace:
 #3 /home/artem/htdocs/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
 #4 /home/artem/htdocs/Monitoring-System/index.php(13): CApplication->run()
 #5 {main} REQUEST_URI=/admin/adminJs/lib/extjs/ext-all-dev.js
+2012/03/09 21:40:38 [error] [exception.CDbException] exception 'CDbException' with message 'CDbConnection failed to open the DB connection: SQLSTATE[28000] [1045] Access denied for user 'kma'@'localhost' (using password: YES)' in /home/artem/htdocs/Monitoring-System/protected/yii/framework/db/CDbConnection.php:348
+Stack trace:
+#0 /home/artem/htdocs/Monitoring-System/protected/yii/framework/db/CDbConnection.php(297): CDbConnection->open()
+#1 /home/artem/htdocs/Monitoring-System/protected/yii/framework/db/CDbConnection.php(275): CDbConnection->setActive(true)
+#2 /home/artem/htdocs/Monitoring-System/protected/yii/framework/base/CModule.php(372): CDbConnection->init()
+#3 /home/artem/htdocs/Monitoring-System/protected/yii/framework/base/CApplication.php(426): CModule->getComponent('db')
+#4 /home/artem/htdocs/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(607): CApplication->getDb()
+#5 /home/artem/htdocs/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(2236): CActiveRecord->getDbConnection()
+#6 /home/artem/htdocs/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(371): CActiveRecordMetaData->__construct(Object(Sensor))
+#7 /home/artem/htdocs/Monitoring-System/protected/components/actions/GetAction.php(18): CActiveRecord::model('Sensor')
+#8 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/actions/CAction.php(72): GetAction->run()
+#9 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php(300): CAction->runWithParams(Array)
+#10 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(GetAction))
+#11 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#12 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php(1122): CFilter->filter(Object(CFilterChain))
+#13 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#14 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#15 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#16 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php(257): CController->runActionWithFilters(Object(GetAction), Array)
+#17 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('get')
+#18 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('sensor/get')
+#19 /home/artem/htdocs/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#20 /home/artem/htdocs/Monitoring-System/index.php(13): CApplication->run()
+#21 {main} REQUEST_URI=/sensor?_dc=1331322038628&page=1&start=0&limit=25
+2012/03/09 21:40:38 [error] [exception.CDbException] exception 'CDbException' with message 'CDbConnection failed to open the DB connection: SQLSTATE[28000] [1045] Access denied for user 'kma'@'localhost' (using password: YES)' in /home/artem/htdocs/Monitoring-System/protected/yii/framework/db/CDbConnection.php:348
+Stack trace:
+#0 /home/artem/htdocs/Monitoring-System/protected/yii/framework/db/CDbConnection.php(297): CDbConnection->open()
+#1 /home/artem/htdocs/Monitoring-System/protected/yii/framework/db/CDbConnection.php(275): CDbConnection->setActive(true)
+#2 /home/artem/htdocs/Monitoring-System/protected/yii/framework/base/CModule.php(372): CDbConnection->init()
+#3 /home/artem/htdocs/Monitoring-System/protected/yii/framework/base/CApplication.php(426): CModule->getComponent('db')
+#4 /home/artem/htdocs/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(607): CApplication->getDb()
+#5 /home/artem/htdocs/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(2236): CActiveRecord->getDbConnection()
+#6 /home/artem/htdocs/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(371): CActiveRecordMetaData->__construct(Object(Sensor))
+#7 /home/artem/htdocs/Monitoring-System/protected/components/actions/GetAction.php(18): CActiveRecord::model('Sensor')
+#8 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/actions/CAction.php(72): GetAction->run()
+#9 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php(300): CAction->runWithParams(Array)
+#10 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(GetAction))
+#11 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#12 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php(1122): CFilter->filter(Object(CFilterChain))
+#13 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#14 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#15 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#16 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php(257): CController->runActionWithFilters(Object(GetAction), Array)
+#17 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('get')
+#18 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('sensor/get')
+#19 /home/artem/htdocs/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#20 /home/artem/htdocs/Monitoring-System/index.php(13): CApplication->run()
+#21 {main} REQUEST_URI=/sensor?_dc=1331322038626&page=1&start=0&limit=25
+2012/03/09 21:40:40 [error] [exception.CDbException] exception 'CDbException' with message 'CDbConnection failed to open the DB connection: SQLSTATE[28000] [1045] Access denied for user 'kma'@'localhost' (using password: YES)' in /home/artem/htdocs/Monitoring-System/protected/yii/framework/db/CDbConnection.php:348
+Stack trace:
+#0 /home/artem/htdocs/Monitoring-System/protected/yii/framework/db/CDbConnection.php(297): CDbConnection->open()
+#1 /home/artem/htdocs/Monitoring-System/protected/yii/framework/db/CDbConnection.php(275): CDbConnection->setActive(true)
+#2 /home/artem/htdocs/Monitoring-System/protected/yii/framework/base/CModule.php(372): CDbConnection->init()
+#3 /home/artem/htdocs/Monitoring-System/protected/yii/framework/base/CApplication.php(426): CModule->getComponent('db')
+#4 /home/artem/htdocs/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(607): CApplication->getDb()
+#5 /home/artem/htdocs/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(2236): CActiveRecord->getDbConnection()
+#6 /home/artem/htdocs/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(371): CActiveRecordMetaData->__construct(Object(Sensor))
+#7 /home/artem/htdocs/Monitoring-System/protected/components/actions/GetAction.php(18): CActiveRecord::model('Sensor')
+#8 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/actions/CAction.php(72): GetAction->run()
+#9 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php(300): CAction->runWithParams(Array)
+#10 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(GetAction))
+#11 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#12 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php(1122): CFilter->filter(Object(CFilterChain))
+#13 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#14 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#15 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#16 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php(257): CController->runActionWithFilters(Object(GetAction), Array)
+#17 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('get')
+#18 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('sensor/get')
+#19 /home/artem/htdocs/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#20 /home/artem/htdocs/Monitoring-System/index.php(13): CApplication->run()
+#21 {main} REQUEST_URI=/sensor?_dc=1331322040631&page=1&start=0&limit=25
+2012/03/09 21:40:41 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "adminjs".' in /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php(262): CController->missingAction('adminjs')
+#1 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('adminjs')
+#2 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/adminJs/l...')
+#3 /home/artem/htdocs/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /home/artem/htdocs/Monitoring-System/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/adminJs/lib/extjs/resources/css/ext-all-gray.css
+2012/03/09 21:40:41 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "adminjs".' in /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php(262): CController->missingAction('adminjs')
+#1 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('adminjs')
+#2 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/adminJs/a...')
+#3 /home/artem/htdocs/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /home/artem/htdocs/Monitoring-System/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/adminJs/app.js?1331322041
+2012/03/09 21:40:41 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "adminjs".' in /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php(262): CController->missingAction('adminjs')
+#1 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('adminjs')
+#2 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/adminJs/l...')
+#3 /home/artem/htdocs/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /home/artem/htdocs/Monitoring-System/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/adminJs/lib/extjs/ext-all-dev.js
+2012/03/09 21:40:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "adminjs".' in /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php(262): CController->missingAction('adminjs')
+#1 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('adminjs')
+#2 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/adminJs/l...')
+#3 /home/artem/htdocs/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /home/artem/htdocs/Monitoring-System/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/adminJs/lib/extjs/ext-all-dev.js
+2012/03/09 21:40:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "adminjs".' in /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php(262): CController->missingAction('adminjs')
+#1 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('adminjs')
+#2 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/adminJs/a...')
+#3 /home/artem/htdocs/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /home/artem/htdocs/Monitoring-System/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/adminJs/app.js?1331322049
+2012/03/09 21:40:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "adminjs".' in /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php(262): CController->missingAction('adminjs')
+#1 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('adminjs')
+#2 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/adminJs/l...')
+#3 /home/artem/htdocs/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /home/artem/htdocs/Monitoring-System/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/adminJs/lib/extjs/resources/css/ext-all-gray.css
+2012/03/09 21:40:50 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "adminjs".' in /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php(262): CController->missingAction('adminjs')
+#1 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('adminjs')
+#2 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/adminJs/l...')
+#3 /home/artem/htdocs/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /home/artem/htdocs/Monitoring-System/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/adminJs/lib/extjs/resources/css/ext-all-gray.css
+2012/03/09 21:40:50 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "adminjs".' in /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php(262): CController->missingAction('adminjs')
+#1 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('adminjs')
+#2 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/adminJs/l...')
+#3 /home/artem/htdocs/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /home/artem/htdocs/Monitoring-System/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/adminJs/lib/extjs/ext-all-dev.js
+2012/03/09 21:40:50 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "adminjs".' in /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php(262): CController->missingAction('adminjs')
+#1 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('adminjs')
+#2 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/adminJs/a...')
+#3 /home/artem/htdocs/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /home/artem/htdocs/Monitoring-System/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/adminJs/app.js?1331322050
+2012/03/09 21:40:50 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "adminjs".' in /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php(262): CController->missingAction('adminjs')
+#1 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('adminjs')
+#2 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/adminJs/l...')
+#3 /home/artem/htdocs/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /home/artem/htdocs/Monitoring-System/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/adminJs/lib/extjs/resources/css/ext-all-gray.css
+2012/03/09 21:40:50 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "adminjs".' in /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php(262): CController->missingAction('adminjs')
+#1 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('adminjs')
+#2 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/adminJs/a...')
+#3 /home/artem/htdocs/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /home/artem/htdocs/Monitoring-System/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/adminJs/app.js?1331322050
+2012/03/09 21:40:50 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "adminjs".' in /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php(262): CController->missingAction('adminjs')
+#1 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('adminjs')
+#2 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/adminJs/l...')
+#3 /home/artem/htdocs/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /home/artem/htdocs/Monitoring-System/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/adminJs/lib/extjs/ext-all-dev.js
+2012/03/09 21:40:50 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "adminjs".' in /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php(262): CController->missingAction('adminjs')
+#1 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('adminjs')
+#2 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/adminJs/a...')
+#3 /home/artem/htdocs/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /home/artem/htdocs/Monitoring-System/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/adminJs/app.js?1331322050
+2012/03/09 21:40:50 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "adminjs".' in /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php(262): CController->missingAction('adminjs')
+#1 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('adminjs')
+#2 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/adminJs/l...')
+#3 /home/artem/htdocs/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /home/artem/htdocs/Monitoring-System/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/adminJs/lib/extjs/resources/css/ext-all-gray.css
+2012/03/09 21:40:50 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "adminjs".' in /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php(262): CController->missingAction('adminjs')
+#1 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('adminjs')
+#2 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/adminJs/l...')
+#3 /home/artem/htdocs/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /home/artem/htdocs/Monitoring-System/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/adminJs/lib/extjs/ext-all-dev.js
+2012/03/09 21:40:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "adminjs".' in /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php(262): CController->missingAction('adminjs')
+#1 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('adminjs')
+#2 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/adminJs/l...')
+#3 /home/artem/htdocs/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /home/artem/htdocs/Monitoring-System/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/adminJs/lib/extjs/resources/css/ext-all-gray.css
+2012/03/09 21:40:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "adminjs".' in /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php(262): CController->missingAction('adminjs')
+#1 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('adminjs')
+#2 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/adminJs/l...')
+#3 /home/artem/htdocs/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /home/artem/htdocs/Monitoring-System/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/adminJs/lib/extjs/ext-all-dev.js
+2012/03/09 21:40:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "adminjs".' in /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php(262): CController->missingAction('adminjs')
+#1 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('adminjs')
+#2 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/adminJs/a...')
+#3 /home/artem/htdocs/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /home/artem/htdocs/Monitoring-System/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/adminJs/app.js?1331322050
+2012/03/09 21:40:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "adminjs".' in /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php(262): CController->missingAction('adminjs')
+#1 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('adminjs')
+#2 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/adminJs/l...')
+#3 /home/artem/htdocs/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /home/artem/htdocs/Monitoring-System/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/adminJs/lib/extjs/resources/css/ext-all-gray.css
+2012/03/09 21:40:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "adminjs".' in /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php(262): CController->missingAction('adminjs')
+#1 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('adminjs')
+#2 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/adminJs/a...')
+#3 /home/artem/htdocs/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /home/artem/htdocs/Monitoring-System/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/adminJs/app.js?1331322051
+2012/03/09 21:40:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "adminjs".' in /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php(262): CController->missingAction('adminjs')
+#1 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('adminjs')
+#2 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/adminJs/l...')
+#3 /home/artem/htdocs/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /home/artem/htdocs/Monitoring-System/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/adminJs/lib/extjs/ext-all-dev.js
+2012/03/09 21:40:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "adminjs".' in /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php(262): CController->missingAction('adminjs')
+#1 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('adminjs')
+#2 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/adminJs/a...')
+#3 /home/artem/htdocs/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /home/artem/htdocs/Monitoring-System/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/adminJs/app.js?1331322051
+2012/03/09 21:40:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "adminjs".' in /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php(262): CController->missingAction('adminjs')
+#1 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('adminjs')
+#2 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/adminJs/l...')
+#3 /home/artem/htdocs/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /home/artem/htdocs/Monitoring-System/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/adminJs/lib/extjs/ext-all-dev.js
+2012/03/09 21:40:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "adminjs".' in /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php(262): CController->missingAction('adminjs')
+#1 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('adminjs')
+#2 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/adminJs/l...')
+#3 /home/artem/htdocs/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /home/artem/htdocs/Monitoring-System/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/adminJs/lib/extjs/resources/css/ext-all-gray.css
+2012/03/09 21:41:46 [error] [exception.CDbException] exception 'CDbException' with message 'CDbConnection failed to open the DB connection: SQLSTATE[28000] [1045] Access denied for user 'kma'@'localhost' (using password: YES)' in /home/artem/htdocs/Monitoring-System/protected/yii/framework/db/CDbConnection.php:348
+Stack trace:
+#0 /home/artem/htdocs/Monitoring-System/protected/yii/framework/db/CDbConnection.php(297): CDbConnection->open()
+#1 /home/artem/htdocs/Monitoring-System/protected/yii/framework/db/CDbConnection.php(275): CDbConnection->setActive(true)
+#2 /home/artem/htdocs/Monitoring-System/protected/yii/framework/base/CModule.php(372): CDbConnection->init()
+#3 /home/artem/htdocs/Monitoring-System/protected/yii/framework/base/CApplication.php(426): CModule->getComponent('db')
+#4 /home/artem/htdocs/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(607): CApplication->getDb()
+#5 /home/artem/htdocs/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(2236): CActiveRecord->getDbConnection()
+#6 /home/artem/htdocs/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(371): CActiveRecordMetaData->__construct(Object(Server))
+#7 /home/artem/htdocs/Monitoring-System/protected/components/actions/GetAction.php(18): CActiveRecord::model('Server')
+#8 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/actions/CAction.php(72): GetAction->run()
+#9 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php(300): CAction->runWithParams(Array)
+#10 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(GetAction))
+#11 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#12 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php(1122): CFilter->filter(Object(CFilterChain))
+#13 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#14 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#15 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#16 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php(257): CController->runActionWithFilters(Object(GetAction), Array)
+#17 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('get')
+#18 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('server/get')
+#19 /home/artem/htdocs/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#20 /home/artem/htdocs/Monitoring-System/index.php(13): CApplication->run()
+#21 {main} REQUEST_URI=/server?_dc=1331322106066&page=1&start=0&limit=25
+2012/03/09 21:43:46 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "adminjs".' in /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php(262): CController->missingAction('adminjs')
+#1 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('adminjs')
+#2 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/adminJs/a...')
+#3 /home/artem/htdocs/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /home/artem/htdocs/Monitoring-System/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/adminJs/app/mock/stats.php?_dc=1331322226718&page=1&start=0&limit=25
+2012/03/09 21:44:03 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "admin".' in /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php(262): CController->missingAction('admin')
+#1 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('admin')
+#2 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/admin/cha...')
+#3 /home/artem/htdocs/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /home/artem/htdocs/Monitoring-System/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/admin/chart/generate
+2012/03/09 21:44:05 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "adminjs".' in /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php(262): CController->missingAction('adminjs')
+#1 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('adminjs')
+#2 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/adminJs/a...')
+#3 /home/artem/htdocs/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /home/artem/htdocs/Monitoring-System/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/adminJs/app/mock/stats.php?_dc=1331322245057&startDate=2012-03-09%2019%3A30%3A00&endDate=2012-03-09%2021%3A30%3A00&page=1&start=0&limit=25
+2012/03/09 21:44:05 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "adminjs".' in /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php(262): CController->missingAction('adminjs')
+#1 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('adminjs')
+#2 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/adminJs/a...')
+#3 /home/artem/htdocs/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /home/artem/htdocs/Monitoring-System/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/adminJs/app/mock/stats.php?_dc=1331322245571&startDate=2012-03-09%2019%3A30%3A00&endDate=2012-03-09%2021%3A30%3A00&page=1&start=0&limit=25
+2012/03/09 21:44:05 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "adminjs".' in /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php(262): CController->missingAction('adminjs')
+#1 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('adminjs')
+#2 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/adminJs/a...')
+#3 /home/artem/htdocs/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /home/artem/htdocs/Monitoring-System/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/adminJs/app/mock/stats.php?_dc=1331322245752&startDate=2012-03-09%2019%3A30%3A00&endDate=2012-03-09%2021%3A30%3A00&page=1&start=0&limit=25
+2012/03/09 21:44:15 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "adminjs".' in /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php(262): CController->missingAction('adminjs')
+#1 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('adminjs')
+#2 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/adminJs/a...')
+#3 /home/artem/htdocs/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /home/artem/htdocs/Monitoring-System/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/adminJs/app/mock/stats.php?_dc=1331322255916&startDate=2012-03-09%2020%3A00%3A00&endDate=2012-03-09%2021%3A30%3A00&page=1&start=0&limit=25
+2012/03/09 21:44:16 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "adminjs".' in /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php(262): CController->missingAction('adminjs')
+#1 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('adminjs')
+#2 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/adminJs/a...')
+#3 /home/artem/htdocs/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /home/artem/htdocs/Monitoring-System/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/adminJs/app/mock/stats.php?_dc=1331322256479&startDate=2012-03-09%2020%3A00%3A00&endDate=2012-03-09%2021%3A30%3A00&page=1&start=0&limit=25
+2012/03/09 21:44:16 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "adminjs".' in /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CController.php(262): CController->missingAction('adminjs')
+#1 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('adminjs')
+#2 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/adminJs/a...')
+#3 /home/artem/htdocs/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /home/artem/htdocs/Monitoring-System/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/adminJs/app/mock/stats.php?_dc=1331322256658&startDate=2012-03-09%2020%3A00%3A00&endDate=2012-03-09%2021%3A30%3A00&page=1&start=0&limit=25
+2012/03/09 22:17:53 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "developer_doc".' in /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('developer_doc')
+#1 /home/artem/htdocs/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /home/artem/htdocs/Monitoring-System/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/developer_doc/
+2012/03/09 22:18:26 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "developer_docs/docs/classref/de_normal.css".' in /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('developer_docs/...')
+#1 /home/artem/htdocs/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /home/artem/htdocs/Monitoring-System/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/developer_docs/docs/classref/de_normal.css
+2012/03/09 22:19:01 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "developer_docs/docs/classref/de_normal.css".' in /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /home/artem/htdocs/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('developer_docs/...')
+#1 /home/artem/htdocs/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /home/artem/htdocs/Monitoring-System/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/developer_docs/docs/classref/de_normal.css
