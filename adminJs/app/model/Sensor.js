@@ -3,15 +3,19 @@ Ext.define("MsAdmin.model.Sensor", {
     idProperty: "sensorId",
 	fields: [
         'sensorId',
-        'serial',
-    	'serverId',
+        'serial', {
+            name: 'serverId',
+            type: "int"
+        },
         'position', 
         'name',
         {
             name: 'x',
+            type: "float",
             defaultValue: 0
         }, {
             name: 'y',
+            type: "float",
             defaultValue: 0
         }, {
             name: 'active',

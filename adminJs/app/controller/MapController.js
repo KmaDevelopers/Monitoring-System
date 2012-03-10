@@ -12,6 +12,9 @@ Ext.define("MsAdmin.controller.MapController", {
 		this.control({
 			'[ref="savePosButton"]': {
 				click: this.onSavePositionClick
+			},
+			'[ref="MapZoomSlider"]': {
+				change: this.doMapZoom
 			}
 		});
 
@@ -22,9 +25,22 @@ Ext.define("MsAdmin.controller.MapController", {
 		MsAdmin.Event.on('sensor.updateVisibility', this.updateSensorVisibility, this);
 	},
 
+	doMapZoom: function(field) {
+		var value = field.getValue();
+		var mapBox = this.getMapLayout().down('[ref="map"]');
+		var toConfig = {
+			width: (mapBox.origin.width + value) + "%",
+			height: (mapBox.origin.height + value) + "%",
+		}
+
+		mapBox.animate({
+			to: toConfig,
+			duration: 0
+		});
+	},
+
 	onSavePositionClick: function() {
-		var sensors = this.getStore('Sensors');
-		sensors.sync();
+		this.server.sensors().sync();
 	},
 
 	updateSensorVisibility: function(model) {
@@ -85,6 +101,8 @@ Ext.define("MsAdmin.controller.MapController", {
 	},
 
 	renderSensors: function(server) {
+		this.server = server;
+
 		Ext.each(this.getMapLayout().query('Sensor'), function(item) {
 			item.destroy();
 		});
