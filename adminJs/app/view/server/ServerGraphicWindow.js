@@ -295,7 +295,7 @@ Ext.define("MsAdmin.view.server.ServerGraphicWindow", {
 		}, this);
 
 		Ext.Ajax.request({
-			url: "./admin/chart/generate/xls",
+			url: "/chart/generate/xls",
 			params: {
 				startDate: this.getStartDate(),
 				endDate: this.getEndDate(),
@@ -330,7 +330,7 @@ Ext.define("MsAdmin.view.server.ServerGraphicWindow", {
 		}, this);
 
 		Ext.Ajax.request({
-			url: "./admin/chart/generate/pdf",
+			url: "/chart/generate/pdf",
 			params: {
 				startDate: this.getStartDate(),
 				endDate: this.getEndDate(),
