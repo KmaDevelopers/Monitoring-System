@@ -13,7 +13,7 @@ class UpdateAction extends CAction {
 		$id = $data[$this->name.'Id'];
 		if ($id) {
 			$this->updateItem($data);
-			$this->getController()->result($this->accept, 1);
+			$this->getController()->result($this->accept[0], 1);
 		} else {
 			if(is_array($data)) {
 				foreach($data as $item){
@@ -32,7 +32,7 @@ class UpdateAction extends CAction {
 			if($model) {
 				$model->attributes = is_array($data) ? $data : array($data);
 				if ($model->save()) {
-					$this->addToAcceptList(array($model->getItemArray()));
+					$this->addToAcceptList($model->getItemArray());
 				} else {
 					$this->getController()->error("{$name} item can't be updated!");
 					Yii::end();
