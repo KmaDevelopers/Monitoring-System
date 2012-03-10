@@ -1,7 +1,7 @@
 Ext.Loader.setConfig({
     enabled: true,
     paths: {
-        'Ext': "./adminJs/lib/extjs/src"
+        'Ext': "/adminJs/lib/extjs/src"
     },
     disableCaching: true
 });

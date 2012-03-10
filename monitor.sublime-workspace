@@ -48,26 +48,10 @@
 			}
 		},
 		{
-			"file": "protected/views/layouts/admin.php",
-			"settings":
-			{
-				"buffer_size": 1570,
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "protected/controllers/GraphicController.php",
 			"settings":
 			{
-				"buffer_size": 2347,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "adminJs/app/view/server/ServerGraphicWindow.js",
-			"settings":
-			{
-				"buffer_size": 7708,
+				"buffer_size": 2357,
 				"line_ending": "Unix"
 			}
 		}
@@ -104,7 +88,10 @@
 	},
 	"file_history":
 	[
+		"/home/artem/.config/sublime-text-2/Packages/Nodejs/Nodejs.sublime-settings",
+		"/home/artem/htdocs/Monitoring-System/protected/views/layouts/admin.php",
 		"/home/artem/htdocs/Monitoring-System/adminJs/app/view/server/ServerGraphicWindow.js",
+		"/home/artem/htdocs/Monitoring-System/adminJs/app.js",
 		"/home/artem/htdocs/Monitoring-System/protected/migrations/m111129_181922_someData.php",
 		"/home/artem/htdocs/Monitoring-System/protected/migrations/m111209_124601_DayStat.php",
 		"/home/artem/htdocs/Monitoring-System/protected/controllers/AdminController.php",
@@ -126,6 +113,7 @@
 		"height": 0.0,
 		"where_history":
 		[
+			"/home/artem/htdocs/Monitoring-System/adminJs",
 			"/home/artem/Projects/Betfair/bfpy-1.13"
 		]
 	},
@@ -134,6 +122,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"./admin",
 			"		",
 			"epydoc.py",
 			"Downloads"
@@ -154,7 +143,7 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -196,35 +185,8 @@
 						"selection":
 						[
 							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 945.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "protected/views/layouts/admin.php",
-					"settings":
-					{
-						"buffer_size": 1570,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								346,
-								346
+								2560,
+								2560
 							]
 						],
 						"settings":
@@ -239,19 +201,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 2,
 					"file": "protected/controllers/GraphicController.php",
 					"settings":
 					{
-						"buffer_size": 2347,
+						"buffer_size": 2357,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1051,
-								1051
+								1172,
+								1172
 							]
 						],
 						"settings":
@@ -260,33 +222,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 238.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "adminJs/app/view/server/ServerGraphicWindow.js",
-					"settings":
-					{
-						"buffer_size": 7708,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3005,
-								3005
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 4725.0,
+						"translation.y": 328.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -325,6 +261,10 @@
 		]
 	},
 	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 100.0
+	},
 	"replace":
 	{
 		"height": 0.0

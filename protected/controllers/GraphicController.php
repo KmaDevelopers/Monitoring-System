@@ -30,11 +30,11 @@ class GraphicController extends KmaController
 		 require_once (Yii::getPathOfAlias('application').'/vendors/jpgraph/jpgraph_line.php');
 		 require_once (Yii::getPathOfAlias('application').'/vendors/jpgraph/jpgraph_date.php');
 
-		 	$ids = Yii::app()->db->createCommand("select sensorId from Sensor")->queryColumn();
+		 	$ids = Yii::app()->db->createCommand("select sensorId from Sensor LIMIT 10")->queryColumn();
 		 	$list = implode(',',$ids);
 			
 			// Setup the graph
-			$graph = new Graph(800,600);
+			$graph = new Graph(2000,600);
 			$graph->SetScale("datelin");
 
 //			$theme_class = new UniversalTheme;
