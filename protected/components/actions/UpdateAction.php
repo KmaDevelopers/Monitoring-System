@@ -10,7 +10,7 @@ class UpdateAction extends CAction {
 		$json = file_get_contents('php://input');
 		$data = CJSON::decode($json);
 
-		if (isset($data[$this->name.'Id']) && $data[$this->name.'Id'] > 1) {
+		if (isset($data[$this->name.'Id']) && $data[$this->name.'Id'] >= 1) {
 			$this->updateItem($data);
 			$this->getController()->result($this->accept, 1);
 		} else {
