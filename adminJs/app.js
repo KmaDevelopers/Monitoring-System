@@ -16,6 +16,7 @@ Ext.application({
     ],
     requires: [
         'MsAdmin.core.EventBus',
+        'MsAdmin.LoadMask',
         'MsAdmin.links',
         'MsAdmin.constants',
         'MsAdmin.components.basic.Utils',
@@ -25,6 +26,7 @@ Ext.application({
     autoCreateViewport: true,
     launch: function() {
         this.applyOverrides();
+        MsAdmin.Event.fireEvent("CJ.mask.init");
     },
     applyOverrides: function() {
         Ext.data.AbstractStore.override({

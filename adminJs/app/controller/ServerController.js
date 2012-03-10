@@ -140,7 +140,18 @@ Ext.define("MsAdmin.controller.ServerController", {
 		this.getServerList().actionClicked = true;
 	},
 	onActiveIconClick: function(model, rIdx, cIdx) {
-		Ext.Msg.alert('works');
+		model.set("active", Number(!model.get("active")));
+		model.save({
+			success: function() {
+				var sensors = model.sensors();
+
+				sensors.each(function(sensor) {
+					sensor.set("active", model.get("active"));
+				});
+
+				sensors.sync();
+			}
+		});
 	},
 	onUpdateServerInfoClick: function() {	
 		var form, model, errors;

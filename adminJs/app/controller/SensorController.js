@@ -252,6 +252,7 @@ Ext.define("MsAdmin.controller.SensorController", {
 		this.editWindow.center();
 		this.editWindow.show();
 	},
+
 	/**
 	 * fires when user clicks on active-icon
 	 * changes active-state and saves model
@@ -261,15 +262,11 @@ Ext.define("MsAdmin.controller.SensorController", {
 	 * @retuns {undefined}
 	 */
 	onActiveIconClick: function(model, rIdx, cIdx) {
-		model.set('active', (!model.get('active')) - 0);
-		model.store.sync({
-			callback: this.onSensorEditSuccess,
-			scope: this
+		model.set('active', Number(!model.get('active')));
+		model.save({
+			success: function(savedModel) {
+				MsAdmin.Event.fire("sensor.updateVisibility", model);
+			}
 		});
-		// model.save({
-		// 	success: this.onSensorEditSuccess,
-		// 	failure: this.onSensorEditFailure,
-		// 	scope: this
-		// });
 	}
 });

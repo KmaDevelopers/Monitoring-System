@@ -19,7 +19,7 @@ Ext.define("MsAdmin.model.Sensor", {
             defaultValue: 0
         }, {
             name: 'active',
-            defaultValue: '1',
+            defaultValue: 1,
             type: 'int'
         }
     ],
