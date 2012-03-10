@@ -70,10 +70,6 @@ Ext.define("MsAdmin.controller.ServerController", {
 					this.getServerCreateWindow().close()
 				}
 			},
-
-			'ServerGraphicWindow [ref="generateBtn"]': {
-				click: this.onGenerateGraphicClick
-			},
 			'ServerGraphicWindow [ref="SensorCombo"]': {
 				change: this.onSensorComboChanged
 			}
@@ -149,7 +145,11 @@ Ext.define("MsAdmin.controller.ServerController", {
 					sensor.set("active", model.get("active"));
 				});
 
-				sensors.sync();
+				sensors.sync({
+					callback: function() {
+						MsAdmin.Event.fireEvent('server.selected', model);
+					}
+				});
 			}
 		});
 	},
