@@ -3,10 +3,10 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="language" content="en" />
-    <link rel="stylesheet" href="./adminJs/lib/extjs/resources/css/ext-all-gray.css" />
+    <link rel="stylesheet" href="/adminJs/lib/extjs/resources/css/ext-all-gray.css" />
     <!--<link rel="stylesheet" href="./adminJs/resources/css/my-ext-theme.css" />-->
-    <script type="text/javascript" src="./adminJs/lib/extjs/ext-all-dev.js"></script>
-    <script type="text/javascript" src="./adminJs/app.js?<?php echo time();?>"></script>
+    <script type="text/javascript" src="/adminJs/lib/extjs/ext-all-dev.js"></script>
+    <script type="text/javascript" src="/adminJs/app.js?<?php echo time();?>"></script>
     <title><?php echo CHtml::encode($this->pageTitle); ?></title>
     <style type='text/css'>
 	.sensor {
