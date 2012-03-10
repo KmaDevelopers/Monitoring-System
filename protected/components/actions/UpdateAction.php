@@ -13,7 +13,7 @@ class UpdateAction extends CAction {
 		$id = $data[$this->name.'Id'];
 		if ($id) {
 			$this->updateItem($data);
-			$this->getController()->result($this->accept[0], 1);
+			$this->getController()->result($this->accept, 1);
 		} else {
 			if(is_array($data)) {
 				foreach($data as $item){
