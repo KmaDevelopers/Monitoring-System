@@ -15,7 +15,7 @@ class KmaController extends CController {
      * @return array access control rules
      */
     public function accessRules() {
-	throw new CHttpException(400, 'No rules for filter!');
+	   throw new CHttpException(400, 'No rules for filter!');
     }
     /**
      * @var string the default layout for the controller view. Defaults to '//layouts/column1',

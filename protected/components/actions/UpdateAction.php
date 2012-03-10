@@ -10,13 +10,12 @@ class UpdateAction extends CAction {
 		$json = file_get_contents('php://input');
 		$data = CJSON::decode($json);
 
-		$id = $data[$this->name.'Id'];
-		if ($id) {
+		if (isset($data[$this->name.'Id']) && $data[$this->name.'Id'] > 1) {
 			$this->updateItem($data);
 			$this->getController()->result($this->accept, 1);
 		} else {
 			if(is_array($data)) {
-				foreach($data as $item){
+				foreach($data as $item) {
 					$this->updateItem($item);
 				}
 				$this->getController()->result($this->accept, count($this->accept));
@@ -27,7 +26,7 @@ class UpdateAction extends CAction {
 	}
 
 	protected function updateItem($data,$return = true ) {
-		$id = $data[$this->name.'Id'];
+		$id = isset($data[$this->name.'Id']) ? $data[$this->name.'Id'] : null ;
 		$model = KmaActiveRecord::model(ucfirst($this->name))->findByPk($id);
 			if($model) {
 				$model->attributes = is_array($data) ? $data : array($data);

@@ -1125,3 +1125,287 @@ Stack trace:
 #3 /home/artem/htdocs/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
 #4 /home/artem/htdocs/Monitoring-System/index.php(13): CApplication->run()
 #5 {main} REQUEST_URI=/admin/admin/chart?_dc=1331330128681&filter=%7B%22startDate%22%3A%222012-03-09%2020%3A30%3A00%22%2C%22endDate%22%3A%222012-03-09%2021%3A30%3A00%22%2C%22sensorIds%22%3A%5B%222%22%2C%223%22%2C%224%22%2C%225%22%2C%2211%22%2C%2215%22%2C%2217%22%2C%2218%22%2C%2220%22%2C%2226%22%2C%2229%22%2C%2232%22%2C%2239%22%2C%2241%22%2C%2245%22%2C%2247%22%5D%7D&page=1&start=0&limit=25
+2012/03/10 13:33:07 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (35)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (22)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 13:33:07 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (35)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (22)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 13:34:02 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (34)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (21)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 13:34:02 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (34)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (21)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 13:34:17 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (20)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 13:34:17 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (20)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 13:34:25 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (15)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 13:34:35 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (20)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 13:34:36 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (20)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 13:34:45 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (20)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 13:34:45 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (20)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 13:34:57 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (15)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:02:45 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (15)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:02:47 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (20)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:02:47 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (20)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:02:47 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (20)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:02:48 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (20)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:02:48 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (20)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:02:48 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (20)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:02:48 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (20)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:02:48 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (20)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:02:48 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (20)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:02:48 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (20)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:02:48 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (20)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:02:48 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (15)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:02:48 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (20)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:02:49 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (20)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:02:50 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (15)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:02:50 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (15)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:02:51 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (15)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:02:52 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (15)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:02:53 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (15)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:02:54 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (15)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:02:54 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (15)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:02:55 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (15)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:02:56 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (15)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:02:57 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (15)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:03:12 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (15)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:03:29 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (15)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:04:40 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (15)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:04:40 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (15)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:04:43 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (15)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:04:44 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (15)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:04:56 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (20)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:04:58 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (20)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:06:25 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (15)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:06:26 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (15)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:06:37 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (15)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:06:38 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (15)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:07:07 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (15)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:07:21 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (15)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:09:04 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (15)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:11:13 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (15)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:11:14 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (15)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:11:15 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (15)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:11:17 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (15)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:11:18 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (15)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:11:18 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (15)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:11:19 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (15)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:11:19 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (15)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:11:21 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (15)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:11:22 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (15)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:11:24 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (15)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:11:28 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (15)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:11:31 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (15)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:11:37 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (15)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:11:42 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (15)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:11:43 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (15)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:12:05 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (20)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:12:05 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (20)
+in /home/artem/htdocs/Monitoring-System/index.php (13)
+2012/03/10 14:12:13 [warning] [application] Failed to set unsafe attribute "sensorId".
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (33)
+in /home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php (15)
+in /home/artem/htdocs/Monitoring-System/index.php (13)

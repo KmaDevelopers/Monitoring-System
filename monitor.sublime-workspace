@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"acc",
+				"accept"
+			],
+			[
+				"update",
+				"updateItem"
+			],
+			[
 				"dec",
 				"dechex"
 			],
@@ -52,6 +60,30 @@
 			"settings":
 			{
 				"buffer_size": 2357,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "protected/controllers/SensorController.php",
+			"settings":
+			{
+				"buffer_size": 1093,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "protected/components/KmaController.php",
+			"settings":
+			{
+				"buffer_size": 2171,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "protected/components/actions/UpdateAction.php",
+			"settings":
+			{
+				"buffer_size": 1246,
 				"line_ending": "Unix"
 			}
 		}
@@ -143,7 +175,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 5,
 			"sheets":
 			[
 				{
@@ -212,8 +244,8 @@
 						"selection":
 						[
 							[
-								1172,
-								1172
+								1329,
+								1329
 							]
 						],
 						"settings":
@@ -223,6 +255,89 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 328.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "protected/controllers/SensorController.php",
+					"settings":
+					{
+						"buffer_size": 1093,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								558,
+								558
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "protected/components/KmaController.php",
+					"settings":
+					{
+						"buffer_size": 2171,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1508,
+								1268
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 225.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "protected/components/actions/UpdateAction.php",
+					"settings":
+					{
+						"buffer_size": 1246,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								248,
+								248
+							]
+						],
+						"settings":
+						{
+							"spell_check": false,
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -236,7 +351,7 @@
 	},
 	"input":
 	{
-		"height": 0.0
+		"height": 31.0
 	},
 	"layout":
 	{
@@ -261,10 +376,6 @@
 		]
 	},
 	"menu_visible": true,
-	"output.exec":
-	{
-		"height": 100.0
-	},
 	"replace":
 	{
 		"height": 0.0
@@ -275,6 +386,18 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"update",
+				"protected/components/actions/UpdateAction.php"
+			],
+			[
+				"kmac",
+				"protected/components/KmaController.php"
+			],
+			[
+				"sensor",
+				"protected/controllers/SensorController.php"
+			],
 			[
 				"servergra",
 				"adminJs/app/view/server/ServerGraphicWindow.js"
