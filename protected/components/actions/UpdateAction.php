@@ -33,11 +33,11 @@ class UpdateAction extends CAction {
 				if ($model->save()) {
 					$this->addToAcceptList($model->getItemArray());
 				} else {
-					$this->getController()->error("{$name} item can't be updated!");
+					$this->getController()->error("{$this->name} item can't be updated!");
 					Yii::end();
 				}
 			} else {
-				$this->getController()->error("No {$name} item to update!");
+				$this->getController()->error("No {$this->name} item to update!");
 			}
 	}
 
