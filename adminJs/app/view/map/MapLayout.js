@@ -1,20 +1,6 @@
 Ext.define("MsAdmin.view.map.MapLayout", {
 	extend: "Ext.panel.Panel",
 	alias: "widget.MapLayout",
-	dockedItems: [{
-        dock: 'bottom',
-        xtype: 'toolbar',
-        items: ['->',
-        {
-            xtype: "button",
-            ref: "savePosButton",
-            text: "Save position"
-        }, {
-            xtype: "button",
-            ref: "refreshBtn",
-            text: "Refresh"
-        }]
-    }],
     bodyStyle: {
 	    "overflow": "auto",
         "position": "relative"
@@ -25,6 +11,10 @@ Ext.define("MsAdmin.view.map.MapLayout", {
     		Ext.applyIf(config || {}, {
     			layout: 'auto',
     			items: {
+                    origin: {
+                        width: 500,
+                        height: 300
+                    },
     				width: 850,
     				height: 550,
 	            	xtype: 'box',
@@ -40,9 +30,35 @@ Ext.define("MsAdmin.view.map.MapLayout", {
 	            },
 	            listeners: {
 	            	render: this.attachDD
-	            }
+	            },
+                dockedItems: this.getCjDockedItemsConfig()
         	})
 	    ]);
+    },
+    getCjDockedItemsConfig: function() {
+        return [{
+            dock: 'bottom',
+            xtype: 'toolbar',
+            items: [{
+                hidden: true,
+                fieldLabel: "zoom",
+                ref: "MapZoomSlider",
+                xtype: "slider",
+                width: 300,
+                value: 250,
+                increment: 5,
+                minValue: 0,
+                maxValue: 2000
+            }, '->', {
+                xtype: "button",
+                ref: "savePosButton",
+                text: "Save position"
+            }, {
+                xtype: "button",
+                ref: "refreshBtn",
+                text: "Refresh"
+            }]
+        }];
     },
     attachDD: function(panel) {
     	this.dd = Ext.create("Ext.dd.DropZone", this.getEl() , {

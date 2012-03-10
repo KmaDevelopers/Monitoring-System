@@ -38,17 +38,44 @@ Ext.define('MsAdmin.view.sensor.Sensor', {
         this.listenEvents();
     },
     addDD: function(container) {
+        var me = this;
         this.dragZone = Ext.create('Ext.dd.DDProxy', this.getEl(), 'sensor');
+        this.dragZone.endDrag = (function(me) {
+            me;
+            return function(e) {
+               var lel = this.getEl();
+                var del = this.getDragEl();
+
+                // Show the drag frame briefly so we can get its position
+                del.style.visibility = "";
+
+                this.beforeMove();
+                // Hide the linked element before the move to get around a Safari
+                // rendering bug.
+                lel.style.visibility = "hidden";
+                Ext.dd.DDM.moveToEl(lel, del);
+                del.style.visibility = "hidden";
+                lel.style.visibility = "";
+
+                this.afterDrag();
+                lel = Ext.fly(lel);
+
+                me.getModel().set({
+                    x: lel.getLeft(true),
+                    y: lel.getTop(true)
+                });
+            }
+        })(me);
     },
     addCounter: function() {
         var marginLeft = this.width || this.el.getWidth();
-        Ext.core.DomHelper.append(
-        this.el.dom.id, {
-            style: "font-size:20px;color:white;font-weight:bold;margin-left:-10px" ,
-            id: "bla",
-            tag: "div",
-            html: '1'
-        });
+        // Ext.core.DomHelper.append(
+        // this.el.dom.id, {
+        //     style: "font-size:20px;color:white;font-weight:bold;margin-left:-10px" ,
+        //     id: "bla",
+        //     tag: "div",
+        //     html: '1'
+        // });
     },
     listenEvents: function() {
         this.el.on('click', function() {

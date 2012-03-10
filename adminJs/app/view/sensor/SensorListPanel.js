@@ -11,7 +11,7 @@ Ext.define("MsAdmin.view.sensor.SensorListPanel", {
 	},
     getCmpToolsConfig: function() {
         return [{
-            ref: 'addBtn',
+            ref: 'addButton',
             xtype: "button",
             text: "+"
         }]  

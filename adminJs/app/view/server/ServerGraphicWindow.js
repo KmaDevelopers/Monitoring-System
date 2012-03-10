@@ -160,21 +160,13 @@ Ext.define("MsAdmin.view.server.ServerGraphicWindow", {
 		return [{
 			xtype: "toolbar",
 			ref: "filter",
-			items: [/*{
-				xtype: "combo",
-				displayField: "serial",
-				valueField: "sensorId",
-				fieldLabel: "Sensors",
-				ref: "SensorCombo",
-				multiSelect: true,
-				width: 500
-			},*/ '->', {
+			items: ['->', {
 				xtype: 'datefield',
 				ref: 'filterField',
 				als: 'startDateField',
 				format: 'Y-m-d',
 				fieldLabel: 'Start date',
-				value: (new Date())
+				value: (new Date(Ext.Date.now() - 1000 * 60 * 120))
 			},' ', {
 				xtype: 'datefield',
 				als: 'endDateField',
@@ -189,7 +181,7 @@ Ext.define("MsAdmin.view.server.ServerGraphicWindow", {
 				fieldLabel: 'Start time',
 				format: 'H:i',
 				increment: 30,
-				value: '08:00'
+				value: (new Date(Ext.Date.now() - 1000 * 60 * 120))
 			}, {
 				xtype: 'timefield',
 				als: 'endTimeField',
@@ -197,7 +189,7 @@ Ext.define("MsAdmin.view.server.ServerGraphicWindow", {
 				format: 'H:i',
 				increment: 30,
 				fieldLabel: 'End time',
-				value: '22:00'
+				value: (new Date())
 			},'->', {
 				xtype: 'button',
 				text: 'Render',
