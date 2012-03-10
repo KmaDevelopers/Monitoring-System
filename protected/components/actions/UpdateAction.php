@@ -2,12 +2,15 @@
 
 class UpdateAction extends CAction {
 
+	protected $name = '';
+
 	public function run() {
-		$name = $this->getController()->id;
+		$this->name = $this->getController()->id;
 
 		$json = file_get_contents('php://input');
 		$data = CJSON::decode($json);
 
+		$id = $data[$this->name.'Id'];
 		if ($id) {
 			$this->updateItem($data);
 			$this->getController()->result($this->accept, 1);
@@ -23,18 +26,16 @@ class UpdateAction extends CAction {
 		}
 	}
 
-	protected function updateItem($data,$return = true ){
-		$id = $data[$name.'Id'];
-		$model = KmaActiveRecord::model(ucfirst($name))->findByPk($id);
+	protected function updateItem($data,$return = true ) {
+		$id = $data[$this->name.'Id'];
+		$model = KmaActiveRecord::model(ucfirst($this->name))->findByPk($id);
 			if($model) {
 				$model->attributes = is_array($data) ? $data : array($data);
-
 				if ($model->save()) {
-					//$this->getController()->result(array($model->getItemArray()), 1);
 					$this->addToAcceptList(array($model->getItemArray()));
 				} else {
-					//print_r ($model->getErrors());
 					$this->getController()->error("{$name} item can't be updated!");
+					Yii::end();
 				}
 			} else {
 				$this->getController()->error("No {$name} item to update!");
