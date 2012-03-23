@@ -259,8 +259,13 @@ Ext.define("MsAdmin.view.server.ServerGraphicWindow", {
 	},
 	getCmpButtons: function() {
 		return [{
+			ref: 'generateXLSBtn',
+			text: "Generate XLS",
+			scope: this,
+			handler: this.generateXLS
+		}, {
 			ref: 'generateBtn',
-			text: "Generate",
+			text: "Generate PDF",
 			scope: this,
 			handler: this.generateGpaphic
 		}, {
@@ -270,6 +275,42 @@ Ext.define("MsAdmin.view.server.ServerGraphicWindow", {
 				button.up("window").close();
 			}
 		}]
+	},
+
+	generateXLS: function() {
+		debugger;
+		var chart = this.down("chart");
+		var fields = this.storeFields;
+		var filters = [];
+		var model = this.model,
+			sensors = model.sensors();
+
+		chart.series.each(function(item, index) {
+			if(item.visibleInLegend()) {
+				var serial = fields[index + 1];
+				var sensorId = sensors.getAt(sensors.findExact("serial", serial)).get("sensorId");
+
+				filters.push(sensorId);
+			}
+		}, this);
+
+		Ext.Ajax.request({
+			url: "/chart/generate/xls",
+			params: {
+				startDate: this.getStartDate(),
+				endDate: this.getEndDate(),
+				filter: Ext.encode({
+					'sensorIds': filters
+				})
+			},
+			success: function(response) {
+				var result = Ext.decode(response, true);
+
+				if(result != null) {
+					window.location = result.src;
+				}
+			}
+		});
 	},
 
 	generateGpaphic: function() {
@@ -289,7 +330,7 @@ Ext.define("MsAdmin.view.server.ServerGraphicWindow", {
 		}, this);
 
 		Ext.Ajax.request({
-			url: "./admin/chart/generate",
+			url: "/chart/generate/pdf",
 			params: {
 				startDate: this.getStartDate(),
 				endDate: this.getEndDate(),
