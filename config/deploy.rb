@@ -34,7 +34,7 @@ namespace :deploy do
 
     desc "Minimizes all css and js code"
     task :minimize_all, :roles => :app do
-    	check_sdk
+    	sencha.check_sdk
 
     	if sdk_exists
         	run "ln -sf #{current_release}/protected/config/jsEnvs/env.php #{current_release}/protected/config/jsEnvs/jsb.php"
