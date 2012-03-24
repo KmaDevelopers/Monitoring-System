@@ -12,6 +12,7 @@ set :current_dir, "#{application}"
 set :keep_releases, 3
 set :deploy_via, :copy
 set :copy_exclude, [".git"]
+set :branch, 'master'
 #ssh_options[:forward_agent] = true
 
 role :web, "217.77.223.17"                          # Your HTTP server, Apache/etc
@@ -33,11 +34,17 @@ namespace :deploy do
 
     desc "Minimizes all css and js code"
     task :minimize_all, :roles => :app do
-        run "ln -sf #{current_release}/protected/config/jsEnvs/env.php #{current_release}/protected/config/jsEnvs/jsb.php"
+    	check_sdk
 
-        run "cd #{current_release}/apps/main/public && xvfb-run sencha create jsb -a http:/// -p ./app.jsb"
-        run "cd #{current_release}/apps/main/public && sencha build -c -p app.jsb -d ."
+    	if sdk_exists
+        	run "ln -sf #{current_release}/protected/config/jsEnvs/env.php #{current_release}/protected/config/jsEnvs/jsb.php"
 
-        run "ln -sf #{current_release}/protected/config/jsEnvs/env.php #{current_release}/protected/config/jsEnvs/production.php"
+        	run "cd #{current_release}/apps/main/public && xvfb-run sencha create jsb -a http:/// -p ./app.jsb"
+        	run "cd #{current_release}/apps/main/public && sencha build -c -p app.jsb -d ."
+
+        	run "ln -sf #{current_release}/protected/config/jsEnvs/env.php #{current_release}/protected/config/jsEnvs/production.php"
+        else
+        	p "task minimize_all::Sencha SDK not found !!!"
+        end
     end
 end

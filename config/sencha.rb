@@ -1,5 +1,6 @@
 set :xvfb_exists, false
 set :sdk_exists, false
+set :sdk_arch, "x86"
 
 namespace :sencha do
     task :check_xvfb_program do
@@ -34,7 +35,9 @@ namespace :sencha do
         check_sdk
 
         unless sdk_exists
-            run "   "
+            run "cd #{current_release}/config/installers && installer_#{arch}.run" do |channel, stream, data|
+                
+            end
         end
     end
 end
