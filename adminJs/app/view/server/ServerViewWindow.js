@@ -8,7 +8,8 @@ Ext.define("MsAdmin.view.server.ServerViewWindow", {
 	maximizable: true,
 	closeAction: 'hide',
 	layout: 'fit',
-	width: 320,
+	width: 400,
+	height: 170,
 	modal: true,
 	constructor: function(config) {
 		this.callParent([

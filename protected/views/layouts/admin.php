@@ -5,7 +5,7 @@
     <meta name="language" content="en" />
     <link rel="stylesheet" href="/adminJs/lib/extjs/resources/css/ext-all-gray.css" />
     <!--<link rel="stylesheet" href="./adminJs/resources/css/my-ext-theme.css" />-->
-    <?php include dirname(__FILE__) . "/../../../protected/config/jsEnvs/env.php"; ?>
+    <?php include dirname(__FILE__) . "/../../protected/config/jsEnvs/env.php"; ?>
     <title><?php echo CHtml::encode($this->pageTitle); ?></title>
     <style type='text/css'>
 	.sensor {
