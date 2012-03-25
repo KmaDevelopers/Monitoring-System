@@ -4,15 +4,15 @@ set :sdk_arch, "x86"
 
 namespace :sencha do
     task :check_xvfb_program do
-        run "command -v xvfb-run" do |channel, stream, data|
-            set :xvfb_exists, true if data.length > 0 # program exists
+        run "s=`command -v xvfb-run`;echo $s;unset $s" do |channel, stream, data|
+            set :xvfb_exists, true if data.chomp.length > 0 # program exists
         end
     end
 
     task :check_sdk do
-       run "command -v sencha" do |channel, stream, data|
-            set :sdk_exists, true if data.length > 0 # program exists
-        end 
+       run "s=`command -v sencha`;echo $s;unset $s" do |channel, stream, data|
+            set :sdk_exists, true if data.chomp.length > 0 # program exists
+        end
     end
 
     task :setup do
@@ -35,8 +35,9 @@ namespace :sencha do
         check_sdk
 
         unless sdk_exists
-            run "cd #{current_release}/config/installers && installer_#{arch}.run" do |channel, stream, data|
-                
+            p 'installing sencha-sdk ...'
+            run "cd #{current_release}/config/installers && sencha_installer_#{sdk_arch}.run" do |channel, stream, data|
+               p data 
             end
         end
     end
