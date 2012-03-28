@@ -13,11 +13,12 @@ class DayStatCommand extends CConsoleCommand{
 			FROM Statistics
 			WHERE 
 			date >= DATE_SUB(DATE_FORMAT(date,'%Y-%m-%d 00:00:00'),INTERVAL 1 DAY)
+			AND date <= DATE_FORMAT(date,'%Y-%m-%d 00:00:00')
 			GROUP BY sensorId
 			";
 
 		$res = Yii::app()->db->createCommand($sql)->queryAll();
-
+		
 		if(empty($res)) {
 			return;
 		}

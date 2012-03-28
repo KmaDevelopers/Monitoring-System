@@ -25,7 +25,7 @@ class HourStatCommand extends CConsoleCommand{
 		$insertIntoArrayRows = array_map(function($it) {
 			return "'{$it['sensorId']}','{$it['aTemp']}','{$it['nDate']}'"; 
 		},$res);
-			
+		
 		$sql = "INSERT INTO HourStatistics(sensorId,temperature,date)
 		VALUES (".implode('),(',$insertIntoArrayRows).")";
 		

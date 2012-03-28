@@ -30,9 +30,62 @@ class GraphicController extends KmaController
 		 require_once (Yii::getPathOfAlias('application').'/vendors/jpgraph/jpgraph_line.php');
 		 require_once (Yii::getPathOfAlias('application').'/vendors/jpgraph/jpgraph_date.php');
 
-		 	$ids = Yii::app()->db->createCommand("select sensorId from Sensor LIMIT 10")->queryColumn();
-		 	$list = implode(',',$ids);
-			
+		 /*************
+		 **************
+		 *************/
+
+		 if(isset($_REQUEST['filter']) && !empty($_REQUEST['filter'])){
+			$filter = CJSON::decode($_REQUEST['filter']);
+			$dateFrom = isset($filter['startDate']) ? $filter['startDate'] : null;
+			$dateTo = isset($filter['endDate']) ? $filter['endDate'] : null;
+			$sensorIds = isset($filter['sensorIds']) ? $filter['sensorIds'] : null;
+		} else {
+			$date = time();			
+			$dateFrom = date('Y-m-d H:i:s',$date-(60*60*2));
+			$dateTo = date('Y-m-d H:i:s',$date);
+			$sensorIds = Yii::app()->db->createCommand("select * from Sensor where active = 1")->queryColumn();
+		}
+		
+		if(!is_array($sensorIds) || empty($sensorIds) ){
+			$sensorIds = Yii::app()->db->createCommand("select * from Sensor where active = 1")->queryColumn();
+		}
+		
+		$sensorList = implode(',',$sensorIds);
+		
+		$sql = "select sensorId,serial from Sensor where sensorId in ({$sensorList})";
+		$res = Yii::app()->db->createCommand($sql)->queryAll(false);
+		
+		$sensorSerialById = array();
+		
+		foreach ($res as $v) {
+			$sensorSerialById[$v[0]] = $v[1];
+		}
+		
+		$tableName = 'Statistics'; // change table name when we change period
+
+		$period = abs(strtotime($dateTo) - strtotime($dateFrom));
+		
+		if($period <= (60*60*2)){ // 2 hours
+			$tableName = 'Statistics';
+		}elseif($period > (60*60*2) && $period < (60*60*24)){ // 1 day
+			$tableName = 'HourStatistics';
+		}elseif($period > (60*60*24) && $period < (60*60*24 * 20)){ // 20 day
+			$tableName = 'DayStatistics';
+		}else{
+			$tableName = 'MonthStatistics';
+		}
+		
+		$sql = "
+			select * FROM {$tableName} `stat`
+			WHERE date BETWEEN '{$dateFrom}' AND '{$dateTo}'
+			AND sensorId in ({$sensorList})
+			ORDER BY date ASC
+		";
+		
+		/*************
+		 **************
+		 *************/
+
 			// Setup the graph
 			$graph = new Graph(2000,600);
 			$graph->SetScale("datelin");
@@ -53,7 +106,7 @@ class GraphicController extends KmaController
 			$graph->xgrid->Show();
 			$graph->xgrid->SetLineStyle("solid");
 
-			$dates = Yii::app()->db->createCommand('select date from Statistics where sensorId in ('.$list.')')->queryColumn();
+			$dates = Yii::app()->db->createCommand($sql)->queryColumn();
 			
 			$dates = array_map(function($it){
 				return date('m/d/y H:i', strtotime($it));
@@ -65,9 +118,9 @@ class GraphicController extends KmaController
 			$graph->xaxis->HideTicks(false,false);
 
 
-			foreach($ids as $id) {
+			foreach($sensorIds as $id) {
 			$data = Yii::app()->db->
-								createCommand('select temperature from Statistics where sensorId = '.$id )->queryColumn();
+								createCommand("select temperature from {$tableName} where sensorId = ".$id )->queryColumn();
 
 						// Create the graph line
 						$p1 = new LinePlot($data);
