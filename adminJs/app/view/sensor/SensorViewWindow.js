@@ -8,6 +8,8 @@ Ext.define("MsAdmin.view.sensor.SensorViewWindow", {
 			Ext.applyIf(config || {}, {
 				closeAction: 'hide',
 				layout: 'fit',
+				width: 400,
+				height: 170,
 				autoShow: true,
 				buttons: this.getCmpButtons(),
 				items: this.getItemsConfig()

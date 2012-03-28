@@ -5,8 +5,7 @@
     <meta name="language" content="en" />
     <link rel="stylesheet" href="/adminJs/lib/extjs/resources/css/ext-all-gray.css" />
     <!--<link rel="stylesheet" href="./adminJs/resources/css/my-ext-theme.css" />-->
-    <script type="text/javascript" src="/adminJs/lib/extjs/ext-all-dev.js"></script>
-    <script type="text/javascript" src="/adminJs/app.js?<?php echo time();?>"></script>
+    <?php include dirname(__FILE__) . "/../../protected/config/jsEnvs/env.php"; ?>
     <title><?php echo CHtml::encode($this->pageTitle); ?></title>
     <style type='text/css'>
 	.sensor {
