@@ -64,9 +64,10 @@ class ServerController extends KmaController {
 				$insertDataArray = array();
 				$date = date('Y-m-d H:i:s');
 				
-				$c = count($resArray);				
+				$c = count($resArray);	
+				$c--;			
 				if($c >= 2)
-					for($i = 0 ; $i < $c/2 ; $i +=2 ){
+					for($i = 0 ; $i < $c ; $i +=2 ){
 					
 						$serial = $resArray[$i];
 						$id = (int) Sensor::getSensorIdBySerial($serial);

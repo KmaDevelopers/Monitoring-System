@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"in",
+				"insertDataArray"
+			],
+			[
+				"res",
+				"results"
+			],
+			[
 				"th",
 				"this"
 			],
@@ -30,10 +38,6 @@
 			[
 				"ser",
 				"servers"
-			],
-			[
-				"in",
-				"insertDataArray"
 			],
 			[
 				"inse",
@@ -292,10 +296,6 @@
 				"numpy"
 			],
 			[
-				"res",
-				"resArray"
-			],
-			[
 				"sri",
 				"serial"
 			],
@@ -460,50 +460,26 @@
 	"buffers":
 	[
 		{
-			"file": "protected/components/actions/DeleteAction.php",
+			"file": "protected/controllers/AdminController.php",
 			"settings":
 			{
-				"buffer_size": 723,
+				"buffer_size": 3002,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "protected/components/KmaController.php",
+			"file": "protected/controllers/ServerController.php",
 			"settings":
 			{
-				"buffer_size": 2168,
+				"buffer_size": 2613,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "protected/config/main.php",
+			"file": "protected/models/Sensor.php",
 			"settings":
 			{
-				"buffer_size": 4633,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "protected/components/actions/UpdateAction.php",
-			"settings":
-			{
-				"buffer_size": 726,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "adminJs/app/controller/SensorController.js",
-			"settings":
-			{
-				"buffer_size": 4193,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "protected/controllers/SensorController.php",
-			"settings":
-			{
-				"buffer_size": 1091,
+				"buffer_size": 3728,
 				"line_ending": "Unix"
 			}
 		}
@@ -536,6 +512,23 @@
 	},
 	"file_history":
 	[
+		"/home/artem/temp/t.php",
+		"/home/artem/htdocs/Monitoring-System/adminJs/app/constants.js",
+		"/home/artem/htdocs/Monitoring-System/protected/controllers/GraphicController.php",
+		"/home/artem/htdocs/Monitoring-System/protected/commands/HourStatCommand.php",
+		"/home/artem/htdocs/Monitoring-System/protected/commands/MonthStatCommand.php",
+		"/home/artem/htdocs/Monitoring-System/protected/commands/DayStatCommand.php",
+		"/home/artem/htdocs/Monitoring-System/protected/components/actions/DeleteAction.php",
+		"/home/artem/htdocs/Monitoring-System/protected/components/KmaController.php",
+		"/home/artem/htdocs/Monitoring-System/protected/config/main.php",
+		"/home/artem/htdocs/Monitoring-System/protected/components/actions/UpdateAction.php",
+		"/home/artem/htdocs/Monitoring-System/adminJs/app/controller/SensorController.js",
+		"/home/artem/htdocs/Monitoring-System/protected/controllers/SensorController.php",
+		"/home/artem/htdocs/Monitoring-System/protected/yii/framework/yiilite.php",
+		"/home/artem/.config/sublime-text-2/Packages/SublimeCodeIntel/Base File.sublime-settings",
+		"/home/artem/.config/sublime-text-2/Packages/SublimeCodeIntel/Default (Linux).sublime-keymap",
+		"/home/artem/.config/sublime-text-2/Packages/User/Base File.sublime-settings",
+		"/home/artem/.codeintel/config",
 		"/home/artiom/htdocs/kma_monitoring_system/.gitignore",
 		"/home/artiom/htdocs/kma_monitoring_system/protected/components/KmaActiveRecord.php",
 		"/home/artiom/htdocs/kma_monitoring_system/adminJs/app/controller/SensorController.js",
@@ -675,15 +668,169 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "protected/components/actions/DeleteAction.php",
+					"file": "protected/controllers/AdminController.php",
 					"settings":
 					{
-						"buffer_size": 723,
+						"buffer_size": 3002,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2974,
+								2974
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"function_name_status_row": 113,
+							"gjslint_ignore":
+							[
+								110
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 0,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": false,
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"Python Django": "python"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1620.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "protected/controllers/ServerController.php",
+					"settings":
+					{
+						"buffer_size": 2613,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1592,
+								1592
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"function_name_status_row": 69,
+							"gjslint_ignore":
+							[
+								110
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 0,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": false,
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"Python Django": "python"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "protected/models/Sensor.php",
+					"settings":
+					{
+						"buffer_size": 3728,
 						"regions":
 						{
 						},
@@ -696,148 +843,61 @@
 						],
 						"settings":
 						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"function_name_status_row": 0,
+							"gjslint_ignore":
+							[
+								110
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 0,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": false,
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"Python Django": "python"
+							},
+							"sublimelinter_wrap_find": true,
 							"syntax": "Packages/PHP/PHP.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "protected/components/KmaController.php",
-					"settings":
-					{
-						"buffer_size": 2168,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								572,
-								572
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 48.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "protected/config/main.php",
-					"settings":
-					{
-						"buffer_size": 4633,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2097,
-								2097
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 576.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "protected/components/actions/UpdateAction.php",
-					"settings":
-					{
-						"buffer_size": 726,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								554,
-								490
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "adminJs/app/controller/SensorController.js",
-					"settings":
-					{
-						"buffer_size": 4193,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								150,
-								156
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "protected/controllers/SensorController.php",
-					"settings":
-					{
-						"buffer_size": 1091,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								13,
-								19
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 48.0,
+						"translation.y": 2106.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -887,6 +947,22 @@
 		"selected_items":
 		[
 			[
+				"sensor",
+				"Monitoring-System/protected/models/Sensor.php"
+			],
+			[
+				"server",
+				"Monitoring-System/protected/controllers/ServerController.php"
+			],
+			[
+				"gra",
+				"Monitoring-System/protected/controllers/GraphicController.php"
+			],
+			[
+				"admin",
+				"Monitoring-System/protected/controllers/AdminController.php"
+			],
+			[
 				"upa",
 				"kma_monitoring_system/protected/components/actions/UpdateAction.php"
 			],
@@ -915,20 +991,12 @@
 				"kma_monitoring_system/adminJs/app/constants.js"
 			],
 			[
-				"server",
-				"kma_monitoring_system/protected/controllers/ServerController.php"
-			],
-			[
 				"main",
 				"kma_monitoring_system/protected/config/main.php"
 			],
 			[
 				"kmaact",
 				"kma_monitoring_system/protected/components/KmaActiveRecord.php"
-			],
-			[
-				"sensor",
-				"kma_monitoring_system/protected/models/Sensor.php"
 			],
 			[
 				"ser",
@@ -973,10 +1041,6 @@
 			[
 				"jpgraph",
 				"kma_monitoring_system/protected/vendors/jpgraph/jpgraph.php"
-			],
-			[
-				"gra",
-				"kma_monitoring_system/protected/controllers/GraphicController.php"
 			],
 			[
 				"google",
@@ -1049,6 +1113,6 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 375.0,
+	"side_bar_width": 233.0,
 	"status_bar_visible": true
 }
