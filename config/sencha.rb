@@ -36,8 +36,11 @@ namespace :sencha do
 
         unless sdk_exists
             p 'installing sencha-sdk ...'
-            run "cd #{current_release}/config/installers && sencha_installer_#{sdk_arch}.run" do |channel, stream, data|
-               p data 
+            run "chmod +x #{current_release}/config/installers/sencha_installer_#{sdk_arch}.run"
+            run "cd #{current_release}/config/installers && ./sencha_installer_#{sdk_arch}.run" do |channel, stream, data|
+                channel.send_data "\n" if data =~ /Enter/ or data =~ /Installation Directory/
+                channel.send_data "y\n" if data =~ /Do you accept this license/
+                channel.send_data "Y\n" if data =~ /Do you want to continue/
             end
         end
     end

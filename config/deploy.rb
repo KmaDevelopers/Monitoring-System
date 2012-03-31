@@ -1,28 +1,35 @@
 load "config/sencha"
 
-set :application, "temperature.kma.edu"
+#set :application, "temperature.kma.edu"
+set :application, "kmamonitor.dyndns.info"
 set :repository,  "git@github.com:KmaDevelopers/Monitoring-System.git"
-set :user, "root"
+set :user, "rsqw"
 set :port, 23
 set :use_sudo, false
-set :password, "kma2011"
+set :password, "rsqw"
 set :scm, :git
-set :deploy_to, "/var/www"
+set :deploy_to, "/home/htdocs/kma.ms"
 set :current_dir, "#{application}"
 set :keep_releases, 3
 set :deploy_via, :copy
 set :copy_exclude, [".git"]
 set :branch, 'master'
-#ssh_options[:forward_agent] = true
 
-role :web, "217.77.223.17"                          # Your HTTP server, Apache/etc
-role :app, "217.77.223.17"                          # This may be the same as your `Web` server
-role :db,  "217.77.223.17", :primary => true # This is where Rails migrations will run
+role :web, "kmamonitor.dyndns.info"                          # Your HTTP server, Apache/etc
+role :app, "kmamonitor.dyndns.info"                          # This may be the same as your `Web` server
+role :db,  "kmamonitor.dyndns.info", :primary => true # This is where Rails migrations will run
+
+before "deploy:create_symlink", "deploy:change_constants"
 
 after "deploy:create_symlink", "deploy:update_rights"
 after "deploy:create_symlink", "deploy:minimize_all"
 
 namespace :deploy do
+    task :change_constants do
+        command = %q{sed -i  s/"define('YII_DEBUG',true)"/"define('YII_DEBUG',false)"/ }
+        run "#{command} #{current_release}/index.php"
+    end
+
 	desc "Migrations :)"
     task :migrate, { :only => { :primary => true}, :roles=>:db } do
         run "cd #{current_release} && protected/yiic migrate --interactive=0"
@@ -39,8 +46,8 @@ namespace :deploy do
     	if sdk_exists
         	run "ln -sf #{current_release}/protected/config/jsEnvs/env.php #{current_release}/protected/config/jsEnvs/jsb.php"
 
-        	run "cd #{current_release}/apps/main/public && xvfb-run sencha create jsb -a http:/// -p ./app.jsb"
-        	run "cd #{current_release}/apps/main/public && sencha build -c -p app.jsb -d ."
+        	run "cd #{current_release}/adminJs && xvfb-run sencha create jsb -a http://#{application}/ -p ./app.jsb"
+        	run "cd #{current_release}/adminJs && sencha build -c -p app.jsb -d ."
 
         	run "ln -sf #{current_release}/protected/config/jsEnvs/env.php #{current_release}/protected/config/jsEnvs/production.php"
         else
