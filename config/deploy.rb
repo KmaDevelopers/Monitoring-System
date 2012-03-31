@@ -4,7 +4,6 @@ load "config/sencha"
 set :application, "kmamonitor.dyndns.info"
 set :repository,  "git@github.com:KmaDevelopers/Monitoring-System.git"
 set :user, "rsqw"
-set :port, 23
 set :use_sudo, false
 set :password, "rsqw"
 set :scm, :git
