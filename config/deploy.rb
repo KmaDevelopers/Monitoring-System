@@ -13,6 +13,10 @@ set :keep_releases, 3
 set :deploy_via, :copy
 set :copy_exclude, [".git"]
 set :branch, 'master'
+set :default_run_options, { 
+    :shell => "/bin/bash", 
+    :pty => true
+}
 
 role :web, "kmamonitor.dyndns.info"                          # Your HTTP server, Apache/etc
 role :app, "kmamonitor.dyndns.info"                          # This may be the same as your `Web` server
@@ -40,17 +44,19 @@ namespace :deploy do
 
     desc "Minimizes all css and js code"
     task :minimize_all, :roles => :app do
-    	sencha.check_sdk
+        run "echo 4" do |c,s,d|
+            p d
+        end
+        sencha.check_sdk
 
     	if sdk_exists
         	run "ln -sf #{current_release}/protected/config/jsEnvs/env.php #{current_release}/protected/config/jsEnvs/jsb.php"
-
         	run "cd #{current_release}/adminJs && xvfb-run sencha create jsb -a http://#{application}/ -p ./app.jsb"
         	run "cd #{current_release}/adminJs && sencha build -c -p app.jsb -d ."
-
         	run "ln -sf #{current_release}/protected/config/jsEnvs/env.php #{current_release}/protected/config/jsEnvs/production.php"
         else
         	p "task minimize_all::Sencha SDK not found !!!"
+            p "run cap sencha:setup to install it"
         end
     end
 end
