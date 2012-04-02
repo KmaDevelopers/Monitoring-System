@@ -1,19 +1,19 @@
 Ext.define('KMA.view.MapContainer', {
     extend: "Ext.panel.Panel",
     alias: 'widget.map',
-    dockedItems: [{
-        dock: 'bottom',
-        xtype: 'toolbar',
-        items: ['->',
-        {
-            xtype: "button",
-            text: "Save position"
-        }, {
-            xtype: "button",
-            ref: "refreshBtn",
-            text: "Refresh"
-        }]
-    }],
+    // dockedItems: [{
+    //     dock: 'bottom',
+    //     xtype: 'toolbar',
+    //     items: ['->',
+    //     {
+    //         xtype: "button",
+    //         text: "Save position"
+    //     }, {
+    //         xtype: "button",
+    //         ref: "refreshBtn",
+    //         text: "Refresh"
+    //     }]
+    // }],
     constructor: function(config) {
         this.callParent([Ext.applyIf(config || {}, {
             bodyStyle: this._getBodyStyle(),
@@ -29,6 +29,8 @@ Ext.define('KMA.view.MapContainer', {
     _getItems: function() {
         return [{
             xtype: 'box',
+            width: 850,
+            height: 550,
             autoEl: {
                 tag: 'img',
                 src: KMA.constants.BG_IMAGE_SRC,

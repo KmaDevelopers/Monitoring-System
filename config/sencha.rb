@@ -11,7 +11,7 @@ namespace :sencha do
     end
 
     task :check_sdk do
-       run "s=`command -v sencha`;echo $s" do |channel, stream, data|
+        run "s=`command -v sencha`;echo $s" do |channel, stream, data|
             set :sdk_exists, true if data.chomp.length > 0 # program exists
         end
     end
