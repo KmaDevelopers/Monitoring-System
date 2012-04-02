@@ -2,12 +2,7 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
-        <file>file:/home/artiom/htdocs/kma_monitoring_system/protected/components/KmaController.php</file>
-        <file>file:/home/artiom/htdocs/kma_monitoring_system/protected/controllers/SensorController.php</file>
-        <file>file:/home/artiom/htdocs/kma_monitoring_system/protected/controllers/ServerController.php</file>
-        <file>file:/home/artiom/htdocs/kma_monitoring_system/protected/models/Server.php</file>
-        <file>file:/home/artiom/htdocs/kma_monitoring_system/protected/components/actions/GetAction.php</file>
-        <file>file:/home/artiom/htdocs/kma_monitoring_system/protected/controllers/StatisticsController.php</file>
-        <file>file:/home/artiom/htdocs/kma_monitoring_system/protected/models/Sensor.php</file>
+        <file>file:/home/artem/htdocs/Monitoring-System/protected/controllers/AdminController.php</file>
+        <file>file:/home/artem/htdocs/Monitoring-System/protected/views/admin/xls.php</file>
     </open-files>
 </project-private>

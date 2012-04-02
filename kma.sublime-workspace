@@ -463,7 +463,7 @@
 			"file": "protected/controllers/AdminController.php",
 			"settings":
 			{
-				"buffer_size": 3002,
+				"buffer_size": 5175,
 				"line_ending": "Unix"
 			}
 		},
@@ -479,7 +479,7 @@
 			"file": "protected/models/Sensor.php",
 			"settings":
 			{
-				"buffer_size": 3728,
+				"buffer_size": 3837,
 				"line_ending": "Unix"
 			}
 		},
@@ -495,7 +495,7 @@
 			"file": "protected/views/layouts/admin.php",
 			"settings":
 			{
-				"buffer_size": 1480,
+				"buffer_size": 1470,
 				"line_ending": "Unix"
 			}
 		},
@@ -702,7 +702,7 @@
 	"groups":
 	[
 		{
-			"selected": 6,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -710,15 +710,15 @@
 					"file": "protected/controllers/AdminController.php",
 					"settings":
 					{
-						"buffer_size": 3002,
+						"buffer_size": 5175,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2974,
-								2974
+								3026,
+								3026
 							]
 						],
 						"settings":
@@ -729,7 +729,7 @@
 								"README",
 								"FIXME"
 							],
-							"function_name_status_row": 113,
+							"function_name_status_row": 117,
 							"gjslint_ignore":
 							[
 								110
@@ -777,7 +777,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1620.0,
+						"translation.y": 1710.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -864,15 +864,15 @@
 					"file": "protected/models/Sensor.php",
 					"settings":
 					{
-						"buffer_size": 3728,
+						"buffer_size": 3837,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								3759,
+								3759
 							]
 						],
 						"settings":
@@ -883,7 +883,7 @@
 								"README",
 								"FIXME"
 							],
-							"function_name_status_row": 0,
+							"function_name_status_row": 142,
 							"gjslint_ignore":
 							[
 								110
@@ -931,7 +931,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2036.0,
+						"translation.y": 2214.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1018,15 +1018,15 @@
 					"file": "protected/views/layouts/admin.php",
 					"settings":
 					{
-						"buffer_size": 1480,
+						"buffer_size": 1470,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								728,
+								728
 							]
 						],
 						"settings":
@@ -1037,7 +1037,7 @@
 								"README",
 								"FIXME"
 							],
-							"function_name_status_row": 0,
+							"function_name_status_row": 15,
 							"gjslint_ignore":
 							[
 								110
@@ -1179,8 +1179,8 @@
 						"selection":
 						[
 							[
-								460,
-								460
+								240,
+								240
 							]
 						],
 						"settings":
@@ -1191,7 +1191,7 @@
 								"README",
 								"FIXME"
 							],
-							"function_name_status_row": 23,
+							"function_name_status_row": 15,
 							"gjslint_ignore":
 							[
 								110
@@ -1278,6 +1278,10 @@
 		]
 	},
 	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 129.0
+	},
 	"replace":
 	{
 		"height": 0.0

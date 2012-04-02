@@ -11,6 +11,7 @@ class AdminController extends KmaController {
 		       		'index',
 	        		'error',
 				'chart',
+				'xls',
 	        ), 'users' => array('*'),), 
 	        array('deny', // deny all users
 	       'users' => array('*'),),);
@@ -124,7 +125,7 @@ class AdminController extends KmaController {
 			$sensorIds = isset($filter['sensorIds']) ? $filter['sensorIds'] : null;
 		} else {
 			$date = time();			
-			$dateFrom = date('Y-m-d H:i:s',$date-(60*60*2));
+			$dateFrom = date('Y-m-d H:i:s',$date-(60*60*2)); 
 			$dateTo = date('Y-m-d H:i:s',$date);
 			$sensorIds = Yii::app()->db->createCommand("select * from Sensor where active = 1")->queryColumn();
 		}
@@ -166,30 +167,31 @@ class AdminController extends KmaController {
 			ORDER BY date ASC
 		";
 		
-		
 		$res = Yii::app()->db->createCommand($sql)->queryAll(false);
 				
 		$data = array();
 		
 		foreach($res as $v){
-			$data[$v[0]][] = $v;
+			$data[$v[1]][] = $v;
 		}
-		
-		$items = array();
-		
-		foreach($data as $d => $v) {
-			$it = array();
-			
-			$it['name'] = $d;
-			foreach($v as $i){
-				$it[$sensorSerialById[(int)$i[1]]] = $i[2]; // $it[1] sensorId
-			}
-			
-			$items[] = $it; 
+		try{
+		$data = $this->renderPartial('xls',array(
+				'sensorSerialById' => $sensorSerialById,
+				'data' => $data
+			),true);
+		}catch(CExeption $e){
+			echo $e->getMessage();
+			Yii::app()->end();
 		}
-		
-		$this->result($items,count($items));
-		
+
+		header('Expires: 0');
+		header('Cache-control: private');
+		header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+		header('Content-Description: File Transfer');
+		header('Content-Type: application/vnd.ms-excel');
+		header('Content-disposition: attachment; filename="' . 'report.xls' . '"');
+
+		echo iconv('UTF-8', 'Windows-1251', $data);
 		Yii::app()->end();
 	}
 	
