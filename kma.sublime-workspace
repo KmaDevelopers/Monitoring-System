@@ -479,7 +479,7 @@
 			"file": "protected/models/Sensor.php",
 			"settings":
 			{
-				"buffer_size": 3837,
+				"buffer_size": 3728,
 				"line_ending": "Unix"
 			}
 		},
@@ -495,7 +495,7 @@
 			"file": "protected/views/layouts/admin.php",
 			"settings":
 			{
-				"buffer_size": 1470,
+				"buffer_size": 1480,
 				"line_ending": "Unix"
 			}
 		},
@@ -864,15 +864,15 @@
 					"file": "protected/models/Sensor.php",
 					"settings":
 					{
-						"buffer_size": 3837,
+						"buffer_size": 3728,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3831,
-								3831
+								0,
+								0
 							]
 						],
 						"settings":
@@ -883,7 +883,7 @@
 								"README",
 								"FIXME"
 							],
-							"function_name_status_row": 143,
+							"function_name_status_row": 0,
 							"gjslint_ignore":
 							[
 								110
@@ -1018,15 +1018,15 @@
 					"file": "protected/views/layouts/admin.php",
 					"settings":
 					{
-						"buffer_size": 1470,
+						"buffer_size": 1480,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								694,
-								694
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1037,7 +1037,7 @@
 								"README",
 								"FIXME"
 							],
-							"function_name_status_row": 13,
+							"function_name_status_row": 0,
 							"gjslint_ignore":
 							[
 								110
@@ -1278,10 +1278,6 @@
 		]
 	},
 	"menu_visible": true,
-	"output.git":
-	{
-		"height": 118.0
-	},
 	"replace":
 	{
 		"height": 0.0

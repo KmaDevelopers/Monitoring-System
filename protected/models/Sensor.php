@@ -139,4 +139,9 @@ class Sensor extends KmaActiveRecord
 			}
 			return -1;
 	}
+
+	public function defaultScope(){
+		return array('condition' => 'sensor.active = 1','alias' =>'sensor');
+	}
+
 }
