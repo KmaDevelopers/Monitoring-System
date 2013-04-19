@@ -1,0 +1,26 @@
+/**
+ * @class Ext.form.field.Checkbox
+ */
+
+// private
+$form-checkbox-image: 'form/checkbox' !default;
+
+/**
+ * @var {number}
+ * The size of the checkbox
+ */
+$form-checkbox-size: 13px !default;
+
+/**
+ * @var {number}
+ * The space between the label and the checkbox.
+ */
+$form-checkbox-label-spacing: 4px !default;
+
+/**
+ * @var {number}
+ * adjustment for vertical positioning of checkbox.  An adjustment of a pixel or two may
+ * be needed to achieve the desired vertical alignment of the checkbox with the label in
+ * cetain combinations of field-height and checkbox height
+ */
+$form-checkbox-vertical-position-adjust: 0 !default;

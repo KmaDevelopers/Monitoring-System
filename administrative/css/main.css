@@ -1,0 +1,22 @@
+.sensor {
+    background-size: 40px;
+}
+
+.active-icon {
+	background: url('/images/admin/active-icon.png') no-repeat;
+	background-size: 15px;
+}
+
+.inactive-icon {
+	background: url('/images/admin/inactive-icon.png')no-repeat;
+	background-size: 15px;
+}
+
+.edit-link img{
+	cursor: pointer;
+}
+
+.edit-icon,
+.graphic-icon {
+	margin-right: 5px;
+}

@@ -1,0 +1,21 @@
+/**
+ * @class Ext.grid.feature.RowWrap
+ */
+
+/**
+ * @var {color}
+ * The border-color of wrapped rows
+ */
+$grid-row-wrap-border-color: $grid-row-cell-border-color !default;
+
+/**
+ * @var {number/list}
+ * The border-width of wrapped rows
+ */
+$grid-row-wrap-border-width: 1px 0 !default;
+
+/**
+ * @var {string}
+ * The border-style of wrapped rows
+ */
+$grid-row-wrap-border-style: solid !default;

@@ -1,0 +1,181 @@
+/**
+* @class Ext.panel.Table
+*/
+
+$grid-base-color: $base-color !default;
+$grid-row-focus-border-style: dotted !default;
+$grid-cell-border-width: 1px !default;
+
+// Row height *within* borders. Eventual height will be 21 (border:collapse). private
+$grid-row-height: 20px !default;
+
+/**
+ * @var {color} $grid-row-cell-color
+ * The color of the text in the grid cells
+ */
+$grid-row-cell-color: null !default;
+
+/**
+ * @var {number} $grid-row-cell-line-height
+ * The line-height of the text inside the grid cells
+ */
+$grid-row-cell-line-height: $grid-row-cell-font-size + $grid-row-line-height-increment !default;
+$grid-row-cell-font: normal #{$grid-row-cell-font-size}/#{$grid-row-cell-line-height} $font-family !default;
+
+// Tree rows are sized to standard table panel row height by their elbow/line icons.
+// Row border of 1px is subtracted
+$tree-elbow-height: $grid-row-height - $grid-cell-border-width !default;
+
+//row body
+$grid-row-body-font: normal 11px/13px $font-family !default;
+$grid-row-body-padding: 0 !default;
+
+/**
+ * @var {color}
+ * The background-color of the grid cells
+ */
+$grid-row-cell-background-color: #fff !default;
+
+/**
+ * @var {color} $grid-row-cell-border-color
+ * The border-color of row/column borders. Can be specified as a single color, or as a list
+ * of colors containing the row border color followed by the column border color.
+ */
+$grid-row-cell-border-color: #ededed !default;
+
+/**
+ * @var {string} $grid-row-cell-border-style
+ * The border-style of the row/column borders.
+ */
+$grid-row-cell-border-style: solid !default;
+
+/**
+ * @var {number} $grid-row-cell-border-width
+ * The border-width of the row and column borders.
+ */
+$grid-row-cell-border-width: 1px 0 !default;
+
+//cell with col lines
+$grid-cell-with-col-lines-border-color: $grid-row-cell-border-color !default;
+
+/**
+ * @var {color} $grid-cell-special-background-color
+ * The background-color of "special" cells. Special cells are created by {@link
+ * Ext.grid.RowNumberer RowNumberer}, {@link Ext.selection.CheckboxModel Checkbox Selection
+ * Model} and {@link Ext.grid.plugin.RowExpander RowExpander}.
+ */
+$grid-cell-special-background-color: $grid-row-cell-background-color !default;
+
+/**
+ * @var {string} $grid-cell-special-background-gradient
+ * The background-gradient to use for "special" cells. Special cells are created by {@link
+ * Ext.grid.RowNumberer RowNumberer}, {@link Ext.selection.CheckboxModel Checkbox Selection
+ * Model} and {@link Ext.grid.plugin.RowExpander RowExpander}.
+ */
+$grid-cell-special-background-gradient: null !default;
+
+/**
+ * @var {color} $grid-cell-special-border-color
+ * The border-color of "special" cells. Special cells are created by {@link
+ * Ext.grid.RowNumberer RowNumberer}, {@link Ext.selection.CheckboxModel Checkbox Selection
+ * Model} and {@link Ext.grid.plugin.RowExpander RowExpander}.
+ * Only applies to the vertical border, since the row border color is determined by
+ * {#$grid-row-cell-border-color}.
+ */
+$grid-cell-special-border-color: $grid-cell-with-col-lines-border-color !default;
+
+/**
+ * @var {color} $grid-cell-special-selected-border-color
+ * The border-color of "special" cells when the row is selected using a {@link
+ * Ext.selection.RowModel Row Selection Model}. Special cells are created by {@link
+ * Ext.grid.RowNumberer RowNumberer}, {@link Ext.selection.CheckboxModel Checkbox Selection
+ * Model} and {@link Ext.grid.plugin.RowExpander RowExpander}.
+ * Only applies to the vertical border, since the selected row border color is determined by
+ * {#$grid-row-cell-selected-border-color}.
+ */
+$grid-cell-special-selected-border-color: $grid-cell-with-col-lines-border-color !default;
+$grid-cell-special-background-image: null !default;
+$grid-cell-special-selected-background-image: null !default;
+
+/**
+ * @var {color} $grid-row-cell-alt-background-color
+ * The background-color color of odd-numbered rows when the table view is configured with
+ * `{@link Ext.view.Table#stripeRows stripeRows}: true`.
+ */
+$grid-row-cell-alt-background-color: darken($grid-row-cell-background-color, 2) !default;
+
+/**
+ * @var {color} $grid-row-cell-over-border-color
+ * The border-color of the hovered row
+ */
+$grid-row-cell-over-border-color: adjust-color($neutral-color, $hue: 0deg, $saturation: 0%, $lightness: -6.667%) !default;
+
+/**
+ * @var {color} $grid-row-cell-over-background-color
+ * The background-color of the hovered row
+ */
+$grid-row-cell-over-background-color: adjust-color($neutral-color, $hue: 0deg, $saturation: 0%, $lightness: 0.392%) !default;
+$grid-row-cell-over-background-gradient: 'grid-row-over' !default;
+
+/**
+ * @var {string} $grid-row-cell-selected-border-style
+ * The border-style of the selected row
+ */
+$grid-row-cell-selected-border-style: dotted !default;
+
+/**
+ * @var {color} $grid-row-cell-selected-border-color
+ * The border-color of the selected row
+ */
+$grid-row-cell-selected-border-color: adjust-color($base-color, $hue: 6.952deg, $saturation: 5.848%, $lightness: -6.471%) !default;
+
+/**
+ * @var {color} $grid-row-cell-selected-background-color
+ * The background-color of the selected row
+ */
+$grid-row-cell-selected-background-color: adjust-color($base-color, $hue: 3.188deg, $saturation: 0.542%, $lightness: 7.843%) !default;
+
+/**
+ * @var {color} $grid-row-cell-focus-border-color
+ * The border-color of the focused row
+ */
+$grid-row-cell-focus-border-color: adjust-color($neutral-color, $hue: 0deg, $saturation: 0%, $lightness: -66%) !default;
+
+/**
+ * @var {color} $grid-row-cell-focus-background-color
+ * The background-color of the focused row
+ */
+$grid-row-cell-focus-background-color: adjust-color($neutral-color, $hue: 0deg, $saturation: 0%, $lightness: 0.392%) !default;
+$grid-row-cell-focus-background-gradient: 'grid-row-over' !default;
+
+/**
+ * @var {number} $grid-cell-inner-padding
+ * The amount of padding to apply to the grid cell's inner div element
+ */
+$grid-cell-inner-padding: 2px 6px 4px !default;
+
+/**
+ * @var {color} $grid-cell-special-over-background-color
+ * The background-color of "special" cells when the row is hovered. Special cells are
+ * created by {@link Ext.grid.RowNumberer RowNumberer}, {@link Ext.selection.CheckboxModel
+ * Checkbox Selection Model} and {@link Ext.grid.plugin.RowExpander RowExpander}.
+ */
+$grid-cell-special-over-background-color: adjust-color($base-color, $hue: -0.476deg, $saturation: 25.214%, $lightness: 5.686%) !default;
+
+/**
+ * @var {color} $grid-body-border-color
+ * The border-color of the grid body
+ */
+$grid-body-border-color: $panel-body-border-color !default;
+
+/**
+ * @var {number} $grid-body-border-width
+ * The border-width of the grid body border
+ */
+$grid-body-border-width: $panel-body-border-width !default;
+
+/**
+ * @var {string} $grid-body-border-style
+ * The border-style of the grid body border
+ */
+$grid-body-border-style: $panel-body-border-style !default;

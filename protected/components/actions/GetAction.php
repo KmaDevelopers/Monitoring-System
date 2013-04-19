@@ -5,7 +5,6 @@ class GetAction extends CAction {
 
 	public function run()
 	{
-		
 		$name = $this->getController()->id;
 		$id = CJSON::decode(file_get_contents('php://input'));
 		

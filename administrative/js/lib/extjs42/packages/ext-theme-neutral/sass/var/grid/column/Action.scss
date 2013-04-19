@@ -1,0 +1,21 @@
+/**
+ * @class Ext.grid.column.Action
+ */
+
+/**
+ * @var {number}
+ * The height of action column icons
+ */
+$grid-actioncolumn-icon-height: 16px !default;
+
+/**
+ * @var {number}
+ * The width of action column icons
+ */
+$grid-actioncolumn-icon-width: 16px !default;
+
+/**
+ * @var {string}
+ * The type of cursor to display when the cursor is over an action column icon
+ */
+$grid-actioncolumn-icon-cursor: pointer !default;

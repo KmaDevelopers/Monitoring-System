@@ -1733,3 +1733,1090 @@ Stack trace:
 #11 /home/artem/htdocs/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
 #12 /home/artem/htdocs/Monitoring-System/index.php(13): CWebApplication->run()
 REQUEST_URI=/graphic/trest.jpg
+2013/04/19 16:41:09 [error] [exception.CDbException] SQLSTATE[28000] [1045] Access denied for user 'kma'@'localhost' (using password: YES)
+2013/04/19 16:41:09 [error] [exception.CDbException] exception 'CDbException' with message 'CDbConnection failed to open the DB connection.' in /root/www/Monitoring-System/protected/yii/framework/db/CDbConnection.php:354
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/db/CDbConnection.php(297): CDbConnection->open()
+#1 /root/www/Monitoring-System/protected/yii/framework/db/CDbConnection.php(275): CDbConnection->setActive(true)
+#2 /root/www/Monitoring-System/protected/yii/framework/base/CModule.php(372): CDbConnection->init()
+#3 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(426): CModule->getComponent('db')
+#4 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(607): CApplication->getDb()
+#5 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(2236): CActiveRecord->getDbConnection()
+#6 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(371): CActiveRecordMetaData->__construct(Object(Sensor))
+#7 /root/www/Monitoring-System/protected/components/actions/GetAction.php(18): CActiveRecord::model('Sensor')
+#8 /root/www/Monitoring-System/protected/yii/framework/web/actions/CAction.php(72): GetAction->run()
+#9 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(300): CAction->runWithParams(Array)
+#10 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(GetAction))
+#11 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#12 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(1122): CFilter->filter(Object(CFilterChain))
+#13 /root/www/Monitoring-System/protected/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#14 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#15 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#16 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(257): CController->runActionWithFilters(Object(GetAction), Array)
+#17 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('get')
+#18 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('sensor/get')
+#19 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#20 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#21 {main} REQUEST_URI=/sensor?_dc=1366378869741&page=1&start=0&limit=25
+2013/04/19 16:41:09 [error] [exception.CDbException] SQLSTATE[28000] [1045] Access denied for user 'kma'@'localhost' (using password: YES)
+2013/04/19 16:41:09 [error] [exception.CDbException] exception 'CDbException' with message 'CDbConnection failed to open the DB connection.' in /root/www/Monitoring-System/protected/yii/framework/db/CDbConnection.php:354
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/db/CDbConnection.php(297): CDbConnection->open()
+#1 /root/www/Monitoring-System/protected/yii/framework/db/CDbConnection.php(275): CDbConnection->setActive(true)
+#2 /root/www/Monitoring-System/protected/yii/framework/base/CModule.php(372): CDbConnection->init()
+#3 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(426): CModule->getComponent('db')
+#4 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(607): CApplication->getDb()
+#5 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(2236): CActiveRecord->getDbConnection()
+#6 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(371): CActiveRecordMetaData->__construct(Object(Sensor))
+#7 /root/www/Monitoring-System/protected/components/actions/GetAction.php(18): CActiveRecord::model('Sensor')
+#8 /root/www/Monitoring-System/protected/yii/framework/web/actions/CAction.php(72): GetAction->run()
+#9 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(300): CAction->runWithParams(Array)
+#10 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(GetAction))
+#11 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#12 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(1122): CFilter->filter(Object(CFilterChain))
+#13 /root/www/Monitoring-System/protected/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#14 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#15 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#16 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(257): CController->runActionWithFilters(Object(GetAction), Array)
+#17 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('get')
+#18 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('sensor/get')
+#19 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#20 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#21 {main} REQUEST_URI=/sensor?_dc=1366378869744&page=1&start=0&limit=25
+2013/04/19 16:41:11 [error] [exception.CDbException] SQLSTATE[28000] [1045] Access denied for user 'kma'@'localhost' (using password: YES)
+2013/04/19 16:41:11 [error] [exception.CDbException] exception 'CDbException' with message 'CDbConnection failed to open the DB connection.' in /root/www/Monitoring-System/protected/yii/framework/db/CDbConnection.php:354
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/db/CDbConnection.php(297): CDbConnection->open()
+#1 /root/www/Monitoring-System/protected/yii/framework/db/CDbConnection.php(275): CDbConnection->setActive(true)
+#2 /root/www/Monitoring-System/protected/yii/framework/base/CModule.php(372): CDbConnection->init()
+#3 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(426): CModule->getComponent('db')
+#4 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(607): CApplication->getDb()
+#5 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(2236): CActiveRecord->getDbConnection()
+#6 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(371): CActiveRecordMetaData->__construct(Object(Sensor))
+#7 /root/www/Monitoring-System/protected/components/actions/GetAction.php(18): CActiveRecord::model('Sensor')
+#8 /root/www/Monitoring-System/protected/yii/framework/web/actions/CAction.php(72): GetAction->run()
+#9 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(300): CAction->runWithParams(Array)
+#10 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(GetAction))
+#11 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#12 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(1122): CFilter->filter(Object(CFilterChain))
+#13 /root/www/Monitoring-System/protected/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#14 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#15 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#16 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(257): CController->runActionWithFilters(Object(GetAction), Array)
+#17 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('get')
+#18 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('sensor/get')
+#19 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#20 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#21 {main} REQUEST_URI=/sensor?_dc=1366378871749&page=1&start=0&limit=25
+2013/04/19 16:41:13 [error] [exception.CDbException] SQLSTATE[28000] [1045] Access denied for user 'kma'@'localhost' (using password: YES)
+2013/04/19 16:41:13 [error] [exception.CDbException] exception 'CDbException' with message 'CDbConnection failed to open the DB connection.' in /root/www/Monitoring-System/protected/yii/framework/db/CDbConnection.php:354
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/db/CDbConnection.php(297): CDbConnection->open()
+#1 /root/www/Monitoring-System/protected/yii/framework/db/CDbConnection.php(275): CDbConnection->setActive(true)
+#2 /root/www/Monitoring-System/protected/yii/framework/base/CModule.php(372): CDbConnection->init()
+#3 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(426): CModule->getComponent('db')
+#4 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(607): CApplication->getDb()
+#5 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(2236): CActiveRecord->getDbConnection()
+#6 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(371): CActiveRecordMetaData->__construct(Object(Sensor))
+#7 /root/www/Monitoring-System/protected/components/actions/GetAction.php(18): CActiveRecord::model('Sensor')
+#8 /root/www/Monitoring-System/protected/yii/framework/web/actions/CAction.php(72): GetAction->run()
+#9 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(300): CAction->runWithParams(Array)
+#10 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(GetAction))
+#11 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#12 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(1122): CFilter->filter(Object(CFilterChain))
+#13 /root/www/Monitoring-System/protected/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#14 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#15 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#16 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(257): CController->runActionWithFilters(Object(GetAction), Array)
+#17 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('get')
+#18 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('sensor/get')
+#19 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#20 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#21 {main} REQUEST_URI=/sensor?_dc=1366378873751&page=1&start=0&limit=25
+2013/04/19 16:41:16 [error] [exception.CDbException] SQLSTATE[28000] [1045] Access denied for user 'kma'@'localhost' (using password: YES)
+2013/04/19 16:41:16 [error] [exception.CDbException] exception 'CDbException' with message 'CDbConnection failed to open the DB connection.' in /root/www/Monitoring-System/protected/yii/framework/db/CDbConnection.php:354
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/db/CDbConnection.php(297): CDbConnection->open()
+#1 /root/www/Monitoring-System/protected/yii/framework/db/CDbConnection.php(275): CDbConnection->setActive(true)
+#2 /root/www/Monitoring-System/protected/yii/framework/base/CModule.php(372): CDbConnection->init()
+#3 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(426): CModule->getComponent('db')
+#4 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(607): CApplication->getDb()
+#5 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(2236): CActiveRecord->getDbConnection()
+#6 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(371): CActiveRecordMetaData->__construct(Object(Server))
+#7 /root/www/Monitoring-System/protected/components/actions/GetAction.php(18): CActiveRecord::model('Server')
+#8 /root/www/Monitoring-System/protected/yii/framework/web/actions/CAction.php(72): GetAction->run()
+#9 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(300): CAction->runWithParams(Array)
+#10 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(GetAction))
+#11 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#12 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(1122): CFilter->filter(Object(CFilterChain))
+#13 /root/www/Monitoring-System/protected/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#14 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#15 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#16 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(257): CController->runActionWithFilters(Object(GetAction), Array)
+#17 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('get')
+#18 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('server/get')
+#19 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#20 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#21 {main} REQUEST_URI=/server?_dc=1366378876144&page=1&start=0&limit=25
+2013/04/19 16:42:12 [error] [exception.CDbException] SQLSTATE[28000] [1045] Access denied for user 'kma'@'localhost' (using password: YES)
+2013/04/19 16:42:12 [error] [exception.CDbException] exception 'CDbException' with message 'CDbConnection failed to open the DB connection.' in /root/www/Monitoring-System/protected/yii/framework/db/CDbConnection.php:354
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/db/CDbConnection.php(297): CDbConnection->open()
+#1 /root/www/Monitoring-System/protected/yii/framework/db/CDbConnection.php(275): CDbConnection->setActive(true)
+#2 /root/www/Monitoring-System/protected/yii/framework/base/CModule.php(372): CDbConnection->init()
+#3 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(426): CModule->getComponent('db')
+#4 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(607): CApplication->getDb()
+#5 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(2236): CActiveRecord->getDbConnection()
+#6 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(371): CActiveRecordMetaData->__construct(Object(Server))
+#7 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(386): CActiveRecord::model('Server')
+#8 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(62): CActiveRecord->getMetaData()
+#9 /root/www/Monitoring-System/protected/controllers/ServerController.php(32): CActiveRecord->__construct()
+#10 /root/www/Monitoring-System/protected/yii/framework/web/actions/CInlineAction.php(50): ServerController->actionCreate()
+#11 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(300): CInlineAction->runWithParams(Array)
+#12 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#13 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#14 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(1122): CFilter->filter(Object(CFilterChain))
+#15 /root/www/Monitoring-System/protected/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#16 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#17 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#18 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#19 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('create')
+#20 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('server/create')
+#21 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#22 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#23 {main} REQUEST_URI=/server?_dc=1366378932235
+2013/04/19 16:42:16 [error] [exception.CDbException] SQLSTATE[28000] [1045] Access denied for user 'kma'@'localhost' (using password: YES)
+2013/04/19 16:42:16 [error] [exception.CDbException] exception 'CDbException' with message 'CDbConnection failed to open the DB connection.' in /root/www/Monitoring-System/protected/yii/framework/db/CDbConnection.php:354
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/db/CDbConnection.php(297): CDbConnection->open()
+#1 /root/www/Monitoring-System/protected/yii/framework/db/CDbConnection.php(275): CDbConnection->setActive(true)
+#2 /root/www/Monitoring-System/protected/yii/framework/base/CModule.php(372): CDbConnection->init()
+#3 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(426): CModule->getComponent('db')
+#4 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(607): CApplication->getDb()
+#5 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(2236): CActiveRecord->getDbConnection()
+#6 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(371): CActiveRecordMetaData->__construct(Object(Server))
+#7 /root/www/Monitoring-System/protected/components/actions/GetAction.php(18): CActiveRecord::model('Server')
+#8 /root/www/Monitoring-System/protected/yii/framework/web/actions/CAction.php(72): GetAction->run()
+#9 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(300): CAction->runWithParams(Array)
+#10 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(GetAction))
+#11 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#12 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(1122): CFilter->filter(Object(CFilterChain))
+#13 /root/www/Monitoring-System/protected/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#14 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#15 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#16 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(257): CController->runActionWithFilters(Object(GetAction), Array)
+#17 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('get')
+#18 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('server/get')
+#19 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#20 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#21 {main} REQUEST_URI=/server?_dc=1366378936139&page=1&start=0&limit=25
+2013/04/19 16:45:05 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "adminJs/lib/extjs/resources/css/ext-all-gray.css".' in /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('adminJs/lib/ext...')
+#1 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/adminJs/lib/extjs/resources/css/ext-all-gray.css
+2013/04/19 16:45:05 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "adminJs/lib/extjs/ext-all-dev.js".' in /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('adminJs/lib/ext...')
+#1 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/adminJs/lib/extjs/ext-all-dev.js
+2013/04/19 16:45:05 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "adminJs/app.js".' in /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('adminJs/app.js')
+#1 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/adminJs/app.js?1366379105
+2013/04/19 16:45:38 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "adminJs/lib/extjs/ext-all-dev.js".' in /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('adminJs/lib/ext...')
+#1 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/adminJs/lib/extjs/ext-all-dev.js
+2013/04/19 16:45:38 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "adminJs/app.js".' in /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('adminJs/app.js')
+#1 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/adminJs/app.js?1366379138
+2013/04/19 16:46:10 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "adminJs/app/core/EventBus.js".' in /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('adminJs/app/cor...')
+#1 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/adminJs/app/core/EventBus.js?_dc=1366379170465
+2013/04/19 16:46:10 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "adminJs/app/components/basic/NoticeHandler.js".' in /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('adminJs/app/com...')
+#1 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/adminJs/app/components/basic/NoticeHandler.js?_dc=1366379170468
+2013/04/19 16:46:10 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "adminJs/app/LoadMask.js".' in /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('adminJs/app/Loa...')
+#1 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/adminJs/app/LoadMask.js?_dc=1366379170466
+2013/04/19 16:46:10 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "adminJs/app/components/basic/Utils.js".' in /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('adminJs/app/com...')
+#1 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/adminJs/app/components/basic/Utils.js?_dc=1366379170467
+2013/04/19 16:46:10 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "adminJs/app/constants.js".' in /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('adminJs/app/con...')
+#1 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/adminJs/app/constants.js?_dc=1366379170467
+2013/04/19 16:46:10 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "adminJs/app/components/ux/Notification.js".' in /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('adminJs/app/com...')
+#1 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/adminJs/app/components/ux/Notification.js?_dc=1366379170468
+2013/04/19 16:46:10 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "adminJs/app/links.js".' in /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('adminJs/app/lin...')
+#1 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/adminJs/app/links.js?_dc=1366379170467
+2013/04/19 16:46:10 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "adminJs/app/view/Viewport.js".' in /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('adminJs/app/vie...')
+#1 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/adminJs/app/view/Viewport.js?_dc=1366379170468
+2013/04/19 16:46:10 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "adminJs/app/controller/ServerController.js".' in /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('adminJs/app/con...')
+#1 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/adminJs/app/controller/ServerController.js?_dc=1366379170469
+2013/04/19 16:46:10 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "adminJs/app/controller/SensorController.js".' in /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('adminJs/app/con...')
+#1 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/adminJs/app/controller/SensorController.js?_dc=1366379170469
+2013/04/19 16:46:10 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "adminJs/app/controller/MapController.js".' in /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('adminJs/app/con...')
+#1 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/adminJs/app/controller/MapController.js?_dc=1366379170469
+2013/04/19 16:46:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "adminJs/app/LoadMask.js".' in /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('adminJs/app/Loa...')
+#1 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/adminJs/app/LoadMask.js?_dc=1366379182326
+2013/04/19 16:46:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "adminJs/app/links.js".' in /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('adminJs/app/lin...')
+#1 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/adminJs/app/links.js?_dc=1366379182327
+2013/04/19 16:46:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "adminJs/app/constants.js".' in /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('adminJs/app/con...')
+#1 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/adminJs/app/constants.js?_dc=1366379182327
+2013/04/19 16:46:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "adminJs/app/core/EventBus.js".' in /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('adminJs/app/cor...')
+#1 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/adminJs/app/core/EventBus.js?_dc=1366379182325
+2013/04/19 16:46:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "adminJs/app/components/basic/NoticeHandler.js".' in /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('adminJs/app/com...')
+#1 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/adminJs/app/components/basic/NoticeHandler.js?_dc=1366379182327
+2013/04/19 16:46:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "adminJs/app/components/basic/Utils.js".' in /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('adminJs/app/com...')
+#1 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/adminJs/app/components/basic/Utils.js?_dc=1366379182327
+2013/04/19 16:46:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "adminJs/app/components/ux/Notification.js".' in /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('adminJs/app/com...')
+#1 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/adminJs/app/components/ux/Notification.js?_dc=1366379182328
+2013/04/19 16:46:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "adminJs/app/controller/ServerController.js".' in /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('adminJs/app/con...')
+#1 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/adminJs/app/controller/ServerController.js?_dc=1366379182328
+2013/04/19 16:46:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "adminJs/app/controller/MapController.js".' in /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('adminJs/app/con...')
+#1 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/adminJs/app/controller/MapController.js?_dc=1366379182329
+2013/04/19 16:46:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "adminJs/app/view/Viewport.js".' in /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('adminJs/app/vie...')
+#1 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/adminJs/app/view/Viewport.js?_dc=1366379182328
+2013/04/19 16:46:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "adminJs/app/controller/SensorController.js".' in /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('adminJs/app/con...')
+#1 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/adminJs/app/controller/SensorController.js?_dc=1366379182328
+2013/04/19 16:47:15 [error] [exception.CDbException] SQLSTATE[28000] [1045] Access denied for user 'kma'@'localhost' (using password: YES)
+2013/04/19 16:47:15 [error] [exception.CDbException] exception 'CDbException' with message 'CDbConnection failed to open the DB connection.' in /root/www/Monitoring-System/protected/yii/framework/db/CDbConnection.php:354
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/db/CDbConnection.php(297): CDbConnection->open()
+#1 /root/www/Monitoring-System/protected/yii/framework/db/CDbConnection.php(275): CDbConnection->setActive(true)
+#2 /root/www/Monitoring-System/protected/yii/framework/base/CModule.php(372): CDbConnection->init()
+#3 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(426): CModule->getComponent('db')
+#4 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(607): CApplication->getDb()
+#5 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(2236): CActiveRecord->getDbConnection()
+#6 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(371): CActiveRecordMetaData->__construct(Object(Server))
+#7 /root/www/Monitoring-System/protected/components/actions/GetAction.php(18): CActiveRecord::model('Server')
+#8 /root/www/Monitoring-System/protected/yii/framework/web/actions/CAction.php(72): GetAction->run()
+#9 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(300): CAction->runWithParams(Array)
+#10 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(GetAction))
+#11 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#12 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(1122): CFilter->filter(Object(CFilterChain))
+#13 /root/www/Monitoring-System/protected/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#14 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#15 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#16 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(257): CController->runActionWithFilters(Object(GetAction), Array)
+#17 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('get')
+#18 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('server/get')
+#19 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#20 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#21 {main} REQUEST_URI=/server?_dc=1366379235488&page=1&start=0&limit=25
+2013/04/19 16:48:43 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kma.Server' doesn't exist. The SQL statement executed was: SHOW COLUMNS FROM `Server`.
+2013/04/19 16:48:43 [error] [exception.CDbException] exception 'CDbException' with message 'The table "Server" for active record class "Server" cannot be found in the database.' in /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php:2237
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(371): CActiveRecordMetaData->__construct(Object(Server))
+#1 /root/www/Monitoring-System/protected/components/actions/GetAction.php(18): CActiveRecord::model('Server')
+#2 /root/www/Monitoring-System/protected/yii/framework/web/actions/CAction.php(72): GetAction->run()
+#3 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(300): CAction->runWithParams(Array)
+#4 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(GetAction))
+#5 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#6 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(1122): CFilter->filter(Object(CFilterChain))
+#7 /root/www/Monitoring-System/protected/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#8 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#10 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(257): CController->runActionWithFilters(Object(GetAction), Array)
+#11 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('get')
+#12 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('server/get')
+#13 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#14 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#15 {main} REQUEST_URI=/server?_dc=1366379323756&page=1&start=0&limit=25
+2013/04/19 16:48:45 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kma.Server' doesn't exist. The SQL statement executed was: SHOW COLUMNS FROM `Server`.
+2013/04/19 16:48:45 [error] [exception.CDbException] exception 'CDbException' with message 'The table "Server" for active record class "Server" cannot be found in the database.' in /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php:2237
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(371): CActiveRecordMetaData->__construct(Object(Server))
+#1 /root/www/Monitoring-System/protected/components/actions/GetAction.php(18): CActiveRecord::model('Server')
+#2 /root/www/Monitoring-System/protected/yii/framework/web/actions/CAction.php(72): GetAction->run()
+#3 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(300): CAction->runWithParams(Array)
+#4 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(GetAction))
+#5 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#6 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(1122): CFilter->filter(Object(CFilterChain))
+#7 /root/www/Monitoring-System/protected/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#8 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#10 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(257): CController->runActionWithFilters(Object(GetAction), Array)
+#11 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('get')
+#12 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('server/get')
+#13 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#14 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#15 {main} REQUEST_URI=/server?_dc=1366379325894&page=1&start=0&limit=25
+2013/04/19 16:48:47 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kma.Server' doesn't exist. The SQL statement executed was: SHOW COLUMNS FROM `Server`.
+2013/04/19 16:48:47 [error] [exception.CDbException] exception 'CDbException' with message 'The table "Server" for active record class "Server" cannot be found in the database.' in /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php:2237
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(371): CActiveRecordMetaData->__construct(Object(Server))
+#1 /root/www/Monitoring-System/protected/components/actions/GetAction.php(18): CActiveRecord::model('Server')
+#2 /root/www/Monitoring-System/protected/yii/framework/web/actions/CAction.php(72): GetAction->run()
+#3 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(300): CAction->runWithParams(Array)
+#4 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(GetAction))
+#5 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#6 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(1122): CFilter->filter(Object(CFilterChain))
+#7 /root/www/Monitoring-System/protected/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#8 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#10 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(257): CController->runActionWithFilters(Object(GetAction), Array)
+#11 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('get')
+#12 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('server/get')
+#13 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#14 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#15 {main} REQUEST_URI=/server?_dc=1366379327520&page=1&start=0&limit=25
+2013/04/19 16:48:52 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kma.Server' doesn't exist. The SQL statement executed was: SHOW COLUMNS FROM `Server`.
+2013/04/19 16:48:52 [error] [exception.CDbException] exception 'CDbException' with message 'The table "Server" for active record class "Server" cannot be found in the database.' in /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php:2237
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(371): CActiveRecordMetaData->__construct(Object(Server))
+#1 /root/www/Monitoring-System/protected/components/actions/GetAction.php(18): CActiveRecord::model('Server')
+#2 /root/www/Monitoring-System/protected/yii/framework/web/actions/CAction.php(72): GetAction->run()
+#3 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(300): CAction->runWithParams(Array)
+#4 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(GetAction))
+#5 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#6 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(1122): CFilter->filter(Object(CFilterChain))
+#7 /root/www/Monitoring-System/protected/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#8 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#10 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(257): CController->runActionWithFilters(Object(GetAction), Array)
+#11 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('get')
+#12 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('server/get')
+#13 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#14 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#15 {main} REQUEST_URI=/server?_dc=1366379332596&page=1&start=0&limit=25
+2013/04/19 16:48:55 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kma.Server' doesn't exist. The SQL statement executed was: SHOW COLUMNS FROM `Server`.
+2013/04/19 16:48:55 [error] [exception.CDbException] exception 'CDbException' with message 'The table "Server" for active record class "Server" cannot be found in the database.' in /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php:2237
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(371): CActiveRecordMetaData->__construct(Object(Server))
+#1 /root/www/Monitoring-System/protected/components/actions/GetAction.php(18): CActiveRecord::model('Server')
+#2 /root/www/Monitoring-System/protected/yii/framework/web/actions/CAction.php(72): GetAction->run()
+#3 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(300): CAction->runWithParams(Array)
+#4 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(GetAction))
+#5 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#6 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(1122): CFilter->filter(Object(CFilterChain))
+#7 /root/www/Monitoring-System/protected/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#8 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#10 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(257): CController->runActionWithFilters(Object(GetAction), Array)
+#11 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('get')
+#12 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('server/get')
+#13 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#14 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#15 {main} REQUEST_URI=/server?_dc=1366379335892&page=1&start=0&limit=25
+2013/04/19 16:48:58 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kma.Server' doesn't exist. The SQL statement executed was: SHOW COLUMNS FROM `Server`.
+2013/04/19 16:48:58 [error] [exception.CDbException] exception 'CDbException' with message 'The table "Server" for active record class "Server" cannot be found in the database.' in /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php:2237
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(371): CActiveRecordMetaData->__construct(Object(Server))
+#1 /root/www/Monitoring-System/protected/components/actions/GetAction.php(18): CActiveRecord::model('Server')
+#2 /root/www/Monitoring-System/protected/yii/framework/web/actions/CAction.php(72): GetAction->run()
+#3 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(300): CAction->runWithParams(Array)
+#4 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(GetAction))
+#5 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#6 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(1122): CFilter->filter(Object(CFilterChain))
+#7 /root/www/Monitoring-System/protected/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#8 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#10 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(257): CController->runActionWithFilters(Object(GetAction), Array)
+#11 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('get')
+#12 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('server/get')
+#13 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#14 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#15 {main} REQUEST_URI=/server?_dc=1366379338378&page=1&start=0&limit=25
+2013/04/19 16:49:10 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kma.Server' doesn't exist. The SQL statement executed was: SHOW COLUMNS FROM `Server`.
+2013/04/19 16:49:10 [error] [exception.CDbException] exception 'CDbException' with message 'The table "Server" for active record class "Server" cannot be found in the database.' in /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php:2237
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(371): CActiveRecordMetaData->__construct(Object(Server))
+#1 /root/www/Monitoring-System/protected/components/actions/GetAction.php(18): CActiveRecord::model('Server')
+#2 /root/www/Monitoring-System/protected/yii/framework/web/actions/CAction.php(72): GetAction->run()
+#3 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(300): CAction->runWithParams(Array)
+#4 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(GetAction))
+#5 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#6 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(1122): CFilter->filter(Object(CFilterChain))
+#7 /root/www/Monitoring-System/protected/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#8 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#10 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(257): CController->runActionWithFilters(Object(GetAction), Array)
+#11 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('get')
+#12 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('server/get')
+#13 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#14 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#15 {main} REQUEST_URI=/server?_dc=1366379350932&page=1&start=0&limit=25
+2013/04/19 16:49:15 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kma.Server' doesn't exist. The SQL statement executed was: SHOW COLUMNS FROM `Server`.
+2013/04/19 16:49:15 [error] [exception.CDbException] exception 'CDbException' with message 'The table "Server" for active record class "Server" cannot be found in the database.' in /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php:2237
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(371): CActiveRecordMetaData->__construct(Object(Server))
+#1 /root/www/Monitoring-System/protected/components/actions/GetAction.php(18): CActiveRecord::model('Server')
+#2 /root/www/Monitoring-System/protected/yii/framework/web/actions/CAction.php(72): GetAction->run()
+#3 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(300): CAction->runWithParams(Array)
+#4 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(GetAction))
+#5 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#6 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(1122): CFilter->filter(Object(CFilterChain))
+#7 /root/www/Monitoring-System/protected/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#8 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#10 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(257): CController->runActionWithFilters(Object(GetAction), Array)
+#11 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('get')
+#12 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('server/get')
+#13 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#14 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#15 {main} REQUEST_URI=/server?_dc=1366379355117&page=1&start=0&limit=25
+2013/04/19 16:49:17 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kma.Server' doesn't exist. The SQL statement executed was: SHOW COLUMNS FROM `Server`.
+2013/04/19 16:49:17 [error] [exception.CDbException] exception 'CDbException' with message 'The table "Server" for active record class "Server" cannot be found in the database.' in /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php:2237
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(371): CActiveRecordMetaData->__construct(Object(Server))
+#1 /root/www/Monitoring-System/protected/components/actions/GetAction.php(18): CActiveRecord::model('Server')
+#2 /root/www/Monitoring-System/protected/yii/framework/web/actions/CAction.php(72): GetAction->run()
+#3 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(300): CAction->runWithParams(Array)
+#4 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(GetAction))
+#5 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#6 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(1122): CFilter->filter(Object(CFilterChain))
+#7 /root/www/Monitoring-System/protected/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#8 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#10 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(257): CController->runActionWithFilters(Object(GetAction), Array)
+#11 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('get')
+#12 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('server/get')
+#13 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#14 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#15 {main} REQUEST_URI=/server?_dc=1366379357180&page=1&start=0&limit=25
+2013/04/19 16:49:18 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kma.Server' doesn't exist. The SQL statement executed was: SHOW COLUMNS FROM `Server`.
+2013/04/19 16:49:18 [error] [exception.CDbException] exception 'CDbException' with message 'The table "Server" for active record class "Server" cannot be found in the database.' in /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php:2237
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(371): CActiveRecordMetaData->__construct(Object(Server))
+#1 /root/www/Monitoring-System/protected/components/actions/GetAction.php(18): CActiveRecord::model('Server')
+#2 /root/www/Monitoring-System/protected/yii/framework/web/actions/CAction.php(72): GetAction->run()
+#3 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(300): CAction->runWithParams(Array)
+#4 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(GetAction))
+#5 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#6 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(1122): CFilter->filter(Object(CFilterChain))
+#7 /root/www/Monitoring-System/protected/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#8 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#10 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(257): CController->runActionWithFilters(Object(GetAction), Array)
+#11 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('get')
+#12 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('server/get')
+#13 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#14 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#15 {main} REQUEST_URI=/server?_dc=1366379358846&page=1&start=0&limit=25
+2013/04/19 16:49:22 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kma.Server' doesn't exist. The SQL statement executed was: SHOW COLUMNS FROM `Server`.
+2013/04/19 16:49:22 [error] [exception.CDbException] exception 'CDbException' with message 'The table "Server" for active record class "Server" cannot be found in the database.' in /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php:2237
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(371): CActiveRecordMetaData->__construct(Object(Server))
+#1 /root/www/Monitoring-System/protected/components/actions/GetAction.php(18): CActiveRecord::model('Server')
+#2 /root/www/Monitoring-System/protected/yii/framework/web/actions/CAction.php(72): GetAction->run()
+#3 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(300): CAction->runWithParams(Array)
+#4 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(GetAction))
+#5 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#6 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(1122): CFilter->filter(Object(CFilterChain))
+#7 /root/www/Monitoring-System/protected/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#8 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#10 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(257): CController->runActionWithFilters(Object(GetAction), Array)
+#11 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('get')
+#12 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('server/get')
+#13 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#14 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#15 {main} REQUEST_URI=/server?_dc=1366379361977&page=1&start=0&limit=25
+2013/04/19 16:49:25 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kma.Server' doesn't exist. The SQL statement executed was: SHOW COLUMNS FROM `Server`.
+2013/04/19 16:49:25 [error] [exception.CDbException] exception 'CDbException' with message 'The table "Server" for active record class "Server" cannot be found in the database.' in /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php:2237
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(371): CActiveRecordMetaData->__construct(Object(Server))
+#1 /root/www/Monitoring-System/protected/components/actions/GetAction.php(18): CActiveRecord::model('Server')
+#2 /root/www/Monitoring-System/protected/yii/framework/web/actions/CAction.php(72): GetAction->run()
+#3 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(300): CAction->runWithParams(Array)
+#4 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(GetAction))
+#5 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#6 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(1122): CFilter->filter(Object(CFilterChain))
+#7 /root/www/Monitoring-System/protected/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#8 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#10 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(257): CController->runActionWithFilters(Object(GetAction), Array)
+#11 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('get')
+#12 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('server/get')
+#13 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#14 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#15 {main} REQUEST_URI=/server?_dc=1366379365880&page=1&start=0&limit=25
+2013/04/19 16:49:27 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kma.Server' doesn't exist. The SQL statement executed was: SHOW COLUMNS FROM `Server`.
+2013/04/19 16:49:27 [error] [exception.CDbException] exception 'CDbException' with message 'The table "Server" for active record class "Server" cannot be found in the database.' in /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php:2237
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(371): CActiveRecordMetaData->__construct(Object(Server))
+#1 /root/www/Monitoring-System/protected/components/actions/GetAction.php(18): CActiveRecord::model('Server')
+#2 /root/www/Monitoring-System/protected/yii/framework/web/actions/CAction.php(72): GetAction->run()
+#3 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(300): CAction->runWithParams(Array)
+#4 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(GetAction))
+#5 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#6 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(1122): CFilter->filter(Object(CFilterChain))
+#7 /root/www/Monitoring-System/protected/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#8 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#10 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(257): CController->runActionWithFilters(Object(GetAction), Array)
+#11 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('get')
+#12 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('server/get')
+#13 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#14 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#15 {main} REQUEST_URI=/server?_dc=1366379367710&page=1&start=0&limit=25
+2013/04/19 16:49:29 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kma.Server' doesn't exist. The SQL statement executed was: SHOW COLUMNS FROM `Server`.
+2013/04/19 16:49:29 [error] [exception.CDbException] exception 'CDbException' with message 'The table "Server" for active record class "Server" cannot be found in the database.' in /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php:2237
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(371): CActiveRecordMetaData->__construct(Object(Server))
+#1 /root/www/Monitoring-System/protected/components/actions/GetAction.php(18): CActiveRecord::model('Server')
+#2 /root/www/Monitoring-System/protected/yii/framework/web/actions/CAction.php(72): GetAction->run()
+#3 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(300): CAction->runWithParams(Array)
+#4 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(GetAction))
+#5 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#6 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(1122): CFilter->filter(Object(CFilterChain))
+#7 /root/www/Monitoring-System/protected/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#8 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#10 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(257): CController->runActionWithFilters(Object(GetAction), Array)
+#11 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('get')
+#12 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('server/get')
+#13 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#14 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#15 {main} REQUEST_URI=/server?_dc=1366379369413&page=1&start=0&limit=25
+2013/04/19 16:49:31 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kma.Server' doesn't exist. The SQL statement executed was: SHOW COLUMNS FROM `Server`.
+2013/04/19 16:49:31 [error] [exception.CDbException] exception 'CDbException' with message 'The table "Server" for active record class "Server" cannot be found in the database.' in /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php:2237
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(371): CActiveRecordMetaData->__construct(Object(Server))
+#1 /root/www/Monitoring-System/protected/components/actions/GetAction.php(18): CActiveRecord::model('Server')
+#2 /root/www/Monitoring-System/protected/yii/framework/web/actions/CAction.php(72): GetAction->run()
+#3 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(300): CAction->runWithParams(Array)
+#4 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(GetAction))
+#5 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#6 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(1122): CFilter->filter(Object(CFilterChain))
+#7 /root/www/Monitoring-System/protected/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#8 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#10 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(257): CController->runActionWithFilters(Object(GetAction), Array)
+#11 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('get')
+#12 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('server/get')
+#13 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#14 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#15 {main} REQUEST_URI=/server?_dc=1366379371053&page=1&start=0&limit=25
+2013/04/19 16:49:40 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kma.Server' doesn't exist. The SQL statement executed was: SHOW COLUMNS FROM `Server`.
+2013/04/19 16:49:40 [error] [exception.CDbException] exception 'CDbException' with message 'The table "Server" for active record class "Server" cannot be found in the database.' in /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php:2237
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(371): CActiveRecordMetaData->__construct(Object(Server))
+#1 /root/www/Monitoring-System/protected/components/actions/GetAction.php(18): CActiveRecord::model('Server')
+#2 /root/www/Monitoring-System/protected/yii/framework/web/actions/CAction.php(72): GetAction->run()
+#3 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(300): CAction->runWithParams(Array)
+#4 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(GetAction))
+#5 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#6 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(1122): CFilter->filter(Object(CFilterChain))
+#7 /root/www/Monitoring-System/protected/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#8 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#10 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(257): CController->runActionWithFilters(Object(GetAction), Array)
+#11 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('get')
+#12 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('server/get')
+#13 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#14 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#15 {main} REQUEST_URI=/server?_dc=1366379379950&page=1&start=0&limit=25
+2013/04/19 16:49:44 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kma.Server' doesn't exist. The SQL statement executed was: SHOW COLUMNS FROM `Server`.
+2013/04/19 16:49:44 [error] [exception.CDbException] exception 'CDbException' with message 'The table "Server" for active record class "Server" cannot be found in the database.' in /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php:2237
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(371): CActiveRecordMetaData->__construct(Object(Server))
+#1 /root/www/Monitoring-System/protected/components/actions/GetAction.php(18): CActiveRecord::model('Server')
+#2 /root/www/Monitoring-System/protected/yii/framework/web/actions/CAction.php(72): GetAction->run()
+#3 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(300): CAction->runWithParams(Array)
+#4 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(GetAction))
+#5 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#6 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(1122): CFilter->filter(Object(CFilterChain))
+#7 /root/www/Monitoring-System/protected/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#8 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#10 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(257): CController->runActionWithFilters(Object(GetAction), Array)
+#11 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('get')
+#12 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('server/get')
+#13 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#14 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#15 {main} REQUEST_URI=/server?_dc=1366379384005&page=1&start=0&limit=25
+2013/04/19 16:50:52 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kma.Server' doesn't exist. The SQL statement executed was: SHOW COLUMNS FROM `Server`.
+2013/04/19 16:50:52 [error] [exception.CDbException] exception 'CDbException' with message 'The table "Server" for active record class "Server" cannot be found in the database.' in /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php:2237
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(371): CActiveRecordMetaData->__construct(Object(Server))
+#1 /root/www/Monitoring-System/protected/components/actions/GetAction.php(18): CActiveRecord::model('Server')
+#2 /root/www/Monitoring-System/protected/yii/framework/web/actions/CAction.php(72): GetAction->run()
+#3 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(300): CAction->runWithParams(Array)
+#4 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(GetAction))
+#5 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#6 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(1122): CFilter->filter(Object(CFilterChain))
+#7 /root/www/Monitoring-System/protected/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#8 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#10 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(257): CController->runActionWithFilters(Object(GetAction), Array)
+#11 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('get')
+#12 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('server/get')
+#13 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#14 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#15 {main} REQUEST_URI=/server?_dc=1366379452394&page=1&start=0&limit=25
+2013/04/19 17:16:45 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "chart/generate/xls".' in /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('chart/generate/...')
+#1 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/chart/generate/xls
+2013/04/19 17:16:48 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "chart/generate/pdf".' in /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('chart/generate/...')
+#1 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/chart/generate/pdf
+2013/04/19 17:16:57 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "chart/generate/xls".' in /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('chart/generate/...')
+#1 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/chart/generate/xls
+2013/04/19 17:36:10 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "administrative/js/lib/extjs42/ext-all-development.js".' in /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php:313
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('administrative/...')
+#1 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#2 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/administrative/js/lib/extjs42/ext-all-development.js
+2013/04/19 17:44:06 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1. The SQL statement executed was: select sensorId,serial from Sensor where sensorId in ().
+2013/04/19 17:44:06 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1' in /root/www/Monitoring-System/protected/yii/framework/db/CDbCommand.php:518
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/db/CDbCommand.php(376): CDbCommand->queryInternal('fetchAll', 3, Array)
+#1 /root/www/Monitoring-System/protected/controllers/AdminController.php(53): CDbCommand->queryAll(false)
+#2 /root/www/Monitoring-System/protected/yii/framework/web/actions/CInlineAction.php(50): AdminController->actionChart()
+#3 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(300): CInlineAction->runWithParams(Array)
+#4 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#5 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#6 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(1122): CFilter->filter(Object(CFilterChain))
+#7 /root/www/Monitoring-System/protected/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#8 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#10 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('chart')
+#12 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/chart')
+#13 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#14 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#15 {main} REQUEST_URI=/admin/chart?_dc=1366382646905&page=1&start=0&limit=25
+2013/04/19 17:44:09 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1. The SQL statement executed was: select sensorId,serial from Sensor where sensorId in ().
+2013/04/19 17:44:09 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1' in /root/www/Monitoring-System/protected/yii/framework/db/CDbCommand.php:518
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/db/CDbCommand.php(376): CDbCommand->queryInternal('fetchAll', 3, Array)
+#1 /root/www/Monitoring-System/protected/controllers/AdminController.php(53): CDbCommand->queryAll(false)
+#2 /root/www/Monitoring-System/protected/yii/framework/web/actions/CInlineAction.php(50): AdminController->actionChart()
+#3 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(300): CInlineAction->runWithParams(Array)
+#4 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#5 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#6 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(1122): CFilter->filter(Object(CFilterChain))
+#7 /root/www/Monitoring-System/protected/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#8 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#10 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('chart')
+#12 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/chart')
+#13 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#14 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#15 {main} REQUEST_URI=/admin/chart?_dc=1366382649952&page=1&start=0&limit=25
+2013/04/19 17:44:13 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1. The SQL statement executed was: select sensorId,serial from Sensor where sensorId in ().
+2013/04/19 17:44:13 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1' in /root/www/Monitoring-System/protected/yii/framework/db/CDbCommand.php:518
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/db/CDbCommand.php(376): CDbCommand->queryInternal('fetchAll', 3, Array)
+#1 /root/www/Monitoring-System/protected/controllers/AdminController.php(53): CDbCommand->queryAll(false)
+#2 /root/www/Monitoring-System/protected/yii/framework/web/actions/CInlineAction.php(50): AdminController->actionChart()
+#3 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(300): CInlineAction->runWithParams(Array)
+#4 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#5 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#6 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(1122): CFilter->filter(Object(CFilterChain))
+#7 /root/www/Monitoring-System/protected/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#8 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#10 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('chart')
+#12 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/chart')
+#13 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#14 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#15 {main} REQUEST_URI=/admin/chart?_dc=1366382653678&page=1&start=0&limit=25
+2013/04/19 17:45:18 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1. The SQL statement executed was: select sensorId,serial from Sensor where sensorId in ().
+2013/04/19 17:45:18 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1' in /root/www/Monitoring-System/protected/yii/framework/db/CDbCommand.php:518
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/db/CDbCommand.php(376): CDbCommand->queryInternal('fetchAll', 3, Array)
+#1 /root/www/Monitoring-System/protected/controllers/AdminController.php(53): CDbCommand->queryAll(false)
+#2 /root/www/Monitoring-System/protected/yii/framework/web/actions/CInlineAction.php(50): AdminController->actionChart()
+#3 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(300): CInlineAction->runWithParams(Array)
+#4 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#5 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#6 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(1122): CFilter->filter(Object(CFilterChain))
+#7 /root/www/Monitoring-System/protected/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#8 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#10 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('chart')
+#12 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/chart')
+#13 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#14 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#15 {main} REQUEST_URI=/admin/chart?_dc=1366382718400&page=1&start=0&limit=25
+2013/04/19 18:02:22 [error] [php] Undefined variable: model (/root/www/Monitoring-System/protected/components/actions/GetAction.php:22)
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(133): ServerController->runAction()
+#1 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#2 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(1122): CAccessControlFilter->filter()
+#3 /root/www/Monitoring-System/protected/yii/framework/web/filters/CInlineFilter.php(59): ServerController->filterAccessControl()
+#4 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#5 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#6 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(257): ServerController->runActionWithFilters()
+#7 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): ServerController->run()
+#8 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController()
+#9 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#10 /root/www/Monitoring-System/index.php(13): CWebApplication->run()
+REQUEST_URI=/server?_dc=1366383742503&page=1&start=0&limit=25
+2013/04/19 18:08:01 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "server".' in /root/www/Monitoring-System/protected/yii/framework/web/CController.php:477
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(262): CController->missingAction('server')
+#1 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('server')
+#2 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('admin/server')
+#3 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#4 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/admin/server/1
+2013/04/19 18:08:44 [error] [php] Undefined variable: model (/root/www/Monitoring-System/protected/components/actions/GetAction.php:13)
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(133): ServerController->runAction()
+#1 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#2 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(1122): CAccessControlFilter->filter()
+#3 /root/www/Monitoring-System/protected/yii/framework/web/filters/CInlineFilter.php(59): ServerController->filterAccessControl()
+#4 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#5 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#6 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(257): ServerController->runActionWithFilters()
+#7 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): ServerController->run()
+#8 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController()
+#9 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#10 /root/www/Monitoring-System/index.php(13): CWebApplication->run()
+REQUEST_URI=/server/1
+2013/04/19 18:08:45 [error] [php] Undefined variable: model (/root/www/Monitoring-System/protected/components/actions/GetAction.php:13)
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(133): ServerController->runAction()
+#1 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#2 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(1122): CAccessControlFilter->filter()
+#3 /root/www/Monitoring-System/protected/yii/framework/web/filters/CInlineFilter.php(59): ServerController->filterAccessControl()
+#4 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#5 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#6 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(257): ServerController->runActionWithFilters()
+#7 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): ServerController->run()
+#8 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController()
+#9 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#10 /root/www/Monitoring-System/index.php(13): CWebApplication->run()
+REQUEST_URI=/server/1
+2013/04/19 18:12:32 [error] [exception.CDbException] exception 'CDbException' with message 'Relation "sensors" is not defined in active record class "Sensor".' in /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveFinder.php:214
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveFinder.php(306): CActiveFinder->buildJoinTree(Object(CJoinElement), 'sensors')
+#1 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveFinder.php(51): CActiveFinder->buildJoinTree(Object(CJoinElement), Array)
+#2 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(1260): CActiveFinder->__construct(Object(Sensor), Array)
+#3 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(1380): CActiveRecord->query(Object(CDbCriteria), true)
+#4 /root/www/Monitoring-System/protected/components/actions/GetAction.php(21): CActiveRecord->findAll()
+#5 /root/www/Monitoring-System/protected/yii/framework/web/actions/CAction.php(72): GetAction->run()
+#6 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(300): CAction->runWithParams(Array)
+#7 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(GetAction))
+#8 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#9 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(1122): CFilter->filter(Object(CFilterChain))
+#10 /root/www/Monitoring-System/protected/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#11 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#12 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#13 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(257): CController->runActionWithFilters(Object(GetAction), Array)
+#14 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('get')
+#15 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('sensor/get')
+#16 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#17 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#18 {main} REQUEST_URI=/sensor?_dc=1366384352420&page=1&start=0&limit=25
+2013/04/19 18:12:32 [error] [exception.CDbException] exception 'CDbException' with message 'Relation "sensors" is not defined in active record class "Sensor".' in /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveFinder.php:214
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveFinder.php(306): CActiveFinder->buildJoinTree(Object(CJoinElement), 'sensors')
+#1 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveFinder.php(51): CActiveFinder->buildJoinTree(Object(CJoinElement), Array)
+#2 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(1260): CActiveFinder->__construct(Object(Sensor), Array)
+#3 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(1380): CActiveRecord->query(Object(CDbCriteria), true)
+#4 /root/www/Monitoring-System/protected/components/actions/GetAction.php(21): CActiveRecord->findAll()
+#5 /root/www/Monitoring-System/protected/yii/framework/web/actions/CAction.php(72): GetAction->run()
+#6 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(300): CAction->runWithParams(Array)
+#7 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(GetAction))
+#8 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#9 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(1122): CFilter->filter(Object(CFilterChain))
+#10 /root/www/Monitoring-System/protected/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#11 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#12 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#13 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(257): CController->runActionWithFilters(Object(GetAction), Array)
+#14 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('get')
+#15 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('sensor/get')
+#16 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#17 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#18 {main} REQUEST_URI=/sensor?_dc=1366384352417&page=1&start=0&limit=25
+2013/04/19 18:12:34 [error] [exception.CDbException] exception 'CDbException' with message 'Relation "sensors" is not defined in active record class "Sensor".' in /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveFinder.php:214
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveFinder.php(306): CActiveFinder->buildJoinTree(Object(CJoinElement), 'sensors')
+#1 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveFinder.php(51): CActiveFinder->buildJoinTree(Object(CJoinElement), Array)
+#2 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(1260): CActiveFinder->__construct(Object(Sensor), Array)
+#3 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(1380): CActiveRecord->query(Object(CDbCriteria), true)
+#4 /root/www/Monitoring-System/protected/components/actions/GetAction.php(21): CActiveRecord->findAll()
+#5 /root/www/Monitoring-System/protected/yii/framework/web/actions/CAction.php(72): GetAction->run()
+#6 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(300): CAction->runWithParams(Array)
+#7 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(GetAction))
+#8 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#9 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(1122): CFilter->filter(Object(CFilterChain))
+#10 /root/www/Monitoring-System/protected/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#11 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#12 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#13 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(257): CController->runActionWithFilters(Object(GetAction), Array)
+#14 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('get')
+#15 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('sensor/get')
+#16 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#17 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#18 {main} REQUEST_URI=/sensor?_dc=1366384354425&page=1&start=0&limit=25
+2013/04/19 18:12:36 [error] [exception.CDbException] exception 'CDbException' with message 'Relation "sensors" is not defined in active record class "Sensor".' in /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveFinder.php:214
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveFinder.php(306): CActiveFinder->buildJoinTree(Object(CJoinElement), 'sensors')
+#1 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveFinder.php(51): CActiveFinder->buildJoinTree(Object(CJoinElement), Array)
+#2 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(1260): CActiveFinder->__construct(Object(Sensor), Array)
+#3 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(1380): CActiveRecord->query(Object(CDbCriteria), true)
+#4 /root/www/Monitoring-System/protected/components/actions/GetAction.php(21): CActiveRecord->findAll()
+#5 /root/www/Monitoring-System/protected/yii/framework/web/actions/CAction.php(72): GetAction->run()
+#6 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(300): CAction->runWithParams(Array)
+#7 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(GetAction))
+#8 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#9 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(1122): CFilter->filter(Object(CFilterChain))
+#10 /root/www/Monitoring-System/protected/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#11 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#12 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#13 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(257): CController->runActionWithFilters(Object(GetAction), Array)
+#14 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('get')
+#15 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('sensor/get')
+#16 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#17 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#18 {main} REQUEST_URI=/sensor?_dc=1366384356429&page=1&start=0&limit=25
+2013/04/19 18:12:38 [error] [exception.CDbException] exception 'CDbException' with message 'Relation "sensors" is not defined in active record class "Sensor".' in /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveFinder.php:214
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveFinder.php(306): CActiveFinder->buildJoinTree(Object(CJoinElement), 'sensors')
+#1 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveFinder.php(51): CActiveFinder->buildJoinTree(Object(CJoinElement), Array)
+#2 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(1260): CActiveFinder->__construct(Object(Sensor), Array)
+#3 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(1380): CActiveRecord->query(Object(CDbCriteria), true)
+#4 /root/www/Monitoring-System/protected/components/actions/GetAction.php(21): CActiveRecord->findAll()
+#5 /root/www/Monitoring-System/protected/yii/framework/web/actions/CAction.php(72): GetAction->run()
+#6 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(300): CAction->runWithParams(Array)
+#7 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(GetAction))
+#8 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#9 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(1122): CFilter->filter(Object(CFilterChain))
+#10 /root/www/Monitoring-System/protected/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#11 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#12 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#13 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(257): CController->runActionWithFilters(Object(GetAction), Array)
+#14 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('get')
+#15 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('sensor/get')
+#16 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#17 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#18 {main} REQUEST_URI=/sensor?_dc=1366384358429&page=1&start=0&limit=25
+2013/04/19 18:12:40 [error] [exception.CDbException] exception 'CDbException' with message 'Relation "sensors" is not defined in active record class "Sensor".' in /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveFinder.php:214
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveFinder.php(306): CActiveFinder->buildJoinTree(Object(CJoinElement), 'sensors')
+#1 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveFinder.php(51): CActiveFinder->buildJoinTree(Object(CJoinElement), Array)
+#2 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(1260): CActiveFinder->__construct(Object(Sensor), Array)
+#3 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(1380): CActiveRecord->query(Object(CDbCriteria), true)
+#4 /root/www/Monitoring-System/protected/components/actions/GetAction.php(21): CActiveRecord->findAll()
+#5 /root/www/Monitoring-System/protected/yii/framework/web/actions/CAction.php(72): GetAction->run()
+#6 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(300): CAction->runWithParams(Array)
+#7 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(GetAction))
+#8 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#9 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(1122): CFilter->filter(Object(CFilterChain))
+#10 /root/www/Monitoring-System/protected/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#11 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#12 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#13 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(257): CController->runActionWithFilters(Object(GetAction), Array)
+#14 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('get')
+#15 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('sensor/get')
+#16 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#17 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#18 {main} REQUEST_URI=/sensor?_dc=1366384360432&page=1&start=0&limit=25
+2013/04/19 18:12:42 [error] [exception.CDbException] exception 'CDbException' with message 'Relation "sensors" is not defined in active record class "Sensor".' in /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveFinder.php:214
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveFinder.php(306): CActiveFinder->buildJoinTree(Object(CJoinElement), 'sensors')
+#1 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveFinder.php(51): CActiveFinder->buildJoinTree(Object(CJoinElement), Array)
+#2 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(1260): CActiveFinder->__construct(Object(Sensor), Array)
+#3 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(1380): CActiveRecord->query(Object(CDbCriteria), true)
+#4 /root/www/Monitoring-System/protected/components/actions/GetAction.php(21): CActiveRecord->findAll()
+#5 /root/www/Monitoring-System/protected/yii/framework/web/actions/CAction.php(72): GetAction->run()
+#6 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(300): CAction->runWithParams(Array)
+#7 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(GetAction))
+#8 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#9 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(1122): CFilter->filter(Object(CFilterChain))
+#10 /root/www/Monitoring-System/protected/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#11 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#12 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#13 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(257): CController->runActionWithFilters(Object(GetAction), Array)
+#14 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('get')
+#15 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('sensor/get')
+#16 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#17 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#18 {main} REQUEST_URI=/sensor?_dc=1366384362435&page=1&start=0&limit=25
+2013/04/19 18:12:44 [error] [exception.CDbException] exception 'CDbException' with message 'Relation "sensors" is not defined in active record class "Sensor".' in /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveFinder.php:214
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveFinder.php(306): CActiveFinder->buildJoinTree(Object(CJoinElement), 'sensors')
+#1 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveFinder.php(51): CActiveFinder->buildJoinTree(Object(CJoinElement), Array)
+#2 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(1260): CActiveFinder->__construct(Object(Sensor), Array)
+#3 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(1380): CActiveRecord->query(Object(CDbCriteria), true)
+#4 /root/www/Monitoring-System/protected/components/actions/GetAction.php(21): CActiveRecord->findAll()
+#5 /root/www/Monitoring-System/protected/yii/framework/web/actions/CAction.php(72): GetAction->run()
+#6 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(300): CAction->runWithParams(Array)
+#7 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(GetAction))
+#8 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#9 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(1122): CFilter->filter(Object(CFilterChain))
+#10 /root/www/Monitoring-System/protected/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#11 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#12 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#13 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(257): CController->runActionWithFilters(Object(GetAction), Array)
+#14 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('get')
+#15 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('sensor/get')
+#16 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#17 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#18 {main} REQUEST_URI=/sensor?_dc=1366384364438&page=1&start=0&limit=25
+2013/04/19 18:12:46 [error] [exception.CDbException] exception 'CDbException' with message 'Relation "sensors" is not defined in active record class "Sensor".' in /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveFinder.php:214
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveFinder.php(306): CActiveFinder->buildJoinTree(Object(CJoinElement), 'sensors')
+#1 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveFinder.php(51): CActiveFinder->buildJoinTree(Object(CJoinElement), Array)
+#2 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(1260): CActiveFinder->__construct(Object(Sensor), Array)
+#3 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(1380): CActiveRecord->query(Object(CDbCriteria), true)
+#4 /root/www/Monitoring-System/protected/components/actions/GetAction.php(21): CActiveRecord->findAll()
+#5 /root/www/Monitoring-System/protected/yii/framework/web/actions/CAction.php(72): GetAction->run()
+#6 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(300): CAction->runWithParams(Array)
+#7 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(GetAction))
+#8 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#9 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(1122): CFilter->filter(Object(CFilterChain))
+#10 /root/www/Monitoring-System/protected/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#11 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#12 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#13 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(257): CController->runActionWithFilters(Object(GetAction), Array)
+#14 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('get')
+#15 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('sensor/get')
+#16 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#17 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#18 {main} REQUEST_URI=/sensor?_dc=1366384366442&page=1&start=0&limit=25
+2013/04/19 18:12:48 [error] [exception.CDbException] exception 'CDbException' with message 'Relation "sensors" is not defined in active record class "Sensor".' in /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveFinder.php:214
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveFinder.php(306): CActiveFinder->buildJoinTree(Object(CJoinElement), 'sensors')
+#1 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveFinder.php(51): CActiveFinder->buildJoinTree(Object(CJoinElement), Array)
+#2 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(1260): CActiveFinder->__construct(Object(Sensor), Array)
+#3 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(1380): CActiveRecord->query(Object(CDbCriteria), true)
+#4 /root/www/Monitoring-System/protected/components/actions/GetAction.php(21): CActiveRecord->findAll()
+#5 /root/www/Monitoring-System/protected/yii/framework/web/actions/CAction.php(72): GetAction->run()
+#6 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(300): CAction->runWithParams(Array)
+#7 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(GetAction))
+#8 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#9 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(1122): CFilter->filter(Object(CFilterChain))
+#10 /root/www/Monitoring-System/protected/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#11 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#12 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#13 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(257): CController->runActionWithFilters(Object(GetAction), Array)
+#14 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('get')
+#15 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('sensor/get')
+#16 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#17 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#18 {main} REQUEST_URI=/sensor?_dc=1366384368447&page=1&start=0&limit=25
+2013/04/19 18:12:50 [error] [exception.CDbException] exception 'CDbException' with message 'Relation "sensors" is not defined in active record class "Sensor".' in /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveFinder.php:214
+Stack trace:
+#0 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveFinder.php(306): CActiveFinder->buildJoinTree(Object(CJoinElement), 'sensors')
+#1 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveFinder.php(51): CActiveFinder->buildJoinTree(Object(CJoinElement), Array)
+#2 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(1260): CActiveFinder->__construct(Object(Sensor), Array)
+#3 /root/www/Monitoring-System/protected/yii/framework/db/ar/CActiveRecord.php(1380): CActiveRecord->query(Object(CDbCriteria), true)
+#4 /root/www/Monitoring-System/protected/components/actions/GetAction.php(21): CActiveRecord->findAll()
+#5 /root/www/Monitoring-System/protected/yii/framework/web/actions/CAction.php(72): GetAction->run()
+#6 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(300): CAction->runWithParams(Array)
+#7 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(GetAction))
+#8 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#9 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(1122): CFilter->filter(Object(CFilterChain))
+#10 /root/www/Monitoring-System/protected/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#11 /root/www/Monitoring-System/protected/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#12 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(283): CFilterChain->run()
+#13 /root/www/Monitoring-System/protected/yii/framework/web/CController.php(257): CController->runActionWithFilters(Object(GetAction), Array)
+#14 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(309): CController->run('get')
+#15 /root/www/Monitoring-System/protected/yii/framework/web/CWebApplication.php(121): CWebApplication->runController('sensor/get')
+#16 /root/www/Monitoring-System/protected/yii/framework/base/CApplication.php(155): CWebApplication->processRequest()
+#17 /root/www/Monitoring-System/index.php(13): CApplication->run()
+#18 {main} REQUEST_URI=/sensor?_dc=1366384370456&page=1&start=0&limit=25
