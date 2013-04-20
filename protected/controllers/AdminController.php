@@ -4,7 +4,12 @@ class AdminController extends KmaController {
 	
 	public $layout = 'admin';
 
-
+	public function accessRules()
+	{
+	   	return array(
+	   		array('allow', 'users' => array('*'))
+	    );
+	}
 
 	public function actionIndex() {
 		$this->render('index');
