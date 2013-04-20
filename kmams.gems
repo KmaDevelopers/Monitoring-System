@@ -1,0 +1,8 @@
+# kmams.gems generated gem export file. Note that any env variable settings will be missing. Append these after using a ';' field separator
+
+capistrano -v2.14.2
+highline -v1.6.18
+net-scp -v1.1.0
+net-sftp -v2.1.1
+net-ssh -v2.6.7
+net-ssh-gateway -v1.2.0
