@@ -65,6 +65,7 @@ namespace :deploy do
 
   task :change_env do
     run %{
+        chmod 777 -R #{latest_release}/protected/runtime ;
         sed -i  s/"define('YII_DEBUG',true)"/"define('YII_DEBUG',false)"/ #{latest_release}/index.php
     }
     #run %{
